@@ -1,0 +1,625 @@
+openapi: 3.0.0
+info:
+  version: 0.1.0
+  title: QED-it - Asset Transfers
+security:
+  - ApiKeyAuth: []
+paths:
+  /wallet/get_wallet_balances:
+    servers:
+      - url: 'http://localhost:8080'
+    post:
+      tags:
+        - Wallet
+      summary: Get wallets information
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetWalletBalanceRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWalletBalanceResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /wallet/issue_asset:
+    servers:
+      - url: 'http://localhost:8080'
+    post:
+      tags:
+        - Wallet
+      summary: Issue assets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IssueAssetRequest'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /wallet/transfer_asset:
+    servers:
+      - url: 'http://localhost:8080'
+    post:
+      tags:
+        - Wallet
+      summary: Transfer assets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferAssetRequest'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /analytics/get_transactions:
+    servers:
+      - url: 'http://localhost:8080'
+    post:
+      tags:
+        - Analytics
+      summary: Get details on past transactions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTransactionsRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTransactionsResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /analytics/get_blocks:
+    servers:
+      - url: 'http://localhost:8080'
+    post:
+      tags:
+        - Analytics
+      summary: Get details on past blocks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetBlocksRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBlocksResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /node/generate_wallet:
+    servers:
+      - url: 'http://localhost:8080'
+    post:
+      tags:
+        - Node
+      summary: Generate a new wallet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateWalletRequest'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /node/delete_wallet:
+    servers:
+      - url: 'http://localhost:8080'
+    post:
+      tags:
+        - Node
+      summary: Delete a wallet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteWalletRequest'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+
+  /wallet/get_new_address:
+    servers:
+      - url: 'http://localhost:8080'
+    post:
+      tags:
+        - Wallet
+      summary: Get a new address from a given diversifier or generate randomly
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetNewAddressRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNewAddressResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+  /node/import_wallet:
+    servers:
+      - url: 'http://localhost:8080'
+    post:
+      tags:
+        - Node
+      summary: Import wallet from secret key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportWalletRequest'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+
+  /node/unlock_wallet:
+    servers:
+      - url: 'http://localhost:8080'
+    post:
+      tags:
+        - Node
+      summary: Unlocks a wallet for a given amount of seconds
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnlockWalletRequest'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+
+
+  /node/export_wallet:
+    servers:
+      - url: 'http://localhost:8080'
+    post:
+      tags:
+        - Node
+      summary: Export wallet secret key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportWalletRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportWalletResponse'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal error
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: x-auth-token
+      in: header
+  schemas:
+    GetWalletBalanceRequest:
+      type: object
+      properties:
+        wallet_label:
+          type: string
+      required:
+        - wallet_label
+      example:
+        wallet_label: source_wallet
+    BalanceForAsset:
+      type: object
+      properties:
+        asset_id:
+          type: integer
+        amount:
+          type: integer
+      required:
+        - asset_id
+        - amount
+      example:
+        wallet_label: source_wallet
+    GetWalletBalanceResponse:
+      type: object
+      properties:
+        wallet_label:
+          type: string
+        assets:
+          type: array
+          items:
+            $ref: '#/components/schemas/BalanceForAsset'
+      required:
+        - wallet_label
+        - assets
+      example:
+        wallet_label: source_wallet
+        assets:
+          - asset_id: 0
+            amount: 8
+    TransferAssetRequest:
+      type: object
+      properties:
+        wallet_label:
+          type: string
+        authorization:
+          type: string
+        recipient_address:
+          type: object
+          properties:
+            d:
+              type: string
+            pkd:
+              type: string
+        amount:
+          type: integer
+        asset_id:
+          type: integer
+        memo:
+          type: string
+      required:
+        - wallet_label
+        - authorization
+        - recipient_address
+        - amount
+        - asset_id
+        - memo
+      example:
+        wallet_label: source_wallet
+        authorization: PrivacyIsAwesome
+        recipient_address:
+          d: 69be9d33a15535a59dd111
+          pkd: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+        amount: 4
+        asset_id: 0
+        memo: '{"recipient_name": "Dan"}'
+    GetTransactionsRequest:
+      type: object
+      properties:
+        wallet_label:
+          type: string
+        start_index:
+          type: integer
+        number_of_results:
+          type: integer
+      required:
+        - wallet_label
+        - start_index
+        - number_of_results
+      example:
+        wallet_label: source_wallet
+        start_index: 0
+        number_of_results: 10
+    TransactionsForWallet:
+      type: object
+      properties:
+        is_incoming:
+          type: boolean
+        asset_id:
+          type: integer
+        amount:
+          type: integer
+        recipient_address:
+          type: object
+          properties:
+            d:
+              type: string
+            pkd:
+              type: string
+        memo:
+          type: string
+      required:
+        - is_incoming
+        - asset_id
+        - amount
+        - recipient_address
+        - memo
+    GetTransactionsResponse:
+      type: object
+      properties:
+        wallet_label:
+          type: string
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionsForWallet'
+      required:
+        - wallet_label
+        - transactions
+      example:
+        wallet_label: source_wallet
+        transactions:
+          - is_incoming: true
+            asset_id: 0
+            amount: 8
+            recipient_address:
+              d: 69be9d33a15535a59dd111
+              pkd: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+            memo: '{"recipient_name": "Dan"}'
+    GetBlocksRequest:
+      type: object
+      properties:
+        start_index:
+          type: integer
+        number_of_results:
+          type: integer
+      required:
+        - start_index
+        - number_of_results
+      example:
+        start_index: 0
+        number_of_results: 10
+    Block:
+      type: object
+      properties:
+        block_hash:
+          type: string
+        height:
+          type: integer
+        transactions:
+          type: array
+          items:
+            type: string
+      required:
+        - block_hash
+        - height
+        - transactions
+    GetBlocksResponse:
+      type: object
+      properties:
+        blocks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Block'
+      required:
+        - blocks
+      example:
+        blocks:
+          - block_hash: abababababababababababababab
+            height: 10
+            transactions:
+              - XKCOKXOASKPOWJEASDlkjweNALNSD==
+    IssueAssetRequest:
+      type: object
+      properties:
+        wallet_label:
+          type: string
+        authorization:
+          type: string
+        recipient_address:
+          type: object
+          properties:
+            d:
+              type: string
+            pkd:
+              type: string
+        amount:
+          type: integer
+        asset_id:
+          type: integer
+        clear_value:
+          type: boolean
+        memo:
+          type: string
+      required:
+        - wallet_label
+        - authorization
+        - recipient_address
+        - amount
+        - clear_value
+        - asset_id
+        - memo
+      example:
+        wallet_label: source_wallet
+        authorization: PrivacyIsAwesome
+        recipient_address:
+          d: 69be9d33a15535a59dd111
+          pkd: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+        amount: 4
+        asset_id: 0
+        clear_value: true
+        memo: '{"recipient_name": "Dan"}'
+    GetNewAddressRequest:
+      type: object
+      properties:
+        wallet_label:
+          type: string
+        diversifier:
+          type: string
+      required:
+        - wallet_label
+      example:
+        wallet_label: source_wallet
+        diversifier: 69be9d33a15535a59dd111
+    GetNewAddressResponse:
+      type: object
+      properties:
+        wallet_label:
+          type: string
+        recipient_address:
+          type: object
+          properties:
+            d:
+              type: string
+            pkd:
+              type: string
+      required:
+        - wallet_label
+        - recipient_address
+      example:
+        wallet_label: source_wallet
+        recipient_address:
+          d: 69be9d33a15535a59dd111
+          pkd: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+
+    ImportWalletRequest:
+      type: object
+      properties:
+        wallet_label:
+          type: string
+        encrypted_sk:
+          type: string
+        authorization:
+          type: string
+        salt:
+          type: string
+      required:
+        - wallet_label
+        - encrypted_sk
+        - authorization
+        - salt
+      example:
+        wallet_label: source_wallet
+        encrypted_sk: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+        authorization: PrivacyIsAwesome
+        salt: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+    ExportWalletRequest:
+      type: object
+      properties:
+        wallet_label:
+          type: string
+      required:
+        - wallet_label
+      example:
+        wallet_label: source_wallet
+    ExportWalletResponse:
+      type: object
+      properties:
+        wallet_label:
+          type: string
+        encrypted_sk:
+          type: string
+        salt:
+          type: string
+      required:
+        - wallet_label
+        - encrypted_sk
+        - salt
+      example:
+        wallet_label: source_wallet
+        encrypted_sk: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+        salt: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+    GenerateWalletRequest:
+      type: object
+      properties:
+        wallet_label:
+          type: string
+        authorization:
+          type: string
+      required:
+        - wallet_label
+        - authorization
+      example:
+        wallet_label: source_wallet
+        authorization: PrivacyIsAwesome
+    DeleteWalletRequest:
+      type: object
+      properties:
+        wallet_label:
+          type: string
+        authorization:
+          type: string
+      required:
+        - wallet_label
+        - authorization
+      example:
+        wallet_label: source_wallet
+        authorization: PrivacyIsAwesome
+    UnlockWalletRequest:
+      type: object
+      properties:
+        wallet_label:
+          type: string
+        authorization:
+          type: string
+        seconds:
+          type: integer
+      required:
+        - wallet_label
+        - authorization
+        - seconds
+      example:
+        wallet_label: source_wallet
+        authorization: PrivacyIsAwesome
+        seconds: 600
+
