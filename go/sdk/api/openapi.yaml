@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: QED-it - Asset Transfers
-  version: 0.1.0
+  version: 1.0.0
 servers:
 - url: /
 security:
@@ -42,8 +42,8 @@ paths:
               $ref: '#/components/schemas/IssueAssetRequest'
         required: true
       responses:
-        200:
-          description: Success
+        201:
+          description: Success/Created
         400:
           description: Bad request
         401:
@@ -73,6 +73,76 @@ paths:
         500:
           description: Internal error
       summary: Transfer assets
+      tags:
+      - Wallet
+    servers:
+    - url: http://localhost:8080
+  /wallet/get_new_address:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetNewAddressRequest'
+        required: true
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNewAddressResponse'
+          description: Success/Created
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+      summary: Get a new address from a given diversifier or generate randomly
+      tags:
+      - Wallet
+    servers:
+    - url: http://localhost:8080
+  /wallet/create_rule:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRuleRequest'
+        required: true
+      responses:
+        201:
+          description: Success/Created
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+      summary: Create & broadcast add-config-rule
+      tags:
+      - Wallet
+    servers:
+    - url: http://localhost:8080
+  /wallet/delete_rule:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRuleRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+      summary: Create & broadcast delete-config-rule
       tags:
       - Wallet
     servers:
@@ -173,32 +243,6 @@ paths:
       - Node
     servers:
     - url: http://localhost:8080
-  /wallet/get_new_address:
-    post:
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GetNewAddressRequest'
-        required: true
-      responses:
-        200:
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetNewAddressResponse'
-          description: Success
-        400:
-          description: Bad request
-        401:
-          description: Unauthorized
-        500:
-          description: Internal error
-      summary: Get a new address from a given diversifier or generate randomly
-      tags:
-      - Wallet
-    servers:
-    - url: http://localhost:8080
   /node/import_wallet:
     post:
       requestBody:
@@ -265,6 +309,26 @@ paths:
         500:
           description: Internal error
       summary: Export wallet secret key
+      tags:
+      - Node
+    servers:
+    - url: http://localhost:8080
+  /node/get_rules:
+    post:
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRulesResponse'
+          description: Success
+        400:
+          description: Bad request
+        401:
+          description: Unauthorized
+        500:
+          description: Internal error
+      summary: Get node rules
       tags:
       - Node
     servers:
@@ -405,6 +469,25 @@ components:
       required:
       - transactions
       - wallet_label
+      type: object
+    GetRulesResponse:
+      example:
+        rules:
+        - public_key: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+          can_issue_anything_confidentially: false
+          can_issue_asset_id_first: 100
+          can_issue_asset_id_last: 112
+          is_admin: false
+        - public_key: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+          can_issue_anything_confidentially: false
+          can_issue_asset_id_first: 100
+          can_issue_asset_id_last: 112
+          is_admin: false
+      properties:
+        rules:
+          items:
+            $ref: '#/components/schemas/Rule'
+          type: array
       type: object
     GetBlocksRequest:
       example:
@@ -606,6 +689,73 @@ components:
       - authorization
       - seconds
       - wallet_label
+      type: object
+    CreateRuleRequest:
+      example:
+        wallet_label: issuer_wallet
+        authorization: PrivacyIsAwesome
+        rules_to_add:
+        - '{"public_key": "bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5",
+          "can_issue_anything_confidentially" : false, "can_issue_asset_id_first"
+          : 100, "can_issue_asset_id_last" : "112", "is_admin" : false}'
+      properties:
+        wallet_label:
+          type: string
+        authorization:
+          type: string
+        rules_to_add:
+          items:
+            $ref: '#/components/schemas/Rule'
+          type: array
+      required:
+      - authorization
+      - rules_to_add
+      - wallet_label
+      type: object
+    DeleteRuleRequest:
+      example:
+        wallet_label: issuer_wallet
+        authorization: PrivacyIsAwesome
+        rules_to_delete:
+        - '{"public_key": "bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5",
+          "can_issue_anything_confidentially" : false, "can_issue_asset_id_first"
+          : 100, "can_issue_asset_id_last" : "112", "is_admin" : false}'
+      properties:
+        wallet_label:
+          type: string
+        authorization:
+          type: string
+        rules_to_delete:
+          items:
+            $ref: '#/components/schemas/Rule'
+          type: array
+      required:
+      - authorization
+      - rules_to_delete
+      - wallet_label
+      type: object
+    Rule:
+      example:
+        public_key: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+        can_issue_anything_confidentially: false
+        can_issue_asset_id_first: 100
+        can_issue_asset_id_last: 112
+        is_admin: false
+      properties:
+        public_key:
+          type: string
+        can_issue_anything_confidentially:
+          type: boolean
+        can_issue_asset_id_first:
+          format: int32
+          type: integer
+        can_issue_asset_id_last:
+          format: int32
+          type: integer
+        is_admin:
+          type: boolean
+      required:
+      - public_key
       type: object
     TransferAssetRequest_recipient_address:
       properties:

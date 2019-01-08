@@ -9,10 +9,6 @@
 
 package openapi
 
-type TransactionsForWallet struct {
-	IsIncoming bool `json:"is_incoming"`
-	AssetId int32 `json:"asset_id"`
-	Amount int32 `json:"amount"`
-	RecipientAddress TransferAssetRequestRecipientAddress `json:"recipient_address"`
-	Memo string `json:"memo"`
+type GetRulesResponse struct {
+	Rules []Rule `json:"rules,omitempty"`
 }
