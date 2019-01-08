@@ -1,4 +1,4 @@
-# Asset transfers developer guide
+# Asset transfers SDKs
 
 This repository provides the means to operate the QED-it asset transfers node API.
 
