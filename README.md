@@ -13,3 +13,6 @@ The structure of the repository is as follows:
       - [unlock](go/examples/cmd/unlock): Unlock a wallet.
       - [transferandread](go/examples/cmd/transferandread): Transfer between wallets and observe the transfer.
       - [tutorial](go/examples/cmd/tutorial): Follows the [tutorial](https://docs.qed-it.com/docs/qed-solution-docs/en/latest/docs/tutorial.html).
+  - [js](js):
+    - [sdk](js/sdk) - Javascript SDK, generated from the API specification.
+
