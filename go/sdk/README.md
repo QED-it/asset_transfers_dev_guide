@@ -26,7 +26,7 @@ import "./openapi"
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:12052*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -35,12 +35,14 @@ Class | Method | HTTP request | Description
 *NodeApi* | [**NodeDeleteWalletPost**](docs/NodeApi.md#nodedeletewalletpost) | **Post** /node/delete_wallet | Delete a wallet
 *NodeApi* | [**NodeExportWalletPost**](docs/NodeApi.md#nodeexportwalletpost) | **Post** /node/export_wallet | Export wallet secret key
 *NodeApi* | [**NodeGenerateWalletPost**](docs/NodeApi.md#nodegeneratewalletpost) | **Post** /node/generate_wallet | Generate a new wallet
+*NodeApi* | [**NodeGetAllWalletsPost**](docs/NodeApi.md#nodegetallwalletspost) | **Post** /node/get_all_wallets | Get all wallet labels
 *NodeApi* | [**NodeGetRulesPost**](docs/NodeApi.md#nodegetrulespost) | **Post** /node/get_rules | Get node rules
 *NodeApi* | [**NodeImportWalletPost**](docs/NodeApi.md#nodeimportwalletpost) | **Post** /node/import_wallet | Import wallet from secret key
 *NodeApi* | [**NodeUnlockWalletPost**](docs/NodeApi.md#nodeunlockwalletpost) | **Post** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds
 *WalletApi* | [**WalletCreateRulePost**](docs/WalletApi.md#walletcreaterulepost) | **Post** /wallet/create_rule | Create &amp; broadcast add-config-rule
 *WalletApi* | [**WalletDeleteRulePost**](docs/WalletApi.md#walletdeleterulepost) | **Post** /wallet/delete_rule | Create &amp; broadcast delete-config-rule
 *WalletApi* | [**WalletGetNewAddressPost**](docs/WalletApi.md#walletgetnewaddresspost) | **Post** /wallet/get_new_address | Get a new address from a given diversifier or generate randomly
+*WalletApi* | [**WalletGetPublicKeyPost**](docs/WalletApi.md#walletgetpublickeypost) | **Post** /wallet/get_public_key | Get wallet public key
 *WalletApi* | [**WalletGetWalletBalancesPost**](docs/WalletApi.md#walletgetwalletbalancespost) | **Post** /wallet/get_wallet_balances | Get wallets information
 *WalletApi* | [**WalletIssueAssetPost**](docs/WalletApi.md#walletissueassetpost) | **Post** /wallet/issue_asset | Issue assets
 *WalletApi* | [**WalletTransferAssetPost**](docs/WalletApi.md#wallettransferassetpost) | **Post** /wallet/transfer_asset | Transfer assets
@@ -56,10 +58,13 @@ Class | Method | HTTP request | Description
  - [ExportWalletRequest](docs/ExportWalletRequest.md)
  - [ExportWalletResponse](docs/ExportWalletResponse.md)
  - [GenerateWalletRequest](docs/GenerateWalletRequest.md)
+ - [GetAllWalletsResponse](docs/GetAllWalletsResponse.md)
  - [GetBlocksRequest](docs/GetBlocksRequest.md)
  - [GetBlocksResponse](docs/GetBlocksResponse.md)
  - [GetNewAddressRequest](docs/GetNewAddressRequest.md)
  - [GetNewAddressResponse](docs/GetNewAddressResponse.md)
+ - [GetPublicKeyRequest](docs/GetPublicKeyRequest.md)
+ - [GetPublicKeyResponse](docs/GetPublicKeyResponse.md)
  - [GetRulesResponse](docs/GetRulesResponse.md)
  - [GetTransactionsRequest](docs/GetTransactionsRequest.md)
  - [GetTransactionsResponse](docs/GetTransactionsResponse.md)
