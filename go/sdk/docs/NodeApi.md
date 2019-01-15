@@ -1,12 +1,13 @@
 # \NodeApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:12052*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**NodeDeleteWalletPost**](NodeApi.md#NodeDeleteWalletPost) | **Post** /node/delete_wallet | Delete a wallet
 [**NodeExportWalletPost**](NodeApi.md#NodeExportWalletPost) | **Post** /node/export_wallet | Export wallet secret key
 [**NodeGenerateWalletPost**](NodeApi.md#NodeGenerateWalletPost) | **Post** /node/generate_wallet | Generate a new wallet
+[**NodeGetAllWalletsPost**](NodeApi.md#NodeGetAllWalletsPost) | **Post** /node/get_all_wallets | Get all wallet labels
 [**NodeGetRulesPost**](NodeApi.md#NodeGetRulesPost) | **Post** /node/get_rules | Get node rules
 [**NodeImportWalletPost**](NodeApi.md#NodeImportWalletPost) | **Post** /node/import_wallet | Import wallet from secret key
 [**NodeUnlockWalletPost**](NodeApi.md#NodeUnlockWalletPost) | **Post** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds
@@ -87,6 +88,28 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **NodeGetAllWalletsPost**
+> GetAllWalletsResponse NodeGetAllWalletsPost(ctx, )
+Get all wallet labels
+
+### Required Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**GetAllWalletsResponse**](GetAllWalletsResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

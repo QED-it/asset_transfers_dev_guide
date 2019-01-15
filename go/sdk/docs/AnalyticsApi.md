@@ -1,6 +1,6 @@
 # \AnalyticsApi
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *http://localhost:12052*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

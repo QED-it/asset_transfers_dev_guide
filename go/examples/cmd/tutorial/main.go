@@ -28,9 +28,9 @@ func main() {
 
 	importWalletRequest := openapi.ImportWalletRequest{
 		WalletLabel:   "bank",
-		EncryptedSk:   "YOUR_PRIVATE_KEY",
-		Authorization: "123456",
-		Salt:          "bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5",
+		EncryptedSk:   "2b9a24e2eafce806cde2f03cae49a840ee4cfb408163c8d2de8264e3552b18ab5debc1def1fb446742cbec99f42ba9e2",
+		Authorization: "123",
+		Salt:          "2829ca5659464e6a825b0ab19d1ac444878b8a3bb1093fb54f629ae4c1ef384d",
 	}
 
 	_, err = client.NodeApi.NodeImportWalletPost(ctx, importWalletRequest)
