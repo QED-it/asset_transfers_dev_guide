@@ -21,7 +21,7 @@ Create &amp; broadcast add-config-rule
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth
@@ -68,7 +68,7 @@ Create &amp; broadcast delete-config-rule
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth
@@ -115,7 +115,7 @@ Get a new address from a given diversifier or generate randomly
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth
@@ -162,7 +162,7 @@ Get wallet public key
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth
@@ -209,7 +209,7 @@ Get wallets information
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth
@@ -256,7 +256,7 @@ Issue assets
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth
@@ -303,7 +303,7 @@ Transfer assets
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth

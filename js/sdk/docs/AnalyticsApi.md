@@ -16,7 +16,7 @@ Get details on past blocks
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth
@@ -63,7 +63,7 @@ Get details on past transactions
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth
