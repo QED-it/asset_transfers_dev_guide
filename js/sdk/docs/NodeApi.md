@@ -21,7 +21,7 @@ Delete a wallet
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth
@@ -68,7 +68,7 @@ Export wallet secret key
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth
@@ -115,7 +115,7 @@ Generate a new wallet
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth
@@ -162,7 +162,7 @@ Get all wallet labels
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth
@@ -205,7 +205,7 @@ Get node rules
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth
@@ -248,7 +248,7 @@ Import wallet from secret key
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth
@@ -295,7 +295,7 @@ Unlocks a wallet for a given amount of seconds
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
+import QedItAssetTransfers from 'QED-it-asset-transfers';
 let defaultClient = QedItAssetTransfers.ApiClient.instance;
 
 // Configure API key authorization: ApiKeyAuth

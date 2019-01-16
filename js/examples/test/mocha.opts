@@ -1,0 +1,3 @@
+-r test/preload.js
+--recursive
+--timeout 10000

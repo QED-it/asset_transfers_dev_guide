@@ -1,24 +1,25 @@
 {
-  "name": "QED-it-asset-transfers",
-  "version": "1.0.0",
-  "description": "ERROR_UNKNOWN",
-  "license": "Unlicense",
-  "main": "src/index.js",
+  "name": "QED-it-asset-transfers-example",
+  "version": "0.1.0",
+  "description": "QED-it Asset_Transfers Example",
+  "license": "MIT",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register --recursive"
+    "test": "mocha"
   },
   "browser": {
     "fs": false
   },
   "dependencies": {
+    "QED-it-asset-transfers": "../sdk",
     "babel": "^6.23.0",
-    "babel-cli": "^6.26.0",
-    "superagent": "3.7.0"
+    "bluebird": "^3.5.3"
   },
   "devDependencies": {
     "babel-core": "6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
     "expect.js": "~0.3.1",
     "mocha": "~2.3.4",
     "sinon": "1.17.3"
