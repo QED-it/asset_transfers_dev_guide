@@ -1,8 +1,8 @@
 # Asset transfers SDKs
 
-This repository provides the means to operate the QED-it asset transfers node API.
+This repository provides the means to operate the QED-it asset transfers bundle API.
 
-The node exposes an HTTP API, which is specified using the [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification).
+The bundle exposes an HTTP API, which is specified using the [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification).
 
 The structure of the repository is as follows:
   - [spec](spec) - contains the API specification.

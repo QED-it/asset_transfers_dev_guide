@@ -16,17 +16,15 @@ func main() {
 
 	ctx := context.Background()
 
-	/*
-		generateWalletRequest := openapi.GenerateWalletRequest{
-			WalletLabel:   "John",
-			Authorization: "123456",
-		}
+	generateWalletRequest := openapi.GenerateWalletRequest{
+		WalletLabel:   "Jane",
+		Authorization: "123456",
+	}
 
-		_, err = client.NodeApi.NodeGenerateWalletPost(ctx, generateWalletRequest)
-		if err != nil {
-			util.HandleErrorAndExit(fmt.Errorf("couldn't generate wallet: %v", err))
-		}
-	*/
+	_, err = client.NodeApi.NodeGenerateWalletPost(ctx, generateWalletRequest)
+	if err != nil {
+		fmt.Printf("Could not generate Jane's wallet, assuming that it already exists.\n")
+	}
 
 	importWalletRequest := openapi.ImportWalletRequest{
 		WalletLabel:   "bank",
@@ -37,11 +35,11 @@ func main() {
 
 	_, err = client.NodeApi.NodeImportWalletPost(ctx, importWalletRequest)
 	if err != nil {
-		util.HandleErrorAndExit(fmt.Errorf("couldn't import wallet: %v", err))
+		fmt.Printf("Could not import the bank's wallet, assuming that it already exists.\n")
 	}
 
 	getNewAddressRequest := openapi.GetNewAddressRequest{
-		WalletLabel: "bank",
+		WalletLabel: "Jane",
 		Diversifier: "69be9d33a15535a59dd111",
 	}
 
@@ -50,7 +48,7 @@ func main() {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't generate address: %v", err))
 	}
 
-	fmt.Printf("new address details: %v", getNewAddressResponse)
+	fmt.Printf("Jane's address details: %v\n", getNewAddressResponse)
 
 	issueAssetRequest := openapi.IssueAssetRequest{
 		WalletLabel: "bank",
@@ -66,7 +64,7 @@ func main() {
 
 	_, err = client.WalletApi.WalletIssueAssetPost(ctx, issueAssetRequest)
 	if err != nil {
-		util.HandleErrorAndExit(fmt.Errorf("couldn't issue asset: %v", err))
+		fmt.Printf("Could not issue asset. Did you configure the bank's private key?\n")
 	}
 
 	time.Sleep(20)
@@ -80,7 +78,7 @@ func main() {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't get wallet balances: %v", err))
 	}
 
-	fmt.Printf("wallet balances: %v", getWalletBalancesResponse)
+	fmt.Printf("Jane's wallet balances: %v\n", getWalletBalancesResponse)
 
 	getTransactionsRequest := openapi.GetTransactionsRequest{
 		WalletLabel:     "Jane",
@@ -93,10 +91,10 @@ func main() {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't get transactions: %v", err))
 	}
 
-	fmt.Printf("transactions: %v", getTransactionsResponse)
+	fmt.Printf("Jane's transactions: %v\n", getTransactionsResponse)
 
 	transferAssetRequest := openapi.TransferAssetRequest{
-		WalletLabel: "bank",
+		WalletLabel: "Jane",
 		RecipientAddress: openapi.TransferAssetRequestRecipientAddress{
 			D:   "69be9d33a15535a59dd111",
 			Pkd: "bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5",
@@ -108,7 +106,7 @@ func main() {
 
 	_, err = client.WalletApi.WalletTransferAssetPost(ctx, transferAssetRequest)
 	if err != nil {
-		util.HandleErrorAndExit(fmt.Errorf("couldn't transfer asset: %v", err))
+		fmt.Printf("Could not transfer asset. Does Jane have sufficient balance?\n")
 	}
 
 	time.Sleep(20)
@@ -118,6 +116,6 @@ func main() {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't get transactions: %v", err))
 	}
 
-	fmt.Printf("transactions: %v", getTransactionsResponse)
+	fmt.Printf("Jane's transactions: %v\n", getTransactionsResponse)
 
 }
