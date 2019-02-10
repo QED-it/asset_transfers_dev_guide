@@ -23,6 +23,30 @@ Then install it via:
 npm install qed_it___asset_transfers --save
 ```
 
+##### Local development
+
+To use the library locally without publishing to a remote npm registry, first install the dependencies by changing 
+into the directory containing `package.json` (and this README). Let's call this `JAVASCRIPT_CLIENT_DIR`. Then run:
+
+```shell
+npm install
+```
+
+Next, [link](https://docs.npmjs.com/cli/link) it globally in npm with the following, also from `JAVASCRIPT_CLIENT_DIR`:
+
+```shell
+npm link
+```
+
+Finally, switch to the directory you want to use your qed_it___asset_transfers from, and run:
+
+```shell
+npm link /path/to/<JAVASCRIPT_CLIENT_DIR>
+```
+
+You should now be able to `require('qed_it___asset_transfers')` in javascript files from the directory you ran the last 
+command above from.
+
 #### git
 #
 If the library is hosted at a git repository, e.g.
@@ -37,7 +61,8 @@ then install it via:
 
 The library also works in the browser environment via npm and [browserify](http://browserify.org/). After following
 the above steps with Node.js and installing browserify with `npm install -g browserify`,
-perform the following (assuming *main.js* is your entry file):
+perform the following (assuming *main.js* is your entry file, that's to say your javascript file where you actually 
+use this library):
 
 ```shell
 browserify main.js > bundle.js
@@ -71,6 +96,7 @@ Please follow the [installation](#installation) instruction and execute the foll
 var QedItAssetTransfers = require('qed_it___asset_transfers');
 
 var defaultClient = QedItAssetTransfers.ApiClient.instance;
+
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = "YOUR API KEY"
@@ -79,14 +105,12 @@ ApiKeyAuth.apiKey = "YOUR API KEY"
 
 var api = new QedItAssetTransfers.AnalyticsApi()
 var getBlocksRequest = new QedItAssetTransfers.GetBlocksRequest(); // {GetBlocksRequest} 
-var callback = function(error, data, response) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-};
-api.analyticsGetBlocksPost(getBlocksRequest, callback);
+api.analyticsGetBlocksPost(getBlocksRequest).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
 
 ```
 
