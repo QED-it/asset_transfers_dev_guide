@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **WalletLabel** | **string** |  | 
 **Authorization** | **string** |  | 
-**RecipientAddress** | [**TransferAssetRequestRecipientAddress**](TransferAssetRequest_recipient_address.md) |  | 
+**RecipientAddress** | **string** |  | 
 **Amount** | **int32** |  | 
 **AssetId** | **int32** |  | 
 **ClearValue** | **bool** |  | 

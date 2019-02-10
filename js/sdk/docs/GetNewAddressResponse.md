@@ -4,6 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **walletLabel** | **String** |  | 
-**recipientAddress** | [**TransferAssetRequestRecipientAddress**](TransferAssetRequestRecipientAddress.md) |  | 
+**recipientAddress** | **String** |  | 
 
 
