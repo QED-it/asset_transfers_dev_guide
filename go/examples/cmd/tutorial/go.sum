@@ -1,6 +1,3 @@
-github.com/QED-it/asset_transfers_dev_guide v1.1.0 h1:C8OiZECmxwTYhPSppQttQGTZx7T50xuvcOIHltxDMeQ=
-github.com/QED-it/asset_transfers_dev_guide/go v0.0.0-20190101103928-39ffe361ef43 h1:IpLjRlT34oiUcuUCkPmOy3bSfL2UZ3I3Z0SSPyzfFlY=
-github.com/QED-it/asset_transfers_dev_guide/go v0.0.0-20190101103928-39ffe361ef43/go.mod h1:hdH1UmJve9SsJcmIa102NLLuD5ZE2uD1IksXi7gRRA0=
 github.com/QED-it/asset_transfers_dev_guide/go v1.1.0 h1:sYgBxda3Z9D398idG4EvUUIB88dLUYoK3Qwm/2nx4Ew=
 github.com/QED-it/asset_transfers_dev_guide/go v1.1.0/go.mod h1:hdH1UmJve9SsJcmIa102NLLuD5ZE2uD1IksXi7gRRA0=
 golang.org/x/net v0.0.0-20181207154023-610586996380 h1:zPQexyRtNYBc7bcHmehl1dH6TB3qn8zytv8cBGLDNY0=
