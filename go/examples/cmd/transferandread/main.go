@@ -24,7 +24,7 @@ func main() {
 		util.HandleErrorAndExit(err)
 	}
 
-	getNewAddressRequest := openapi.GetNewAddressRequest{
+	getNewAddressRequest := sdk.GetNewAddressRequest{
 		WalletLabel: "dest_wallet",
 		Diversifier: hex.EncodeToString(diversifier),
 	}
@@ -33,7 +33,7 @@ func main() {
 	// END get address of destination wallet
 
 	// START unlock source wallet
-	unlockRequest := openapi.UnlockWalletRequest{
+	unlockRequest := sdk.UnlockWalletRequest{
 		WalletLabel: "source_wallet",
 		Authorization: "PrivacyIsAwesome",
 		Seconds: 600,
@@ -46,7 +46,7 @@ func main() {
 	// END unlock source wallet
 
 	// START transfer from source to destination
-	transferRequest := openapi.TransferAssetRequest{
+	transferRequest := sdk.TransferAssetRequest{
 		WalletLabel: "source_wallet",
 		AssetId: 10,
 		Amount: 50,
@@ -61,7 +61,7 @@ func main() {
 	// END transfer from source to destination
 
 	// START read transactions in the destination wallet and find this transfer
-	getTransactionsRequest := openapi.GetTransactionsRequest{
+	getTransactionsRequest := sdk.GetTransactionsRequest{
 		WalletLabel: "dest_wallet",
 		NumberOfResults: 1000,
 		StartIndex: 0,

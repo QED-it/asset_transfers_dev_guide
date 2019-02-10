@@ -15,7 +15,7 @@ func main() {
 
 	ctx := context.Background()
 
-	unlockRequest := openapi.UnlockWalletRequest{
+	unlockRequest := sdk.UnlockWalletRequest{
 		WalletLabel: "source_wallet",
 		Authorization: "PrivacyIsAwesome",
 		Seconds: 600,

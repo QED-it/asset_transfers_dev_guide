@@ -16,7 +16,7 @@ Get details on past blocks
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed_it___asset_transfers');
+var QedItAssetTransfers = require('qed-it-asset-transfers');
 var defaultClient = QedItAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
@@ -61,7 +61,7 @@ Get details on past transactions
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed_it___asset_transfers');
+var QedItAssetTransfers = require('qed-it-asset-transfers');
 var defaultClient = QedItAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];

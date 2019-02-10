@@ -21,7 +21,7 @@ Delete a wallet
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed_it___asset_transfers');
+var QedItAssetTransfers = require('qed-it-asset-transfers');
 var defaultClient = QedItAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
@@ -66,7 +66,7 @@ Export wallet secret key
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed_it___asset_transfers');
+var QedItAssetTransfers = require('qed-it-asset-transfers');
 var defaultClient = QedItAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
@@ -111,7 +111,7 @@ Generate a new wallet
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed_it___asset_transfers');
+var QedItAssetTransfers = require('qed-it-asset-transfers');
 var defaultClient = QedItAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
@@ -156,7 +156,7 @@ Get all wallet labels
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed_it___asset_transfers');
+var QedItAssetTransfers = require('qed-it-asset-transfers');
 var defaultClient = QedItAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
@@ -197,7 +197,7 @@ Get network governance rules
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed_it___asset_transfers');
+var QedItAssetTransfers = require('qed-it-asset-transfers');
 var defaultClient = QedItAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
@@ -238,7 +238,7 @@ Import wallet from secret key
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed_it___asset_transfers');
+var QedItAssetTransfers = require('qed-it-asset-transfers');
 var defaultClient = QedItAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
@@ -283,7 +283,7 @@ Unlocks a wallet for a given amount of seconds
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed_it___asset_transfers');
+var QedItAssetTransfers = require('qed-it-asset-transfers');
 var defaultClient = QedItAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];

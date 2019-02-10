@@ -30,16 +30,16 @@ func handleFlagParseError(err error) error {
 	return err
 }
 
-func InitAPIClient() (*openapi.APIClient, *AssetTransfersConfig, error) {
+func InitAPIClient() (*sdk.APIClient, *AssetTransfersConfig, error) {
 	config, err := parseFlags()
 	if err != nil {
 		return nil, nil, err
 	}
 
-	clientConfig := openapi.NewConfiguration()
+	clientConfig := sdk.NewConfiguration()
 	clientConfig.BasePath = config.ServerURL
 
-	client := openapi.NewAPIClient(clientConfig)
+	client := sdk.NewAPIClient(clientConfig)
 
 	return client, &config, nil
 }

@@ -15,7 +15,7 @@ func main() {
 
 	ctx := context.Background()
 
-	balanceRequest := openapi.GetWalletBalanceRequest{
+	balanceRequest := sdk.GetWalletBalanceRequest{
 		WalletLabel: "source_wallet",
 	}
 

@@ -16,7 +16,7 @@ func main() {
 
 	ctx := context.Background()
 
-	generateWalletRequest := openapi.GenerateWalletRequest{
+	generateWalletRequest := sdk.GenerateWalletRequest{
 		WalletLabel:   "Jane",
 		Authorization: "123456",
 	}
@@ -26,7 +26,7 @@ func main() {
 		fmt.Printf("Could not generate Jane's wallet, assuming that it already exists.\n")
 	}
 
-	importWalletRequest := openapi.ImportWalletRequest{
+	importWalletRequest := sdk.ImportWalletRequest{
 		WalletLabel:   "bank",
 		EncryptedSk:   "2b9a24e2eafce806cde2f03cae49a840ee4cfb408163c8d2de8264e3552b18ab5debc1def1fb446742cbec99f42ba9e2",
 		Authorization: "123",
@@ -38,7 +38,7 @@ func main() {
 		fmt.Printf("Could not import the bank's wallet, assuming that it already exists.\n")
 	}
 
-	getNewAddressRequest := openapi.GetNewAddressRequest{
+	getNewAddressRequest := sdk.GetNewAddressRequest{
 		WalletLabel: "Jane",
 		Diversifier: "69be9d33a15535a59dd111",
 	}
@@ -50,7 +50,7 @@ func main() {
 
 	fmt.Printf("Jane's address details: %v\n", getNewAddressResponse)
 
-	issueAssetRequest := openapi.IssueAssetRequest{
+	issueAssetRequest := sdk.IssueAssetRequest{
 		WalletLabel: "bank",
 		RecipientAddress: "q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f",
 		AssetId:    200,
@@ -66,7 +66,7 @@ func main() {
 
 	time.Sleep(20)
 
-	getWalletBalancesRequest := openapi.GetWalletBalanceRequest{
+	getWalletBalancesRequest := sdk.GetWalletBalanceRequest{
 		WalletLabel: "Jane",
 	}
 
@@ -77,7 +77,7 @@ func main() {
 
 	fmt.Printf("Jane's wallet balances: %v\n", getWalletBalancesResponse)
 
-	getTransactionsRequest := openapi.GetTransactionsRequest{
+	getTransactionsRequest := sdk.GetTransactionsRequest{
 		WalletLabel:     "Jane",
 		StartIndex:      0,
 		NumberOfResults: 10,
@@ -90,7 +90,7 @@ func main() {
 
 	fmt.Printf("Jane's transactions: %v\n", getTransactionsResponse)
 
-	transferAssetRequest := openapi.TransferAssetRequest{
+	transferAssetRequest := sdk.TransferAssetRequest{
 		WalletLabel: "Jane",
 		RecipientAddress: "q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f",
 		AssetId: 200,
