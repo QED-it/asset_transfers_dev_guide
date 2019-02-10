@@ -50,10 +50,7 @@ func main() {
 		WalletLabel: "source_wallet",
 		AssetId: 10,
 		Amount: 50,
-		RecipientAddress: openapi.TransferAssetRequestRecipientAddress{
-			D: getNewAddressResponse.RecipientAddress.D,
-			Pkd: getNewAddressResponse.RecipientAddress.Pkd,
-		},
+		RecipientAddress:  getNewAddressResponse.RecipientAddress,
 		Memo: "hello there!",
 		Authorization: "PrivacyIsAwesome",
 	}

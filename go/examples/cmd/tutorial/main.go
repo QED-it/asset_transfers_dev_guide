@@ -52,10 +52,7 @@ func main() {
 
 	issueAssetRequest := openapi.IssueAssetRequest{
 		WalletLabel: "bank",
-		RecipientAddress: openapi.TransferAssetRequestRecipientAddress{
-			D:   "69be9d33a15535a59dd111",
-			Pkd: "bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5",
-		},
+		RecipientAddress: "q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f",
 		AssetId:    200,
 		Amount:     1,
 		ClearValue: true,
@@ -95,10 +92,7 @@ func main() {
 
 	transferAssetRequest := openapi.TransferAssetRequest{
 		WalletLabel: "Jane",
-		RecipientAddress: openapi.TransferAssetRequestRecipientAddress{
-			D:   "69be9d33a15535a59dd111",
-			Pkd: "bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5",
-		},
+		RecipientAddress: "q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f",
 		AssetId: 200,
 		Amount:  1,
 		Memo:    "Getting rid of my asset",
