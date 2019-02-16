@@ -23,8 +23,8 @@ func parseFlags() (AssetTransfersConfig, error) {
 		return AssetTransfersConfig{}, handleFlagParseError(fmt.Errorf("url cannot be empty"))
 	}
 
-	if *key == "" {
-		return AssetTransfersConfig{}, handleFlagParseError(fmt.Errorf("key cannot be empty"))
+	if *token == "" {
+		return AssetTransfersConfig{}, handleFlagParseError(fmt.Errorf("token cannot be empty"))
 	}
 
 	httpPrefix := "http://"
