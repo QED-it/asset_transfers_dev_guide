@@ -9,10 +9,12 @@ import (
 
 type AssetTransfersConfig struct {
 	ServerURL string
+	Token     string
 }
 
 func parseFlags() (AssetTransfersConfig, error) {
 	url := flag.String("url", "", "asset transfers node url (i.e., http://localhost:12052/node")
+	token := flag.String("key", "", "API key")
 
 	flag.Parse()
 
@@ -22,6 +24,7 @@ func parseFlags() (AssetTransfersConfig, error) {
 
 	return AssetTransfersConfig{
 		ServerURL: *url,
+		Token:     *token,
 	}, nil
 }
 
@@ -38,6 +41,7 @@ func InitAPIClient() (*openapi.APIClient, *AssetTransfersConfig, error) {
 
 	clientConfig := openapi.NewConfiguration()
 	clientConfig.BasePath = config.ServerURL
+	clientConfig.AddDefaultHeader("x-auth-token", config.Token)
 
 	client := openapi.NewAPIClient(clientConfig)
 
