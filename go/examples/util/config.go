@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/QED-it/asset_transfers_dev_guide/go/sdk"
 	"os"
+	"strings"
 )
 
 type AssetTransfersConfig struct {
@@ -13,7 +14,7 @@ type AssetTransfersConfig struct {
 }
 
 func parseFlags() (AssetTransfersConfig, error) {
-	url := flag.String("url", "", "asset transfers node url (i.e., http://localhost:12052/node")
+	url := flag.String("url", "", "asset transfers node url (i.e., http://localhost:12052")
 	token := flag.String("key", "", "API key")
 
 	flag.Parse()
@@ -22,8 +23,19 @@ func parseFlags() (AssetTransfersConfig, error) {
 		return AssetTransfersConfig{}, handleFlagParseError(fmt.Errorf("url cannot be empty"))
 	}
 
+	httpPrefix := "http://"
+	rawUrl := *url
+	if !strings.HasPrefix(rawUrl, httpPrefix) {
+		rawUrl = httpPrefix + rawUrl
+	}
+
+	portSuffix := ":12052"
+	if !strings.HasSuffix(rawUrl, portSuffix) {
+		rawUrl = rawUrl + portSuffix
+	}
+
 	return AssetTransfersConfig{
-		ServerURL: *url,
+		ServerURL: rawUrl,
 		Token:     *token,
 	}, nil
 }
