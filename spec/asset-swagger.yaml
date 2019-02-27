@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 1.0.0
+  version: 1.1.0
   title: QED-it - Asset Transfers
 security:
   - ApiKeyAuth: []
@@ -318,7 +318,7 @@ paths:
     post:
       tags:
         - Node
-      summary: Get node rules
+      summary: Get network governance rules
       responses:
         '200':
           description: Success
@@ -403,12 +403,7 @@ components:
         authorization:
           type: string
         recipient_address:
-          type: object
-          properties:
-            d:
-              type: string
-            pkd:
-              type: string
+          type: string
         amount:
           type: integer
         asset_id:
@@ -425,9 +420,7 @@ components:
       example:
         wallet_label: source_wallet
         authorization: PrivacyIsAwesome
-        recipient_address:
-          d: 69be9d33a15535a59dd111
-          pkd: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+        recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
         amount: 4
         asset_id: 0
         memo: '{"recipient_name": "Dan"}'
@@ -458,12 +451,7 @@ components:
         amount:
           type: integer
         recipient_address:
-          type: object
-          properties:
-            d:
-              type: string
-            pkd:
-              type: string
+          type: string
         memo:
           type: string
       required:
@@ -490,9 +478,7 @@ components:
           - is_incoming: true
             asset_id: 0
             amount: 8
-            recipient_address:
-              d: 69be9d33a15535a59dd111
-              pkd: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+            recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
             memo: '{"recipient_name": "Dan"}'
     GetRulesResponse:
       type: object
@@ -564,12 +550,7 @@ components:
         authorization:
           type: string
         recipient_address:
-          type: object
-          properties:
-            d:
-              type: string
-            pkd:
-              type: string
+          type: string
         amount:
           type: integer
         asset_id:
@@ -589,9 +570,7 @@ components:
       example:
         wallet_label: source_wallet
         authorization: PrivacyIsAwesome
-        recipient_address:
-          d: 69be9d33a15535a59dd111
-          pkd: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+        recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
         amount: 4
         asset_id: 0
         clear_value: true
@@ -614,20 +593,13 @@ components:
         wallet_label:
           type: string
         recipient_address:
-          type: object
-          properties:
-            d:
-              type: string
-            pkd:
-              type: string
+          type: string
       required:
         - wallet_label
         - recipient_address
       example:
         wallet_label: source_wallet
-        recipient_address:
-          d: 69be9d33a15535a59dd111
-          pkd: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+        recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
     GetPublicKeyRequest:
       type: object
       properties:
@@ -649,7 +621,7 @@ components:
         - public_key
       example:
         wallet_label: source_wallet
-        public_key: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+        public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
     ImportWalletRequest:
       type: object
       properties:
@@ -668,9 +640,9 @@ components:
         - salt
       example:
         wallet_label: source_wallet
-        encrypted_sk: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+        encrypted_sk: 44d2836bbfcc7c69dd35dbe854d54a093be9a1be7f9d658325a8d2526f67ede16abf0d1430edab07be9b8c12070260af
         authorization: PrivacyIsAwesome
-        salt: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+        salt: 27ca2bf75fe4c1564398459bd2f39a89645bf98aeeb1f99a9c9efa6e5c39cbfe
     ExportWalletRequest:
       type: object
       properties:
@@ -695,8 +667,8 @@ components:
         - salt
       example:
         wallet_label: source_wallet
-        encrypted_sk: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
-        salt: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+        encrypted_sk: 44d2836bbfcc7c69dd35dbe854d54a093be9a1be7f9d658325a8d2526f67ede16abf0d1430edab07be9b8c12070260af
+        salt: 27ca2bf75fe4c1564398459bd2f39a89645bf98aeeb1f99a9c9efa6e5c39cbfe
     GenerateWalletRequest:
       type: object
       properties:
@@ -759,7 +731,7 @@ components:
         wallet_label: issuer_wallet
         authorization: PrivacyIsAwesome
         rules_to_add:
-          - public_key: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+          - public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
             can_issue_anything_confidentially: false
             can_issue_asset_id_first: 100
             can_issue_asset_id_last: 112
@@ -783,7 +755,7 @@ components:
         wallet_label: issuer_wallet
         authorization: PrivacyIsAwesome
         rules_to_delete:
-          - public_key: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+          - public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
             can_issue_anything_confidentially: false
             can_issue_asset_id_first: 100
             can_issue_asset_id_last: 112
@@ -804,7 +776,7 @@ components:
       required:
         - public_key
       example:
-        public_key: bed104e2358a36053fb3a5dacb4ed34a2a612a2e10aa521dd166032e9b3343d5
+        public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
         can_issue_anything_confidentially: false
         can_issue_asset_id_first: 100
         can_issue_asset_id_last: 112

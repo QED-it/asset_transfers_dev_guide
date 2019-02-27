@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**NodeExportWalletPost**](NodeApi.md#NodeExportWalletPost) | **Post** /node/export_wallet | Export wallet secret key
 [**NodeGenerateWalletPost**](NodeApi.md#NodeGenerateWalletPost) | **Post** /node/generate_wallet | Generate a new wallet
 [**NodeGetAllWalletsPost**](NodeApi.md#NodeGetAllWalletsPost) | **Post** /node/get_all_wallets | Get all wallet labels
-[**NodeGetRulesPost**](NodeApi.md#NodeGetRulesPost) | **Post** /node/get_rules | Get node rules
+[**NodeGetRulesPost**](NodeApi.md#NodeGetRulesPost) | **Post** /node/get_rules | Get network governance rules
 [**NodeImportWalletPost**](NodeApi.md#NodeImportWalletPost) | **Post** /node/import_wallet | Import wallet from secret key
 [**NodeUnlockWalletPost**](NodeApi.md#NodeUnlockWalletPost) | **Post** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds
 
@@ -115,7 +115,7 @@ This endpoint does not need any parameter.
 
 # **NodeGetRulesPost**
 > GetRulesResponse NodeGetRulesPost(ctx, )
-Get node rules
+Get network governance rules
 
 ### Required Parameters
 This endpoint does not need any parameter.

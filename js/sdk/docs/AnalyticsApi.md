@@ -16,24 +16,22 @@ Get details on past blocks
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
-let defaultClient = QedItAssetTransfers.ApiClient.instance;
-
+var QedItAssetTransfers = require('qed-it-asset-transfers');
+var defaultClient = QedItAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
-let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
+var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new QedItAssetTransfers.AnalyticsApi();
-let getBlocksRequest = new QedItAssetTransfers.GetBlocksRequest(); // GetBlocksRequest | 
-apiInstance.analyticsGetBlocksPost(getBlocksRequest, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+var apiInstance = new QedItAssetTransfers.AnalyticsApi();
+var getBlocksRequest = new QedItAssetTransfers.GetBlocksRequest(); // GetBlocksRequest | 
+apiInstance.analyticsGetBlocksPost(getBlocksRequest).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
 });
+
 ```
 
 ### Parameters
@@ -63,24 +61,22 @@ Get details on past transactions
 
 ### Example
 ```javascript
-import QedItAssetTransfers from 'qed_it___asset_transfers';
-let defaultClient = QedItAssetTransfers.ApiClient.instance;
-
+var QedItAssetTransfers = require('qed-it-asset-transfers');
+var defaultClient = QedItAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
-let ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
+var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-let apiInstance = new QedItAssetTransfers.AnalyticsApi();
-let getTransactionsRequest = new QedItAssetTransfers.GetTransactionsRequest(); // GetTransactionsRequest | 
-apiInstance.analyticsGetTransactionsPost(getTransactionsRequest, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
+var apiInstance = new QedItAssetTransfers.AnalyticsApi();
+var getTransactionsRequest = new QedItAssetTransfers.GetTransactionsRequest(); // GetTransactionsRequest | 
+apiInstance.analyticsGetTransactionsPost(getTransactionsRequest).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
 });
+
 ```
 
 ### Parameters

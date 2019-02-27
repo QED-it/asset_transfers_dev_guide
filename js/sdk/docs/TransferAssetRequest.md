@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **walletLabel** | **String** |  | 
 **authorization** | **String** |  | 
-**recipientAddress** | [**TransferAssetRequestRecipientAddress**](TransferAssetRequestRecipientAddress.md) |  | 
+**recipientAddress** | **String** |  | 
 **amount** | **Number** |  | 
 **assetId** | **Number** |  | 
 **memo** | **String** |  | 

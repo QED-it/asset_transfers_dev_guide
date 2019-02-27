@@ -45,17 +45,17 @@ func handleFlagParseError(err error) error {
 	return err
 }
 
-func InitAPIClient() (*openapi.APIClient, *AssetTransfersConfig, error) {
+func InitAPIClient() (*sdk.APIClient, *AssetTransfersConfig, error) {
 	config, err := parseFlags()
 	if err != nil {
 		return nil, nil, err
 	}
 
-	clientConfig := openapi.NewConfiguration()
+	clientConfig := sdk.NewConfiguration()
 	clientConfig.BasePath = config.ServerURL
 	clientConfig.AddDefaultHeader("x-auth-token", config.Token)
 
-	client := openapi.NewAPIClient(clientConfig)
+	client := sdk.NewAPIClient(clientConfig)
 
 	return client, &config, nil
 }
