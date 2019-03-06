@@ -393,7 +393,7 @@ components:
       example:
         wallet_label: source_wallet
         assets:
-          - asset_id: 0
+          - asset_id: 1
             amount: 8
     TransferAssetRequest:
       type: object
@@ -422,7 +422,7 @@ components:
         authorization: PrivacyIsAwesome
         recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
         amount: 4
-        asset_id: 0
+        asset_id: 1
         memo: '{"recipient_name": "Dan"}'
     GetTransactionsRequest:
       type: object
@@ -476,7 +476,7 @@ components:
         wallet_label: source_wallet
         transactions:
           - is_incoming: true
-            asset_id: 0
+            asset_id: 1
             amount: 8
             recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
             memo: '{"recipient_name": "Dan"}'
@@ -572,7 +572,7 @@ components:
         authorization: PrivacyIsAwesome
         recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
         amount: 4
-        asset_id: 0
+        asset_id: 1
         clear_value: true
         memo: '{"recipient_name": "Dan"}'
     GetNewAddressRequest:
