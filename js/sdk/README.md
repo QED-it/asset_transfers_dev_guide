@@ -145,6 +145,7 @@ Class | Method | HTTP request | Description
  - [QedItAssetTransfers.CreateRuleRequest](docs/CreateRuleRequest.md)
  - [QedItAssetTransfers.DeleteRuleRequest](docs/DeleteRuleRequest.md)
  - [QedItAssetTransfers.DeleteWalletRequest](docs/DeleteWalletRequest.md)
+ - [QedItAssetTransfers.ErrorResponse](docs/ErrorResponse.md)
  - [QedItAssetTransfers.ExportWalletRequest](docs/ExportWalletRequest.md)
  - [QedItAssetTransfers.ExportWalletResponse](docs/ExportWalletResponse.md)
  - [QedItAssetTransfers.GenerateWalletRequest](docs/GenerateWalletRequest.md)

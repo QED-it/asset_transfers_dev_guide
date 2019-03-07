@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/DeleteWalletRequest', 'model/ExportWalletRequest', 'model/ExportWalletResponse', 'model/GenerateWalletRequest', 'model/GetAllWalletsResponse', 'model/GetRulesResponse', 'model/ImportWalletRequest', 'model/UnlockWalletRequest'], factory);
+    define(['ApiClient', 'model/DeleteWalletRequest', 'model/ErrorResponse', 'model/ExportWalletRequest', 'model/ExportWalletResponse', 'model/GenerateWalletRequest', 'model/GetAllWalletsResponse', 'model/GetRulesResponse', 'model/ImportWalletRequest', 'model/UnlockWalletRequest'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/DeleteWalletRequest'), require('../model/ExportWalletRequest'), require('../model/ExportWalletResponse'), require('../model/GenerateWalletRequest'), require('../model/GetAllWalletsResponse'), require('../model/GetRulesResponse'), require('../model/ImportWalletRequest'), require('../model/UnlockWalletRequest'));
+    module.exports = factory(require('../ApiClient'), require('../model/DeleteWalletRequest'), require('../model/ErrorResponse'), require('../model/ExportWalletRequest'), require('../model/ExportWalletResponse'), require('../model/GenerateWalletRequest'), require('../model/GetAllWalletsResponse'), require('../model/GetRulesResponse'), require('../model/ImportWalletRequest'), require('../model/UnlockWalletRequest'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.NodeApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.DeleteWalletRequest, root.QedItAssetTransfers.ExportWalletRequest, root.QedItAssetTransfers.ExportWalletResponse, root.QedItAssetTransfers.GenerateWalletRequest, root.QedItAssetTransfers.GetAllWalletsResponse, root.QedItAssetTransfers.GetRulesResponse, root.QedItAssetTransfers.ImportWalletRequest, root.QedItAssetTransfers.UnlockWalletRequest);
+    root.QedItAssetTransfers.NodeApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.DeleteWalletRequest, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.ExportWalletRequest, root.QedItAssetTransfers.ExportWalletResponse, root.QedItAssetTransfers.GenerateWalletRequest, root.QedItAssetTransfers.GetAllWalletsResponse, root.QedItAssetTransfers.GetRulesResponse, root.QedItAssetTransfers.ImportWalletRequest, root.QedItAssetTransfers.UnlockWalletRequest);
   }
-}(this, function(ApiClient, DeleteWalletRequest, ExportWalletRequest, ExportWalletResponse, GenerateWalletRequest, GetAllWalletsResponse, GetRulesResponse, ImportWalletRequest, UnlockWalletRequest) {
+}(this, function(ApiClient, DeleteWalletRequest, ErrorResponse, ExportWalletRequest, ExportWalletResponse, GenerateWalletRequest, GetAllWalletsResponse, GetRulesResponse, ImportWalletRequest, UnlockWalletRequest) {
   'use strict';
 
   /**
@@ -75,7 +75,7 @@
 
       var authNames = ['ApiKeyAuth'];
       var contentTypes = ['application/json'];
-      var accepts = [];
+      var accepts = ['application/json'];
       var returnType = null;
 
       return this.apiClient.callApi(
@@ -175,7 +175,7 @@
 
       var authNames = ['ApiKeyAuth'];
       var contentTypes = ['application/json'];
-      var accepts = [];
+      var accepts = ['application/json'];
       var returnType = null;
 
       return this.apiClient.callApi(
@@ -311,7 +311,7 @@
 
       var authNames = ['ApiKeyAuth'];
       var contentTypes = ['application/json'];
-      var accepts = [];
+      var accepts = ['application/json'];
       var returnType = null;
 
       return this.apiClient.callApi(
@@ -361,7 +361,7 @@
 
       var authNames = ['ApiKeyAuth'];
       var contentTypes = ['application/json'];
-      var accepts = [];
+      var accepts = ['application/json'];
       var returnType = null;
 
       return this.apiClient.callApi(

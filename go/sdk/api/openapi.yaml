@@ -26,10 +26,22 @@ paths:
                 $ref: '#/components/schemas/GetWalletBalanceResponse'
           description: Success
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Get wallets information
       tags:
@@ -46,10 +58,22 @@ paths:
         201:
           description: Success/Created
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Issue assets
       tags:
@@ -66,10 +90,22 @@ paths:
         200:
           description: Success
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Transfer assets
       tags:
@@ -90,10 +126,22 @@ paths:
                 $ref: '#/components/schemas/GetNewAddressResponse'
           description: Success/Created
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Get a new address from a given diversifier or generate randomly
       tags:
@@ -114,10 +162,22 @@ paths:
                 $ref: '#/components/schemas/GetPublicKeyResponse'
           description: Success/Created
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Get wallet public key
       tags:
@@ -134,10 +194,22 @@ paths:
         201:
           description: Success/Created
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Create & broadcast add-config-rule
       tags:
@@ -154,10 +226,22 @@ paths:
         200:
           description: Success
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Create & broadcast delete-config-rule
       tags:
@@ -178,10 +262,22 @@ paths:
                 $ref: '#/components/schemas/GetTransactionsResponse'
           description: Success
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Get details on past transactions
       tags:
@@ -202,10 +298,22 @@ paths:
                 $ref: '#/components/schemas/GetBlocksResponse'
           description: Success
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Get details on past blocks
       tags:
@@ -222,10 +330,22 @@ paths:
         200:
           description: Success
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Generate a new wallet
       tags:
@@ -242,10 +362,22 @@ paths:
         200:
           description: Success
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Delete a wallet
       tags:
@@ -262,10 +394,22 @@ paths:
         200:
           description: Success
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Import wallet from secret key
       tags:
@@ -282,10 +426,22 @@ paths:
         200:
           description: Success
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Unlocks a wallet for a given amount of seconds
       tags:
@@ -306,10 +462,22 @@ paths:
                 $ref: '#/components/schemas/ExportWalletResponse'
           description: Success
         400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Export wallet secret key
       tags:
@@ -323,11 +491,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetRulesResponse'
           description: Success
-        400:
-          description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Get network governance rules
       tags:
@@ -341,11 +515,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetAllWalletsResponse'
           description: Success
-        400:
-          description: Bad request
         401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Unauthorized
         500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
       summary: Get all wallet labels
       tags:
@@ -379,7 +559,7 @@ components:
       example:
         wallet_label: source_wallet
         assets:
-        - asset_id: 0
+        - asset_id: 1
           amount: 8
       properties:
         wallet_label:
@@ -398,7 +578,7 @@ components:
         authorization: PrivacyIsAwesome
         recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
         amount: 4
-        asset_id: 0
+        asset_id: 1
         memo: '{"recipient_name": "Dan"}'
       properties:
         wallet_label:
@@ -468,7 +648,7 @@ components:
         wallet_label: source_wallet
         transactions:
         - is_incoming: true
-          asset_id: 0
+          asset_id: 1
           amount: 8
           recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
           memo: '{"recipient_name": "Dan"}'
@@ -566,7 +746,7 @@ components:
         authorization: PrivacyIsAwesome
         recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
         amount: 4
-        asset_id: 0
+        asset_id: 1
         clear_value: true
         memo: '{"recipient_name": "Dan"}'
       properties:
@@ -598,7 +778,6 @@ components:
     GetNewAddressRequest:
       example:
         wallet_label: source_wallet
-        diversifier: 69be9d33a15535a59dd111
       properties:
         wallet_label:
           type: string
@@ -803,6 +982,19 @@ components:
           type: boolean
       required:
       - public_key
+      type: object
+    ErrorResponse:
+      example:
+        error_code: 400
+        message: error message
+      properties:
+        error_code:
+          format: int32
+          type: integer
+        message:
+          type: string
+      required:
+      - error_code
       type: object
   securitySchemes:
     ApiKeyAuth:

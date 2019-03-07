@@ -56,7 +56,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 <a name="walletDeleteRulePost"></a>
 # **walletDeleteRulePost**
@@ -101,7 +101,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 <a name="walletGetNewAddressPost"></a>
 # **walletGetNewAddressPost**
@@ -281,7 +281,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 <a name="walletTransferAssetPost"></a>
 # **walletTransferAssetPost**
@@ -326,5 +326,5 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 

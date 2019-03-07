@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/GetBlocksRequest', 'model/GetBlocksResponse', 'model/GetTransactionsRequest', 'model/GetTransactionsResponse'], factory);
+    define(['ApiClient', 'model/ErrorResponse', 'model/GetBlocksRequest', 'model/GetBlocksResponse', 'model/GetTransactionsRequest', 'model/GetTransactionsResponse'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/GetBlocksRequest'), require('../model/GetBlocksResponse'), require('../model/GetTransactionsRequest'), require('../model/GetTransactionsResponse'));
+    module.exports = factory(require('../ApiClient'), require('../model/ErrorResponse'), require('../model/GetBlocksRequest'), require('../model/GetBlocksResponse'), require('../model/GetTransactionsRequest'), require('../model/GetTransactionsResponse'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.AnalyticsApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.GetBlocksRequest, root.QedItAssetTransfers.GetBlocksResponse, root.QedItAssetTransfers.GetTransactionsRequest, root.QedItAssetTransfers.GetTransactionsResponse);
+    root.QedItAssetTransfers.AnalyticsApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.GetBlocksRequest, root.QedItAssetTransfers.GetBlocksResponse, root.QedItAssetTransfers.GetTransactionsRequest, root.QedItAssetTransfers.GetTransactionsResponse);
   }
-}(this, function(ApiClient, GetBlocksRequest, GetBlocksResponse, GetTransactionsRequest, GetTransactionsResponse) {
+}(this, function(ApiClient, ErrorResponse, GetBlocksRequest, GetBlocksResponse, GetTransactionsRequest, GetTransactionsResponse) {
   'use strict';
 
   /**
