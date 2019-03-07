@@ -766,7 +766,6 @@ components:
         - wallet_label
       example:
         wallet_label: source_wallet
-        diversifier: 69be9d33a15535a59dd111
     GetNewAddressResponse:
       type: object
       properties:
