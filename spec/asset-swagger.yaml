@@ -5,7 +5,7 @@ info:
 security:
   - ApiKeyAuth: []
 servers:
-  - url: 'http://{server_url}:12052'
+  - url: http://{server_url}:12052
     variables:
       server_url:
         default: localhost
