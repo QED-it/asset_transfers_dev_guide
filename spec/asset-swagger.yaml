@@ -494,12 +494,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetRulesResponse'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
           content:
@@ -524,12 +518,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetAllWalletsResponse'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
           content:
