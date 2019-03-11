@@ -56,7 +56,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 <a name="nodeExportWalletPost"></a>
 # **nodeExportWalletPost**
@@ -146,7 +146,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 <a name="nodeGetAllWalletsPost"></a>
 # **nodeGetAllWalletsPost**
@@ -273,7 +273,7 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 <a name="nodeUnlockWalletPost"></a>
 # **nodeUnlockWalletPost**
@@ -318,5 +318,5 @@ null (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 

@@ -55,6 +55,7 @@ Class | Method | HTTP request | Description
  - [CreateRuleRequest](docs/CreateRuleRequest.md)
  - [DeleteRuleRequest](docs/DeleteRuleRequest.md)
  - [DeleteWalletRequest](docs/DeleteWalletRequest.md)
+ - [ErrorResponse](docs/ErrorResponse.md)
  - [ExportWalletRequest](docs/ExportWalletRequest.md)
  - [ExportWalletResponse](docs/ExportWalletResponse.md)
  - [GenerateWalletRequest](docs/GenerateWalletRequest.md)

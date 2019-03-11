@@ -30,10 +30,22 @@ paths:
                 $ref: '#/components/schemas/GetWalletBalanceResponse'
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /wallet/issue_asset:
     post:
       tags:
@@ -50,10 +62,22 @@ paths:
           description: Success/Created
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /wallet/transfer_asset:
     post:
       tags:
@@ -70,10 +94,22 @@ paths:
           description: Success
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /wallet/get_new_address:
     post:
       tags:
@@ -94,10 +130,22 @@ paths:
                 $ref: '#/components/schemas/GetNewAddressResponse'
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /wallet/get_public_key:
     post:
       tags:
@@ -118,10 +166,22 @@ paths:
                 $ref: '#/components/schemas/GetPublicKeyResponse'
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /wallet/create_rule:
     post:
       tags:
@@ -138,10 +198,22 @@ paths:
           description: Success/Created
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /wallet/delete_rule:
     post:
       tags:
@@ -158,10 +230,22 @@ paths:
           description: Success
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /analytics/get_transactions:
     post:
       tags:
@@ -182,10 +266,22 @@ paths:
                 $ref: '#/components/schemas/GetTransactionsResponse'
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /analytics/get_blocks:
     post:
       tags:
@@ -206,10 +302,22 @@ paths:
                 $ref: '#/components/schemas/GetBlocksResponse'
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /node/generate_wallet:
     post:
       tags:
@@ -226,10 +334,22 @@ paths:
           description: Success
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /node/delete_wallet:
     post:
       tags:
@@ -246,10 +366,22 @@ paths:
           description: Success
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /node/import_wallet:
     post:
       tags:
@@ -266,10 +398,22 @@ paths:
           description: Success
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /node/unlock_wallet:
     post:
       tags:
@@ -286,10 +430,22 @@ paths:
           description: Success
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /node/export_wallet:
     post:
       tags:
@@ -310,10 +466,22 @@ paths:
                 $ref: '#/components/schemas/ExportWalletResponse'
         '400':
           description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /node/get_rules:
     post:
       tags:
@@ -326,12 +494,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetRulesResponse'
-        '400':
-          description: Bad request
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /node/get_all_wallets:
     post:
       tags:
@@ -344,12 +518,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetAllWalletsResponse'
-        '400':
-          description: Bad request
         '401':
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -393,7 +573,7 @@ components:
       example:
         wallet_label: source_wallet
         assets:
-          - asset_id: 0
+          - asset_id: 1
             amount: 8
     TransferAssetRequest:
       type: object
@@ -422,7 +602,7 @@ components:
         authorization: PrivacyIsAwesome
         recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
         amount: 4
-        asset_id: 0
+        asset_id: 1
         memo: '{"recipient_name": "Dan"}'
     GetTransactionsRequest:
       type: object
@@ -476,7 +656,7 @@ components:
         wallet_label: source_wallet
         transactions:
           - is_incoming: true
-            asset_id: 0
+            asset_id: 1
             amount: 8
             recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
             memo: '{"recipient_name": "Dan"}'
@@ -572,7 +752,7 @@ components:
         authorization: PrivacyIsAwesome
         recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
         amount: 4
-        asset_id: 0
+        asset_id: 1
         clear_value: true
         memo: '{"recipient_name": "Dan"}'
     GetNewAddressRequest:
@@ -586,7 +766,6 @@ components:
         - wallet_label
       example:
         wallet_label: source_wallet
-        diversifier: 69be9d33a15535a59dd111
     GetNewAddressResponse:
       type: object
       properties:
@@ -781,3 +960,16 @@ components:
         can_issue_asset_id_first: 100
         can_issue_asset_id_last: 112
         is_admin: false
+    ErrorResponse:
+      type: object
+      properties:
+        error_code:
+          type: integer
+        message:
+          type: string
+      required:
+        - error_code
+      example:
+        error_code: 400
+        message: "error message"
+
