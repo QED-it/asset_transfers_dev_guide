@@ -16,12 +16,12 @@
 (function(factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/BalanceForAsset', 'model/Block', 'model/CreateRuleRequest', 'model/DeleteRuleRequest', 'model/DeleteWalletRequest', 'model/ErrorResponse', 'model/ExportWalletRequest', 'model/ExportWalletResponse', 'model/GenerateWalletRequest', 'model/GetAllWalletsResponse', 'model/GetBlocksRequest', 'model/GetBlocksResponse', 'model/GetNewAddressRequest', 'model/GetNewAddressResponse', 'model/GetPublicKeyRequest', 'model/GetPublicKeyResponse', 'model/GetRulesResponse', 'model/GetTransactionsRequest', 'model/GetTransactionsResponse', 'model/GetWalletBalanceRequest', 'model/GetWalletBalanceResponse', 'model/ImportWalletRequest', 'model/IssueAssetRequest', 'model/Rule', 'model/TransactionsForWallet', 'model/TransferAssetRequest', 'model/UnlockWalletRequest', 'api/AnalyticsApi', 'api/NodeApi', 'api/WalletApi'], factory);
+    define(['ApiClient', 'model/AsyncTaskCreatedResponse', 'model/BalanceForAsset', 'model/Block', 'model/CreateRuleRequest', 'model/DeleteRuleRequest', 'model/DeleteWalletRequest', 'model/ErrorResponse', 'model/ExportWalletRequest', 'model/ExportWalletResponse', 'model/GenerateWalletRequest', 'model/GetAllWalletsResponse', 'model/GetBlocksRequest', 'model/GetBlocksResponse', 'model/GetNewAddressRequest', 'model/GetNewAddressResponse', 'model/GetPublicKeyRequest', 'model/GetPublicKeyResponse', 'model/GetRulesResponse', 'model/GetTaskStatusRequest', 'model/GetTaskStatusResponse', 'model/GetTransactionsRequest', 'model/GetTransactionsResponse', 'model/GetWalletBalanceRequest', 'model/GetWalletBalanceResponse', 'model/ImportWalletRequest', 'model/IssueAssetRequest', 'model/Rule', 'model/TransactionsForWallet', 'model/TransferAssetRequest', 'model/UnlockWalletRequest', 'api/AnalyticsApi', 'api/NodeApi', 'api/WalletApi'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./model/BalanceForAsset'), require('./model/Block'), require('./model/CreateRuleRequest'), require('./model/DeleteRuleRequest'), require('./model/DeleteWalletRequest'), require('./model/ErrorResponse'), require('./model/ExportWalletRequest'), require('./model/ExportWalletResponse'), require('./model/GenerateWalletRequest'), require('./model/GetAllWalletsResponse'), require('./model/GetBlocksRequest'), require('./model/GetBlocksResponse'), require('./model/GetNewAddressRequest'), require('./model/GetNewAddressResponse'), require('./model/GetPublicKeyRequest'), require('./model/GetPublicKeyResponse'), require('./model/GetRulesResponse'), require('./model/GetTransactionsRequest'), require('./model/GetTransactionsResponse'), require('./model/GetWalletBalanceRequest'), require('./model/GetWalletBalanceResponse'), require('./model/ImportWalletRequest'), require('./model/IssueAssetRequest'), require('./model/Rule'), require('./model/TransactionsForWallet'), require('./model/TransferAssetRequest'), require('./model/UnlockWalletRequest'), require('./api/AnalyticsApi'), require('./api/NodeApi'), require('./api/WalletApi'));
+    module.exports = factory(require('./ApiClient'), require('./model/AsyncTaskCreatedResponse'), require('./model/BalanceForAsset'), require('./model/Block'), require('./model/CreateRuleRequest'), require('./model/DeleteRuleRequest'), require('./model/DeleteWalletRequest'), require('./model/ErrorResponse'), require('./model/ExportWalletRequest'), require('./model/ExportWalletResponse'), require('./model/GenerateWalletRequest'), require('./model/GetAllWalletsResponse'), require('./model/GetBlocksRequest'), require('./model/GetBlocksResponse'), require('./model/GetNewAddressRequest'), require('./model/GetNewAddressResponse'), require('./model/GetPublicKeyRequest'), require('./model/GetPublicKeyResponse'), require('./model/GetRulesResponse'), require('./model/GetTaskStatusRequest'), require('./model/GetTaskStatusResponse'), require('./model/GetTransactionsRequest'), require('./model/GetTransactionsResponse'), require('./model/GetWalletBalanceRequest'), require('./model/GetWalletBalanceResponse'), require('./model/ImportWalletRequest'), require('./model/IssueAssetRequest'), require('./model/Rule'), require('./model/TransactionsForWallet'), require('./model/TransferAssetRequest'), require('./model/UnlockWalletRequest'), require('./api/AnalyticsApi'), require('./api/NodeApi'), require('./api/WalletApi'));
   }
-}(function(ApiClient, BalanceForAsset, Block, CreateRuleRequest, DeleteRuleRequest, DeleteWalletRequest, ErrorResponse, ExportWalletRequest, ExportWalletResponse, GenerateWalletRequest, GetAllWalletsResponse, GetBlocksRequest, GetBlocksResponse, GetNewAddressRequest, GetNewAddressResponse, GetPublicKeyRequest, GetPublicKeyResponse, GetRulesResponse, GetTransactionsRequest, GetTransactionsResponse, GetWalletBalanceRequest, GetWalletBalanceResponse, ImportWalletRequest, IssueAssetRequest, Rule, TransactionsForWallet, TransferAssetRequest, UnlockWalletRequest, AnalyticsApi, NodeApi, WalletApi) {
+}(function(ApiClient, AsyncTaskCreatedResponse, BalanceForAsset, Block, CreateRuleRequest, DeleteRuleRequest, DeleteWalletRequest, ErrorResponse, ExportWalletRequest, ExportWalletResponse, GenerateWalletRequest, GetAllWalletsResponse, GetBlocksRequest, GetBlocksResponse, GetNewAddressRequest, GetNewAddressResponse, GetPublicKeyRequest, GetPublicKeyResponse, GetRulesResponse, GetTaskStatusRequest, GetTaskStatusResponse, GetTransactionsRequest, GetTransactionsResponse, GetWalletBalanceRequest, GetWalletBalanceResponse, ImportWalletRequest, IssueAssetRequest, Rule, TransactionsForWallet, TransferAssetRequest, UnlockWalletRequest, AnalyticsApi, NodeApi, WalletApi) {
   'use strict';
 
   /**
@@ -61,6 +61,11 @@
      * @property {module:ApiClient}
      */
     ApiClient: ApiClient,
+    /**
+     * The AsyncTaskCreatedResponse model constructor.
+     * @property {module:model/AsyncTaskCreatedResponse}
+     */
+    AsyncTaskCreatedResponse: AsyncTaskCreatedResponse,
     /**
      * The BalanceForAsset model constructor.
      * @property {module:model/BalanceForAsset}
@@ -146,6 +151,16 @@
      * @property {module:model/GetRulesResponse}
      */
     GetRulesResponse: GetRulesResponse,
+    /**
+     * The GetTaskStatusRequest model constructor.
+     * @property {module:model/GetTaskStatusRequest}
+     */
+    GetTaskStatusRequest: GetTaskStatusRequest,
+    /**
+     * The GetTaskStatusResponse model constructor.
+     * @property {module:model/GetTaskStatusResponse}
+     */
+    GetTaskStatusResponse: GetTaskStatusResponse,
     /**
      * The GetTransactionsRequest model constructor.
      * @property {module:model/GetTransactionsRequest}

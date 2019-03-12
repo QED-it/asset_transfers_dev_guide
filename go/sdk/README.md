@@ -37,6 +37,7 @@ Class | Method | HTTP request | Description
 *NodeApi* | [**NodeGenerateWalletPost**](docs/NodeApi.md#nodegeneratewalletpost) | **Post** /node/generate_wallet | Generate a new wallet
 *NodeApi* | [**NodeGetAllWalletsPost**](docs/NodeApi.md#nodegetallwalletspost) | **Post** /node/get_all_wallets | Get all wallet labels
 *NodeApi* | [**NodeGetRulesPost**](docs/NodeApi.md#nodegetrulespost) | **Post** /node/get_rules | Get network governance rules
+*NodeApi* | [**NodeGetTaskStatusPost**](docs/NodeApi.md#nodegettaskstatuspost) | **Post** /node/get_task_status | Get all tasks in the node
 *NodeApi* | [**NodeImportWalletPost**](docs/NodeApi.md#nodeimportwalletpost) | **Post** /node/import_wallet | Import wallet from secret key
 *NodeApi* | [**NodeUnlockWalletPost**](docs/NodeApi.md#nodeunlockwalletpost) | **Post** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds
 *WalletApi* | [**WalletCreateRulePost**](docs/WalletApi.md#walletcreaterulepost) | **Post** /wallet/create_rule | Create &amp; broadcast add-config-rule
@@ -50,6 +51,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [AsyncTaskCreatedResponse](docs/AsyncTaskCreatedResponse.md)
  - [BalanceForAsset](docs/BalanceForAsset.md)
  - [Block](docs/Block.md)
  - [CreateRuleRequest](docs/CreateRuleRequest.md)
@@ -67,6 +69,8 @@ Class | Method | HTTP request | Description
  - [GetPublicKeyRequest](docs/GetPublicKeyRequest.md)
  - [GetPublicKeyResponse](docs/GetPublicKeyResponse.md)
  - [GetRulesResponse](docs/GetRulesResponse.md)
+ - [GetTaskStatusRequest](docs/GetTaskStatusRequest.md)
+ - [GetTaskStatusResponse](docs/GetTaskStatusResponse.md)
  - [GetTransactionsRequest](docs/GetTransactionsRequest.md)
  - [GetTransactionsResponse](docs/GetTransactionsResponse.md)
  - [GetWalletBalanceRequest](docs/GetWalletBalanceRequest.md)

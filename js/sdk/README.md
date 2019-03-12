@@ -127,6 +127,7 @@ Class | Method | HTTP request | Description
 *QedItAssetTransfers.NodeApi* | [**nodeGenerateWalletPost**](docs/NodeApi.md#nodeGenerateWalletPost) | **POST** /node/generate_wallet | Generate a new wallet
 *QedItAssetTransfers.NodeApi* | [**nodeGetAllWalletsPost**](docs/NodeApi.md#nodeGetAllWalletsPost) | **POST** /node/get_all_wallets | Get all wallet labels
 *QedItAssetTransfers.NodeApi* | [**nodeGetRulesPost**](docs/NodeApi.md#nodeGetRulesPost) | **POST** /node/get_rules | Get network governance rules
+*QedItAssetTransfers.NodeApi* | [**nodeGetTaskStatusPost**](docs/NodeApi.md#nodeGetTaskStatusPost) | **POST** /node/get_task_status | Get all tasks in the node
 *QedItAssetTransfers.NodeApi* | [**nodeImportWalletPost**](docs/NodeApi.md#nodeImportWalletPost) | **POST** /node/import_wallet | Import wallet from secret key
 *QedItAssetTransfers.NodeApi* | [**nodeUnlockWalletPost**](docs/NodeApi.md#nodeUnlockWalletPost) | **POST** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds
 *QedItAssetTransfers.WalletApi* | [**walletCreateRulePost**](docs/WalletApi.md#walletCreateRulePost) | **POST** /wallet/create_rule | Create &amp; broadcast add-config-rule
@@ -140,6 +141,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [QedItAssetTransfers.AsyncTaskCreatedResponse](docs/AsyncTaskCreatedResponse.md)
  - [QedItAssetTransfers.BalanceForAsset](docs/BalanceForAsset.md)
  - [QedItAssetTransfers.Block](docs/Block.md)
  - [QedItAssetTransfers.CreateRuleRequest](docs/CreateRuleRequest.md)
@@ -157,6 +159,8 @@ Class | Method | HTTP request | Description
  - [QedItAssetTransfers.GetPublicKeyRequest](docs/GetPublicKeyRequest.md)
  - [QedItAssetTransfers.GetPublicKeyResponse](docs/GetPublicKeyResponse.md)
  - [QedItAssetTransfers.GetRulesResponse](docs/GetRulesResponse.md)
+ - [QedItAssetTransfers.GetTaskStatusRequest](docs/GetTaskStatusRequest.md)
+ - [QedItAssetTransfers.GetTaskStatusResponse](docs/GetTaskStatusResponse.md)
  - [QedItAssetTransfers.GetTransactionsRequest](docs/GetTransactionsRequest.md)
  - [QedItAssetTransfers.GetTransactionsResponse](docs/GetTransactionsResponse.md)
  - [QedItAssetTransfers.GetWalletBalanceRequest](docs/GetWalletBalanceRequest.md)
