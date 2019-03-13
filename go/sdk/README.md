@@ -32,6 +32,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AnalyticsApi* | [**AnalyticsGetBlocksPost**](docs/AnalyticsApi.md#analyticsgetblockspost) | **Post** /analytics/get_blocks | Get details on past blocks
 *AnalyticsApi* | [**AnalyticsGetTransactionsPost**](docs/AnalyticsApi.md#analyticsgettransactionspost) | **Post** /analytics/get_transactions | Get details on past transactions
+*AsyncApi* | [**NodeUnlockWalletPost**](docs/AsyncApi.md#nodeunlockwalletpost) | **Post** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds [async call]
 *NodeApi* | [**NodeDeleteWalletPost**](docs/NodeApi.md#nodedeletewalletpost) | **Post** /node/delete_wallet | Delete a wallet
 *NodeApi* | [**NodeExportWalletPost**](docs/NodeApi.md#nodeexportwalletpost) | **Post** /node/export_wallet | Export wallet secret key
 *NodeApi* | [**NodeGenerateWalletPost**](docs/NodeApi.md#nodegeneratewalletpost) | **Post** /node/generate_wallet | Generate a new wallet
@@ -39,7 +40,7 @@ Class | Method | HTTP request | Description
 *NodeApi* | [**NodeGetRulesPost**](docs/NodeApi.md#nodegetrulespost) | **Post** /node/get_rules | Get network governance rules
 *NodeApi* | [**NodeGetTaskStatusPost**](docs/NodeApi.md#nodegettaskstatuspost) | **Post** /node/get_task_status | Get all tasks in the node
 *NodeApi* | [**NodeImportWalletPost**](docs/NodeApi.md#nodeimportwalletpost) | **Post** /node/import_wallet | Import wallet from secret key
-*NodeApi* | [**NodeUnlockWalletPost**](docs/NodeApi.md#nodeunlockwalletpost) | **Post** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds
+*NodeApi* | [**NodeUnlockWalletPost**](docs/NodeApi.md#nodeunlockwalletpost) | **Post** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds [async call]
 *WalletApi* | [**WalletCreateRulePost**](docs/WalletApi.md#walletcreaterulepost) | **Post** /wallet/create_rule | Create &amp; broadcast add-config-rule
 *WalletApi* | [**WalletDeleteRulePost**](docs/WalletApi.md#walletdeleterulepost) | **Post** /wallet/delete_rule | Create &amp; broadcast delete-config-rule
 *WalletApi* | [**WalletGetNewAddressPost**](docs/WalletApi.md#walletgetnewaddresspost) | **Post** /wallet/get_new_address | Get a new address from a given diversifier or generate randomly

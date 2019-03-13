@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**NodeGetRulesPost**](NodeApi.md#NodeGetRulesPost) | **Post** /node/get_rules | Get network governance rules
 [**NodeGetTaskStatusPost**](NodeApi.md#NodeGetTaskStatusPost) | **Post** /node/get_task_status | Get all tasks in the node
 [**NodeImportWalletPost**](NodeApi.md#NodeImportWalletPost) | **Post** /node/import_wallet | Import wallet from secret key
-[**NodeUnlockWalletPost**](NodeApi.md#NodeUnlockWalletPost) | **Post** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds
+[**NodeUnlockWalletPost**](NodeApi.md#NodeUnlockWalletPost) | **Post** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds [async call]
 
 
 # **NodeDeleteWalletPost**
@@ -190,7 +190,7 @@ Name | Type | Description  | Notes
 
 # **NodeUnlockWalletPost**
 > AsyncTaskCreatedResponse NodeUnlockWalletPost(ctx, unlockWalletRequest)
-Unlocks a wallet for a given amount of seconds
+Unlocks a wallet for a given amount of seconds [async call]
 
 ### Required Parameters
 

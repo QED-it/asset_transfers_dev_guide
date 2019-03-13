@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**nodeGetRulesPost**](NodeApi.md#nodeGetRulesPost) | **POST** /node/get_rules | Get network governance rules
 [**nodeGetTaskStatusPost**](NodeApi.md#nodeGetTaskStatusPost) | **POST** /node/get_task_status | Get all tasks in the node
 [**nodeImportWalletPost**](NodeApi.md#nodeImportWalletPost) | **POST** /node/import_wallet | Import wallet from secret key
-[**nodeUnlockWalletPost**](NodeApi.md#nodeUnlockWalletPost) | **POST** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds
+[**nodeUnlockWalletPost**](NodeApi.md#nodeUnlockWalletPost) | **POST** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds [async call]
 
 
 <a name="nodeDeleteWalletPost"></a>
@@ -325,7 +325,7 @@ null (empty response body)
 # **nodeUnlockWalletPost**
 > AsyncTaskCreatedResponse nodeUnlockWalletPost(unlockWalletRequest)
 
-Unlocks a wallet for a given amount of seconds
+Unlocks a wallet for a given amount of seconds [async call]
 
 ### Example
 ```javascript

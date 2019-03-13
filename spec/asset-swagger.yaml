@@ -418,7 +418,8 @@ paths:
     post:
       tags:
         - Node
-      summary: Unlocks a wallet for a given amount of seconds
+        - async
+      summary: Unlocks a wallet for a given amount of seconds [async call]
       requestBody:
         required: true
         content:

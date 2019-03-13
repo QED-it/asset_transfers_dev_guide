@@ -47,6 +47,8 @@ type APIClient struct {
 
 	AnalyticsApi *AnalyticsApiService
 
+	AsyncApi *AsyncApiService
+
 	NodeApi *NodeApiService
 
 	WalletApi *WalletApiService
@@ -69,6 +71,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.AnalyticsApi = (*AnalyticsApiService)(&c.common)
+	c.AsyncApi = (*AsyncApiService)(&c.common)
 	c.NodeApi = (*NodeApiService)(&c.common)
 	c.WalletApi = (*WalletApiService)(&c.common)
 

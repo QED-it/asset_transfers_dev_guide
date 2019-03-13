@@ -447,9 +447,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
-      summary: Unlocks a wallet for a given amount of seconds
+      summary: Unlocks a wallet for a given amount of seconds [async call]
       tags:
       - Node
+      - async
   /node/export_wallet:
     post:
       requestBody:

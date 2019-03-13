@@ -853,7 +853,7 @@ func (a *NodeApiService) NodeImportWalletPost(ctx context.Context, importWalletR
 }
 
 /*
-NodeApiService Unlocks a wallet for a given amount of seconds
+NodeApiService Unlocks a wallet for a given amount of seconds [async call]
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param unlockWalletRequest
 @return AsyncTaskCreatedResponse

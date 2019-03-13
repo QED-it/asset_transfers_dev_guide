@@ -385,7 +385,7 @@
 
 
     /**
-     * Unlocks a wallet for a given amount of seconds
+     * Unlocks a wallet for a given amount of seconds [async call]
      * @param {module:model/UnlockWalletRequest} unlockWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
      */
@@ -422,7 +422,7 @@
     }
 
     /**
-     * Unlocks a wallet for a given amount of seconds
+     * Unlocks a wallet for a given amount of seconds [async call]
      * @param {module:model/UnlockWalletRequest} unlockWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
      */
