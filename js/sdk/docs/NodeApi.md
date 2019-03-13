@@ -9,8 +9,9 @@ Method | HTTP request | Description
 [**nodeGenerateWalletPost**](NodeApi.md#nodeGenerateWalletPost) | **POST** /node/generate_wallet | Generate a new wallet
 [**nodeGetAllWalletsPost**](NodeApi.md#nodeGetAllWalletsPost) | **POST** /node/get_all_wallets | Get all wallet labels
 [**nodeGetRulesPost**](NodeApi.md#nodeGetRulesPost) | **POST** /node/get_rules | Get network governance rules
+[**nodeGetTaskStatusPost**](NodeApi.md#nodeGetTaskStatusPost) | **POST** /node/get_task_status | Get all tasks in the node
 [**nodeImportWalletPost**](NodeApi.md#nodeImportWalletPost) | **POST** /node/import_wallet | Import wallet from secret key
-[**nodeUnlockWalletPost**](NodeApi.md#nodeUnlockWalletPost) | **POST** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds
+[**nodeUnlockWalletPost**](NodeApi.md#nodeUnlockWalletPost) | **POST** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds [async call]
 
 
 <a name="nodeDeleteWalletPost"></a>
@@ -230,6 +231,51 @@ This endpoint does not need any parameter.
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="nodeGetTaskStatusPost"></a>
+# **nodeGetTaskStatusPost**
+> GetTaskStatusResponse nodeGetTaskStatusPost(getTaskStatusRequest)
+
+Get all tasks in the node
+
+### Example
+```javascript
+var QedItAssetTransfers = require('qed-it-asset-transfers');
+var defaultClient = QedItAssetTransfers.ApiClient.instance;
+// Configure API key authorization: ApiKeyAuth
+var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
+ApiKeyAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//ApiKeyAuth.apiKeyPrefix = 'Token';
+
+var apiInstance = new QedItAssetTransfers.NodeApi();
+var getTaskStatusRequest = new QedItAssetTransfers.GetTaskStatusRequest(); // GetTaskStatusRequest | 
+apiInstance.nodeGetTaskStatusPost(getTaskStatusRequest).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **getTaskStatusRequest** | [**GetTaskStatusRequest**](GetTaskStatusRequest.md)|  | 
+
+### Return type
+
+[**GetTaskStatusResponse**](GetTaskStatusResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="nodeImportWalletPost"></a>
 # **nodeImportWalletPost**
 > nodeImportWalletPost(importWalletRequest)
@@ -277,9 +323,9 @@ null (empty response body)
 
 <a name="nodeUnlockWalletPost"></a>
 # **nodeUnlockWalletPost**
-> nodeUnlockWalletPost(unlockWalletRequest)
+> AsyncTaskCreatedResponse nodeUnlockWalletPost(unlockWalletRequest)
 
-Unlocks a wallet for a given amount of seconds
+Unlocks a wallet for a given amount of seconds [async call]
 
 ### Example
 ```javascript
@@ -293,8 +339,8 @@ ApiKeyAuth.apiKey = 'YOUR API KEY';
 
 var apiInstance = new QedItAssetTransfers.NodeApi();
 var unlockWalletRequest = new QedItAssetTransfers.UnlockWalletRequest(); // UnlockWalletRequest | 
-apiInstance.nodeUnlockWalletPost(unlockWalletRequest).then(function() {
-  console.log('API called successfully.');
+apiInstance.nodeUnlockWalletPost(unlockWalletRequest).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
 });
@@ -309,7 +355,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+[**AsyncTaskCreatedResponse**](AsyncTaskCreatedResponse.md)
 
 ### Authorization
 

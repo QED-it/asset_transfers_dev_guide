@@ -418,7 +418,8 @@ paths:
     post:
       tags:
         - Node
-      summary: Unlocks a wallet for a given amount of seconds
+        - async
+      summary: Unlocks a wallet for a given amount of seconds [async call]
       requestBody:
         required: true
         content:
@@ -426,8 +427,12 @@ paths:
             schema:
               $ref: '#/components/schemas/UnlockWalletRequest'
       responses:
-        '200':
-          description: Success
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncTaskCreatedResponse'
         '400':
           description: Bad request
           content:
@@ -518,6 +523,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetAllWalletsResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /node/get_task_status:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetTaskStatusRequest'
+      tags:
+        - Node
+      summary: Get all tasks in the node
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTaskStatusResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '401':
           description: Unauthorized
           content:
@@ -679,6 +720,42 @@ components:
           - Jane
           - John
           - Marty
+    GetTaskStatusRequest:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+        - id
+      example:
+        id: "5aaa4045-e949-4c44-a7ef-25fb55a1afa6"
+    GetTaskStatusResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        created_at:
+          type: string
+          format: date
+        updated_at:
+          type: string
+          format: date
+        result:
+          type: string
+        tx_hash:
+          type: string
+        type:
+          type: string
+        data:
+          type: object
+      example:
+        id: "5aaa4045-e949-4c44-a7ef-25fb55a1afa6"
+        created_at: "2019-03-12T16:40:22"
+        updated_at: "2019-03-12T16:41:17"
+        result: "success"
+        tx_hash: "0xd379aa4e5e40552910c8ae456c65dcf51e9779fc9281ac2dc9e677ec810af6b1"
+        type: "transfer_asset"
+        data: {}
     GetBlocksRequest:
       type: object
       properties:
@@ -972,4 +1049,13 @@ components:
       example:
         error_code: 400
         message: "error message"
+    AsyncTaskCreatedResponse:
+      type: object
+      properties:
+        id:
+          type: string
+      required:
+        - id
+      example:
+        id: "70a88558-2b8b-4b63-a5b6-2c54b24377f5"
 

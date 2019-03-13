@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/DeleteWalletRequest', 'model/ErrorResponse', 'model/ExportWalletRequest', 'model/ExportWalletResponse', 'model/GenerateWalletRequest', 'model/GetAllWalletsResponse', 'model/GetRulesResponse', 'model/ImportWalletRequest', 'model/UnlockWalletRequest'], factory);
+    define(['ApiClient', 'model/AsyncTaskCreatedResponse', 'model/DeleteWalletRequest', 'model/ErrorResponse', 'model/ExportWalletRequest', 'model/ExportWalletResponse', 'model/GenerateWalletRequest', 'model/GetAllWalletsResponse', 'model/GetRulesResponse', 'model/GetTaskStatusRequest', 'model/GetTaskStatusResponse', 'model/ImportWalletRequest', 'model/UnlockWalletRequest'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/DeleteWalletRequest'), require('../model/ErrorResponse'), require('../model/ExportWalletRequest'), require('../model/ExportWalletResponse'), require('../model/GenerateWalletRequest'), require('../model/GetAllWalletsResponse'), require('../model/GetRulesResponse'), require('../model/ImportWalletRequest'), require('../model/UnlockWalletRequest'));
+    module.exports = factory(require('../ApiClient'), require('../model/AsyncTaskCreatedResponse'), require('../model/DeleteWalletRequest'), require('../model/ErrorResponse'), require('../model/ExportWalletRequest'), require('../model/ExportWalletResponse'), require('../model/GenerateWalletRequest'), require('../model/GetAllWalletsResponse'), require('../model/GetRulesResponse'), require('../model/GetTaskStatusRequest'), require('../model/GetTaskStatusResponse'), require('../model/ImportWalletRequest'), require('../model/UnlockWalletRequest'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.NodeApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.DeleteWalletRequest, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.ExportWalletRequest, root.QedItAssetTransfers.ExportWalletResponse, root.QedItAssetTransfers.GenerateWalletRequest, root.QedItAssetTransfers.GetAllWalletsResponse, root.QedItAssetTransfers.GetRulesResponse, root.QedItAssetTransfers.ImportWalletRequest, root.QedItAssetTransfers.UnlockWalletRequest);
+    root.QedItAssetTransfers.NodeApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.AsyncTaskCreatedResponse, root.QedItAssetTransfers.DeleteWalletRequest, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.ExportWalletRequest, root.QedItAssetTransfers.ExportWalletResponse, root.QedItAssetTransfers.GenerateWalletRequest, root.QedItAssetTransfers.GetAllWalletsResponse, root.QedItAssetTransfers.GetRulesResponse, root.QedItAssetTransfers.GetTaskStatusRequest, root.QedItAssetTransfers.GetTaskStatusResponse, root.QedItAssetTransfers.ImportWalletRequest, root.QedItAssetTransfers.UnlockWalletRequest);
   }
-}(this, function(ApiClient, DeleteWalletRequest, ErrorResponse, ExportWalletRequest, ExportWalletResponse, GenerateWalletRequest, GetAllWalletsResponse, GetRulesResponse, ImportWalletRequest, UnlockWalletRequest) {
+}(this, function(ApiClient, AsyncTaskCreatedResponse, DeleteWalletRequest, ErrorResponse, ExportWalletRequest, ExportWalletResponse, GenerateWalletRequest, GetAllWalletsResponse, GetRulesResponse, GetTaskStatusRequest, GetTaskStatusResponse, ImportWalletRequest, UnlockWalletRequest) {
   'use strict';
 
   /**
@@ -285,6 +285,56 @@
 
 
     /**
+     * Get all tasks in the node
+     * @param {module:model/GetTaskStatusRequest} getTaskStatusRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetTaskStatusResponse} and HTTP response
+     */
+    this.nodeGetTaskStatusPostWithHttpInfo = function(getTaskStatusRequest) {
+      var postBody = getTaskStatusRequest;
+
+      // verify the required parameter 'getTaskStatusRequest' is set
+      if (getTaskStatusRequest === undefined || getTaskStatusRequest === null) {
+        throw new Error("Missing the required parameter 'getTaskStatusRequest' when calling nodeGetTaskStatusPost");
+      }
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['ApiKeyAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = GetTaskStatusResponse;
+
+      return this.apiClient.callApi(
+        '/node/get_task_status', 'POST',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Get all tasks in the node
+     * @param {module:model/GetTaskStatusRequest} getTaskStatusRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetTaskStatusResponse}
+     */
+    this.nodeGetTaskStatusPost = function(getTaskStatusRequest) {
+      return this.nodeGetTaskStatusPostWithHttpInfo(getTaskStatusRequest)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
      * Import wallet from secret key
      * @param {module:model/ImportWalletRequest} importWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
@@ -335,9 +385,9 @@
 
 
     /**
-     * Unlocks a wallet for a given amount of seconds
+     * Unlocks a wallet for a given amount of seconds [async call]
      * @param {module:model/UnlockWalletRequest} unlockWalletRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
      */
     this.nodeUnlockWalletPostWithHttpInfo = function(unlockWalletRequest) {
       var postBody = unlockWalletRequest;
@@ -362,7 +412,7 @@
       var authNames = ['ApiKeyAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = null;
+      var returnType = AsyncTaskCreatedResponse;
 
       return this.apiClient.callApi(
         '/node/unlock_wallet', 'POST',
@@ -372,9 +422,9 @@
     }
 
     /**
-     * Unlocks a wallet for a given amount of seconds
+     * Unlocks a wallet for a given amount of seconds [async call]
      * @param {module:model/UnlockWalletRequest} unlockWalletRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
      */
     this.nodeUnlockWalletPost = function(unlockWalletRequest) {
       return this.nodeUnlockWalletPostWithHttpInfo(unlockWalletRequest)
