@@ -10,5 +10,6 @@ Name | Type | Description | Notes
 **txHash** | **String** |  | [optional] 
 **type** | **String** |  | [optional] 
 **data** | **Object** |  | [optional] 
+**error** | **String** |  | [optional] 
 
 

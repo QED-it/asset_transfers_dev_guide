@@ -10,7 +10,7 @@ Method | HTTP request | Description
 [**walletGetPublicKeyPost**](WalletApi.md#walletGetPublicKeyPost) | **POST** /wallet/get_public_key | Get wallet public key
 [**walletGetWalletBalancesPost**](WalletApi.md#walletGetWalletBalancesPost) | **POST** /wallet/get_wallet_balances | Get wallets information
 [**walletIssueAssetPost**](WalletApi.md#walletIssueAssetPost) | **POST** /wallet/issue_asset | Issue assets
-[**walletTransferAssetPost**](WalletApi.md#walletTransferAssetPost) | **POST** /wallet/transfer_asset | Transfer assets
+[**walletTransferAssetPost**](WalletApi.md#walletTransferAssetPost) | **POST** /wallet/transfer_asset | Transfer assets [async call]
 
 
 <a name="walletCreateRulePost"></a>
@@ -285,9 +285,9 @@ null (empty response body)
 
 <a name="walletTransferAssetPost"></a>
 # **walletTransferAssetPost**
-> walletTransferAssetPost(transferAssetRequest)
+> AsyncTaskCreatedResponse walletTransferAssetPost(transferAssetRequest)
 
-Transfer assets
+Transfer assets [async call]
 
 ### Example
 ```javascript
@@ -301,8 +301,8 @@ ApiKeyAuth.apiKey = 'YOUR API KEY';
 
 var apiInstance = new QedItAssetTransfers.WalletApi();
 var transferAssetRequest = new QedItAssetTransfers.TransferAssetRequest(); // TransferAssetRequest | 
-apiInstance.walletTransferAssetPost(transferAssetRequest).then(function() {
-  console.log('API called successfully.');
+apiInstance.walletTransferAssetPost(transferAssetRequest).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
 });
@@ -317,7 +317,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+[**AsyncTaskCreatedResponse**](AsyncTaskCreatedResponse.md)
 
 ### Authorization
 

@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/AsyncTaskCreatedResponse', 'model/ErrorResponse', 'model/UnlockWalletRequest'], factory);
+    define(['ApiClient', 'model/AsyncTaskCreatedResponse', 'model/ErrorResponse', 'model/TransferAssetRequest', 'model/UnlockWalletRequest'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/AsyncTaskCreatedResponse'), require('../model/ErrorResponse'), require('../model/UnlockWalletRequest'));
+    module.exports = factory(require('../ApiClient'), require('../model/AsyncTaskCreatedResponse'), require('../model/ErrorResponse'), require('../model/TransferAssetRequest'), require('../model/UnlockWalletRequest'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.AsyncApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.AsyncTaskCreatedResponse, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.UnlockWalletRequest);
+    root.QedItAssetTransfers.AsyncApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.AsyncTaskCreatedResponse, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.TransferAssetRequest, root.QedItAssetTransfers.UnlockWalletRequest);
   }
-}(this, function(ApiClient, AsyncTaskCreatedResponse, ErrorResponse, UnlockWalletRequest) {
+}(this, function(ApiClient, AsyncTaskCreatedResponse, ErrorResponse, TransferAssetRequest, UnlockWalletRequest) {
   'use strict';
 
   /**
@@ -92,6 +92,56 @@
      */
     this.nodeUnlockWalletPost = function(unlockWalletRequest) {
       return this.nodeUnlockWalletPostWithHttpInfo(unlockWalletRequest)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Transfer assets [async call]
+     * @param {module:model/TransferAssetRequest} transferAssetRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
+     */
+    this.walletTransferAssetPostWithHttpInfo = function(transferAssetRequest) {
+      var postBody = transferAssetRequest;
+
+      // verify the required parameter 'transferAssetRequest' is set
+      if (transferAssetRequest === undefined || transferAssetRequest === null) {
+        throw new Error("Missing the required parameter 'transferAssetRequest' when calling walletTransferAssetPost");
+      }
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['ApiKeyAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = AsyncTaskCreatedResponse;
+
+      return this.apiClient.callApi(
+        '/wallet/transfer_asset', 'POST',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Transfer assets [async call]
+     * @param {module:model/TransferAssetRequest} transferAssetRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
+     */
+    this.walletTransferAssetPost = function(transferAssetRequest) {
+      return this.walletTransferAssetPostWithHttpInfo(transferAssetRequest)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

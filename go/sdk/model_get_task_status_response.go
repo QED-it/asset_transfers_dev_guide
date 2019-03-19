@@ -17,4 +17,5 @@ type GetTaskStatusResponse struct {
 	TxHash string `json:"tx_hash,omitempty"`
 	Type string `json:"type,omitempty"`
 	Data map[string]interface{} `json:"data,omitempty"`
+	Error string `json:"error,omitempty"`
 }

@@ -123,6 +123,7 @@ Class | Method | HTTP request | Description
 *QedItAssetTransfers.AnalyticsApi* | [**analyticsGetBlocksPost**](docs/AnalyticsApi.md#analyticsGetBlocksPost) | **POST** /analytics/get_blocks | Get details on past blocks
 *QedItAssetTransfers.AnalyticsApi* | [**analyticsGetTransactionsPost**](docs/AnalyticsApi.md#analyticsGetTransactionsPost) | **POST** /analytics/get_transactions | Get details on past transactions
 *QedItAssetTransfers.AsyncApi* | [**nodeUnlockWalletPost**](docs/AsyncApi.md#nodeUnlockWalletPost) | **POST** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds [async call]
+*QedItAssetTransfers.AsyncApi* | [**walletTransferAssetPost**](docs/AsyncApi.md#walletTransferAssetPost) | **POST** /wallet/transfer_asset | Transfer assets [async call]
 *QedItAssetTransfers.NodeApi* | [**nodeDeleteWalletPost**](docs/NodeApi.md#nodeDeleteWalletPost) | **POST** /node/delete_wallet | Delete a wallet
 *QedItAssetTransfers.NodeApi* | [**nodeExportWalletPost**](docs/NodeApi.md#nodeExportWalletPost) | **POST** /node/export_wallet | Export wallet secret key
 *QedItAssetTransfers.NodeApi* | [**nodeGenerateWalletPost**](docs/NodeApi.md#nodeGenerateWalletPost) | **POST** /node/generate_wallet | Generate a new wallet
@@ -137,7 +138,7 @@ Class | Method | HTTP request | Description
 *QedItAssetTransfers.WalletApi* | [**walletGetPublicKeyPost**](docs/WalletApi.md#walletGetPublicKeyPost) | **POST** /wallet/get_public_key | Get wallet public key
 *QedItAssetTransfers.WalletApi* | [**walletGetWalletBalancesPost**](docs/WalletApi.md#walletGetWalletBalancesPost) | **POST** /wallet/get_wallet_balances | Get wallets information
 *QedItAssetTransfers.WalletApi* | [**walletIssueAssetPost**](docs/WalletApi.md#walletIssueAssetPost) | **POST** /wallet/issue_asset | Issue assets
-*QedItAssetTransfers.WalletApi* | [**walletTransferAssetPost**](docs/WalletApi.md#walletTransferAssetPost) | **POST** /wallet/transfer_asset | Transfer assets
+*QedItAssetTransfers.WalletApi* | [**walletTransferAssetPost**](docs/WalletApi.md#walletTransferAssetPost) | **POST** /wallet/transfer_asset | Transfer assets [async call]
 
 
 ## Documentation for Models

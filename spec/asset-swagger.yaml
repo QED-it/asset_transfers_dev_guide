@@ -82,7 +82,8 @@ paths:
     post:
       tags:
         - Wallet
-      summary: Transfer assets
+        - async
+      summary: Transfer assets [async call]
       requestBody:
         required: true
         content:
@@ -90,8 +91,12 @@ paths:
             schema:
               $ref: '#/components/schemas/TransferAssetRequest'
       responses:
-        '200':
-          description: Success
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncTaskCreatedResponse'
         '400':
           description: Bad request
           content:
@@ -748,6 +753,8 @@ components:
           type: string
         data:
           type: object
+        error:
+          type: string
       example:
         id: "5aaa4045-e949-4c44-a7ef-25fb55a1afa6"
         created_at: "2019-03-12T16:40:22"
