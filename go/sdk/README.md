@@ -33,6 +33,7 @@ Class | Method | HTTP request | Description
 *AnalyticsApi* | [**AnalyticsGetBlocksPost**](docs/AnalyticsApi.md#analyticsgetblockspost) | **Post** /analytics/get_blocks | Get details on past blocks
 *AnalyticsApi* | [**AnalyticsGetTransactionsPost**](docs/AnalyticsApi.md#analyticsgettransactionspost) | **Post** /analytics/get_transactions | Get details on past transactions
 *AsyncApi* | [**NodeUnlockWalletPost**](docs/AsyncApi.md#nodeunlockwalletpost) | **Post** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds [async call]
+*AsyncApi* | [**WalletTransferAssetPost**](docs/AsyncApi.md#wallettransferassetpost) | **Post** /wallet/transfer_asset | Transfer assets [async call]
 *NodeApi* | [**NodeDeleteWalletPost**](docs/NodeApi.md#nodedeletewalletpost) | **Post** /node/delete_wallet | Delete a wallet
 *NodeApi* | [**NodeExportWalletPost**](docs/NodeApi.md#nodeexportwalletpost) | **Post** /node/export_wallet | Export wallet secret key
 *NodeApi* | [**NodeGenerateWalletPost**](docs/NodeApi.md#nodegeneratewalletpost) | **Post** /node/generate_wallet | Generate a new wallet
@@ -47,7 +48,7 @@ Class | Method | HTTP request | Description
 *WalletApi* | [**WalletGetPublicKeyPost**](docs/WalletApi.md#walletgetpublickeypost) | **Post** /wallet/get_public_key | Get wallet public key
 *WalletApi* | [**WalletGetWalletBalancesPost**](docs/WalletApi.md#walletgetwalletbalancespost) | **Post** /wallet/get_wallet_balances | Get wallets information
 *WalletApi* | [**WalletIssueAssetPost**](docs/WalletApi.md#walletissueassetpost) | **Post** /wallet/issue_asset | Issue assets
-*WalletApi* | [**WalletTransferAssetPost**](docs/WalletApi.md#wallettransferassetpost) | **Post** /wallet/transfer_asset | Transfer assets
+*WalletApi* | [**WalletTransferAssetPost**](docs/WalletApi.md#wallettransferassetpost) | **Post** /wallet/transfer_asset | Transfer assets [async call]
 
 
 ## Documentation For Models

@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/CreateRuleRequest', 'model/DeleteRuleRequest', 'model/ErrorResponse', 'model/GetNewAddressRequest', 'model/GetNewAddressResponse', 'model/GetPublicKeyRequest', 'model/GetPublicKeyResponse', 'model/GetWalletBalanceRequest', 'model/GetWalletBalanceResponse', 'model/IssueAssetRequest', 'model/TransferAssetRequest'], factory);
+    define(['ApiClient', 'model/AsyncTaskCreatedResponse', 'model/CreateRuleRequest', 'model/DeleteRuleRequest', 'model/ErrorResponse', 'model/GetNewAddressRequest', 'model/GetNewAddressResponse', 'model/GetPublicKeyRequest', 'model/GetPublicKeyResponse', 'model/GetWalletBalanceRequest', 'model/GetWalletBalanceResponse', 'model/IssueAssetRequest', 'model/TransferAssetRequest'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/CreateRuleRequest'), require('../model/DeleteRuleRequest'), require('../model/ErrorResponse'), require('../model/GetNewAddressRequest'), require('../model/GetNewAddressResponse'), require('../model/GetPublicKeyRequest'), require('../model/GetPublicKeyResponse'), require('../model/GetWalletBalanceRequest'), require('../model/GetWalletBalanceResponse'), require('../model/IssueAssetRequest'), require('../model/TransferAssetRequest'));
+    module.exports = factory(require('../ApiClient'), require('../model/AsyncTaskCreatedResponse'), require('../model/CreateRuleRequest'), require('../model/DeleteRuleRequest'), require('../model/ErrorResponse'), require('../model/GetNewAddressRequest'), require('../model/GetNewAddressResponse'), require('../model/GetPublicKeyRequest'), require('../model/GetPublicKeyResponse'), require('../model/GetWalletBalanceRequest'), require('../model/GetWalletBalanceResponse'), require('../model/IssueAssetRequest'), require('../model/TransferAssetRequest'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.WalletApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.CreateRuleRequest, root.QedItAssetTransfers.DeleteRuleRequest, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.GetNewAddressRequest, root.QedItAssetTransfers.GetNewAddressResponse, root.QedItAssetTransfers.GetPublicKeyRequest, root.QedItAssetTransfers.GetPublicKeyResponse, root.QedItAssetTransfers.GetWalletBalanceRequest, root.QedItAssetTransfers.GetWalletBalanceResponse, root.QedItAssetTransfers.IssueAssetRequest, root.QedItAssetTransfers.TransferAssetRequest);
+    root.QedItAssetTransfers.WalletApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.AsyncTaskCreatedResponse, root.QedItAssetTransfers.CreateRuleRequest, root.QedItAssetTransfers.DeleteRuleRequest, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.GetNewAddressRequest, root.QedItAssetTransfers.GetNewAddressResponse, root.QedItAssetTransfers.GetPublicKeyRequest, root.QedItAssetTransfers.GetPublicKeyResponse, root.QedItAssetTransfers.GetWalletBalanceRequest, root.QedItAssetTransfers.GetWalletBalanceResponse, root.QedItAssetTransfers.IssueAssetRequest, root.QedItAssetTransfers.TransferAssetRequest);
   }
-}(this, function(ApiClient, CreateRuleRequest, DeleteRuleRequest, ErrorResponse, GetNewAddressRequest, GetNewAddressResponse, GetPublicKeyRequest, GetPublicKeyResponse, GetWalletBalanceRequest, GetWalletBalanceResponse, IssueAssetRequest, TransferAssetRequest) {
+}(this, function(ApiClient, AsyncTaskCreatedResponse, CreateRuleRequest, DeleteRuleRequest, ErrorResponse, GetNewAddressRequest, GetNewAddressResponse, GetPublicKeyRequest, GetPublicKeyResponse, GetWalletBalanceRequest, GetWalletBalanceResponse, IssueAssetRequest, TransferAssetRequest) {
   'use strict';
 
   /**
@@ -349,9 +349,9 @@
 
 
     /**
-     * Transfer assets
+     * Transfer assets [async call]
      * @param {module:model/TransferAssetRequest} transferAssetRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
      */
     this.walletTransferAssetPostWithHttpInfo = function(transferAssetRequest) {
       var postBody = transferAssetRequest;
@@ -376,7 +376,7 @@
       var authNames = ['ApiKeyAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = null;
+      var returnType = AsyncTaskCreatedResponse;
 
       return this.apiClient.callApi(
         '/wallet/transfer_asset', 'POST',
@@ -386,9 +386,9 @@
     }
 
     /**
-     * Transfer assets
+     * Transfer assets [async call]
      * @param {module:model/TransferAssetRequest} transferAssetRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
      */
     this.walletTransferAssetPost = function(transferAssetRequest) {
       return this.walletTransferAssetPostWithHttpInfo(transferAssetRequest)

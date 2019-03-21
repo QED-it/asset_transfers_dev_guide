@@ -10,7 +10,7 @@ Method | HTTP request | Description
 [**WalletGetPublicKeyPost**](WalletApi.md#WalletGetPublicKeyPost) | **Post** /wallet/get_public_key | Get wallet public key
 [**WalletGetWalletBalancesPost**](WalletApi.md#WalletGetWalletBalancesPost) | **Post** /wallet/get_wallet_balances | Get wallets information
 [**WalletIssueAssetPost**](WalletApi.md#WalletIssueAssetPost) | **Post** /wallet/issue_asset | Issue assets
-[**WalletTransferAssetPost**](WalletApi.md#WalletTransferAssetPost) | **Post** /wallet/transfer_asset | Transfer assets
+[**WalletTransferAssetPost**](WalletApi.md#WalletTransferAssetPost) | **Post** /wallet/transfer_asset | Transfer assets [async call]
 
 
 # **WalletCreateRulePost**
@@ -170,8 +170,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WalletTransferAssetPost**
-> WalletTransferAssetPost(ctx, transferAssetRequest)
-Transfer assets
+> AsyncTaskCreatedResponse WalletTransferAssetPost(ctx, transferAssetRequest)
+Transfer assets [async call]
 
 ### Required Parameters
 
@@ -182,7 +182,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**AsyncTaskCreatedResponse**](AsyncTaskCreatedResponse.md)
 
 ### Authorization
 

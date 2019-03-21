@@ -79,6 +79,9 @@
       if (data.hasOwnProperty('data')) {
         obj['data'] = ApiClient.convertToType(data['data'], Object);
       }
+      if (data.hasOwnProperty('error')) {
+        obj['error'] = ApiClient.convertToType(data['error'], 'String');
+      }
     }
     return obj;
   }
@@ -111,6 +114,10 @@
    * @member {Object} data
    */
   exports.prototype['data'] = undefined;
+  /**
+   * @member {String} error
+   */
+  exports.prototype['error'] = undefined;
 
 
 
