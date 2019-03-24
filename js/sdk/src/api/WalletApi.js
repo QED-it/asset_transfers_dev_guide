@@ -49,9 +49,9 @@
 
 
     /**
-     * Create &amp; broadcast add-config-rule
+     * Create &amp; broadcast add-config-rule [async call]
      * @param {module:model/CreateRuleRequest} createRuleRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
      */
     this.walletCreateRulePostWithHttpInfo = function(createRuleRequest) {
       var postBody = createRuleRequest;
@@ -76,7 +76,7 @@
       var authNames = ['ApiKeyAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = null;
+      var returnType = AsyncTaskCreatedResponse;
 
       return this.apiClient.callApi(
         '/wallet/create_rule', 'POST',
@@ -86,9 +86,9 @@
     }
 
     /**
-     * Create &amp; broadcast add-config-rule
+     * Create &amp; broadcast add-config-rule [async call]
      * @param {module:model/CreateRuleRequest} createRuleRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
      */
     this.walletCreateRulePost = function(createRuleRequest) {
       return this.walletCreateRulePostWithHttpInfo(createRuleRequest)
@@ -99,9 +99,9 @@
 
 
     /**
-     * Create &amp; broadcast delete-config-rule
+     * Create &amp; broadcast delete-config-rule [async call]
      * @param {module:model/DeleteRuleRequest} deleteRuleRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
      */
     this.walletDeleteRulePostWithHttpInfo = function(deleteRuleRequest) {
       var postBody = deleteRuleRequest;
@@ -126,7 +126,7 @@
       var authNames = ['ApiKeyAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = null;
+      var returnType = AsyncTaskCreatedResponse;
 
       return this.apiClient.callApi(
         '/wallet/delete_rule', 'POST',
@@ -136,9 +136,9 @@
     }
 
     /**
-     * Create &amp; broadcast delete-config-rule
+     * Create &amp; broadcast delete-config-rule [async call]
      * @param {module:model/DeleteRuleRequest} deleteRuleRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
      */
     this.walletDeleteRulePost = function(deleteRuleRequest) {
       return this.walletDeleteRulePostWithHttpInfo(deleteRuleRequest)
