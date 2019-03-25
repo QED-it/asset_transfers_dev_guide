@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**walletGetNewAddressPost**](WalletApi.md#walletGetNewAddressPost) | **POST** /wallet/get_new_address | Get a new address from a given diversifier or generate randomly
 [**walletGetPublicKeyPost**](WalletApi.md#walletGetPublicKeyPost) | **POST** /wallet/get_public_key | Get wallet public key
 [**walletGetWalletBalancesPost**](WalletApi.md#walletGetWalletBalancesPost) | **POST** /wallet/get_wallet_balances | Get wallets information
-[**walletIssueAssetPost**](WalletApi.md#walletIssueAssetPost) | **POST** /wallet/issue_asset | Issue assets
+[**walletIssueAssetPost**](WalletApi.md#walletIssueAssetPost) | **POST** /wallet/issue_asset | Issue assets [async call]
 [**walletTransferAssetPost**](WalletApi.md#walletTransferAssetPost) | **POST** /wallet/transfer_asset | Transfer assets [async call]
 
 
@@ -240,9 +240,9 @@ Name | Type | Description  | Notes
 
 <a name="walletIssueAssetPost"></a>
 # **walletIssueAssetPost**
-> walletIssueAssetPost(issueAssetRequest)
+> AsyncTaskCreatedResponse walletIssueAssetPost(issueAssetRequest)
 
-Issue assets
+Issue assets [async call]
 
 ### Example
 ```javascript
@@ -256,8 +256,8 @@ ApiKeyAuth.apiKey = 'YOUR API KEY';
 
 var apiInstance = new QedItAssetTransfers.WalletApi();
 var issueAssetRequest = new QedItAssetTransfers.IssueAssetRequest(); // IssueAssetRequest | 
-apiInstance.walletIssueAssetPost(issueAssetRequest).then(function() {
-  console.log('API called successfully.');
+apiInstance.walletIssueAssetPost(issueAssetRequest).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
 });
@@ -272,7 +272,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+[**AsyncTaskCreatedResponse**](AsyncTaskCreatedResponse.md)
 
 ### Authorization
 

@@ -50,7 +50,8 @@ paths:
     post:
       tags:
         - Wallet
-      summary: Issue assets
+        - Async
+      summary: Issue assets [async call]
       requestBody:
         required: true
         content:
@@ -59,7 +60,11 @@ paths:
               $ref: '#/components/schemas/IssueAssetRequest'
       responses:
         '201':
-          description: Success/Created
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncTaskCreatedResponse'
         '400':
           description: Bad request
           content:
@@ -82,7 +87,7 @@ paths:
     post:
       tags:
         - Wallet
-        - async
+        - Async
       summary: Transfer assets [async call]
       requestBody:
         required: true
@@ -423,7 +428,7 @@ paths:
     post:
       tags:
         - Node
-        - async
+        - Async
       summary: Unlocks a wallet for a given amount of seconds [async call]
       requestBody:
         required: true

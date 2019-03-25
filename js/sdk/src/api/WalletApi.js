@@ -299,9 +299,9 @@
 
 
     /**
-     * Issue assets
+     * Issue assets [async call]
      * @param {module:model/IssueAssetRequest} issueAssetRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
      */
     this.walletIssueAssetPostWithHttpInfo = function(issueAssetRequest) {
       var postBody = issueAssetRequest;
@@ -326,7 +326,7 @@
       var authNames = ['ApiKeyAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = null;
+      var returnType = AsyncTaskCreatedResponse;
 
       return this.apiClient.callApi(
         '/wallet/issue_asset', 'POST',
@@ -336,9 +336,9 @@
     }
 
     /**
-     * Issue assets
+     * Issue assets [async call]
      * @param {module:model/IssueAssetRequest} issueAssetRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
      */
     this.walletIssueAssetPost = function(issueAssetRequest) {
       return this.walletIssueAssetPostWithHttpInfo(issueAssetRequest)
