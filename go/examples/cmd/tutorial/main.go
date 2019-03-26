@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"time"
 
 	"github.com/QED-it/asset_transfers_dev_guide/go/examples/util"
 	"github.com/QED-it/asset_transfers_dev_guide/go/sdk"
@@ -66,18 +65,9 @@ func main() {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't issue asset: %v", util.ErrorResponseString(err)))
 	}
 
-	var issueTaskStatus sdk.GetTaskStatusResponse
-	taskStatusRequest := sdk.GetTaskStatusRequest{Id: asyncTask.Id}
-	for {
-		issueTaskStatus, _, err = client.NodeApi.NodeGetTaskStatusPost(ctx, taskStatusRequest)
-		if err != nil {
-			util.HandleErrorAndExit(fmt.Errorf("couldn't get task status: %v", util.ErrorResponseString(err)))
-		}
-		if issueTaskStatus.Result != "pending" && issueTaskStatus.Result != "in_progress" {
-			break
-		}
-		fmt.Println("Waiting for assets issuance to be done")
-		time.Sleep(time.Second * 2)
+	issueTaskStatus, err := util.WaitForAsyncTaskDone(ctx, asyncTask.Id, client)
+	if err != nil {
+		util.HandleErrorAndExit(err)
 	}
 	if issueTaskStatus.Result == "failure" {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't issue asset: %v\nDid you configure the bank's private key?", issueTaskStatus.Error))
@@ -129,18 +119,9 @@ func main() {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't transfer asset: %v", util.ErrorResponseString(err)))
 	}
 
-	var transferTaskStatus sdk.GetTaskStatusResponse
-	taskStatusRequest = sdk.GetTaskStatusRequest{Id: asyncTask.Id}
-	for {
-		transferTaskStatus, _, err = client.NodeApi.NodeGetTaskStatusPost(ctx, taskStatusRequest)
-		if err != nil {
-			util.HandleErrorAndExit(fmt.Errorf("couldn't get task status: %v", util.ErrorResponseString(err)))
-		}
-		if transferTaskStatus.Result != "pending" && transferTaskStatus.Result != "in_progress" {
-			break
-		}
-		fmt.Println("Waiting for assets transfer to be done")
-		time.Sleep(time.Second * 2)
+	transferTaskStatus, err := util.WaitForAsyncTaskDone(ctx, asyncTask.Id, client)
+	if err != nil {
+		util.HandleErrorAndExit(err)
 	}
 	if transferTaskStatus.Result == "failure" {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't transfer asset: %v\nDoes Jane have sufficient balance?", transferTaskStatus.Error))
