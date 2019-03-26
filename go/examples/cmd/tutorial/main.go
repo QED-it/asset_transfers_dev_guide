@@ -3,9 +3,10 @@ package main
 import (
 	"context"
 	"fmt"
+	"time"
+
 	"github.com/QED-it/asset_transfers_dev_guide/go/examples/util"
 	"github.com/QED-it/asset_transfers_dev_guide/go/sdk"
-	"time"
 )
 
 func main() {
@@ -23,7 +24,7 @@ func main() {
 
 	_, err = client.NodeApi.NodeGenerateWalletPost(ctx, generateWalletRequest)
 	if err != nil {
-		fmt.Printf("Could not generate Jane's wallet, assuming that it already exists.\n")
+		fmt.Printf("Could not generate Jane's wallet, %v\n", util.ErrorResponseString(err))
 	}
 
 	importWalletRequest := sdk.ImportWalletRequest{
@@ -35,7 +36,7 @@ func main() {
 
 	_, err = client.NodeApi.NodeImportWalletPost(ctx, importWalletRequest)
 	if err != nil {
-		fmt.Printf("Could not import the bank's wallet, assuming that it already exists.\n")
+		fmt.Printf("Could not import the bank's wallet, %v\n", util.ErrorResponseString(err))
 	}
 
 	getNewAddressRequest := sdk.GetNewAddressRequest{
@@ -45,26 +46,42 @@ func main() {
 
 	getNewAddressResponse, _, err := client.WalletApi.WalletGetNewAddressPost(ctx, getNewAddressRequest)
 	if err != nil {
-		util.HandleErrorAndExit(fmt.Errorf("couldn't generate address: %v", err))
+		util.HandleErrorAndExit(fmt.Errorf("couldn't generate address: %v", util.ErrorResponseString(err)))
 	}
 
 	fmt.Printf("Jane's address details: %v\n", getNewAddressResponse)
 
 	issueAssetRequest := sdk.IssueAssetRequest{
-		WalletLabel: "bank",
-		RecipientAddress: "q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f",
-		AssetId:    200,
-		Amount:     1,
-		ClearValue: true,
-		Memo:       "this is for you, Jane",
+		WalletLabel:      "bank",
+		Authorization:    "123",
+		RecipientAddress: getNewAddressResponse.RecipientAddress,
+		AssetId:          200,
+		Amount:           1,
+		ClearValue:       true,
+		Memo:             "this is for you, Jane",
 	}
 
-	_, err = client.WalletApi.WalletIssueAssetPost(ctx, issueAssetRequest)
+	asyncTask, _, err := client.WalletApi.WalletIssueAssetPost(ctx, issueAssetRequest)
 	if err != nil {
-		fmt.Printf("Could not issue asset. Did you configure the bank's private key?\n")
+		util.HandleErrorAndExit(fmt.Errorf("couldn't issue asset: %v", util.ErrorResponseString(err)))
 	}
 
-	time.Sleep(20)
+	var issueTaskStatus sdk.GetTaskStatusResponse
+	taskStatusRequest := sdk.GetTaskStatusRequest{Id: asyncTask.Id}
+	for {
+		issueTaskStatus, _, err = client.NodeApi.NodeGetTaskStatusPost(ctx, taskStatusRequest)
+		if err != nil {
+			util.HandleErrorAndExit(fmt.Errorf("couldn't get task status: %v", util.ErrorResponseString(err)))
+		}
+		if issueTaskStatus.Result != "pending" && issueTaskStatus.Result != "in_progress" {
+			break
+		}
+		fmt.Println("Waiting for issuance to be done")
+		time.Sleep(time.Second * 2)
+	}
+	if issueTaskStatus.Result == "failure" {
+		util.HandleErrorAndExit(fmt.Errorf("couldn't issue asset: %v\nDid you configure the bank's private key?", issueTaskStatus.Error))
+	}
 
 	getWalletBalancesRequest := sdk.GetWalletBalanceRequest{
 		WalletLabel: "Jane",
@@ -72,7 +89,7 @@ func main() {
 
 	getWalletBalancesResponse, _, err := client.WalletApi.WalletGetWalletBalancesPost(ctx, getWalletBalancesRequest)
 	if err != nil {
-		util.HandleErrorAndExit(fmt.Errorf("couldn't get wallet balances: %v", err))
+		util.HandleErrorAndExit(fmt.Errorf("couldn't get wallet balances: %v", util.ErrorResponseString(err)))
 	}
 
 	fmt.Printf("Jane's wallet balances: %v\n", getWalletBalancesResponse)
@@ -85,29 +102,53 @@ func main() {
 
 	getTransactionsResponse, _, err := client.AnalyticsApi.AnalyticsGetTransactionsPost(ctx, getTransactionsRequest)
 	if err != nil {
-		util.HandleErrorAndExit(fmt.Errorf("couldn't get transactions: %v", err))
+		util.HandleErrorAndExit(fmt.Errorf("couldn't get transactions: %v", util.ErrorResponseString(err)))
 	}
 
 	fmt.Printf("Jane's transactions: %v\n", getTransactionsResponse)
+	newBankAddressRequest := sdk.GetNewAddressRequest{
+		WalletLabel: "bank",
+	}
+
+	newBankAddressResponse, _, err := client.WalletApi.WalletGetNewAddressPost(ctx, newBankAddressRequest)
+	if err != nil {
+		util.HandleErrorAndExit(fmt.Errorf("couldn't generate address for bank wallet: %v", util.ErrorResponseString(err)))
+	}
 
 	transferAssetRequest := sdk.TransferAssetRequest{
-		WalletLabel: "Jane",
-		RecipientAddress: "q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f",
-		AssetId: 200,
-		Amount:  1,
-		Memo:    "Getting rid of my asset",
+		WalletLabel:      "Jane",
+		Authorization:    "123456",
+		RecipientAddress: newBankAddressResponse.RecipientAddress,
+		AssetId:          200,
+		Amount:           1,
+		Memo:             "Getting rid of my asset",
 	}
 
-	_, err = client.WalletApi.WalletTransferAssetPost(ctx, transferAssetRequest)
+	asyncTask, _, err = client.WalletApi.WalletTransferAssetPost(ctx, transferAssetRequest)
 	if err != nil {
-		fmt.Printf("Could not transfer asset. Does Jane have sufficient balance?\n")
+		util.HandleErrorAndExit(fmt.Errorf("couldn't transfer asset: %v", util.ErrorResponseString(err)))
 	}
 
-	time.Sleep(20)
+	var transferTaskStatus sdk.GetTaskStatusResponse
+	taskStatusRequest = sdk.GetTaskStatusRequest{Id: asyncTask.Id}
+	for {
+		transferTaskStatus, _, err = client.NodeApi.NodeGetTaskStatusPost(ctx, taskStatusRequest)
+		if err != nil {
+			util.HandleErrorAndExit(fmt.Errorf("couldn't get task status: %v", util.ErrorResponseString(err)))
+		}
+		if transferTaskStatus.Result != "pending" && transferTaskStatus.Result != "in_progress" {
+			break
+		}
+		fmt.Println("Waiting for issuance to be done")
+		time.Sleep(time.Second * 2)
+	}
+	if transferTaskStatus.Result == "failure" {
+		util.HandleErrorAndExit(fmt.Errorf("couldn't transfer asset: %v\nDoes Jane have sufficient balance?", transferTaskStatus.Error))
+	}
 
 	getTransactionsResponse, _, err = client.AnalyticsApi.AnalyticsGetTransactionsPost(ctx, getTransactionsRequest)
 	if err != nil {
-		util.HandleErrorAndExit(fmt.Errorf("couldn't get transactions: %v", err))
+		util.HandleErrorAndExit(fmt.Errorf("couldn't get transactions: %v", util.ErrorResponseString(err)))
 	}
 
 	fmt.Printf("Jane's transactions: %v\n", getTransactionsResponse)
