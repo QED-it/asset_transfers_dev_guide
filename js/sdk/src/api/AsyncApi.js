@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/AsyncTaskCreatedResponse', 'model/ErrorResponse', 'model/TransferAssetRequest', 'model/UnlockWalletRequest'], factory);
+    define(['ApiClient', 'model/AsyncTaskCreatedResponse', 'model/ErrorResponse', 'model/IssueAssetRequest', 'model/TransferAssetRequest', 'model/UnlockWalletRequest'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/AsyncTaskCreatedResponse'), require('../model/ErrorResponse'), require('../model/TransferAssetRequest'), require('../model/UnlockWalletRequest'));
+    module.exports = factory(require('../ApiClient'), require('../model/AsyncTaskCreatedResponse'), require('../model/ErrorResponse'), require('../model/IssueAssetRequest'), require('../model/TransferAssetRequest'), require('../model/UnlockWalletRequest'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.AsyncApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.AsyncTaskCreatedResponse, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.TransferAssetRequest, root.QedItAssetTransfers.UnlockWalletRequest);
+    root.QedItAssetTransfers.AsyncApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.AsyncTaskCreatedResponse, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.IssueAssetRequest, root.QedItAssetTransfers.TransferAssetRequest, root.QedItAssetTransfers.UnlockWalletRequest);
   }
-}(this, function(ApiClient, AsyncTaskCreatedResponse, ErrorResponse, TransferAssetRequest, UnlockWalletRequest) {
+}(this, function(ApiClient, AsyncTaskCreatedResponse, ErrorResponse, IssueAssetRequest, TransferAssetRequest, UnlockWalletRequest) {
   'use strict';
 
   /**
@@ -92,6 +92,56 @@
      */
     this.nodeUnlockWalletPost = function(unlockWalletRequest) {
       return this.nodeUnlockWalletPostWithHttpInfo(unlockWalletRequest)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Issue assets [async call]
+     * @param {module:model/IssueAssetRequest} issueAssetRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
+     */
+    this.walletIssueAssetPostWithHttpInfo = function(issueAssetRequest) {
+      var postBody = issueAssetRequest;
+
+      // verify the required parameter 'issueAssetRequest' is set
+      if (issueAssetRequest === undefined || issueAssetRequest === null) {
+        throw new Error("Missing the required parameter 'issueAssetRequest' when calling walletIssueAssetPost");
+      }
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['ApiKeyAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = AsyncTaskCreatedResponse;
+
+      return this.apiClient.callApi(
+        '/wallet/issue_asset', 'POST',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Issue assets [async call]
+     * @param {module:model/IssueAssetRequest} issueAssetRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
+     */
+    this.walletIssueAssetPost = function(issueAssetRequest) {
+      return this.walletIssueAssetPostWithHttpInfo(issueAssetRequest)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

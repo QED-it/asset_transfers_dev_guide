@@ -56,7 +56,11 @@ paths:
         required: true
       responses:
         201:
-          description: Success/Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncTaskCreatedResponse'
+          description: Created
         400:
           content:
             application/json:
@@ -75,9 +79,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
-      summary: Issue assets
+      summary: Issue assets [async call]
       tags:
       - Wallet
+      - Async
   /wallet/transfer_asset:
     post:
       requestBody:
@@ -114,7 +119,7 @@ paths:
       summary: Transfer assets [async call]
       tags:
       - Wallet
-      - async
+      - Async
   /wallet/get_new_address:
     post:
       requestBody:
@@ -455,7 +460,7 @@ paths:
       summary: Unlocks a wallet for a given amount of seconds [async call]
       tags:
       - Node
-      - async
+      - Async
   /node/export_wallet:
     post:
       requestBody:

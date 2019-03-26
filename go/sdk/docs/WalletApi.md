@@ -9,7 +9,7 @@ Method | HTTP request | Description
 [**WalletGetNewAddressPost**](WalletApi.md#WalletGetNewAddressPost) | **Post** /wallet/get_new_address | Get a new address from a given diversifier or generate randomly
 [**WalletGetPublicKeyPost**](WalletApi.md#WalletGetPublicKeyPost) | **Post** /wallet/get_public_key | Get wallet public key
 [**WalletGetWalletBalancesPost**](WalletApi.md#WalletGetWalletBalancesPost) | **Post** /wallet/get_wallet_balances | Get wallets information
-[**WalletIssueAssetPost**](WalletApi.md#WalletIssueAssetPost) | **Post** /wallet/issue_asset | Issue assets
+[**WalletIssueAssetPost**](WalletApi.md#WalletIssueAssetPost) | **Post** /wallet/issue_asset | Issue assets [async call]
 [**WalletTransferAssetPost**](WalletApi.md#WalletTransferAssetPost) | **Post** /wallet/transfer_asset | Transfer assets [async call]
 
 
@@ -144,8 +144,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WalletIssueAssetPost**
-> WalletIssueAssetPost(ctx, issueAssetRequest)
-Issue assets
+> AsyncTaskCreatedResponse WalletIssueAssetPost(ctx, issueAssetRequest)
+Issue assets [async call]
 
 ### Required Parameters
 
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**AsyncTaskCreatedResponse**](AsyncTaskCreatedResponse.md)
 
 ### Authorization
 
