@@ -76,7 +76,7 @@ func main() {
 		if issueTaskStatus.Result != "pending" && issueTaskStatus.Result != "in_progress" {
 			break
 		}
-		fmt.Println("Waiting for issuance to be done")
+		fmt.Println("Waiting for assets issuance to be done")
 		time.Sleep(time.Second * 2)
 	}
 	if issueTaskStatus.Result == "failure" {
@@ -139,7 +139,7 @@ func main() {
 		if transferTaskStatus.Result != "pending" && transferTaskStatus.Result != "in_progress" {
 			break
 		}
-		fmt.Println("Waiting for issuance to be done")
+		fmt.Println("Waiting for assets transfer to be done")
 		time.Sleep(time.Second * 2)
 	}
 	if transferTaskStatus.Result == "failure" {
