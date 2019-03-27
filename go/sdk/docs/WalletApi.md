@@ -4,8 +4,8 @@ All URIs are relative to *http://localhost:12052*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**WalletCreateRulePost**](WalletApi.md#WalletCreateRulePost) | **Post** /wallet/create_rule | Create &amp; broadcast add-config-rule
-[**WalletDeleteRulePost**](WalletApi.md#WalletDeleteRulePost) | **Post** /wallet/delete_rule | Create &amp; broadcast delete-config-rule
+[**WalletCreateRulePost**](WalletApi.md#WalletCreateRulePost) | **Post** /wallet/create_rule | Create &amp; broadcast add-config-rule [async call]
+[**WalletDeleteRulePost**](WalletApi.md#WalletDeleteRulePost) | **Post** /wallet/delete_rule | Create &amp; broadcast delete-config-rule [async call]
 [**WalletGetNewAddressPost**](WalletApi.md#WalletGetNewAddressPost) | **Post** /wallet/get_new_address | Get a new address from a given diversifier or generate randomly
 [**WalletGetPublicKeyPost**](WalletApi.md#WalletGetPublicKeyPost) | **Post** /wallet/get_public_key | Get wallet public key
 [**WalletGetWalletBalancesPost**](WalletApi.md#WalletGetWalletBalancesPost) | **Post** /wallet/get_wallet_balances | Get wallets information
@@ -14,8 +14,8 @@ Method | HTTP request | Description
 
 
 # **WalletCreateRulePost**
-> WalletCreateRulePost(ctx, createRuleRequest)
-Create & broadcast add-config-rule
+> AsyncTaskCreatedResponse WalletCreateRulePost(ctx, createRuleRequest)
+Create & broadcast add-config-rule [async call]
 
 ### Required Parameters
 
@@ -26,7 +26,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**AsyncTaskCreatedResponse**](AsyncTaskCreatedResponse.md)
 
 ### Authorization
 
@@ -40,8 +40,8 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **WalletDeleteRulePost**
-> WalletDeleteRulePost(ctx, deleteRuleRequest)
-Create & broadcast delete-config-rule
+> AsyncTaskCreatedResponse WalletDeleteRulePost(ctx, deleteRuleRequest)
+Create & broadcast delete-config-rule [async call]
 
 ### Required Parameters
 
@@ -52,7 +52,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
- (empty response body)
+[**AsyncTaskCreatedResponse**](AsyncTaskCreatedResponse.md)
 
 ### Authorization
 

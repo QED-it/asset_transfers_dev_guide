@@ -25,17 +25,19 @@ var (
 type WalletApiService service
 
 /*
-WalletApiService Create & broadcast add-config-rule
+WalletApiService Create & broadcast add-config-rule [async call]
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param createRuleRequest
+@return AsyncTaskCreatedResponse
 */
-func (a *WalletApiService) WalletCreateRulePost(ctx context.Context, createRuleRequest CreateRuleRequest) (*http.Response, error) {
+func (a *WalletApiService) WalletCreateRulePost(ctx context.Context, createRuleRequest CreateRuleRequest) (AsyncTaskCreatedResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Post")
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		localVarReturnValue  AsyncTaskCreatedResponse
 	)
 
 	// create path and map variables
@@ -79,18 +81,18 @@ func (a *WalletApiService) WalletCreateRulePost(ctx context.Context, createRuleR
 
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
-		return localVarHttpResponse, err
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 	localVarHttpResponse.Body.Close()
 	if err != nil {
-		return localVarHttpResponse, err
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -98,54 +100,75 @@ func (a *WalletApiService) WalletCreateRulePost(ctx context.Context, createRuleR
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
+		if localVarHttpResponse.StatusCode == 201 {
+			var v AsyncTaskCreatedResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 400 {
 			var v ErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHttpResponse, newErr
+				return localVarReturnValue, localVarHttpResponse, newErr
 			}
 			newErr.model = v
-			return localVarHttpResponse, newErr
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 401 {
 			var v ErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHttpResponse, newErr
+				return localVarReturnValue, localVarHttpResponse, newErr
 			}
 			newErr.model = v
-			return localVarHttpResponse, newErr
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 500 {
 			var v ErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHttpResponse, newErr
+				return localVarReturnValue, localVarHttpResponse, newErr
 			}
 			newErr.model = v
-			return localVarHttpResponse, newErr
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		return localVarHttpResponse, newErr
+		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
-	return localVarHttpResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
 }
 
 /*
-WalletApiService Create & broadcast delete-config-rule
+WalletApiService Create & broadcast delete-config-rule [async call]
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param deleteRuleRequest
+@return AsyncTaskCreatedResponse
 */
-func (a *WalletApiService) WalletDeleteRulePost(ctx context.Context, deleteRuleRequest DeleteRuleRequest) (*http.Response, error) {
+func (a *WalletApiService) WalletDeleteRulePost(ctx context.Context, deleteRuleRequest DeleteRuleRequest) (AsyncTaskCreatedResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Post")
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		localVarReturnValue  AsyncTaskCreatedResponse
 	)
 
 	// create path and map variables
@@ -189,18 +212,18 @@ func (a *WalletApiService) WalletDeleteRulePost(ctx context.Context, deleteRuleR
 
 	r, err := a.client.prepareRequest(ctx, localVarPath, localVarHttpMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHttpResponse, err := a.client.callAPI(r)
 	if err != nil || localVarHttpResponse == nil {
-		return localVarHttpResponse, err
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	localVarBody, err := ioutil.ReadAll(localVarHttpResponse.Body)
 	localVarHttpResponse.Body.Close()
 	if err != nil {
-		return localVarHttpResponse, err
+		return localVarReturnValue, localVarHttpResponse, err
 	}
 
 	if localVarHttpResponse.StatusCode >= 300 {
@@ -208,40 +231,59 @@ func (a *WalletApiService) WalletDeleteRulePost(ctx context.Context, deleteRuleR
 			body:  localVarBody,
 			error: localVarHttpResponse.Status,
 		}
+		if localVarHttpResponse.StatusCode == 201 {
+			var v AsyncTaskCreatedResponse
+			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHttpResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHttpResponse, newErr
+		}
 		if localVarHttpResponse.StatusCode == 400 {
 			var v ErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHttpResponse, newErr
+				return localVarReturnValue, localVarHttpResponse, newErr
 			}
 			newErr.model = v
-			return localVarHttpResponse, newErr
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 401 {
 			var v ErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHttpResponse, newErr
+				return localVarReturnValue, localVarHttpResponse, newErr
 			}
 			newErr.model = v
-			return localVarHttpResponse, newErr
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
 		if localVarHttpResponse.StatusCode == 500 {
 			var v ErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHttpResponse, newErr
+				return localVarReturnValue, localVarHttpResponse, newErr
 			}
 			newErr.model = v
-			return localVarHttpResponse, newErr
+			return localVarReturnValue, localVarHttpResponse, newErr
 		}
-		return localVarHttpResponse, newErr
+		return localVarReturnValue, localVarHttpResponse, newErr
 	}
 
-	return localVarHttpResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHttpResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHttpResponse, nil
 }
 
 /*

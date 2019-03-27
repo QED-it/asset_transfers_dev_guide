@@ -202,7 +202,11 @@ paths:
         required: true
       responses:
         201:
-          description: Success/Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncTaskCreatedResponse'
+          description: Created
         400:
           content:
             application/json:
@@ -221,9 +225,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
-      summary: Create & broadcast add-config-rule
+      summary: Create & broadcast add-config-rule [async call]
       tags:
       - Wallet
+      - Async
   /wallet/delete_rule:
     post:
       requestBody:
@@ -233,8 +238,12 @@ paths:
               $ref: '#/components/schemas/DeleteRuleRequest'
         required: true
       responses:
-        200:
-          description: Success
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncTaskCreatedResponse'
+          description: Created
         400:
           content:
             application/json:
@@ -253,9 +262,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
-      summary: Create & broadcast delete-config-rule
+      summary: Create & broadcast delete-config-rule [async call]
       tags:
       - Wallet
+      - Async
   /analytics/get_transactions:
     post:
       requestBody:

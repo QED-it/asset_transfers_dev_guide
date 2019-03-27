@@ -4,8 +4,8 @@ All URIs are relative to *http://localhost:12052*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**walletCreateRulePost**](WalletApi.md#walletCreateRulePost) | **POST** /wallet/create_rule | Create &amp; broadcast add-config-rule
-[**walletDeleteRulePost**](WalletApi.md#walletDeleteRulePost) | **POST** /wallet/delete_rule | Create &amp; broadcast delete-config-rule
+[**walletCreateRulePost**](WalletApi.md#walletCreateRulePost) | **POST** /wallet/create_rule | Create &amp; broadcast add-config-rule [async call]
+[**walletDeleteRulePost**](WalletApi.md#walletDeleteRulePost) | **POST** /wallet/delete_rule | Create &amp; broadcast delete-config-rule [async call]
 [**walletGetNewAddressPost**](WalletApi.md#walletGetNewAddressPost) | **POST** /wallet/get_new_address | Get a new address from a given diversifier or generate randomly
 [**walletGetPublicKeyPost**](WalletApi.md#walletGetPublicKeyPost) | **POST** /wallet/get_public_key | Get wallet public key
 [**walletGetWalletBalancesPost**](WalletApi.md#walletGetWalletBalancesPost) | **POST** /wallet/get_wallet_balances | Get wallets information
@@ -15,9 +15,9 @@ Method | HTTP request | Description
 
 <a name="walletCreateRulePost"></a>
 # **walletCreateRulePost**
-> walletCreateRulePost(createRuleRequest)
+> AsyncTaskCreatedResponse walletCreateRulePost(createRuleRequest)
 
-Create &amp; broadcast add-config-rule
+Create &amp; broadcast add-config-rule [async call]
 
 ### Example
 ```javascript
@@ -31,8 +31,8 @@ ApiKeyAuth.apiKey = 'YOUR API KEY';
 
 var apiInstance = new QedItAssetTransfers.WalletApi();
 var createRuleRequest = new QedItAssetTransfers.CreateRuleRequest(); // CreateRuleRequest | 
-apiInstance.walletCreateRulePost(createRuleRequest).then(function() {
-  console.log('API called successfully.');
+apiInstance.walletCreateRulePost(createRuleRequest).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
 });
@@ -47,7 +47,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+[**AsyncTaskCreatedResponse**](AsyncTaskCreatedResponse.md)
 
 ### Authorization
 
@@ -60,9 +60,9 @@ null (empty response body)
 
 <a name="walletDeleteRulePost"></a>
 # **walletDeleteRulePost**
-> walletDeleteRulePost(deleteRuleRequest)
+> AsyncTaskCreatedResponse walletDeleteRulePost(deleteRuleRequest)
 
-Create &amp; broadcast delete-config-rule
+Create &amp; broadcast delete-config-rule [async call]
 
 ### Example
 ```javascript
@@ -76,8 +76,8 @@ ApiKeyAuth.apiKey = 'YOUR API KEY';
 
 var apiInstance = new QedItAssetTransfers.WalletApi();
 var deleteRuleRequest = new QedItAssetTransfers.DeleteRuleRequest(); // DeleteRuleRequest | 
-apiInstance.walletDeleteRulePost(deleteRuleRequest).then(function() {
-  console.log('API called successfully.');
+apiInstance.walletDeleteRulePost(deleteRuleRequest).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
 });
@@ -92,7 +92,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+[**AsyncTaskCreatedResponse**](AsyncTaskCreatedResponse.md)
 
 ### Authorization
 

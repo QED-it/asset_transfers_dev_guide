@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/AsyncTaskCreatedResponse', 'model/ErrorResponse', 'model/IssueAssetRequest', 'model/TransferAssetRequest', 'model/UnlockWalletRequest'], factory);
+    define(['ApiClient', 'model/AsyncTaskCreatedResponse', 'model/CreateRuleRequest', 'model/DeleteRuleRequest', 'model/ErrorResponse', 'model/IssueAssetRequest', 'model/TransferAssetRequest', 'model/UnlockWalletRequest'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/AsyncTaskCreatedResponse'), require('../model/ErrorResponse'), require('../model/IssueAssetRequest'), require('../model/TransferAssetRequest'), require('../model/UnlockWalletRequest'));
+    module.exports = factory(require('../ApiClient'), require('../model/AsyncTaskCreatedResponse'), require('../model/CreateRuleRequest'), require('../model/DeleteRuleRequest'), require('../model/ErrorResponse'), require('../model/IssueAssetRequest'), require('../model/TransferAssetRequest'), require('../model/UnlockWalletRequest'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.AsyncApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.AsyncTaskCreatedResponse, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.IssueAssetRequest, root.QedItAssetTransfers.TransferAssetRequest, root.QedItAssetTransfers.UnlockWalletRequest);
+    root.QedItAssetTransfers.AsyncApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.AsyncTaskCreatedResponse, root.QedItAssetTransfers.CreateRuleRequest, root.QedItAssetTransfers.DeleteRuleRequest, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.IssueAssetRequest, root.QedItAssetTransfers.TransferAssetRequest, root.QedItAssetTransfers.UnlockWalletRequest);
   }
-}(this, function(ApiClient, AsyncTaskCreatedResponse, ErrorResponse, IssueAssetRequest, TransferAssetRequest, UnlockWalletRequest) {
+}(this, function(ApiClient, AsyncTaskCreatedResponse, CreateRuleRequest, DeleteRuleRequest, ErrorResponse, IssueAssetRequest, TransferAssetRequest, UnlockWalletRequest) {
   'use strict';
 
   /**
@@ -92,6 +92,106 @@
      */
     this.nodeUnlockWalletPost = function(unlockWalletRequest) {
       return this.nodeUnlockWalletPostWithHttpInfo(unlockWalletRequest)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Create &amp; broadcast add-config-rule [async call]
+     * @param {module:model/CreateRuleRequest} createRuleRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
+     */
+    this.walletCreateRulePostWithHttpInfo = function(createRuleRequest) {
+      var postBody = createRuleRequest;
+
+      // verify the required parameter 'createRuleRequest' is set
+      if (createRuleRequest === undefined || createRuleRequest === null) {
+        throw new Error("Missing the required parameter 'createRuleRequest' when calling walletCreateRulePost");
+      }
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['ApiKeyAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = AsyncTaskCreatedResponse;
+
+      return this.apiClient.callApi(
+        '/wallet/create_rule', 'POST',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Create &amp; broadcast add-config-rule [async call]
+     * @param {module:model/CreateRuleRequest} createRuleRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
+     */
+    this.walletCreateRulePost = function(createRuleRequest) {
+      return this.walletCreateRulePostWithHttpInfo(createRuleRequest)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Create &amp; broadcast delete-config-rule [async call]
+     * @param {module:model/DeleteRuleRequest} deleteRuleRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
+     */
+    this.walletDeleteRulePostWithHttpInfo = function(deleteRuleRequest) {
+      var postBody = deleteRuleRequest;
+
+      // verify the required parameter 'deleteRuleRequest' is set
+      if (deleteRuleRequest === undefined || deleteRuleRequest === null) {
+        throw new Error("Missing the required parameter 'deleteRuleRequest' when calling walletDeleteRulePost");
+      }
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['ApiKeyAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = AsyncTaskCreatedResponse;
+
+      return this.apiClient.callApi(
+        '/wallet/delete_rule', 'POST',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Create &amp; broadcast delete-config-rule [async call]
+     * @param {module:model/DeleteRuleRequest} deleteRuleRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
+     */
+    this.walletDeleteRulePost = function(deleteRuleRequest) {
+      return this.walletDeleteRulePostWithHttpInfo(deleteRuleRequest)
         .then(function(response_and_data) {
           return response_and_data.data;
         });
