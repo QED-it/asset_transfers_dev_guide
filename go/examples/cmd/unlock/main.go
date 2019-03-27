@@ -1,10 +1,11 @@
 package main
 
 import (
+	"context"
 	"fmt"
+
 	"github.com/QED-it/asset_transfers_dev_guide/go/examples/util"
 	"github.com/QED-it/asset_transfers_dev_guide/go/sdk"
-	"context"
 )
 
 func main() {
@@ -16,15 +17,23 @@ func main() {
 	ctx := context.Background()
 
 	unlockRequest := sdk.UnlockWalletRequest{
-		WalletLabel: "source_wallet",
+		WalletLabel:   "source_wallet",
 		Authorization: "PrivacyIsAwesome",
-		Seconds: 600,
+		Seconds:       600,
 	}
 
-	_, err = client.NodeApi.NodeUnlockWalletPost(ctx, unlockRequest)
+	unlockWalletTask, _, err := client.NodeApi.NodeUnlockWalletPost(ctx, unlockRequest)
 	if err != nil {
-		util.HandleErrorAndExit(fmt.Errorf("couldn't unlock wallet"))
+		util.HandleErrorAndExit(fmt.Errorf("couldn't unlock wallet: %s", util.ErrorResponseString(err)))
+	}
+
+	unlockWalletStatus, err := util.WaitForAsyncTaskDone(ctx, unlockWalletTask.Id, client)
+	if err != nil {
+		util.HandleErrorAndExit(err)
+	}
+	if unlockWalletStatus.Result != "success" {
+		util.HandleErrorAndExit(fmt.Errorf("couldn't unlock wallet: %s", unlockWalletStatus.Error))
+	} else {
+		fmt.Println("wallet unlocked successfully")
 	}
 }
-
-
