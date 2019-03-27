@@ -69,7 +69,7 @@ func main() {
 	if err != nil {
 		util.HandleErrorAndExit(err)
 	}
-	if issueTaskStatus.Result == "failure" {
+	if issueTaskStatus.Result != "success" { // Or == "failure"
 		util.HandleErrorAndExit(fmt.Errorf("couldn't issue asset: %v\nDid you configure the bank's private key?", issueTaskStatus.Error))
 	}
 
@@ -123,7 +123,7 @@ func main() {
 	if err != nil {
 		util.HandleErrorAndExit(err)
 	}
-	if transferTaskStatus.Result == "failure" {
+	if transferTaskStatus.Result != "success" { // or == "failure"
 		util.HandleErrorAndExit(fmt.Errorf("couldn't transfer asset: %v\nDoes Jane have sufficient balance?", transferTaskStatus.Error))
 	}
 
