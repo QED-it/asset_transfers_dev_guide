@@ -15,6 +15,6 @@ type IssueAssetRequest struct {
 	RecipientAddress string `json:"recipient_address"`
 	Amount int32 `json:"amount"`
 	AssetId int32 `json:"asset_id"`
-	ClearValue bool `json:"clear_value"`
+	Confidential bool `json:"confidential"`
 	Memo string `json:"memo"`
 }

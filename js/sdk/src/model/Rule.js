@@ -63,8 +63,8 @@
       if (data.hasOwnProperty('public_key')) {
         obj['public_key'] = ApiClient.convertToType(data['public_key'], 'String');
       }
-      if (data.hasOwnProperty('can_issue_anything_confidentially')) {
-        obj['can_issue_anything_confidentially'] = ApiClient.convertToType(data['can_issue_anything_confidentially'], 'Boolean');
+      if (data.hasOwnProperty('can_issue_confidentially')) {
+        obj['can_issue_confidentially'] = ApiClient.convertToType(data['can_issue_confidentially'], 'Boolean');
       }
       if (data.hasOwnProperty('can_issue_asset_id_first')) {
         obj['can_issue_asset_id_first'] = ApiClient.convertToType(data['can_issue_asset_id_first'], 'Number');
@@ -84,9 +84,9 @@
    */
   exports.prototype['public_key'] = undefined;
   /**
-   * @member {Boolean} can_issue_anything_confidentially
+   * @member {Boolean} can_issue_confidentially
    */
-  exports.prototype['can_issue_anything_confidentially'] = undefined;
+  exports.prototype['can_issue_confidentially'] = undefined;
   /**
    * @member {Number} can_issue_asset_id_first
    */
