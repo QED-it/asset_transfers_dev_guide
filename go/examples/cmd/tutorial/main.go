@@ -56,7 +56,7 @@ func main() {
 		RecipientAddress: getNewAddressResponse.RecipientAddress,
 		AssetId:          200,
 		Amount:           1,
-		ClearValue:       true,
+		Confidential:     false,
 		Memo:             "this is for you, Jane",
 	}
 
