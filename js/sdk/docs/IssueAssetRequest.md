@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **recipientAddress** | **String** |  | 
 **amount** | **Number** |  | 
 **assetId** | **Number** |  | 
-**clearValue** | **Boolean** |  | 
+**confidential** | **Boolean** |  | 
 **memo** | **String** |  | 
 
 

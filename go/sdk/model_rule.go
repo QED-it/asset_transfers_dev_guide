@@ -11,7 +11,7 @@ package sdk
 
 type Rule struct {
 	PublicKey string `json:"public_key"`
-	CanIssueAnythingConfidentially bool `json:"can_issue_anything_confidentially,omitempty"`
+	CanIssueConfidentially bool `json:"can_issue_confidentially,omitempty"`
 	CanIssueAssetIdFirst int32 `json:"can_issue_asset_id_first,omitempty"`
 	CanIssueAssetIdLast int32 `json:"can_issue_asset_id_last,omitempty"`
 	IsAdmin bool `json:"is_admin,omitempty"`

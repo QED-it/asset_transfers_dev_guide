@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **RecipientAddress** | **string** |  | 
 **Amount** | **int32** |  | 
 **AssetId** | **int32** |  | 
-**ClearValue** | **bool** |  | 
+**Confidential** | **bool** |  | 
 **Memo** | **string** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

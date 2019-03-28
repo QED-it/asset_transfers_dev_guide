@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PublicKey** | **string** |  | 
-**CanIssueAnythingConfidentially** | **bool** |  | [optional] 
+**CanIssueConfidentially** | **bool** |  | [optional] 
 **CanIssueAssetIdFirst** | **int32** |  | [optional] 
 **CanIssueAssetIdLast** | **int32** |  | [optional] 
 **IsAdmin** | **bool** |  | [optional] 

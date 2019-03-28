@@ -47,10 +47,10 @@
    * @param recipientAddress {String} 
    * @param amount {Number} 
    * @param assetId {Number} 
-   * @param clearValue {Boolean} 
+   * @param confidential {Boolean} 
    * @param memo {String} 
    */
-  var exports = function(walletLabel, authorization, recipientAddress, amount, assetId, clearValue, memo) {
+  var exports = function(walletLabel, authorization, recipientAddress, amount, assetId, confidential, memo) {
     var _this = this;
 
     _this['wallet_label'] = walletLabel;
@@ -58,7 +58,7 @@
     _this['recipient_address'] = recipientAddress;
     _this['amount'] = amount;
     _this['asset_id'] = assetId;
-    _this['clear_value'] = clearValue;
+    _this['confidential'] = confidential;
     _this['memo'] = memo;
   };
 
@@ -87,8 +87,8 @@
       if (data.hasOwnProperty('asset_id')) {
         obj['asset_id'] = ApiClient.convertToType(data['asset_id'], 'Number');
       }
-      if (data.hasOwnProperty('clear_value')) {
-        obj['clear_value'] = ApiClient.convertToType(data['clear_value'], 'Boolean');
+      if (data.hasOwnProperty('confidential')) {
+        obj['confidential'] = ApiClient.convertToType(data['confidential'], 'Boolean');
       }
       if (data.hasOwnProperty('memo')) {
         obj['memo'] = ApiClient.convertToType(data['memo'], 'String');
@@ -118,9 +118,9 @@
    */
   exports.prototype['asset_id'] = undefined;
   /**
-   * @member {Boolean} clear_value
+   * @member {Boolean} confidential
    */
-  exports.prototype['clear_value'] = undefined;
+  exports.prototype['confidential'] = undefined;
   /**
    * @member {String} memo
    */
