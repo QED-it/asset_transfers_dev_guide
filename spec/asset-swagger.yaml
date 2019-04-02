@@ -1010,7 +1010,7 @@ components:
         authorization: PrivacyIsAwesome
         rules_to_add:
           - public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
-            can_issue_anything_confidentially: false
+            can_issue_confidentially: false
             can_issue_asset_id_first: 100
             can_issue_asset_id_last: 112
             is_admin: false
@@ -1055,7 +1055,7 @@ components:
         - public_key
       example:
         public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
-        can_issue_anything_confidentially: false
+        can_issue_confidentially: false
         can_issue_asset_id_first: 100
         can_issue_asset_id_last: 112
         is_admin: false
