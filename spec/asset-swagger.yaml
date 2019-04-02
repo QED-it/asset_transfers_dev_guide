@@ -50,7 +50,6 @@ paths:
     post:
       tags:
         - Wallet
-        - Async
       summary: Issue assets [async call]
       requestBody:
         required: true
@@ -87,7 +86,6 @@ paths:
     post:
       tags:
         - Wallet
-        - Async
       summary: Transfer assets [async call]
       requestBody:
         required: true
@@ -196,7 +194,6 @@ paths:
     post:
       tags:
         - Wallet
-        - Async
       summary: Create & broadcast add-config-rule [async call]
       requestBody:
         required: true
@@ -233,7 +230,6 @@ paths:
     post:
       tags:
         - Wallet
-        - Async
       summary: Create & broadcast delete-config-rule [async call]
       requestBody:
         required: true
@@ -438,7 +434,6 @@ paths:
     post:
       tags:
         - Node
-        - Async
       summary: Unlocks a wallet for a given amount of seconds [async call]
       requestBody:
         required: true
