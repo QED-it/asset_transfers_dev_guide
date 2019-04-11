@@ -266,7 +266,7 @@ paths:
       tags:
       - Wallet
       - Async
-  /analytics/get_transactions:
+  /wallet/get_transactions:
     post:
       requestBody:
         content:
@@ -301,7 +301,7 @@ paths:
           description: Internal error
       summary: Get details on past transactions
       tags:
-      - Analytics
+      - Wallet
   /analytics/get_blocks:
     post:
       requestBody:

@@ -266,10 +266,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /analytics/get_transactions:
+  /wallet/get_transactions:
     post:
       tags:
-        - Analytics
+        - Wallet
       summary: Get details on past transactions
       requestBody:
         required: true
