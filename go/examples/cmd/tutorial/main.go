@@ -127,7 +127,7 @@ func main() {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't transfer asset: %v\nDoes Jane have sufficient balance?", transferTaskStatus.Error))
 	}
 
-	getTransactionsResponse, _, err = client.AnalyticsApi.AnalyticsGetTransactionsPost(ctx, getTransactionsRequest)
+	getTransactionsResponse, _, err = client.WalletApi.WalletGetTransactionsPost(ctx, getTransactionsRequest)
 	if err != nil {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't get transactions: %v", util.ErrorResponseString(err)))
 	}
