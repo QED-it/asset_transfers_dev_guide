@@ -82,7 +82,7 @@ func main() {
 		StartIndex:      0,
 	}
 
-	getTransactionsResponse, _, err := client.WalletApi.WalletGetTransactionsPost(ctx, getTransactionsRequest)
+	getTransactionsResponse, _, err := client.WalletApi.WalletGetWalletActivitiesPost(ctx, getTransactionsRequest)
 	if err != nil {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't get transactions: %v", err))
 	}
