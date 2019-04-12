@@ -8,5 +8,6 @@ Name | Type | Description | Notes
 **amount** | **Number** |  | 
 **recipientAddress** | **String** |  | 
 **memo** | **String** |  | 
+**id** | **String** |  | 
 
 

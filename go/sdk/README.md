@@ -48,7 +48,7 @@ Class | Method | HTTP request | Description
 *WalletApi* | [**WalletDeleteRulePost**](docs/WalletApi.md#walletdeleterulepost) | **Post** /wallet/delete_rule | Create &amp; broadcast delete-config-rule [async call]
 *WalletApi* | [**WalletGetNewAddressPost**](docs/WalletApi.md#walletgetnewaddresspost) | **Post** /wallet/get_new_address | Get a new address from a given diversifier or generate randomly
 *WalletApi* | [**WalletGetPublicKeyPost**](docs/WalletApi.md#walletgetpublickeypost) | **Post** /wallet/get_public_key | Get wallet public key
-*WalletApi* | [**WalletGetTransactionsPost**](docs/WalletApi.md#walletgettransactionspost) | **Post** /wallet/get_transactions | Get details on past transactions
+*WalletApi* | [**WalletGetWalletActivitiesPost**](docs/WalletApi.md#walletgetwalletactivitiespost) | **Post** /wallet/get_wallet_activities | Get details on past transactions
 *WalletApi* | [**WalletGetWalletBalancesPost**](docs/WalletApi.md#walletgetwalletbalancespost) | **Post** /wallet/get_wallet_balances | Get wallets information
 *WalletApi* | [**WalletIssueAssetPost**](docs/WalletApi.md#walletissueassetpost) | **Post** /wallet/issue_asset | Issue assets [async call]
 *WalletApi* | [**WalletTransferAssetPost**](docs/WalletApi.md#wallettransferassetpost) | **Post** /wallet/transfer_asset | Transfer assets [async call]

@@ -253,12 +253,12 @@
      * @param {module:model/GetTransactionsRequest} getTransactionsRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetTransactionsResponse} and HTTP response
      */
-    this.walletGetTransactionsPostWithHttpInfo = function(getTransactionsRequest) {
+    this.walletGetWalletActivitiesPostWithHttpInfo = function(getTransactionsRequest) {
       var postBody = getTransactionsRequest;
 
       // verify the required parameter 'getTransactionsRequest' is set
       if (getTransactionsRequest === undefined || getTransactionsRequest === null) {
-        throw new Error("Missing the required parameter 'getTransactionsRequest' when calling walletGetTransactionsPost");
+        throw new Error("Missing the required parameter 'getTransactionsRequest' when calling walletGetWalletActivitiesPost");
       }
 
 
@@ -279,7 +279,7 @@
       var returnType = GetTransactionsResponse;
 
       return this.apiClient.callApi(
-        '/wallet/get_transactions', 'POST',
+        '/wallet/get_wallet_activities', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
@@ -290,8 +290,8 @@
      * @param {module:model/GetTransactionsRequest} getTransactionsRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetTransactionsResponse}
      */
-    this.walletGetTransactionsPost = function(getTransactionsRequest) {
-      return this.walletGetTransactionsPostWithHttpInfo(getTransactionsRequest)
+    this.walletGetWalletActivitiesPost = function(getTransactionsRequest) {
+      return this.walletGetWalletActivitiesPostWithHttpInfo(getTransactionsRequest)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

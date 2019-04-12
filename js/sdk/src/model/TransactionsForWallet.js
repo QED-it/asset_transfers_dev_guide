@@ -47,8 +47,9 @@
    * @param amount {Number} 
    * @param recipientAddress {String} 
    * @param memo {String} 
+   * @param id {String} 
    */
-  var exports = function(isIncoming, assetId, amount, recipientAddress, memo) {
+  var exports = function(isIncoming, assetId, amount, recipientAddress, memo, id) {
     var _this = this;
 
     _this['is_incoming'] = isIncoming;
@@ -56,6 +57,7 @@
     _this['amount'] = amount;
     _this['recipient_address'] = recipientAddress;
     _this['memo'] = memo;
+    _this['id'] = id;
   };
 
   /**
@@ -83,6 +85,9 @@
       if (data.hasOwnProperty('memo')) {
         obj['memo'] = ApiClient.convertToType(data['memo'], 'String');
       }
+      if (data.hasOwnProperty('id')) {
+        obj['id'] = ApiClient.convertToType(data['id'], 'String');
+      }
     }
     return obj;
   }
@@ -107,6 +112,10 @@
    * @member {String} memo
    */
   exports.prototype['memo'] = undefined;
+  /**
+   * @member {String} id
+   */
+  exports.prototype['id'] = undefined;
 
 
 

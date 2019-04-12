@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**walletDeleteRulePost**](WalletApi.md#walletDeleteRulePost) | **POST** /wallet/delete_rule | Create &amp; broadcast delete-config-rule [async call]
 [**walletGetNewAddressPost**](WalletApi.md#walletGetNewAddressPost) | **POST** /wallet/get_new_address | Get a new address from a given diversifier or generate randomly
 [**walletGetPublicKeyPost**](WalletApi.md#walletGetPublicKeyPost) | **POST** /wallet/get_public_key | Get wallet public key
-[**walletGetTransactionsPost**](WalletApi.md#walletGetTransactionsPost) | **POST** /wallet/get_transactions | Get details on past transactions
+[**walletGetWalletActivitiesPost**](WalletApi.md#walletGetWalletActivitiesPost) | **POST** /wallet/get_wallet_activities | Get details on past transactions
 [**walletGetWalletBalancesPost**](WalletApi.md#walletGetWalletBalancesPost) | **POST** /wallet/get_wallet_balances | Get wallets information
 [**walletIssueAssetPost**](WalletApi.md#walletIssueAssetPost) | **POST** /wallet/issue_asset | Issue assets [async call]
 [**walletTransferAssetPost**](WalletApi.md#walletTransferAssetPost) | **POST** /wallet/transfer_asset | Transfer assets [async call]
@@ -194,9 +194,9 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="walletGetTransactionsPost"></a>
-# **walletGetTransactionsPost**
-> GetTransactionsResponse walletGetTransactionsPost(getTransactionsRequest)
+<a name="walletGetWalletActivitiesPost"></a>
+# **walletGetWalletActivitiesPost**
+> GetTransactionsResponse walletGetWalletActivitiesPost(getTransactionsRequest)
 
 Get details on past transactions
 
@@ -212,7 +212,7 @@ ApiKeyAuth.apiKey = 'YOUR API KEY';
 
 var apiInstance = new QedItAssetTransfers.WalletApi();
 var getTransactionsRequest = new QedItAssetTransfers.GetTransactionsRequest(); // GetTransactionsRequest | 
-apiInstance.walletGetTransactionsPost(getTransactionsRequest).then(function(data) {
+apiInstance.walletGetWalletActivitiesPost(getTransactionsRequest).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);

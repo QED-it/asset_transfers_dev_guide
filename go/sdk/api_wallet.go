@@ -554,7 +554,7 @@ WalletApiService Get details on past transactions
  * @param getTransactionsRequest
 @return GetTransactionsResponse
 */
-func (a *WalletApiService) WalletGetTransactionsPost(ctx context.Context, getTransactionsRequest GetTransactionsRequest) (GetTransactionsResponse, *http.Response, error) {
+func (a *WalletApiService) WalletGetWalletActivitiesPost(ctx context.Context, getTransactionsRequest GetTransactionsRequest) (GetTransactionsResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Post")
 		localVarPostBody     interface{}
@@ -565,7 +565,7 @@ func (a *WalletApiService) WalletGetTransactionsPost(ctx context.Context, getTra
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/wallet/get_transactions"
+	localVarPath := a.client.cfg.BasePath + "/wallet/get_wallet_activities"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

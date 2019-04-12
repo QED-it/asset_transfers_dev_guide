@@ -15,4 +15,5 @@ type TransactionsForWallet struct {
 	Amount int32 `json:"amount"`
 	RecipientAddress string `json:"recipient_address"`
 	Memo string `json:"memo"`
+	Id string `json:"id"`
 }
