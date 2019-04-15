@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/ErrorResponse', 'model/GetBlocksRequest', 'model/GetBlocksResponse', 'model/GetTransactionsRequest', 'model/GetTransactionsResponse'], factory);
+    define(['ApiClient', 'model/ErrorResponse', 'model/GetBlocksRequest', 'model/GetBlocksResponse'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ErrorResponse'), require('../model/GetBlocksRequest'), require('../model/GetBlocksResponse'), require('../model/GetTransactionsRequest'), require('../model/GetTransactionsResponse'));
+    module.exports = factory(require('../ApiClient'), require('../model/ErrorResponse'), require('../model/GetBlocksRequest'), require('../model/GetBlocksResponse'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.AnalyticsApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.GetBlocksRequest, root.QedItAssetTransfers.GetBlocksResponse, root.QedItAssetTransfers.GetTransactionsRequest, root.QedItAssetTransfers.GetTransactionsResponse);
+    root.QedItAssetTransfers.AnalyticsApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.GetBlocksRequest, root.QedItAssetTransfers.GetBlocksResponse);
   }
-}(this, function(ApiClient, ErrorResponse, GetBlocksRequest, GetBlocksResponse, GetTransactionsRequest, GetTransactionsResponse) {
+}(this, function(ApiClient, ErrorResponse, GetBlocksRequest, GetBlocksResponse) {
   'use strict';
 
   /**
@@ -92,56 +92,6 @@
      */
     this.analyticsGetBlocksPost = function(getBlocksRequest) {
       return this.analyticsGetBlocksPostWithHttpInfo(getBlocksRequest)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
-
-
-    /**
-     * Get details on past transactions
-     * @param {module:model/GetTransactionsRequest} getTransactionsRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetTransactionsResponse} and HTTP response
-     */
-    this.analyticsGetTransactionsPostWithHttpInfo = function(getTransactionsRequest) {
-      var postBody = getTransactionsRequest;
-
-      // verify the required parameter 'getTransactionsRequest' is set
-      if (getTransactionsRequest === undefined || getTransactionsRequest === null) {
-        throw new Error("Missing the required parameter 'getTransactionsRequest' when calling analyticsGetTransactionsPost");
-      }
-
-
-      var pathParams = {
-      };
-      var queryParams = {
-      };
-      var collectionQueryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
-
-      var authNames = ['ApiKeyAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = GetTransactionsResponse;
-
-      return this.apiClient.callApi(
-        '/analytics/get_transactions', 'POST',
-        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
-    /**
-     * Get details on past transactions
-     * @param {module:model/GetTransactionsRequest} getTransactionsRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetTransactionsResponse}
-     */
-    this.analyticsGetTransactionsPost = function(getTransactionsRequest) {
-      return this.analyticsGetTransactionsPostWithHttpInfo(getTransactionsRequest)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

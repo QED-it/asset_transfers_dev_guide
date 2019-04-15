@@ -262,10 +262,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /analytics/get_transactions:
+  /wallet/get_wallet_activities:
     post:
       tags:
-        - Analytics
+        - Wallet
       summary: Get details on past transactions
       requestBody:
         required: true
@@ -690,12 +690,15 @@ components:
           type: string
         memo:
           type: string
+        id:
+          type: string
       required:
         - is_incoming
         - asset_id
         - amount
         - recipient_address
         - memo
+        - id
     GetTransactionsResponse:
       type: object
       properties:
@@ -716,6 +719,7 @@ components:
             amount: 8
             recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
             memo: '{"recipient_name": "Dan"}'
+            id: "0xd379aa4e5e40552910c8ae456c65dcf51e9779fc9281ac2dc9e677ec810af6b1" 
     GetRulesResponse:
       type: object
       properties:

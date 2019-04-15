@@ -5,7 +5,6 @@ All URIs are relative to *http://localhost:12052*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**analyticsGetBlocksPost**](AnalyticsApi.md#analyticsGetBlocksPost) | **POST** /analytics/get_blocks | Get details on past blocks
-[**analyticsGetTransactionsPost**](AnalyticsApi.md#analyticsGetTransactionsPost) | **POST** /analytics/get_transactions | Get details on past transactions
 
 
 <a name="analyticsGetBlocksPost"></a>
@@ -43,51 +42,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetBlocksResponse**](GetBlocksResponse.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-<a name="analyticsGetTransactionsPost"></a>
-# **analyticsGetTransactionsPost**
-> GetTransactionsResponse analyticsGetTransactionsPost(getTransactionsRequest)
-
-Get details on past transactions
-
-### Example
-```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
-// Configure API key authorization: ApiKeyAuth
-var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
-ApiKeyAuth.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ApiKeyAuth.apiKeyPrefix = 'Token';
-
-var apiInstance = new QedItAssetTransfers.AnalyticsApi();
-var getTransactionsRequest = new QedItAssetTransfers.GetTransactionsRequest(); // GetTransactionsRequest | 
-apiInstance.analyticsGetTransactionsPost(getTransactionsRequest).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **getTransactionsRequest** | [**GetTransactionsRequest**](GetTransactionsRequest.md)|  | 
-
-### Return type
-
-[**GetTransactionsResponse**](GetTransactionsResponse.md)
 
 ### Authorization
 

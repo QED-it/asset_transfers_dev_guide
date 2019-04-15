@@ -121,7 +121,6 @@ All URIs are relative to *http://localhost:12052*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *QedItAssetTransfers.AnalyticsApi* | [**analyticsGetBlocksPost**](docs/AnalyticsApi.md#analyticsGetBlocksPost) | **POST** /analytics/get_blocks | Get details on past blocks
-*QedItAssetTransfers.AnalyticsApi* | [**analyticsGetTransactionsPost**](docs/AnalyticsApi.md#analyticsGetTransactionsPost) | **POST** /analytics/get_transactions | Get details on past transactions
 *QedItAssetTransfers.AsyncApi* | [**nodeUnlockWalletPost**](docs/AsyncApi.md#nodeUnlockWalletPost) | **POST** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds [async call]
 *QedItAssetTransfers.AsyncApi* | [**walletCreateRulePost**](docs/AsyncApi.md#walletCreateRulePost) | **POST** /wallet/create_rule | Create &amp; broadcast add-config-rule [async call]
 *QedItAssetTransfers.AsyncApi* | [**walletDeleteRulePost**](docs/AsyncApi.md#walletDeleteRulePost) | **POST** /wallet/delete_rule | Create &amp; broadcast delete-config-rule [async call]
@@ -139,6 +138,7 @@ Class | Method | HTTP request | Description
 *QedItAssetTransfers.WalletApi* | [**walletDeleteRulePost**](docs/WalletApi.md#walletDeleteRulePost) | **POST** /wallet/delete_rule | Create &amp; broadcast delete-config-rule [async call]
 *QedItAssetTransfers.WalletApi* | [**walletGetNewAddressPost**](docs/WalletApi.md#walletGetNewAddressPost) | **POST** /wallet/get_new_address | Get a new address from a given diversifier or generate randomly
 *QedItAssetTransfers.WalletApi* | [**walletGetPublicKeyPost**](docs/WalletApi.md#walletGetPublicKeyPost) | **POST** /wallet/get_public_key | Get wallet public key
+*QedItAssetTransfers.WalletApi* | [**walletGetWalletActivitiesPost**](docs/WalletApi.md#walletGetWalletActivitiesPost) | **POST** /wallet/get_wallet_activities | Get details on past transactions
 *QedItAssetTransfers.WalletApi* | [**walletGetWalletBalancesPost**](docs/WalletApi.md#walletGetWalletBalancesPost) | **POST** /wallet/get_wallet_balances | Get wallets information
 *QedItAssetTransfers.WalletApi* | [**walletIssueAssetPost**](docs/WalletApi.md#walletIssueAssetPost) | **POST** /wallet/issue_asset | Issue assets [async call]
 *QedItAssetTransfers.WalletApi* | [**walletTransferAssetPost**](docs/WalletApi.md#walletTransferAssetPost) | **POST** /wallet/transfer_asset | Transfer assets [async call]
