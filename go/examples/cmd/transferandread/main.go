@@ -76,13 +76,13 @@ func main() {
 	// END transfer from source to destination
 
 	// START read transactions in the destination wallet and find this transfer
-	getTransactionsRequest := sdk.GetTransactionsRequest{
+	getTransactionsRequest := sdk.GetActivityRequest{
 		WalletLabel:     "dest_wallet",
 		NumberOfResults: 1000,
 		StartIndex:      0,
 	}
 
-	getTransactionsResponse, _, err := client.WalletApi.WalletGetWalletActivitiesPost(ctx, getTransactionsRequest)
+	getTransactionsResponse, _, err := client.WalletApi.WalletGetActivityPost(ctx, getTransactionsRequest)
 	if err != nil {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't get transactions: %v", err))
 	}
