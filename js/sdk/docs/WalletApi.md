@@ -6,10 +6,10 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**walletCreateRulePost**](WalletApi.md#walletCreateRulePost) | **POST** /wallet/create_rule | Create &amp; broadcast add-config-rule [async call]
 [**walletDeleteRulePost**](WalletApi.md#walletDeleteRulePost) | **POST** /wallet/delete_rule | Create &amp; broadcast delete-config-rule [async call]
+[**walletGetActivityPost**](WalletApi.md#walletGetActivityPost) | **POST** /wallet/get_activity | Get wallet activity (transactions)
+[**walletGetBalancesPost**](WalletApi.md#walletGetBalancesPost) | **POST** /wallet/get_balances | Get wallets balance
 [**walletGetNewAddressPost**](WalletApi.md#walletGetNewAddressPost) | **POST** /wallet/get_new_address | Get a new address from a given diversifier or generate randomly
 [**walletGetPublicKeyPost**](WalletApi.md#walletGetPublicKeyPost) | **POST** /wallet/get_public_key | Get wallet public key
-[**walletGetWalletActivitiesPost**](WalletApi.md#walletGetWalletActivitiesPost) | **POST** /wallet/get_wallet_activities | Get details on past transactions
-[**walletGetWalletBalancesPost**](WalletApi.md#walletGetWalletBalancesPost) | **POST** /wallet/get_wallet_balances | Get wallets information
 [**walletIssueAssetPost**](WalletApi.md#walletIssueAssetPost) | **POST** /wallet/issue_asset | Issue assets [async call]
 [**walletTransferAssetPost**](WalletApi.md#walletTransferAssetPost) | **POST** /wallet/transfer_asset | Transfer assets [async call]
 
@@ -104,6 +104,96 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="walletGetActivityPost"></a>
+# **walletGetActivityPost**
+> GetActivityResponse walletGetActivityPost(getActivityRequest)
+
+Get wallet activity (transactions)
+
+### Example
+```javascript
+var QedItAssetTransfers = require('qed-it-asset-transfers');
+var defaultClient = QedItAssetTransfers.ApiClient.instance;
+// Configure API key authorization: ApiKeyAuth
+var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
+ApiKeyAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//ApiKeyAuth.apiKeyPrefix = 'Token';
+
+var apiInstance = new QedItAssetTransfers.WalletApi();
+var getActivityRequest = new QedItAssetTransfers.GetActivityRequest(); // GetActivityRequest | 
+apiInstance.walletGetActivityPost(getActivityRequest).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **getActivityRequest** | [**GetActivityRequest**](GetActivityRequest.md)|  | 
+
+### Return type
+
+[**GetActivityResponse**](GetActivityResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="walletGetBalancesPost"></a>
+# **walletGetBalancesPost**
+> GetWalletBalanceResponse walletGetBalancesPost(getWalletBalanceRequest)
+
+Get wallets balance
+
+### Example
+```javascript
+var QedItAssetTransfers = require('qed-it-asset-transfers');
+var defaultClient = QedItAssetTransfers.ApiClient.instance;
+// Configure API key authorization: ApiKeyAuth
+var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
+ApiKeyAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//ApiKeyAuth.apiKeyPrefix = 'Token';
+
+var apiInstance = new QedItAssetTransfers.WalletApi();
+var getWalletBalanceRequest = new QedItAssetTransfers.GetWalletBalanceRequest(); // GetWalletBalanceRequest | 
+apiInstance.walletGetBalancesPost(getWalletBalanceRequest).then(function(data) {
+  console.log('API called successfully. Returned data: ' + data);
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **getWalletBalanceRequest** | [**GetWalletBalanceRequest**](GetWalletBalanceRequest.md)|  | 
+
+### Return type
+
+[**GetWalletBalanceResponse**](GetWalletBalanceResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="walletGetNewAddressPost"></a>
 # **walletGetNewAddressPost**
 > GetNewAddressResponse walletGetNewAddressPost(getNewAddressRequest)
@@ -184,96 +274,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetPublicKeyResponse**](GetPublicKeyResponse.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-<a name="walletGetWalletActivitiesPost"></a>
-# **walletGetWalletActivitiesPost**
-> GetTransactionsResponse walletGetWalletActivitiesPost(getTransactionsRequest)
-
-Get details on past transactions
-
-### Example
-```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
-// Configure API key authorization: ApiKeyAuth
-var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
-ApiKeyAuth.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ApiKeyAuth.apiKeyPrefix = 'Token';
-
-var apiInstance = new QedItAssetTransfers.WalletApi();
-var getTransactionsRequest = new QedItAssetTransfers.GetTransactionsRequest(); // GetTransactionsRequest | 
-apiInstance.walletGetWalletActivitiesPost(getTransactionsRequest).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **getTransactionsRequest** | [**GetTransactionsRequest**](GetTransactionsRequest.md)|  | 
-
-### Return type
-
-[**GetTransactionsResponse**](GetTransactionsResponse.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-<a name="walletGetWalletBalancesPost"></a>
-# **walletGetWalletBalancesPost**
-> GetWalletBalanceResponse walletGetWalletBalancesPost(getWalletBalanceRequest)
-
-Get wallets information
-
-### Example
-```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
-// Configure API key authorization: ApiKeyAuth
-var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
-ApiKeyAuth.apiKey = 'YOUR API KEY';
-// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-//ApiKeyAuth.apiKeyPrefix = 'Token';
-
-var apiInstance = new QedItAssetTransfers.WalletApi();
-var getWalletBalanceRequest = new QedItAssetTransfers.GetWalletBalanceRequest(); // GetWalletBalanceRequest | 
-apiInstance.walletGetWalletBalancesPost(getWalletBalanceRequest).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **getWalletBalanceRequest** | [**GetWalletBalanceRequest**](GetWalletBalanceRequest.md)|  | 
-
-### Return type
-
-[**GetWalletBalanceResponse**](GetWalletBalanceResponse.md)
 
 ### Authorization
 
