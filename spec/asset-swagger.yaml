@@ -10,11 +10,11 @@ servers:
       server_url:
         default: localhost
 paths:
-  /wallet/get_wallet_balances:
+  /wallet/get_balances:
     post:
       tags:
         - Wallet
-      summary: Get wallets information
+      summary: Get wallets balance
       requestBody:
         required: true
         content:
@@ -262,24 +262,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /wallet/get_wallet_activities:
+  /wallet/get_activity:
     post:
       tags:
         - Wallet
-      summary: Get details on past transactions
+      summary: Get wallet activity (transactions)
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetTransactionsRequest'
+              $ref: '#/components/schemas/GetActivityRequest'
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetTransactionsResponse'
+                $ref: '#/components/schemas/GetActivityResponse'
         '400':
           description: Bad request
           content:
@@ -298,7 +298,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-  /analytics/get_blocks:
+  /analytics/get_network_activity:
     post:
       tags:
         - Analytics
@@ -308,14 +308,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetBlocksRequest'
+              $ref: '#/components/schemas/GetNetworkActivityRequest'
       responses:
         '200':
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetBlocksResponse'
+                $ref: '#/components/schemas/GetNetworkActivityResponse'
         '400':
           description: Bad request
           content:
@@ -660,7 +660,7 @@ components:
         amount: 4
         asset_id: 1
         memo: '{"recipient_name": "Dan"}'
-    GetTransactionsRequest:
+    GetActivityRequest:
       type: object
       properties:
         wallet_label:
@@ -699,7 +699,7 @@ components:
         - recipient_address
         - memo
         - id
-    GetTransactionsResponse:
+    GetActivityResponse:
       type: object
       properties:
         wallet_label:
@@ -777,7 +777,7 @@ components:
         tx_hash: "0xd379aa4e5e40552910c8ae456c65dcf51e9779fc9281ac2dc9e677ec810af6b1"
         type: "transfer_asset"
         data: {}
-    GetBlocksRequest:
+    GetNetworkActivityRequest:
       type: object
       properties:
         start_index:
@@ -805,7 +805,7 @@ components:
         - block_hash
         - height
         - transactions
-    GetBlocksResponse:
+    GetNetworkActivityResponse:
       type: object
       properties:
         blocks:

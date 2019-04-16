@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost:12052*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**analyticsGetBlocksPost**](AnalyticsApi.md#analyticsGetBlocksPost) | **POST** /analytics/get_blocks | Get details on past blocks
+[**analyticsGetNetworkActivityPost**](AnalyticsApi.md#analyticsGetNetworkActivityPost) | **POST** /analytics/get_network_activity | Get details on past blocks
 
 
-<a name="analyticsGetBlocksPost"></a>
-# **analyticsGetBlocksPost**
-> GetBlocksResponse analyticsGetBlocksPost(getBlocksRequest)
+<a name="analyticsGetNetworkActivityPost"></a>
+# **analyticsGetNetworkActivityPost**
+> GetNetworkActivityResponse analyticsGetNetworkActivityPost(getNetworkActivityRequest)
 
 Get details on past blocks
 
@@ -24,8 +24,8 @@ ApiKeyAuth.apiKey = 'YOUR API KEY';
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
 var apiInstance = new QedItAssetTransfers.AnalyticsApi();
-var getBlocksRequest = new QedItAssetTransfers.GetBlocksRequest(); // GetBlocksRequest | 
-apiInstance.analyticsGetBlocksPost(getBlocksRequest).then(function(data) {
+var getNetworkActivityRequest = new QedItAssetTransfers.GetNetworkActivityRequest(); // GetNetworkActivityRequest | 
+apiInstance.analyticsGetNetworkActivityPost(getNetworkActivityRequest).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -37,11 +37,11 @@ apiInstance.analyticsGetBlocksPost(getBlocksRequest).then(function(data) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **getBlocksRequest** | [**GetBlocksRequest**](GetBlocksRequest.md)|  | 
+ **getNetworkActivityRequest** | [**GetNetworkActivityRequest**](GetNetworkActivityRequest.md)|  | 
 
 ### Return type
 
-[**GetBlocksResponse**](GetBlocksResponse.md)
+[**GetNetworkActivityResponse**](GetNetworkActivityResponse.md)
 
 ### Authorization
 
