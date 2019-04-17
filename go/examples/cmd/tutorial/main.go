@@ -17,7 +17,7 @@ func main() {
 	ctx := context.Background()
 
 	generateWalletRequest := sdk.GenerateWalletRequest{
-		WalletId:   "Jane",
+		WalletId:      "Jane",
 		Authorization: "123456",
 	}
 
@@ -27,7 +27,7 @@ func main() {
 	}
 
 	importWalletRequest := sdk.ImportWalletRequest{
-		WalletId:   "bank",
+		WalletId:      "bank",
 		EncryptedSk:   "2b9a24e2eafce806cde2f03cae49a840ee4cfb408163c8d2de8264e3552b18ab5debc1def1fb446742cbec99f42ba9e2",
 		Authorization: "123",
 		Salt:          "2829ca5659464e6a825b0ab19d1ac444878b8a3bb1093fb54f629ae4c1ef384d",
@@ -51,7 +51,7 @@ func main() {
 	fmt.Printf("Jane's address details: %v\n", getNewAddressResponse)
 
 	issueAssetRequest := sdk.IssueAssetRequest{
-		WalletId:      "bank",
+		WalletId:         "bank",
 		Authorization:    "123",
 		RecipientAddress: getNewAddressResponse.RecipientAddress,
 		AssetId:          200,
@@ -85,7 +85,7 @@ func main() {
 	fmt.Printf("Jane's wallet balances: %v\n", getWalletBalancesResponse)
 
 	getTransactionsRequest := sdk.GetTransactionsRequest{
-		WalletId:     "Jane",
+		WalletId:        "Jane",
 		StartIndex:      0,
 		NumberOfResults: 10,
 	}
@@ -106,7 +106,7 @@ func main() {
 	}
 
 	transferAssetRequest := sdk.TransferAssetRequest{
-		WalletId:      "Jane",
+		WalletId:         "Jane",
 		Authorization:    "123456",
 		RecipientAddress: newBankAddressResponse.RecipientAddress,
 		AssetId:          200,

@@ -17,7 +17,7 @@ func main() {
 	ctx := context.Background()
 
 	unlockRequest := sdk.UnlockWalletRequest{
-		WalletId:   "source_wallet",
+		WalletId:      "source_wallet",
 		Authorization: "PrivacyIsAwesome",
 		Seconds:       600,
 	}

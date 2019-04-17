@@ -26,7 +26,7 @@ func main() {
 	}
 
 	getNewAddressRequest := sdk.GetNewAddressRequest{
-		WalletId: "dest_wallet",
+		WalletId:    "dest_wallet",
 		Diversifier: hex.EncodeToString(diversifier),
 	}
 
@@ -35,7 +35,7 @@ func main() {
 
 	// START unlock source wallet
 	unlockRequest := sdk.UnlockWalletRequest{
-		WalletId:   "source_wallet",
+		WalletId:      "source_wallet",
 		Authorization: "PrivacyIsAwesome",
 		Seconds:       600,
 	}
@@ -55,7 +55,7 @@ func main() {
 
 	// START transfer from source to destination
 	transferRequest := sdk.TransferAssetRequest{
-		WalletId:      "source_wallet",
+		WalletId:         "source_wallet",
 		Authorization:    "PrivacyIsAwesome",
 		AssetId:          10,
 		Amount:           50,
