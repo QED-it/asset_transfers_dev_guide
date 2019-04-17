@@ -19,7 +19,7 @@ func main() {
 		WalletId: "source_wallet",
 	}
 
-	balanceResponse, _, err := client.WalletApi.WalletGetWalletBalancesPost(ctx, balanceRequest)
+	balanceResponse, _, err := client.WalletApi.WalletGetBalancesPost(ctx, balanceRequest)
 	if err != nil {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't get wallet balance"))
 	}

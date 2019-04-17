@@ -104,8 +104,8 @@ ApiKeyAuth.apiKey = "YOUR API KEY"
 //ApiKeyAuth.apiKeyPrefix['x-auth-token'] = "Token"
 
 var api = new QedItAssetTransfers.AnalyticsApi()
-var getBlocksRequest = new QedItAssetTransfers.GetBlocksRequest(); // {GetBlocksRequest} 
-api.analyticsGetBlocksPost(getBlocksRequest).then(function(data) {
+var getNetworkActivityRequest = new QedItAssetTransfers.GetNetworkActivityRequest(); // {GetNetworkActivityRequest} 
+api.analyticsGetNetworkActivityPost(getNetworkActivityRequest).then(function(data) {
   console.log('API called successfully. Returned data: ' + data);
 }, function(error) {
   console.error(error);
@@ -120,7 +120,7 @@ All URIs are relative to *http://localhost:12052*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*QedItAssetTransfers.AnalyticsApi* | [**analyticsGetBlocksPost**](docs/AnalyticsApi.md#analyticsGetBlocksPost) | **POST** /analytics/get_blocks | Get details on past blocks
+*QedItAssetTransfers.AnalyticsApi* | [**analyticsGetNetworkActivityPost**](docs/AnalyticsApi.md#analyticsGetNetworkActivityPost) | **POST** /analytics/get_network_activity | Get details on past blocks
 *QedItAssetTransfers.NodeApi* | [**nodeDeleteWalletPost**](docs/NodeApi.md#nodeDeleteWalletPost) | **POST** /node/delete_wallet | Delete a wallet
 *QedItAssetTransfers.NodeApi* | [**nodeExportWalletPost**](docs/NodeApi.md#nodeExportWalletPost) | **POST** /node/export_wallet | Export wallet secret key
 *QedItAssetTransfers.NodeApi* | [**nodeGenerateWalletPost**](docs/NodeApi.md#nodeGenerateWalletPost) | **POST** /node/generate_wallet | Generate a new wallet
@@ -131,10 +131,10 @@ Class | Method | HTTP request | Description
 *QedItAssetTransfers.NodeApi* | [**nodeUnlockWalletPost**](docs/NodeApi.md#nodeUnlockWalletPost) | **POST** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds [async call]
 *QedItAssetTransfers.WalletApi* | [**walletCreateRulePost**](docs/WalletApi.md#walletCreateRulePost) | **POST** /wallet/create_rule | Create &amp; broadcast add-config-rule [async call]
 *QedItAssetTransfers.WalletApi* | [**walletDeleteRulePost**](docs/WalletApi.md#walletDeleteRulePost) | **POST** /wallet/delete_rule | Create &amp; broadcast delete-config-rule [async call]
+*QedItAssetTransfers.WalletApi* | [**walletGetActivityPost**](docs/WalletApi.md#walletGetActivityPost) | **POST** /wallet/get_activity | Get wallet activity (transactions)
+*QedItAssetTransfers.WalletApi* | [**walletGetBalancesPost**](docs/WalletApi.md#walletGetBalancesPost) | **POST** /wallet/get_balances | Get wallets balance
 *QedItAssetTransfers.WalletApi* | [**walletGetNewAddressPost**](docs/WalletApi.md#walletGetNewAddressPost) | **POST** /wallet/get_new_address | Get a new address from a given diversifier or generate randomly
 *QedItAssetTransfers.WalletApi* | [**walletGetPublicKeyPost**](docs/WalletApi.md#walletGetPublicKeyPost) | **POST** /wallet/get_public_key | Get wallet public key
-*QedItAssetTransfers.WalletApi* | [**walletGetWalletActivitiesPost**](docs/WalletApi.md#walletGetWalletActivitiesPost) | **POST** /wallet/get_wallet_activities | Get details on past transactions
-*QedItAssetTransfers.WalletApi* | [**walletGetWalletBalancesPost**](docs/WalletApi.md#walletGetWalletBalancesPost) | **POST** /wallet/get_wallet_balances | Get wallets information
 *QedItAssetTransfers.WalletApi* | [**walletIssueAssetPost**](docs/WalletApi.md#walletIssueAssetPost) | **POST** /wallet/issue_asset | Issue assets [async call]
 *QedItAssetTransfers.WalletApi* | [**walletTransferAssetPost**](docs/WalletApi.md#walletTransferAssetPost) | **POST** /wallet/transfer_asset | Transfer assets [async call]
 
@@ -151,9 +151,11 @@ Class | Method | HTTP request | Description
  - [QedItAssetTransfers.ExportWalletRequest](docs/ExportWalletRequest.md)
  - [QedItAssetTransfers.ExportWalletResponse](docs/ExportWalletResponse.md)
  - [QedItAssetTransfers.GenerateWalletRequest](docs/GenerateWalletRequest.md)
+ - [QedItAssetTransfers.GetActivityRequest](docs/GetActivityRequest.md)
+ - [QedItAssetTransfers.GetActivityResponse](docs/GetActivityResponse.md)
  - [QedItAssetTransfers.GetAllWalletsResponse](docs/GetAllWalletsResponse.md)
- - [QedItAssetTransfers.GetBlocksRequest](docs/GetBlocksRequest.md)
- - [QedItAssetTransfers.GetBlocksResponse](docs/GetBlocksResponse.md)
+ - [QedItAssetTransfers.GetNetworkActivityRequest](docs/GetNetworkActivityRequest.md)
+ - [QedItAssetTransfers.GetNetworkActivityResponse](docs/GetNetworkActivityResponse.md)
  - [QedItAssetTransfers.GetNewAddressRequest](docs/GetNewAddressRequest.md)
  - [QedItAssetTransfers.GetNewAddressResponse](docs/GetNewAddressResponse.md)
  - [QedItAssetTransfers.GetPublicKeyRequest](docs/GetPublicKeyRequest.md)
@@ -161,8 +163,6 @@ Class | Method | HTTP request | Description
  - [QedItAssetTransfers.GetRulesResponse](docs/GetRulesResponse.md)
  - [QedItAssetTransfers.GetTaskStatusRequest](docs/GetTaskStatusRequest.md)
  - [QedItAssetTransfers.GetTaskStatusResponse](docs/GetTaskStatusResponse.md)
- - [QedItAssetTransfers.GetTransactionsRequest](docs/GetTransactionsRequest.md)
- - [QedItAssetTransfers.GetTransactionsResponse](docs/GetTransactionsResponse.md)
  - [QedItAssetTransfers.GetWalletBalanceRequest](docs/GetWalletBalanceRequest.md)
  - [QedItAssetTransfers.GetWalletBalanceResponse](docs/GetWalletBalanceResponse.md)
  - [QedItAssetTransfers.ImportWalletRequest](docs/ImportWalletRequest.md)

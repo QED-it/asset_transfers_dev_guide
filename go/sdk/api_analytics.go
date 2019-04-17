@@ -27,21 +27,21 @@ type AnalyticsApiService service
 /*
 AnalyticsApiService Get details on past blocks
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param getBlocksRequest
-@return GetBlocksResponse
+ * @param getNetworkActivityRequest
+@return GetNetworkActivityResponse
 */
-func (a *AnalyticsApiService) AnalyticsGetBlocksPost(ctx context.Context, getBlocksRequest GetBlocksRequest) (GetBlocksResponse, *http.Response, error) {
+func (a *AnalyticsApiService) AnalyticsGetNetworkActivityPost(ctx context.Context, getNetworkActivityRequest GetNetworkActivityRequest) (GetNetworkActivityResponse, *http.Response, error) {
 	var (
 		localVarHttpMethod   = strings.ToUpper("Post")
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  GetBlocksResponse
+		localVarReturnValue  GetNetworkActivityResponse
 	)
 
 	// create path and map variables
-	localVarPath := a.client.cfg.BasePath + "/analytics/get_blocks"
+	localVarPath := a.client.cfg.BasePath + "/analytics/get_network_activity"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -65,7 +65,7 @@ func (a *AnalyticsApiService) AnalyticsGetBlocksPost(ctx context.Context, getBlo
 		localVarHeaderParams["Accept"] = localVarHttpHeaderAccept
 	}
 	// body params
-	localVarPostBody = &getBlocksRequest
+	localVarPostBody = &getNetworkActivityRequest
 	if ctx != nil {
 		// API Key Authentication
 		if auth, ok := ctx.Value(ContextAPIKey).(APIKey); ok {
@@ -101,7 +101,7 @@ func (a *AnalyticsApiService) AnalyticsGetBlocksPost(ctx context.Context, getBlo
 			error: localVarHttpResponse.Status,
 		}
 		if localVarHttpResponse.StatusCode == 200 {
-			var v GetBlocksResponse
+			var v GetNetworkActivityResponse
 			err = a.client.decode(&v, localVarBody, localVarHttpResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

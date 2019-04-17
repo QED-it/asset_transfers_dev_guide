@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/ErrorResponse', 'model/GetBlocksRequest', 'model/GetBlocksResponse'], factory);
+    define(['ApiClient', 'model/ErrorResponse', 'model/GetNetworkActivityRequest', 'model/GetNetworkActivityResponse'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ErrorResponse'), require('../model/GetBlocksRequest'), require('../model/GetBlocksResponse'));
+    module.exports = factory(require('../ApiClient'), require('../model/ErrorResponse'), require('../model/GetNetworkActivityRequest'), require('../model/GetNetworkActivityResponse'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.AnalyticsApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.GetBlocksRequest, root.QedItAssetTransfers.GetBlocksResponse);
+    root.QedItAssetTransfers.AnalyticsApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.GetNetworkActivityRequest, root.QedItAssetTransfers.GetNetworkActivityResponse);
   }
-}(this, function(ApiClient, ErrorResponse, GetBlocksRequest, GetBlocksResponse) {
+}(this, function(ApiClient, ErrorResponse, GetNetworkActivityRequest, GetNetworkActivityResponse) {
   'use strict';
 
   /**
@@ -50,15 +50,15 @@
 
     /**
      * Get details on past blocks
-     * @param {module:model/GetBlocksRequest} getBlocksRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetBlocksResponse} and HTTP response
+     * @param {module:model/GetNetworkActivityRequest} getNetworkActivityRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetNetworkActivityResponse} and HTTP response
      */
-    this.analyticsGetBlocksPostWithHttpInfo = function(getBlocksRequest) {
-      var postBody = getBlocksRequest;
+    this.analyticsGetNetworkActivityPostWithHttpInfo = function(getNetworkActivityRequest) {
+      var postBody = getNetworkActivityRequest;
 
-      // verify the required parameter 'getBlocksRequest' is set
-      if (getBlocksRequest === undefined || getBlocksRequest === null) {
-        throw new Error("Missing the required parameter 'getBlocksRequest' when calling analyticsGetBlocksPost");
+      // verify the required parameter 'getNetworkActivityRequest' is set
+      if (getNetworkActivityRequest === undefined || getNetworkActivityRequest === null) {
+        throw new Error("Missing the required parameter 'getNetworkActivityRequest' when calling analyticsGetNetworkActivityPost");
       }
 
 
@@ -76,10 +76,10 @@
       var authNames = ['ApiKeyAuth'];
       var contentTypes = ['application/json'];
       var accepts = ['application/json'];
-      var returnType = GetBlocksResponse;
+      var returnType = GetNetworkActivityResponse;
 
       return this.apiClient.callApi(
-        '/analytics/get_blocks', 'POST',
+        '/analytics/get_network_activity', 'POST',
         pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType
       );
@@ -87,11 +87,11 @@
 
     /**
      * Get details on past blocks
-     * @param {module:model/GetBlocksRequest} getBlocksRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetBlocksResponse}
+     * @param {module:model/GetNetworkActivityRequest} getNetworkActivityRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetNetworkActivityResponse}
      */
-    this.analyticsGetBlocksPost = function(getBlocksRequest) {
-      return this.analyticsGetBlocksPostWithHttpInfo(getBlocksRequest)
+    this.analyticsGetNetworkActivityPost = function(getNetworkActivityRequest) {
+      return this.analyticsGetNetworkActivityPostWithHttpInfo(getNetworkActivityRequest)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

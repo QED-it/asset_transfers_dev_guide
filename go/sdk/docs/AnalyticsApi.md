@@ -4,11 +4,11 @@ All URIs are relative to *http://localhost:12052*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AnalyticsGetBlocksPost**](AnalyticsApi.md#AnalyticsGetBlocksPost) | **Post** /analytics/get_blocks | Get details on past blocks
+[**AnalyticsGetNetworkActivityPost**](AnalyticsApi.md#AnalyticsGetNetworkActivityPost) | **Post** /analytics/get_network_activity | Get details on past blocks
 
 
-# **AnalyticsGetBlocksPost**
-> GetBlocksResponse AnalyticsGetBlocksPost(ctx, getBlocksRequest)
+# **AnalyticsGetNetworkActivityPost**
+> GetNetworkActivityResponse AnalyticsGetNetworkActivityPost(ctx, getNetworkActivityRequest)
 Get details on past blocks
 
 ### Required Parameters
@@ -16,11 +16,11 @@ Get details on past blocks
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **getBlocksRequest** | [**GetBlocksRequest**](GetBlocksRequest.md)|  | 
+  **getNetworkActivityRequest** | [**GetNetworkActivityRequest**](GetNetworkActivityRequest.md)|  | 
 
 ### Return type
 
-[**GetBlocksResponse**](GetBlocksResponse.md)
+[**GetNetworkActivityResponse**](GetNetworkActivityResponse.md)
 
 ### Authorization
 

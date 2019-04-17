@@ -77,7 +77,7 @@ func main() {
 		WalletId: "Jane",
 	}
 
-	getWalletBalancesResponse, _, err := client.WalletApi.WalletGetWalletBalancesPost(ctx, getWalletBalancesRequest)
+	getWalletBalancesResponse, _, err := client.WalletApi.WalletGetBalancesPost(ctx, getWalletBalancesRequest)
 	if err != nil {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't get wallet balances: %v", util.ErrorResponseString(err)))
 	}
@@ -90,7 +90,7 @@ func main() {
 		NumberOfResults: 10,
 	}
 
-	getTransactionsResponse, _, err := client.WalletApi.WalletGetWalletActivitiesPost(ctx, getTransactionsRequest)
+	getTransactionsResponse, _, err := client.WalletApi.WalletGetActivityPost(ctx, getTransactionsRequest)
 	if err != nil {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't get transactions: %v", util.ErrorResponseString(err)))
 	}
@@ -127,7 +127,7 @@ func main() {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't transfer asset: %v\nDoes Jane have sufficient balance?", transferTaskStatus.Error))
 	}
 
-	getTransactionsResponse, _, err = client.WalletApi.WalletGetWalletActivitiesPost(ctx, getTransactionsRequest)
+	getTransactionsResponse, _, err = client.WalletApi.WalletGetActivityPost(ctx, getTransactionsRequest)
 	if err != nil {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't get transactions: %v", util.ErrorResponseString(err)))
 	}

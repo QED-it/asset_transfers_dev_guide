@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/AsyncTaskCreatedResponse', 'model/CreateRuleRequest', 'model/DeleteRuleRequest', 'model/ErrorResponse', 'model/GetNewAddressRequest', 'model/GetNewAddressResponse', 'model/GetPublicKeyRequest', 'model/GetPublicKeyResponse', 'model/GetTransactionsRequest', 'model/GetTransactionsResponse', 'model/GetWalletBalanceRequest', 'model/GetWalletBalanceResponse', 'model/IssueAssetRequest', 'model/TransferAssetRequest'], factory);
+    define(['ApiClient', 'model/AsyncTaskCreatedResponse', 'model/CreateRuleRequest', 'model/DeleteRuleRequest', 'model/ErrorResponse', 'model/GetActivityRequest', 'model/GetActivityResponse', 'model/GetNewAddressRequest', 'model/GetNewAddressResponse', 'model/GetPublicKeyRequest', 'model/GetPublicKeyResponse', 'model/GetWalletBalanceRequest', 'model/GetWalletBalanceResponse', 'model/IssueAssetRequest', 'model/TransferAssetRequest'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/AsyncTaskCreatedResponse'), require('../model/CreateRuleRequest'), require('../model/DeleteRuleRequest'), require('../model/ErrorResponse'), require('../model/GetNewAddressRequest'), require('../model/GetNewAddressResponse'), require('../model/GetPublicKeyRequest'), require('../model/GetPublicKeyResponse'), require('../model/GetTransactionsRequest'), require('../model/GetTransactionsResponse'), require('../model/GetWalletBalanceRequest'), require('../model/GetWalletBalanceResponse'), require('../model/IssueAssetRequest'), require('../model/TransferAssetRequest'));
+    module.exports = factory(require('../ApiClient'), require('../model/AsyncTaskCreatedResponse'), require('../model/CreateRuleRequest'), require('../model/DeleteRuleRequest'), require('../model/ErrorResponse'), require('../model/GetActivityRequest'), require('../model/GetActivityResponse'), require('../model/GetNewAddressRequest'), require('../model/GetNewAddressResponse'), require('../model/GetPublicKeyRequest'), require('../model/GetPublicKeyResponse'), require('../model/GetWalletBalanceRequest'), require('../model/GetWalletBalanceResponse'), require('../model/IssueAssetRequest'), require('../model/TransferAssetRequest'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.WalletApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.AsyncTaskCreatedResponse, root.QedItAssetTransfers.CreateRuleRequest, root.QedItAssetTransfers.DeleteRuleRequest, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.GetNewAddressRequest, root.QedItAssetTransfers.GetNewAddressResponse, root.QedItAssetTransfers.GetPublicKeyRequest, root.QedItAssetTransfers.GetPublicKeyResponse, root.QedItAssetTransfers.GetTransactionsRequest, root.QedItAssetTransfers.GetTransactionsResponse, root.QedItAssetTransfers.GetWalletBalanceRequest, root.QedItAssetTransfers.GetWalletBalanceResponse, root.QedItAssetTransfers.IssueAssetRequest, root.QedItAssetTransfers.TransferAssetRequest);
+    root.QedItAssetTransfers.WalletApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.AsyncTaskCreatedResponse, root.QedItAssetTransfers.CreateRuleRequest, root.QedItAssetTransfers.DeleteRuleRequest, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.GetActivityRequest, root.QedItAssetTransfers.GetActivityResponse, root.QedItAssetTransfers.GetNewAddressRequest, root.QedItAssetTransfers.GetNewAddressResponse, root.QedItAssetTransfers.GetPublicKeyRequest, root.QedItAssetTransfers.GetPublicKeyResponse, root.QedItAssetTransfers.GetWalletBalanceRequest, root.QedItAssetTransfers.GetWalletBalanceResponse, root.QedItAssetTransfers.IssueAssetRequest, root.QedItAssetTransfers.TransferAssetRequest);
   }
-}(this, function(ApiClient, AsyncTaskCreatedResponse, CreateRuleRequest, DeleteRuleRequest, ErrorResponse, GetNewAddressRequest, GetNewAddressResponse, GetPublicKeyRequest, GetPublicKeyResponse, GetTransactionsRequest, GetTransactionsResponse, GetWalletBalanceRequest, GetWalletBalanceResponse, IssueAssetRequest, TransferAssetRequest) {
+}(this, function(ApiClient, AsyncTaskCreatedResponse, CreateRuleRequest, DeleteRuleRequest, ErrorResponse, GetActivityRequest, GetActivityResponse, GetNewAddressRequest, GetNewAddressResponse, GetPublicKeyRequest, GetPublicKeyResponse, GetWalletBalanceRequest, GetWalletBalanceResponse, IssueAssetRequest, TransferAssetRequest) {
   'use strict';
 
   /**
@@ -149,6 +149,106 @@
 
 
     /**
+     * Get wallet activity (transactions)
+     * @param {module:model/GetActivityRequest} getActivityRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetActivityResponse} and HTTP response
+     */
+    this.walletGetActivityPostWithHttpInfo = function(getActivityRequest) {
+      var postBody = getActivityRequest;
+
+      // verify the required parameter 'getActivityRequest' is set
+      if (getActivityRequest === undefined || getActivityRequest === null) {
+        throw new Error("Missing the required parameter 'getActivityRequest' when calling walletGetActivityPost");
+      }
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['ApiKeyAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = GetActivityResponse;
+
+      return this.apiClient.callApi(
+        '/wallet/get_activity', 'POST',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Get wallet activity (transactions)
+     * @param {module:model/GetActivityRequest} getActivityRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetActivityResponse}
+     */
+    this.walletGetActivityPost = function(getActivityRequest) {
+      return this.walletGetActivityPostWithHttpInfo(getActivityRequest)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Get wallets balance
+     * @param {module:model/GetWalletBalanceRequest} getWalletBalanceRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetWalletBalanceResponse} and HTTP response
+     */
+    this.walletGetBalancesPostWithHttpInfo = function(getWalletBalanceRequest) {
+      var postBody = getWalletBalanceRequest;
+
+      // verify the required parameter 'getWalletBalanceRequest' is set
+      if (getWalletBalanceRequest === undefined || getWalletBalanceRequest === null) {
+        throw new Error("Missing the required parameter 'getWalletBalanceRequest' when calling walletGetBalancesPost");
+      }
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['ApiKeyAuth'];
+      var contentTypes = ['application/json'];
+      var accepts = ['application/json'];
+      var returnType = GetWalletBalanceResponse;
+
+      return this.apiClient.callApi(
+        '/wallet/get_balances', 'POST',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Get wallets balance
+     * @param {module:model/GetWalletBalanceRequest} getWalletBalanceRequest 
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetWalletBalanceResponse}
+     */
+    this.walletGetBalancesPost = function(getWalletBalanceRequest) {
+      return this.walletGetBalancesPostWithHttpInfo(getWalletBalanceRequest)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
      * Get a new address from a given diversifier or generate randomly
      * @param {module:model/GetNewAddressRequest} getNewAddressRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetNewAddressResponse} and HTTP response
@@ -242,106 +342,6 @@
      */
     this.walletGetPublicKeyPost = function(getPublicKeyRequest) {
       return this.walletGetPublicKeyPostWithHttpInfo(getPublicKeyRequest)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
-
-
-    /**
-     * Get details on past transactions
-     * @param {module:model/GetTransactionsRequest} getTransactionsRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetTransactionsResponse} and HTTP response
-     */
-    this.walletGetWalletActivitiesPostWithHttpInfo = function(getTransactionsRequest) {
-      var postBody = getTransactionsRequest;
-
-      // verify the required parameter 'getTransactionsRequest' is set
-      if (getTransactionsRequest === undefined || getTransactionsRequest === null) {
-        throw new Error("Missing the required parameter 'getTransactionsRequest' when calling walletGetWalletActivitiesPost");
-      }
-
-
-      var pathParams = {
-      };
-      var queryParams = {
-      };
-      var collectionQueryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
-
-      var authNames = ['ApiKeyAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = GetTransactionsResponse;
-
-      return this.apiClient.callApi(
-        '/wallet/get_wallet_activities', 'POST',
-        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
-    /**
-     * Get details on past transactions
-     * @param {module:model/GetTransactionsRequest} getTransactionsRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetTransactionsResponse}
-     */
-    this.walletGetWalletActivitiesPost = function(getTransactionsRequest) {
-      return this.walletGetWalletActivitiesPostWithHttpInfo(getTransactionsRequest)
-        .then(function(response_and_data) {
-          return response_and_data.data;
-        });
-    }
-
-
-    /**
-     * Get wallets information
-     * @param {module:model/GetWalletBalanceRequest} getWalletBalanceRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetWalletBalanceResponse} and HTTP response
-     */
-    this.walletGetWalletBalancesPostWithHttpInfo = function(getWalletBalanceRequest) {
-      var postBody = getWalletBalanceRequest;
-
-      // verify the required parameter 'getWalletBalanceRequest' is set
-      if (getWalletBalanceRequest === undefined || getWalletBalanceRequest === null) {
-        throw new Error("Missing the required parameter 'getWalletBalanceRequest' when calling walletGetWalletBalancesPost");
-      }
-
-
-      var pathParams = {
-      };
-      var queryParams = {
-      };
-      var collectionQueryParams = {
-      };
-      var headerParams = {
-      };
-      var formParams = {
-      };
-
-      var authNames = ['ApiKeyAuth'];
-      var contentTypes = ['application/json'];
-      var accepts = ['application/json'];
-      var returnType = GetWalletBalanceResponse;
-
-      return this.apiClient.callApi(
-        '/wallet/get_wallet_balances', 'POST',
-        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType
-      );
-    }
-
-    /**
-     * Get wallets information
-     * @param {module:model/GetWalletBalanceRequest} getWalletBalanceRequest 
-     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetWalletBalanceResponse}
-     */
-    this.walletGetWalletBalancesPost = function(getWalletBalanceRequest) {
-      return this.walletGetWalletBalancesPostWithHttpInfo(getWalletBalanceRequest)
         .then(function(response_and_data) {
           return response_and_data.data;
         });

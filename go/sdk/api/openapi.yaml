@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: QED-it - Asset Transfers
-  version: 1.2.0
+  version: 1.2.2
 servers:
 - url: http://{server_url}:12052
   variables:
@@ -10,7 +10,7 @@ servers:
 security:
 - ApiKeyAuth: []
 paths:
-  /wallet/get_wallet_balances:
+  /wallet/get_balances:
     post:
       requestBody:
         content:
@@ -43,7 +43,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
-      summary: Get wallets information
+      summary: Get wallets balance
       tags:
       - Wallet
   /wallet/issue_asset:
@@ -262,20 +262,24 @@ paths:
       summary: Create & broadcast delete-config-rule [async call]
       tags:
       - Wallet
+<<<<<<< HEAD
   /wallet/get_wallet_activities:
+=======
+  /wallet/get_activity:
+>>>>>>> master
     post:
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetTransactionsRequest'
+              $ref: '#/components/schemas/GetActivityRequest'
         required: true
       responses:
         200:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetTransactionsResponse'
+                $ref: '#/components/schemas/GetActivityResponse'
           description: Success
         400:
           content:
@@ -295,23 +299,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
-      summary: Get details on past transactions
+      summary: Get wallet activity (transactions)
       tags:
       - Wallet
-  /analytics/get_blocks:
+  /analytics/get_network_activity:
     post:
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetBlocksRequest'
+              $ref: '#/components/schemas/GetNetworkActivityRequest'
         required: true
       responses:
         200:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetBlocksResponse'
+                $ref: '#/components/schemas/GetNetworkActivityResponse'
           description: Success
         400:
           content:
@@ -659,7 +663,7 @@ components:
       - recipient_address
       - wallet_id
       type: object
-    GetTransactionsRequest:
+    GetActivityRequest:
       example:
         wallet_id: source_wallet
         start_index: 0
@@ -702,7 +706,7 @@ components:
       - memo
       - recipient_address
       type: object
-    GetTransactionsResponse:
+    GetActivityResponse:
       example:
         wallet_id: source_wallet
         transactions:
@@ -792,7 +796,7 @@ components:
         error:
           type: string
       type: object
-    GetBlocksRequest:
+    GetNetworkActivityRequest:
       example:
         start_index: 0
         number_of_results: 10
@@ -823,7 +827,7 @@ components:
       - height
       - transactions
       type: object
-    GetBlocksResponse:
+    GetNetworkActivityResponse:
       example:
         blocks:
         - block_hash: abababababababababababababab
