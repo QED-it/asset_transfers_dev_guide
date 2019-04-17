@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**WalletLabel** | **string** |  | 
+**WalletId** | **string** |  | 
 **StartIndex** | **int32** |  | 
 **NumberOfResults** | **int32** |  | 
 

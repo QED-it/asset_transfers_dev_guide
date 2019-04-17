@@ -26,7 +26,7 @@ func main() {
 	}
 
 	getNewAddressRequest := sdk.GetNewAddressRequest{
-		WalletLabel: "dest_wallet",
+		WalletId:    "dest_wallet",
 		Diversifier: hex.EncodeToString(diversifier),
 	}
 
@@ -35,7 +35,7 @@ func main() {
 
 	// START unlock source wallet
 	unlockRequest := sdk.UnlockWalletRequest{
-		WalletLabel:   "source_wallet",
+		WalletId:      "source_wallet",
 		Authorization: "PrivacyIsAwesome",
 		Seconds:       600,
 	}
@@ -55,7 +55,7 @@ func main() {
 
 	// START transfer from source to destination
 	transferRequest := sdk.TransferAssetRequest{
-		WalletLabel:      "source_wallet",
+		WalletId:         "source_wallet",
 		Authorization:    "PrivacyIsAwesome",
 		AssetId:          10,
 		Amount:           50,
@@ -76,8 +76,8 @@ func main() {
 	// END transfer from source to destination
 
 	// START read transactions in the destination wallet and find this transfer
-	getTransactionsRequest := sdk.GetActivityRequest{
-		WalletLabel:     "dest_wallet",
+	getTransactionsRequest := sdk.GetTransactionsRequest{
+		WalletId:     "dest_wallet",
 		NumberOfResults: 1000,
 		StartIndex:      0,
 	}

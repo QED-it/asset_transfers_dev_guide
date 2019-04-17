@@ -16,7 +16,7 @@ func main() {
 	ctx := context.Background()
 
 	balanceRequest := sdk.GetWalletBalanceRequest{
-		WalletLabel: "source_wallet",
+		WalletId: "source_wallet",
 	}
 
 	balanceResponse, _, err := client.WalletApi.WalletGetBalancesPost(ctx, balanceRequest)
