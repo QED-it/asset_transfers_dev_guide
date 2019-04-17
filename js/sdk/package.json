@@ -1,6 +1,6 @@
 {
   "name": "qed-it-asset-transfers",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "description": "ERROR_UNKNOWN",
   "license": "Unlicense",
   "main": "src/index.js",

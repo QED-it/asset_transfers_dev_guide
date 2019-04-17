@@ -262,11 +262,7 @@ paths:
       summary: Create & broadcast delete-config-rule [async call]
       tags:
       - Wallet
-<<<<<<< HEAD
-  /wallet/get_wallet_activities:
-=======
   /wallet/get_activity:
->>>>>>> master
     post:
       requestBody:
         content:
