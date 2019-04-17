@@ -84,18 +84,18 @@ func main() {
 
 	fmt.Printf("Jane's wallet balances: %v\n", getWalletBalancesResponse)
 
-	getTransactionsRequest := sdk.GetTransactionsRequest{
+	getActivityRequest := sdk.GetActivityRequest{
 		WalletId:        "Jane",
 		StartIndex:      0,
 		NumberOfResults: 10,
 	}
 
-	getTransactionsResponse, _, err := client.WalletApi.WalletGetActivityPost(ctx, getTransactionsRequest)
+	getActivityResponse, _, err := client.WalletApi.WalletGetActivityPost(ctx, getActivityRequest)
 	if err != nil {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't get transactions: %v", util.ErrorResponseString(err)))
 	}
 
-	fmt.Printf("Jane's transactions: %v\n", getTransactionsResponse)
+	fmt.Printf("Jane's activity: %v\n", getActivityResponse)
 	newBankAddressRequest := sdk.GetNewAddressRequest{
 		WalletId: "bank",
 	}
@@ -127,11 +127,11 @@ func main() {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't transfer asset: %v\nDoes Jane have sufficient balance?", transferTaskStatus.Error))
 	}
 
-	getTransactionsResponse, _, err = client.WalletApi.WalletGetActivityPost(ctx, getTransactionsRequest)
+	getActivityResponse, _, err = client.WalletApi.WalletGetActivityPost(ctx, getActivityRequest)
 	if err != nil {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't get transactions: %v", util.ErrorResponseString(err)))
 	}
 
-	fmt.Printf("Jane's transactions: %v\n", getTransactionsResponse)
+	fmt.Printf("Jane's transactions: %v\n", getActivityResponse)
 
 }
