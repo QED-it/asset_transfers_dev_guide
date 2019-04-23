@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**walletLabel** | **String** |  | 
+**walletId** | **String** |  | 
 **encryptedSk** | **String** |  | 
 **authorization** | **String** |  | 
 **salt** | **String** |  | 

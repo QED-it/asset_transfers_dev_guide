@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 1.2.0
+  version: 1.2.2
   title: QED-it - Asset Transfers
 security:
   - ApiKeyAuth: []
@@ -596,12 +596,12 @@ components:
     GetWalletBalanceRequest:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
       required:
-        - wallet_label
+        - wallet_id
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
     BalanceForAsset:
       type: object
       properties:
@@ -613,28 +613,28 @@ components:
         - asset_id
         - amount
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
     GetWalletBalanceResponse:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
         assets:
           type: array
           items:
             $ref: '#/components/schemas/BalanceForAsset'
       required:
-        - wallet_label
+        - wallet_id
         - assets
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
         assets:
           - asset_id: 1
             amount: 8
     TransferAssetRequest:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
         authorization:
           type: string
@@ -647,14 +647,14 @@ components:
         memo:
           type: string
       required:
-        - wallet_label
+        - wallet_id
         - authorization
         - recipient_address
         - amount
         - asset_id
         - memo
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
         authorization: PrivacyIsAwesome
         recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
         amount: 4
@@ -663,18 +663,18 @@ components:
     GetActivityRequest:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
         start_index:
           type: integer
         number_of_results:
           type: integer
       required:
-        - wallet_label
+        - wallet_id
         - start_index
         - number_of_results
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
         start_index: 0
         number_of_results: 10
     TransactionsForWallet:
@@ -702,17 +702,17 @@ components:
     GetActivityResponse:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
         transactions:
           type: array
           items:
             $ref: '#/components/schemas/TransactionsForWallet'
       required:
-        - wallet_label
+        - wallet_id
         - transactions
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
         transactions:
           - is_incoming: true
             asset_id: 1
@@ -730,12 +730,12 @@ components:
     GetAllWalletsResponse:
       type: object
       properties:
-        wallet_labels:
+        wallet_ids:
           type: array
           items:
             type: string
       example:
-        wallet_labels:
+        wallet_ids:
           - Jane
           - John
           - Marty
@@ -802,7 +802,7 @@ components:
     IssueAssetRequest:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
         authorization:
           type: string
@@ -817,7 +817,7 @@ components:
         memo:
           type: string
       required:
-        - wallet_label
+        - wallet_id
         - authorization
         - recipient_address
         - amount
@@ -825,7 +825,7 @@ components:
         - asset_id
         - memo
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
         authorization: PrivacyIsAwesome
         recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
         amount: 4
@@ -835,53 +835,53 @@ components:
     GetNewAddressRequest:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
         diversifier:
           type: string
       required:
-        - wallet_label
+        - wallet_id
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
     GetNewAddressResponse:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
         recipient_address:
           type: string
       required:
-        - wallet_label
+        - wallet_id
         - recipient_address
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
         recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
     GetPublicKeyRequest:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
       required:
-        - wallet_label
+        - wallet_id
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
     GetPublicKeyResponse:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
         public_key:
           type: string
       required:
-        - wallet_label
+        - wallet_id
         - public_key
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
         public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
     ImportWalletRequest:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
         encrypted_sk:
           type: string
@@ -890,88 +890,88 @@ components:
         salt:
           type: string
       required:
-        - wallet_label
+        - wallet_id
         - encrypted_sk
         - authorization
         - salt
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
         encrypted_sk: 44d2836bbfcc7c69dd35dbe854d54a093be9a1be7f9d658325a8d2526f67ede16abf0d1430edab07be9b8c12070260af
         authorization: PrivacyIsAwesome
         salt: 27ca2bf75fe4c1564398459bd2f39a89645bf98aeeb1f99a9c9efa6e5c39cbfe
     ExportWalletRequest:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
       required:
-        - wallet_label
+        - wallet_id
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
     ExportWalletResponse:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
         encrypted_sk:
           type: string
         salt:
           type: string
       required:
-        - wallet_label
+        - wallet_id
         - encrypted_sk
         - salt
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
         encrypted_sk: 44d2836bbfcc7c69dd35dbe854d54a093be9a1be7f9d658325a8d2526f67ede16abf0d1430edab07be9b8c12070260af
         salt: 27ca2bf75fe4c1564398459bd2f39a89645bf98aeeb1f99a9c9efa6e5c39cbfe
     GenerateWalletRequest:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
         authorization:
           type: string
       required:
-        - wallet_label
+        - wallet_id
         - authorization
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
         authorization: PrivacyIsAwesome
     DeleteWalletRequest:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
         authorization:
           type: string
       required:
-        - wallet_label
+        - wallet_id
         - authorization
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
         authorization: PrivacyIsAwesome
     UnlockWalletRequest:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
         authorization:
           type: string
         seconds:
           type: integer
       required:
-        - wallet_label
+        - wallet_id
         - authorization
         - seconds
       example:
-        wallet_label: source_wallet
+        wallet_id: source_wallet
         authorization: PrivacyIsAwesome
         seconds: 600
     CreateRuleRequest:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
         authorization:
           type: string
@@ -980,11 +980,11 @@ components:
           items:
             $ref: '#/components/schemas/Rule'
       required:
-        - wallet_label
+        - wallet_id
         - authorization
         - rules_to_add
       example:
-        wallet_label: issuer_wallet
+        wallet_id: issuer_wallet
         authorization: PrivacyIsAwesome
         rules_to_add:
           - public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
@@ -995,7 +995,7 @@ components:
     DeleteRuleRequest:
       type: object
       properties:
-        wallet_label:
+        wallet_id:
           type: string
         authorization:
           type: string
@@ -1004,11 +1004,11 @@ components:
           items:
             $ref: '#/components/schemas/Rule'
       required:
-        - wallet_label
+        - wallet_id
         - authorization
         - rules_to_delete
       example:
-        wallet_label: issuer_wallet
+        wallet_id: issuer_wallet
         authorization: PrivacyIsAwesome
         rules_to_delete:
           - public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204

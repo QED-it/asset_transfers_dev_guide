@@ -17,7 +17,7 @@ func main() {
 	ctx := context.Background()
 
 	generateWalletRequest := sdk.GenerateWalletRequest{
-		WalletLabel:   "Jane",
+		WalletId:      "Jane",
 		Authorization: "123456",
 	}
 
@@ -27,7 +27,7 @@ func main() {
 	}
 
 	importWalletRequest := sdk.ImportWalletRequest{
-		WalletLabel:   "bank",
+		WalletId:      "bank",
 		EncryptedSk:   "2b9a24e2eafce806cde2f03cae49a840ee4cfb408163c8d2de8264e3552b18ab5debc1def1fb446742cbec99f42ba9e2",
 		Authorization: "123",
 		Salt:          "2829ca5659464e6a825b0ab19d1ac444878b8a3bb1093fb54f629ae4c1ef384d",
@@ -39,7 +39,7 @@ func main() {
 	}
 
 	getNewAddressRequest := sdk.GetNewAddressRequest{
-		WalletLabel: "Jane",
+		WalletId: "Jane",
 		Diversifier: "69be9d33a15535a59dd111",
 	}
 
@@ -51,7 +51,7 @@ func main() {
 	fmt.Printf("Jane's address details: %v\n", getNewAddressResponse)
 
 	issueAssetRequest := sdk.IssueAssetRequest{
-		WalletLabel:      "bank",
+		WalletId:         "bank",
 		Authorization:    "123",
 		RecipientAddress: getNewAddressResponse.RecipientAddress,
 		AssetId:          200,
@@ -74,7 +74,7 @@ func main() {
 	}
 
 	getWalletBalancesRequest := sdk.GetWalletBalanceRequest{
-		WalletLabel: "Jane",
+		WalletId: "Jane",
 	}
 
 	getWalletBalancesResponse, _, err := client.WalletApi.WalletGetBalancesPost(ctx, getWalletBalancesRequest)
@@ -86,18 +86,19 @@ func main() {
 
 	getTransactionsRequest := sdk.GetActivityRequest{
 		WalletLabel:     "Jane",
-		StartIndex:      0,
+    StartIndex:      0,
 		NumberOfResults: 10,
 	}
 
-	getTransactionsResponse, _, err := client.WalletApi.WalletGetActivityPost(ctx, getTransactionsRequest)
+
+	getActivityResponse, _, err := client.WalletApi.WalletGetActivityPost(ctx, getActivityRequest)
 	if err != nil {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't get transactions: %v", util.ErrorResponseString(err)))
 	}
 
-	fmt.Printf("Jane's transactions: %v\n", getTransactionsResponse)
+	fmt.Printf("Jane's transactions: %v\n", getActivityResponse)
 	newBankAddressRequest := sdk.GetNewAddressRequest{
-		WalletLabel: "bank",
+		WalletId: "bank",
 	}
 
 	newBankAddressResponse, _, err := client.WalletApi.WalletGetNewAddressPost(ctx, newBankAddressRequest)
@@ -106,7 +107,7 @@ func main() {
 	}
 
 	transferAssetRequest := sdk.TransferAssetRequest{
-		WalletLabel:      "Jane",
+		WalletId:         "Jane",
 		Authorization:    "123456",
 		RecipientAddress: newBankAddressResponse.RecipientAddress,
 		AssetId:          200,
@@ -127,11 +128,12 @@ func main() {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't transfer asset: %v\nDoes Jane have sufficient balance?", transferTaskStatus.Error))
 	}
 
-	getTransactionsResponse, _, err = client.WalletApi.WalletGetActivityPost(ctx, getTransactionsRequest)
+
+	getActivityResponse, _, err = client.WalletApi.WalletGetActivityPost(ctx, getActivityRequest)
 	if err != nil {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't get transactions: %v", util.ErrorResponseString(err)))
 	}
 
-	fmt.Printf("Jane's transactions: %v\n", getTransactionsResponse)
+	fmt.Printf("Jane's transactions: %v\n", getActivityResponse)
 
 }
