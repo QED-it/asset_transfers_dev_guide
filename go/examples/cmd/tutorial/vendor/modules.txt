@@ -1,0 +1,19 @@
+# github.com/QED-it/asset_transfers_dev_guide/go v1.2.0
+github.com/QED-it/asset_transfers_dev_guide/go/examples/util
+github.com/QED-it/asset_transfers_dev_guide/go/sdk
+# github.com/golang/protobuf v1.2.0
+github.com/golang/protobuf/proto
+# golang.org/x/net v0.0.0-20181207154023-610586996380
+golang.org/x/net/context/ctxhttp
+golang.org/x/net/context
+# golang.org/x/oauth2 v0.0.0-20181203162652-d668ce993890
+golang.org/x/oauth2
+golang.org/x/oauth2/internal
+# google.golang.org/appengine v1.5.0
+google.golang.org/appengine/urlfetch
+google.golang.org/appengine/internal
+google.golang.org/appengine/internal/urlfetch
+google.golang.org/appengine/internal/base
+google.golang.org/appengine/internal/datastore
+google.golang.org/appengine/internal/log
+google.golang.org/appengine/internal/remote_api

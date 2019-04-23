@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**blocks** | [**[Block]**](Block.md) |  | 
+**transactions** | [**[AnalyticsTransaction]**](AnalyticsTransaction.md) |  | [optional] 
 
 

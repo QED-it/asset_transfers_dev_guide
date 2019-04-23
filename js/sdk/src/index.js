@@ -16,12 +16,12 @@
 (function(factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/AsyncTaskCreatedResponse', 'model/BalanceForAsset', 'model/Block', 'model/CreateRuleRequest', 'model/DeleteRuleRequest', 'model/DeleteWalletRequest', 'model/ErrorResponse', 'model/ExportWalletRequest', 'model/ExportWalletResponse', 'model/GenerateWalletRequest', 'model/GetActivityRequest', 'model/GetActivityResponse', 'model/GetAllWalletsResponse', 'model/GetNetworkActivityRequest', 'model/GetNetworkActivityResponse', 'model/GetNewAddressRequest', 'model/GetNewAddressResponse', 'model/GetPublicKeyRequest', 'model/GetPublicKeyResponse', 'model/GetRulesResponse', 'model/GetTaskStatusRequest', 'model/GetTaskStatusResponse', 'model/GetWalletBalanceRequest', 'model/GetWalletBalanceResponse', 'model/ImportWalletRequest', 'model/IssueAssetRequest', 'model/Rule', 'model/TransactionsForWallet', 'model/TransferAssetRequest', 'model/UnlockWalletRequest', 'api/AnalyticsApi', 'api/NodeApi', 'api/WalletApi'], factory);
+    define(['ApiClient', 'model/AnalyticsAssetConverterProofDescription', 'model/AnalyticsConfidentialIssuanceDescription', 'model/AnalyticsIssueTx', 'model/AnalyticsOutput', 'model/AnalyticsOutputDescription', 'model/AnalyticsRule', 'model/AnalyticsRuleDefinition', 'model/AnalyticsRuleTx', 'model/AnalyticsSpendDescription', 'model/AnalyticsTransaction', 'model/AnalyticsTransferTx', 'model/AsyncTaskCreatedResponse', 'model/BalanceForAsset', 'model/CreateRuleRequest', 'model/DeleteRuleRequest', 'model/DeleteWalletRequest', 'model/ErrorResponse', 'model/ExportWalletRequest', 'model/ExportWalletResponse', 'model/GenerateWalletRequest', 'model/GetActivityRequest', 'model/GetActivityResponse', 'model/GetAllWalletsResponse', 'model/GetNetworkActivityRequest', 'model/GetNetworkActivityResponse', 'model/GetNewAddressRequest', 'model/GetNewAddressResponse', 'model/GetPublicKeyRequest', 'model/GetPublicKeyResponse', 'model/GetRulesResponse', 'model/GetTaskStatusRequest', 'model/GetTaskStatusResponse', 'model/GetWalletBalanceRequest', 'model/GetWalletBalanceResponse', 'model/ImportWalletRequest', 'model/IssueAssetRequest', 'model/Rule', 'model/TransactionsForWallet', 'model/TransferAssetRequest', 'model/UnlockWalletRequest', 'api/AnalyticsApi', 'api/NodeApi', 'api/WalletApi'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('./ApiClient'), require('./model/AsyncTaskCreatedResponse'), require('./model/BalanceForAsset'), require('./model/Block'), require('./model/CreateRuleRequest'), require('./model/DeleteRuleRequest'), require('./model/DeleteWalletRequest'), require('./model/ErrorResponse'), require('./model/ExportWalletRequest'), require('./model/ExportWalletResponse'), require('./model/GenerateWalletRequest'), require('./model/GetActivityRequest'), require('./model/GetActivityResponse'), require('./model/GetAllWalletsResponse'), require('./model/GetNetworkActivityRequest'), require('./model/GetNetworkActivityResponse'), require('./model/GetNewAddressRequest'), require('./model/GetNewAddressResponse'), require('./model/GetPublicKeyRequest'), require('./model/GetPublicKeyResponse'), require('./model/GetRulesResponse'), require('./model/GetTaskStatusRequest'), require('./model/GetTaskStatusResponse'), require('./model/GetWalletBalanceRequest'), require('./model/GetWalletBalanceResponse'), require('./model/ImportWalletRequest'), require('./model/IssueAssetRequest'), require('./model/Rule'), require('./model/TransactionsForWallet'), require('./model/TransferAssetRequest'), require('./model/UnlockWalletRequest'), require('./api/AnalyticsApi'), require('./api/NodeApi'), require('./api/WalletApi'));
+    module.exports = factory(require('./ApiClient'), require('./model/AnalyticsAssetConverterProofDescription'), require('./model/AnalyticsConfidentialIssuanceDescription'), require('./model/AnalyticsIssueTx'), require('./model/AnalyticsOutput'), require('./model/AnalyticsOutputDescription'), require('./model/AnalyticsRule'), require('./model/AnalyticsRuleDefinition'), require('./model/AnalyticsRuleTx'), require('./model/AnalyticsSpendDescription'), require('./model/AnalyticsTransaction'), require('./model/AnalyticsTransferTx'), require('./model/AsyncTaskCreatedResponse'), require('./model/BalanceForAsset'), require('./model/CreateRuleRequest'), require('./model/DeleteRuleRequest'), require('./model/DeleteWalletRequest'), require('./model/ErrorResponse'), require('./model/ExportWalletRequest'), require('./model/ExportWalletResponse'), require('./model/GenerateWalletRequest'), require('./model/GetActivityRequest'), require('./model/GetActivityResponse'), require('./model/GetAllWalletsResponse'), require('./model/GetNetworkActivityRequest'), require('./model/GetNetworkActivityResponse'), require('./model/GetNewAddressRequest'), require('./model/GetNewAddressResponse'), require('./model/GetPublicKeyRequest'), require('./model/GetPublicKeyResponse'), require('./model/GetRulesResponse'), require('./model/GetTaskStatusRequest'), require('./model/GetTaskStatusResponse'), require('./model/GetWalletBalanceRequest'), require('./model/GetWalletBalanceResponse'), require('./model/ImportWalletRequest'), require('./model/IssueAssetRequest'), require('./model/Rule'), require('./model/TransactionsForWallet'), require('./model/TransferAssetRequest'), require('./model/UnlockWalletRequest'), require('./api/AnalyticsApi'), require('./api/NodeApi'), require('./api/WalletApi'));
   }
-}(function(ApiClient, AsyncTaskCreatedResponse, BalanceForAsset, Block, CreateRuleRequest, DeleteRuleRequest, DeleteWalletRequest, ErrorResponse, ExportWalletRequest, ExportWalletResponse, GenerateWalletRequest, GetActivityRequest, GetActivityResponse, GetAllWalletsResponse, GetNetworkActivityRequest, GetNetworkActivityResponse, GetNewAddressRequest, GetNewAddressResponse, GetPublicKeyRequest, GetPublicKeyResponse, GetRulesResponse, GetTaskStatusRequest, GetTaskStatusResponse, GetWalletBalanceRequest, GetWalletBalanceResponse, ImportWalletRequest, IssueAssetRequest, Rule, TransactionsForWallet, TransferAssetRequest, UnlockWalletRequest, AnalyticsApi, NodeApi, WalletApi) {
+}(function(ApiClient, AnalyticsAssetConverterProofDescription, AnalyticsConfidentialIssuanceDescription, AnalyticsIssueTx, AnalyticsOutput, AnalyticsOutputDescription, AnalyticsRule, AnalyticsRuleDefinition, AnalyticsRuleTx, AnalyticsSpendDescription, AnalyticsTransaction, AnalyticsTransferTx, AsyncTaskCreatedResponse, BalanceForAsset, CreateRuleRequest, DeleteRuleRequest, DeleteWalletRequest, ErrorResponse, ExportWalletRequest, ExportWalletResponse, GenerateWalletRequest, GetActivityRequest, GetActivityResponse, GetAllWalletsResponse, GetNetworkActivityRequest, GetNetworkActivityResponse, GetNewAddressRequest, GetNewAddressResponse, GetPublicKeyRequest, GetPublicKeyResponse, GetRulesResponse, GetTaskStatusRequest, GetTaskStatusResponse, GetWalletBalanceRequest, GetWalletBalanceResponse, ImportWalletRequest, IssueAssetRequest, Rule, TransactionsForWallet, TransferAssetRequest, UnlockWalletRequest, AnalyticsApi, NodeApi, WalletApi) {
   'use strict';
 
   /**
@@ -62,6 +62,61 @@
      */
     ApiClient: ApiClient,
     /**
+     * The AnalyticsAssetConverterProofDescription model constructor.
+     * @property {module:model/AnalyticsAssetConverterProofDescription}
+     */
+    AnalyticsAssetConverterProofDescription: AnalyticsAssetConverterProofDescription,
+    /**
+     * The AnalyticsConfidentialIssuanceDescription model constructor.
+     * @property {module:model/AnalyticsConfidentialIssuanceDescription}
+     */
+    AnalyticsConfidentialIssuanceDescription: AnalyticsConfidentialIssuanceDescription,
+    /**
+     * The AnalyticsIssueTx model constructor.
+     * @property {module:model/AnalyticsIssueTx}
+     */
+    AnalyticsIssueTx: AnalyticsIssueTx,
+    /**
+     * The AnalyticsOutput model constructor.
+     * @property {module:model/AnalyticsOutput}
+     */
+    AnalyticsOutput: AnalyticsOutput,
+    /**
+     * The AnalyticsOutputDescription model constructor.
+     * @property {module:model/AnalyticsOutputDescription}
+     */
+    AnalyticsOutputDescription: AnalyticsOutputDescription,
+    /**
+     * The AnalyticsRule model constructor.
+     * @property {module:model/AnalyticsRule}
+     */
+    AnalyticsRule: AnalyticsRule,
+    /**
+     * The AnalyticsRuleDefinition model constructor.
+     * @property {module:model/AnalyticsRuleDefinition}
+     */
+    AnalyticsRuleDefinition: AnalyticsRuleDefinition,
+    /**
+     * The AnalyticsRuleTx model constructor.
+     * @property {module:model/AnalyticsRuleTx}
+     */
+    AnalyticsRuleTx: AnalyticsRuleTx,
+    /**
+     * The AnalyticsSpendDescription model constructor.
+     * @property {module:model/AnalyticsSpendDescription}
+     */
+    AnalyticsSpendDescription: AnalyticsSpendDescription,
+    /**
+     * The AnalyticsTransaction model constructor.
+     * @property {module:model/AnalyticsTransaction}
+     */
+    AnalyticsTransaction: AnalyticsTransaction,
+    /**
+     * The AnalyticsTransferTx model constructor.
+     * @property {module:model/AnalyticsTransferTx}
+     */
+    AnalyticsTransferTx: AnalyticsTransferTx,
+    /**
      * The AsyncTaskCreatedResponse model constructor.
      * @property {module:model/AsyncTaskCreatedResponse}
      */
@@ -71,11 +126,6 @@
      * @property {module:model/BalanceForAsset}
      */
     BalanceForAsset: BalanceForAsset,
-    /**
-     * The Block model constructor.
-     * @property {module:model/Block}
-     */
-    Block: Block,
     /**
      * The CreateRuleRequest model constructor.
      * @property {module:model/CreateRuleRequest}
