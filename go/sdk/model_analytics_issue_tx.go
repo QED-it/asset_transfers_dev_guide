@@ -9,6 +9,7 @@
 
 package sdk
 
-type GetNetworkActivityResponse struct {
-	Transactions []AnalyticsTransaction `json:"transactions,omitempty"`
+type AnalyticsIssueTx struct {
+	Outputs AnalyticsOutput `json:"outputs,omitempty"`
+	PublicKey string `json:"public_key,omitempty"`
 }

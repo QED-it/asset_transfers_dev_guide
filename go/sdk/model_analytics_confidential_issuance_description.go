@@ -9,6 +9,8 @@
 
 package sdk
 
-type GetNetworkActivityResponse struct {
-	Transactions []AnalyticsTransaction `json:"transactions,omitempty"`
+type AnalyticsConfidentialIssuanceDescription struct {
+	InputCv string `json:"input_cv,omitempty"`
+	Zkproof string `json:"zkproof,omitempty"`
+	Rule AnalyticsRule `json:"rule,omitempty"`
 }

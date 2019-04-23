@@ -1,9 +1,13 @@
-# GetNetworkActivityResponse
+# AnalyticsRuleDefinition
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Transactions** | [**[]AnalyticsTransaction**](AnalyticsTransaction.md) |  | [optional] 
+**PublicKey** | **string** |  | [optional] 
+**CanIssueConfidentially** | **bool** |  | [optional] 
+**IsAdmin** | **bool** |  | [optional] 
+**CanIssueAssetIdFirst** | **int32** |  | [optional] 
+**CanIssueAssetIdLast** | **int32** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

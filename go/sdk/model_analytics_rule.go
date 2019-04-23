@@ -9,6 +9,7 @@
 
 package sdk
 
-type GetNetworkActivityResponse struct {
-	Transactions []AnalyticsTransaction `json:"transactions,omitempty"`
+type AnalyticsRule struct {
+	MinId string `json:"min_id"`
+	MaxId int32 `json:"max_id"`
 }

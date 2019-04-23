@@ -1,9 +1,10 @@
-# GetNetworkActivityResponse
+# AnalyticsRule
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Transactions** | [**[]AnalyticsTransaction**](AnalyticsTransaction.md) |  | [optional] 
+**MinId** | **string** |  | 
+**MaxId** | **int32** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

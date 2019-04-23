@@ -51,9 +51,19 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [AnalyticsAssetConverterProofDescription](docs/AnalyticsAssetConverterProofDescription.md)
+ - [AnalyticsConfidentialIssuanceDescription](docs/AnalyticsConfidentialIssuanceDescription.md)
+ - [AnalyticsIssueTx](docs/AnalyticsIssueTx.md)
+ - [AnalyticsOutput](docs/AnalyticsOutput.md)
+ - [AnalyticsOutputDescription](docs/AnalyticsOutputDescription.md)
+ - [AnalyticsRule](docs/AnalyticsRule.md)
+ - [AnalyticsRuleDefinition](docs/AnalyticsRuleDefinition.md)
+ - [AnalyticsRuleTx](docs/AnalyticsRuleTx.md)
+ - [AnalyticsSpendDescription](docs/AnalyticsSpendDescription.md)
+ - [AnalyticsTransaction](docs/AnalyticsTransaction.md)
+ - [AnalyticsTransferTx](docs/AnalyticsTransferTx.md)
  - [AsyncTaskCreatedResponse](docs/AsyncTaskCreatedResponse.md)
  - [BalanceForAsset](docs/BalanceForAsset.md)
- - [Block](docs/Block.md)
  - [CreateRuleRequest](docs/CreateRuleRequest.md)
  - [DeleteRuleRequest](docs/DeleteRuleRequest.md)
  - [DeleteWalletRequest](docs/DeleteWalletRequest.md)

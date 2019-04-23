@@ -807,36 +807,28 @@ components:
       - number_of_results
       - start_index
       type: object
-    Block:
-      properties:
-        block_hash:
-          type: string
-        height:
-          format: int32
-          type: integer
-        transactions:
-          items:
-            type: string
-          type: array
-      required:
-      - block_hash
-      - height
-      - transactions
-      type: object
     GetNetworkActivityResponse:
       example:
-        blocks:
-        - block_hash: abababababababababababababab
-          height: 10
-          transactions:
-          - XKCOKXOASKPOWJEASDlkjweNALNSD==
+        transactions:
+        - index_in_block: 0
+          block_hash: block_hash
+          tx_hash: tx_hash
+          block_height: 6
+          type: type
+          content: ""
+          timestamp: timestamp
+        - index_in_block: 0
+          block_hash: block_hash
+          tx_hash: tx_hash
+          block_height: 6
+          type: type
+          content: ""
+          timestamp: timestamp
       properties:
-        blocks:
+        transactions:
           items:
-            $ref: '#/components/schemas/Block'
+            $ref: '#/components/schemas/AnalyticsTransaction'
           type: array
-      required:
-      - blocks
       type: object
     IssueAssetRequest:
       example:
@@ -1102,6 +1094,190 @@ components:
           type: string
       required:
       - id
+      type: object
+    AnalyticsTransaction:
+      example:
+        index_in_block: 0
+        block_hash: block_hash
+        tx_hash: tx_hash
+        block_height: 6
+        type: type
+        content: ""
+        timestamp: timestamp
+      properties:
+        type:
+          type: string
+        tx_hash:
+          type: string
+        block_hash:
+          type: string
+        timestamp:
+          type: string
+        index_in_block:
+          format: int32
+          type: integer
+        block_height:
+          format: int32
+          type: integer
+        content:
+          oneOf:
+          - $ref: '#/components/schemas/AnalyticsIssueTx'
+          - $ref: '#/components/schemas/AnalyticsTransferTx'
+          - $ref: '#/components/schemas/AnalyticsRuleTx'
+      type: object
+    AnalyticsIssueTx:
+      properties:
+        outputs:
+          $ref: '#/components/schemas/AnalyticsOutput'
+        public_key:
+          type: string
+      type: object
+    AnalyticsTransferTx:
+      properties:
+        asset_converter_descriptions:
+          $ref: '#/components/schemas/AnalyticsAssetConverterProofDescription'
+        spends:
+          items:
+            $ref: '#/components/schemas/AnalyticsSpendDescription'
+          type: array
+        outputs:
+          items:
+            $ref: '#/components/schemas/AnalyticsOutputDescription'
+          type: array
+      type: object
+    AnalyticsRuleTx:
+      properties:
+        sender_public_key:
+          type: string
+        rules_to_add:
+          $ref: '#/components/schemas/AnalyticsRuleDefinition'
+        rules_to_delete:
+          $ref: '#/components/schemas/AnalyticsRuleDefinition'
+      type: object
+    AnalyticsRuleDefinition:
+      example:
+        public_key: AAAAAAAAAA==
+        can_issue_confidentially: true
+        is_admin: true
+        can_issue_asset_id_first: 11
+        can_issue_asset_id_last: 20
+      properties:
+        public_key:
+          type: string
+        can_issue_confidentially:
+          type: boolean
+        is_admin:
+          type: boolean
+        can_issue_asset_id_first:
+          format: int32
+          type: integer
+        can_issue_asset_id_last:
+          format: int32
+          type: integer
+      type: object
+    AnalyticsOutput:
+      properties:
+        output_description:
+          $ref: '#/components/schemas/AnalyticsOutputDescription'
+        asset_id:
+          format: int32
+          type: integer
+        amount:
+          format: int32
+          type: integer
+        confidential_issuance_description:
+          $ref: '#/components/schemas/AnalyticsConfidentialIssuanceDescription'
+        is_confidential:
+          type: boolean
+      type: object
+    AnalyticsAssetConverterProofDescription:
+      example:
+        asset_cv: AAAAAAAAAAA=
+        amount_cv: AAAAAAAAAAA=
+        input_cv: AAAAAAAAAAA=
+        zkproof: 000AAAAAAA=
+      properties:
+        input_cv:
+          type: string
+        amount_cv:
+          type: string
+        asset_cv:
+          type: string
+        zkproof:
+          type: string
+      type: object
+    AnalyticsSpendDescription:
+      example:
+        cv: AAAAAAAAAAA=
+        anchor: AAAAAAAAAAA=
+        nullifier: AAAAAAAAAAA=
+        zkproof: 000AAAAAAA=
+        rk_out: AAAAAAAAAAA=
+        spend_auth_sig: AAAAAAAAAAA=
+      properties:
+        cv:
+          type: string
+        anchor:
+          type: string
+        nullifier:
+          type: string
+        rk_out:
+          type: string
+        zkproof:
+          type: string
+        spend_auth_sig:
+          type: string
+      type: object
+    AnalyticsOutputDescription:
+      example:
+        cv: AAAAAAAAAAA=
+        cm: 000AAAAAAA=
+        epk: AAAAAAAAAAA=
+        zkproof: 000AAAAAAA=
+        enc_note: AAAAAAAAAAA=
+        enc_sender: 000AAAAAAA=
+      properties:
+        cv:
+          type: string
+        cm:
+          type: string
+        epk:
+          type: string
+        zkproof:
+          type: string
+        enc_note:
+          type: string
+        enc_sender:
+          type: string
+      type: object
+    AnalyticsConfidentialIssuanceDescription:
+      example:
+        input_cv: AAAAAAAAAAA=
+        zkproof: 000AAAAAAA=
+        rule:
+        - min_id: 11
+        - max_id: 20
+      properties:
+        input_cv:
+          type: string
+        zkproof:
+          type: string
+        rule:
+          $ref: '#/components/schemas/AnalyticsRule'
+      type: object
+    AnalyticsRule:
+      example:
+        min_id: 11
+        max_id: 20
+      properties:
+        min_id:
+          type: string
+        max_id:
+          format: int32
+          type: integer
+      required:
+      - max_id
+      - min_id
       type: object
   securitySchemes:
     ApiKeyAuth:

@@ -16,59 +16,70 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/AnalyticsTransaction'], factory);
+    define(['ApiClient'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./AnalyticsTransaction'));
+    module.exports = factory(require('../ApiClient'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.GetNetworkActivityResponse = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.AnalyticsTransaction);
+    root.QedItAssetTransfers.AnalyticsRule = factory(root.QedItAssetTransfers.ApiClient);
   }
-}(this, function(ApiClient, AnalyticsTransaction) {
+}(this, function(ApiClient) {
   'use strict';
 
 
 
   /**
-   * The GetNetworkActivityResponse model module.
-   * @module model/GetNetworkActivityResponse
+   * The AnalyticsRule model module.
+   * @module model/AnalyticsRule
    * @version 1.2.0
    */
 
   /**
-   * Constructs a new <code>GetNetworkActivityResponse</code>.
-   * @alias module:model/GetNetworkActivityResponse
+   * Constructs a new <code>AnalyticsRule</code>.
+   * @alias module:model/AnalyticsRule
    * @class
+   * @param minId {String} 
+   * @param maxId {Number} 
    */
-  var exports = function() {
+  var exports = function(minId, maxId) {
     var _this = this;
 
+    _this['min_id'] = minId;
+    _this['max_id'] = maxId;
   };
 
   /**
-   * Constructs a <code>GetNetworkActivityResponse</code> from a plain JavaScript object, optionally creating a new instance.
+   * Constructs a <code>AnalyticsRule</code> from a plain JavaScript object, optionally creating a new instance.
    * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
    * @param {Object} data The plain JavaScript object bearing properties of interest.
-   * @param {module:model/GetNetworkActivityResponse} obj Optional instance to populate.
-   * @return {module:model/GetNetworkActivityResponse} The populated <code>GetNetworkActivityResponse</code> instance.
+   * @param {module:model/AnalyticsRule} obj Optional instance to populate.
+   * @return {module:model/AnalyticsRule} The populated <code>AnalyticsRule</code> instance.
    */
   exports.constructFromObject = function(data, obj) {
     if (data) {
       obj = obj || new exports();
-      if (data.hasOwnProperty('transactions')) {
-        obj['transactions'] = ApiClient.convertToType(data['transactions'], [AnalyticsTransaction]);
+      if (data.hasOwnProperty('min_id')) {
+        obj['min_id'] = ApiClient.convertToType(data['min_id'], 'String');
+      }
+      if (data.hasOwnProperty('max_id')) {
+        obj['max_id'] = ApiClient.convertToType(data['max_id'], 'Number');
       }
     }
     return obj;
   }
 
   /**
-   * @member {Array.<module:model/AnalyticsTransaction>} transactions
+   * @member {String} min_id
    */
-  exports.prototype['transactions'] = undefined;
+  exports.prototype['min_id'] = undefined;
+  /**
+   * @member {Number} max_id
+   */
+  exports.prototype['max_id'] = undefined;
 
 
 

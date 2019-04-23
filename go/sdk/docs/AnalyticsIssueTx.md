@@ -1,9 +1,10 @@
-# GetNetworkActivityResponse
+# AnalyticsIssueTx
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Transactions** | [**[]AnalyticsTransaction**](AnalyticsTransaction.md) |  | [optional] 
+**Outputs** | [**AnalyticsOutput**](AnalyticsOutput.md) |  | [optional] 
+**PublicKey** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

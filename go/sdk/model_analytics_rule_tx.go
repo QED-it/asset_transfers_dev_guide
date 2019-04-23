@@ -9,6 +9,8 @@
 
 package sdk
 
-type GetNetworkActivityResponse struct {
-	Transactions []AnalyticsTransaction `json:"transactions,omitempty"`
+type AnalyticsRuleTx struct {
+	SenderPublicKey string `json:"sender_public_key,omitempty"`
+	RulesToAdd AnalyticsRuleDefinition `json:"rules_to_add,omitempty"`
+	RulesToDelete AnalyticsRuleDefinition `json:"rules_to_delete,omitempty"`
 }
