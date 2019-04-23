@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 1.2.2
+  version: 1.2.4
   title: QED-it - Asset Transfers
 security:
   - ApiKeyAuth: []
@@ -790,36 +790,29 @@ components:
       example:
         start_index: 0
         number_of_results: 10
-    Block:
-      type: object
-      properties:
-        block_hash:
-          type: string
-        height:
-          type: integer
-        transactions:
-          type: array
-          items:
-            type: string
-      required:
-        - block_hash
-        - height
-        - transactions
+    # Block:
+    #   type: object
+    #   properties:
+    #     block_hash:
+    #       type: string
+    #     height:
+    #       type: integer
+    #     transactions:
+    #       type: array
+    #       items:
+    #         type: string
+    #   required:
+    #     - block_hash
+    #     - height
+    #     - transactions
     GetNetworkActivityResponse:
       type: object
       properties:
-        blocks:
+        transactions:
           type: array
           items:
-            $ref: '#/components/schemas/Block'
-      required:
-        - blocks
-      example:
-        blocks:
-          - block_hash: abababababababababababababab
-            height: 10
-            transactions:
-              - XKCOKXOASKPOWJEASDlkjweNALNSD==
+            $ref: '#/components/schemas/AnalyticsTransaction'
+
     IssueAssetRequest:
       type: object
       properties:
@@ -1080,3 +1073,189 @@ components:
       example:
         id: "70a88558-2b8b-4b63-a5b6-2c54b24377f5"
 
+
+
+    AnalyticsTransaction:
+      type: object
+      properties:
+        type:
+          type: string
+        tx_hash:
+          type: string
+        block_hash:
+          type: string
+        timestamp:
+          type: string
+        index_in_block:
+          type: integer
+        block_height:
+          type: integer
+        content:
+          oneOf:
+            - $ref: '#/components/schemas/AnalyticsIssueTx'
+            - $ref: '#/components/schemas/AnalyticsTransferTx'          
+            - $ref: '#/components/schemas/AnalyticsRuleTx'          
+
+    AnalyticsIssueTx:
+      type: object
+      properties:
+        outputs:
+          $ref: '#/components/schemas/AnalyticsOutput'
+        public_key:
+          type: string
+
+    AnalyticsTransferTx:
+      type: object
+      properties:
+        asset_converter_descriptions:
+          $ref: '#/components/schemas/AnalyticsAssetConverterProofDescription'
+        spends:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalyticsSpendDescription'
+        outputs:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnalyticsOutputDescription'
+
+    AnalyticsRuleTx:
+      type: object
+      properties:
+        sender_public_key:
+          type: string
+        rules_to_add:
+          $ref: '#/components/schemas/AnalyticsRuleDefinition'
+        rules_to_delete:
+          $ref: '#/components/schemas/AnalyticsRuleDefinition'
+
+    AnalyticsRuleDefinition:
+      type: object
+      properties:
+        public_key:
+          type: string
+        can_issue_confidentially:
+          type: boolean
+        is_admin:
+          type: boolean
+        can_issue_asset_id_first:
+          type: integer
+        can_issue_asset_id_last:
+          type: integer
+      example:
+        public_key: "AAAAAAAAAA=="
+        can_issue_confidentially: true
+        is_admin: true
+        can_issue_asset_id_first: 11
+        can_issue_asset_id_last: 20
+
+    AnalyticsOutput:
+      type: object
+      properties:
+        output_description:
+          $ref: '#/components/schemas/AnalyticsOutputDescription'
+        asset_id:
+          type: integer
+        amount:
+          type: integer
+        confidential_issuance_description:
+          $ref: '#/components/schemas/AnalyticsConfidentialIssuanceDescription'
+        is_confidential:
+          type: boolean
+      # example:
+      #   asset_cv: "AAAAAAAAAAA="
+      #   amount_cv: "AAAAAAAAAAA="
+      #   input_cv: "AAAAAAAAAAA="
+      #   zkproof: "000AAAAAAA="
+
+    AnalyticsAssetConverterProofDescription:
+      type: object
+      properties:
+        input_cv:
+          type: string
+        amount_cv:
+          type: string
+        asset_cv:
+          type: string
+        zkproof:
+          type: string
+      example:
+        asset_cv: "AAAAAAAAAAA="
+        amount_cv: "AAAAAAAAAAA="
+        input_cv: "AAAAAAAAAAA="
+        zkproof: "000AAAAAAA="
+
+    AnalyticsSpendDescription:
+      type: object
+      properties:
+        cv:
+          type: string
+        anchor:
+          type: string
+        nullifier:
+          type: string
+        rk_out:
+          type: string
+        zkproof:
+          type: string
+        spend_auth_sig:
+          type: string
+      example:
+        cv: "AAAAAAAAAAA="
+        anchor: "AAAAAAAAAAA="
+        nullifier: "AAAAAAAAAAA="
+        zkproof: "000AAAAAAA="
+        rk_out: "AAAAAAAAAAA="
+        spend_auth_sig: "AAAAAAAAAAA="
+
+    AnalyticsOutputDescription:
+      type: object
+      properties:
+        cv:
+          type: string
+        cm:
+          type: string
+        epk:
+          type: string
+        zkproof:
+          type: string
+        enc_note:
+          type: string
+        enc_sender:
+          type: string
+      example:
+        cv: "AAAAAAAAAAA="
+        cm: "000AAAAAAA="
+        epk: "AAAAAAAAAAA="
+        zkproof: "000AAAAAAA="
+        enc_note: "AAAAAAAAAAA="
+        enc_sender: "000AAAAAAA="
+
+    AnalyticsConfidentialIssuanceDescription:
+      type: object
+      properties:
+        input_cv:
+          type: string
+        zkproof:
+          type: string
+        rule:
+          $ref: '#/components/schemas/AnalyticsRule'
+      example:
+        input_cv: "AAAAAAAAAAA="
+        zkproof: "000AAAAAAA="
+        rule:
+          - min_id: 11
+          - max_id: 20
+
+    AnalyticsRule:
+      type: object
+      properties:
+        min_id:
+          type: string
+        max_id:
+          type: integer
+      required:
+        - min_id
+        - max_id
+      example:
+        min_id: 11
+        max_id: 20

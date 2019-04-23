@@ -10,5 +10,5 @@
 package sdk
 
 type GetNetworkActivityResponse struct {
-	Blocks []Block `json:"blocks"`
+	Transactions []AnalyticsTransaction `json:"transactions,omitempty"`
 }

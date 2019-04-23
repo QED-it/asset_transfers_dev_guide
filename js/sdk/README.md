@@ -141,9 +141,19 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [QedItAssetTransfers.AnalyticsAssetConverterProofDescription](docs/AnalyticsAssetConverterProofDescription.md)
+ - [QedItAssetTransfers.AnalyticsConfidentialIssuanceDescription](docs/AnalyticsConfidentialIssuanceDescription.md)
+ - [QedItAssetTransfers.AnalyticsIssueTx](docs/AnalyticsIssueTx.md)
+ - [QedItAssetTransfers.AnalyticsOutput](docs/AnalyticsOutput.md)
+ - [QedItAssetTransfers.AnalyticsOutputDescription](docs/AnalyticsOutputDescription.md)
+ - [QedItAssetTransfers.AnalyticsRule](docs/AnalyticsRule.md)
+ - [QedItAssetTransfers.AnalyticsRuleDefinition](docs/AnalyticsRuleDefinition.md)
+ - [QedItAssetTransfers.AnalyticsRuleTx](docs/AnalyticsRuleTx.md)
+ - [QedItAssetTransfers.AnalyticsSpendDescription](docs/AnalyticsSpendDescription.md)
+ - [QedItAssetTransfers.AnalyticsTransaction](docs/AnalyticsTransaction.md)
+ - [QedItAssetTransfers.AnalyticsTransferTx](docs/AnalyticsTransferTx.md)
  - [QedItAssetTransfers.AsyncTaskCreatedResponse](docs/AsyncTaskCreatedResponse.md)
  - [QedItAssetTransfers.BalanceForAsset](docs/BalanceForAsset.md)
- - [QedItAssetTransfers.Block](docs/Block.md)
  - [QedItAssetTransfers.CreateRuleRequest](docs/CreateRuleRequest.md)
  - [QedItAssetTransfers.DeleteRuleRequest](docs/DeleteRuleRequest.md)
  - [QedItAssetTransfers.DeleteWalletRequest](docs/DeleteWalletRequest.md)

@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/Block'], factory);
+    define(['ApiClient', 'model/AnalyticsTransaction'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('./Block'));
+    module.exports = factory(require('../ApiClient'), require('./AnalyticsTransaction'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.GetNetworkActivityResponse = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.Block);
+    root.QedItAssetTransfers.GetNetworkActivityResponse = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.AnalyticsTransaction);
   }
-}(this, function(ApiClient, Block) {
+}(this, function(ApiClient, AnalyticsTransaction) {
   'use strict';
 
 
@@ -42,12 +42,10 @@
    * Constructs a new <code>GetNetworkActivityResponse</code>.
    * @alias module:model/GetNetworkActivityResponse
    * @class
-   * @param blocks {Array.<module:model/Block>} 
    */
-  var exports = function(blocks) {
+  var exports = function() {
     var _this = this;
 
-    _this['blocks'] = blocks;
   };
 
   /**
@@ -60,17 +58,17 @@
   exports.constructFromObject = function(data, obj) {
     if (data) {
       obj = obj || new exports();
-      if (data.hasOwnProperty('blocks')) {
-        obj['blocks'] = ApiClient.convertToType(data['blocks'], [Block]);
+      if (data.hasOwnProperty('transactions')) {
+        obj['transactions'] = ApiClient.convertToType(data['transactions'], [AnalyticsTransaction]);
       }
     }
     return obj;
   }
 
   /**
-   * @member {Array.<module:model/Block>} blocks
+   * @member {Array.<module:model/AnalyticsTransaction>} transactions
    */
-  exports.prototype['blocks'] = undefined;
+  exports.prototype['transactions'] = undefined;
 
 
 
