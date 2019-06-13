@@ -4,6 +4,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **walletId** | **String** |  | 
-**authorization** | **String** |  | 
+**authorization** | **String** |  | [optional] 
 
 

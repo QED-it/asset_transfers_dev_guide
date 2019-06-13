@@ -4,9 +4,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **publicKey** | **String** |  | 
-**canIssueConfidentially** | **Boolean** |  | [optional] 
-**canIssueAssetIdFirst** | **Number** |  | [optional] 
-**canIssueAssetIdLast** | **Number** |  | [optional] 
-**isAdmin** | **Boolean** |  | [optional] 
+**canIssueConfidentially** | **Boolean** |  | 
+**canIssueAssetIdFirst** | **Number** |  | 
+**canIssueAssetIdLast** | **Number** |  | 
+**isAdmin** | **Boolean** |  | 
 
 

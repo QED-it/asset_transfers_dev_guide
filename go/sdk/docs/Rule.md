@@ -4,10 +4,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PublicKey** | **string** |  | 
-**CanIssueConfidentially** | **bool** |  | [optional] 
-**CanIssueAssetIdFirst** | **int32** |  | [optional] 
-**CanIssueAssetIdLast** | **int32** |  | [optional] 
-**IsAdmin** | **bool** |  | [optional] 
+**CanIssueConfidentially** | **bool** |  | 
+**CanIssueAssetIdFirst** | **int32** |  | 
+**CanIssueAssetIdLast** | **int32** |  | 
+**IsAdmin** | **bool** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

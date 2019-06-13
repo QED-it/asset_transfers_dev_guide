@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **IsIncoming** | **bool** |  | [optional] 
 **IssuedBySelf** | **bool** |  | [optional] 
+**SenderId** | **string** |  | [optional] 
 **Memo** | **string** |  | [optional] 
 **RecipientAddress** | **string** |  | [optional] 
 **AssetId** | **int32** |  | [optional] 
