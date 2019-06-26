@@ -33,9 +33,16 @@ func main() {
 		Salt:          "2829ca5659464e6a825b0ab19d1ac444878b8a3bb1093fb54f629ae4c1ef384d",
 	}
 
-	_, err = client.NodeApi.NodeImportWalletPost(ctx, importWalletRequest)
+	importWalletTask, _, err := client.NodeApi.NodeImportWalletPost(ctx, importWalletRequest)
 	if err != nil {
 		fmt.Printf("Could not import the bank's wallet, %v\n", util.ErrorResponseString(err))
+	}
+	importWalletTaskStatus, err := util.WaitForAsyncTaskDone(ctx, importWalletTask.Id, client)
+	if err != nil {
+		util.HandleErrorAndExit(err)
+	}
+	if importWalletTaskStatus.Result != "success" {
+		util.HandleErrorAndExit(fmt.Errorf("error while importing wallet: %v", importWalletTaskStatus.Error))
 	}
 
 	getNewAddressRequest := sdk.GetNewAddressRequest{

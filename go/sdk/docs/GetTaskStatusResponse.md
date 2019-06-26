@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **UpdatedAt** | **string** |  | [optional] 
 **Result** | **string** |  | [optional] 
 **TxHash** | **string** |  | [optional] 
+**QeditTxHash** | **string** |  | [optional] 
 **Type** | **string** |  | [optional] 
 **Data** | [**map[string]interface{}**](map[string]interface{}.md) |  | [optional] 
 **Error** | **string** |  | [optional] 

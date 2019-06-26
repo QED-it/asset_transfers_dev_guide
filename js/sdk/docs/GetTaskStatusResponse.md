@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **updatedAt** | **Date** |  | [optional] 
 **result** | **String** |  | [optional] 
 **txHash** | **String** |  | [optional] 
+**qeditTxHash** | **String** |  | [optional] 
 **type** | **String** |  | [optional] 
 **data** | **Object** |  | [optional] 
 **error** | **String** |  | [optional] 
