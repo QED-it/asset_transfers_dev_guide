@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **CreatedAt** | **string** |  | [optional] 
 **UpdatedAt** | **string** |  | [optional] 
 **Result** | **string** |  | [optional] 
+**State** | **string** |  | [optional] 
 **TxHash** | **string** |  | [optional] 
 **QeditTxHash** | **string** |  | [optional] 
 **Type** | **string** |  | [optional] 
