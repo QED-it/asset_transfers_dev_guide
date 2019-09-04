@@ -10,7 +10,10 @@
 package sdk
 
 type DeleteRuleRequest struct {
-	WalletId      string `json:"wallet_id"`
+	// The ID of the Wallet whose admin credentials should be used to delete the Rules
+	WalletId string `json:"wallet_id"`
+	// The authorization password for the Wallet whose admin credentials should be used to delete the Rules
 	Authorization string `json:"authorization"`
+	// The list of Rules to delete from the network
 	RulesToDelete []Rule `json:"rules_to_delete"`
 }

@@ -10,9 +10,11 @@
 package sdk
 
 type HealthcheckResponse struct {
+	// API version of the Node
 	Version             string                  `json:"version,omitempty"`
 	BlockchainConnector HealthcheckResponseItem `json:"blockchain_connector,omitempty"`
 	MessageQueue        HealthcheckResponseItem `json:"message_queue,omitempty"`
 	Database            HealthcheckResponseItem `json:"database,omitempty"`
-	Passing             bool                    `json:"passing,omitempty"`
+	// Boolean signifying whether the endpoint is ready for calls
+	Passing bool `json:"passing,omitempty"`
 }

@@ -10,8 +10,12 @@
 package sdk
 
 type AnalyticsAssetConverterProofDescription struct {
-	InputCv  string `json:"input_cv,omitempty"`
+	// The commitment to both the Asset Type and amount of the Note
+	InputCv string `json:"input_cv,omitempty"`
+	// The commitment to the Asset amount
 	AmountCv string `json:"amount_cv,omitempty"`
-	AssetCv  string `json:"asset_cv,omitempty"`
-	Zkproof  string `json:"zkproof,omitempty"`
+	// The commitment to the ID of the Asset Type
+	AssetCv string `json:"asset_cv,omitempty"`
+	// The Proof that the commitment contents match
+	Zkproof string `json:"zkproof,omitempty"`
 }

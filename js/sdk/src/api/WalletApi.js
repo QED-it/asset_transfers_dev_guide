@@ -49,7 +49,8 @@
 
 
     /**
-     * Create &amp; broadcast add-config-rule [async call]
+     * Create a new Rule in the network [async call]
+     * Create new Rules that can either create a new admin, a new issuer, or both; The Rules are created by a Wallet that needs to have admin rights; The Rules grant rights to other Wallets through the Wallets&#39; public keys.
      * @param {module:model/CreateRuleRequest} createRuleRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
      */
@@ -86,7 +87,8 @@
     }
 
     /**
-     * Create &amp; broadcast add-config-rule [async call]
+     * Create a new Rule in the network [async call]
+     * Create new Rules that can either create a new admin, a new issuer, or both; The Rules are created by a Wallet that needs to have admin rights; The Rules grant rights to other Wallets through the Wallets&#39; public keys.
      * @param {module:model/CreateRuleRequest} createRuleRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
      */
@@ -99,7 +101,8 @@
 
 
     /**
-     * Create &amp; broadcast delete-config-rule [async call]
+     * Delete an existing Rule from the network [async call]
+     * Delete an existing Rule from the network; The Rule is deleted by a Wallet which needs to have admin rights.
      * @param {module:model/DeleteRuleRequest} deleteRuleRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
      */
@@ -136,7 +139,8 @@
     }
 
     /**
-     * Create &amp; broadcast delete-config-rule [async call]
+     * Delete an existing Rule from the network [async call]
+     * Delete an existing Rule from the network; The Rule is deleted by a Wallet which needs to have admin rights.
      * @param {module:model/DeleteRuleRequest} deleteRuleRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
      */
@@ -150,6 +154,7 @@
 
     /**
      * Get wallet activity (transactions)
+     * List transactions that were created by a specifed Wallet or that affected that Wallet; All known details of each such transaction will be returned.
      * @param {module:model/GetWalletActivityRequest} getWalletActivityRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetWalletActivityResponse} and HTTP response
      */
@@ -187,6 +192,7 @@
 
     /**
      * Get wallet activity (transactions)
+     * List transactions that were created by a specifed Wallet or that affected that Wallet; All known details of each such transaction will be returned.
      * @param {module:model/GetWalletActivityRequest} getWalletActivityRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetWalletActivityResponse}
      */
@@ -199,7 +205,8 @@
 
 
     /**
-     * Get wallets balance
+     * Get wallets balances
+     * Get a list of the Asset Types held within a given Wallet and the amount of each type held.
      * @param {module:model/GetWalletBalanceRequest} getWalletBalanceRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetWalletBalanceResponse} and HTTP response
      */
@@ -236,7 +243,8 @@
     }
 
     /**
-     * Get wallets balance
+     * Get wallets balances
+     * Get a list of the Asset Types held within a given Wallet and the amount of each type held.
      * @param {module:model/GetWalletBalanceRequest} getWalletBalanceRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetWalletBalanceResponse}
      */
@@ -250,6 +258,7 @@
 
     /**
      * Get a new address from a given diversifier or generate randomly
+     * Generate an Address for the Wallet; the address can be used by other Wallet owners to issue or transfer Assets into said Wallet; If a diversifier is provided, then the generated address is deterministically generated from the diversifier; If the diversifier is omitted, then a random diversifier is used and the resulting Address will be random; in both cases the Address cannot be linked to the Wallet by parties that do not have access to the Wallet. All generated Addresses of a Wallet are always valid and cannot be invalidated.
      * @param {module:model/GetNewAddressRequest} getNewAddressRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetNewAddressResponse} and HTTP response
      */
@@ -287,6 +296,7 @@
 
     /**
      * Get a new address from a given diversifier or generate randomly
+     * Generate an Address for the Wallet; the address can be used by other Wallet owners to issue or transfer Assets into said Wallet; If a diversifier is provided, then the generated address is deterministically generated from the diversifier; If the diversifier is omitted, then a random diversifier is used and the resulting Address will be random; in both cases the Address cannot be linked to the Wallet by parties that do not have access to the Wallet. All generated Addresses of a Wallet are always valid and cannot be invalidated.
      * @param {module:model/GetNewAddressRequest} getNewAddressRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetNewAddressResponse}
      */
@@ -300,6 +310,7 @@
 
     /**
      * Get wallet public key
+     * Get the unique public key of the Wallet; This key is unique across the entire network and is used to identify the Wallet.
      * @param {module:model/GetPublicKeyRequest} getPublicKeyRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetPublicKeyResponse} and HTTP response
      */
@@ -337,6 +348,7 @@
 
     /**
      * Get wallet public key
+     * Get the unique public key of the Wallet; This key is unique across the entire network and is used to identify the Wallet.
      * @param {module:model/GetPublicKeyRequest} getPublicKeyRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetPublicKeyResponse}
      */
@@ -350,6 +362,7 @@
 
     /**
      * Issue assets [async call]
+     * Issue Assets from a Wallet to a recipient Address; The issuing Wallet is required to have matching issuance rights (in the form of a matching Rule); Issuance can be done either confidentially or in public; In order to issue confidentially, the matching Rule must explicitly allow this.
      * @param {module:model/IssueAssetRequest} issueAssetRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
      */
@@ -387,6 +400,7 @@
 
     /**
      * Issue assets [async call]
+     * Issue Assets from a Wallet to a recipient Address; The issuing Wallet is required to have matching issuance rights (in the form of a matching Rule); Issuance can be done either confidentially or in public; In order to issue confidentially, the matching Rule must explicitly allow this.
      * @param {module:model/IssueAssetRequest} issueAssetRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
      */
@@ -400,6 +414,7 @@
 
     /**
      * Transfer assets [async call]
+     * Transfer a specified amount of a specified Asset Type from a specified Wallet to a specified Address; Transfers are always completely confidential.
      * @param {module:model/TransferAssetRequest} transferAssetRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
      */
@@ -437,6 +452,7 @@
 
     /**
      * Transfer assets [async call]
+     * Transfer a specified amount of a specified Asset Type from a specified Wallet to a specified Address; Transfers are always completely confidential.
      * @param {module:model/TransferAssetRequest} transferAssetRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
      */

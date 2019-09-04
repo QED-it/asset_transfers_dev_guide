@@ -10,6 +10,8 @@
 package sdk
 
 type GenerateWalletRequest struct {
-	WalletId      string `json:"wallet_id"`
+	// The ID under which to create the Wallet; must be unique within the Node
+	WalletId string `json:"wallet_id"`
+	// The authorizarion password under which to encrypt the generated Wallet's secret key; will be required in order to perform actions using the Wallet
 	Authorization string `json:"authorization"`
 }

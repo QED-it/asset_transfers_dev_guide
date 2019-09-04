@@ -3,39 +3,20 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**startIndex** | **Number** |  | 
-**numberOfResults** | **Number** |  | 
-**types** | **[String]** |  | [optional] 
-**results** | **[String]** |  | [optional] 
-**order** | **String** |  | [optional] [default to &#39;desc&#39;]
+**startIndex** | **Number** | An offset used to paginate through the Task list; indexing is 0-based | 
+**numberOfResults** | **Number** | Maximal number of results to fetch in this call | 
+**types** | [**[TaskType]**](TaskType.md) | Types of Tasks to fetch; fetch all types if omitted | [optional] 
+**results** | [**[Result]**](Result.md) | List of results (statuses) to filter by; fetch in_progress tasks if omitted | [optional] 
+**order** | **String** | Order of tasks to fetch (either ascending or descending); ordering is chronological where the time is set to when the task was created in this Node | [optional] [default to &#39;desc&#39;]
 
 
-<a name="[TypesEnum]"></a>
-## Enum: [TypesEnum]
+<a name="OrderEnum"></a>
+## Enum: OrderEnum
 
 
-* `unlock_wallet` (value: `"unlock_wallet"`)
+* `asc` (value: `"asc"`)
 
-* `transfer_asset` (value: `"transfer_asset"`)
-
-* `issue_asset` (value: `"issue_asset"`)
-
-* `alter_rule` (value: `"alter_rule"`)
-
-
-
-
-<a name="[ResultsEnum]"></a>
-## Enum: [ResultsEnum]
-
-
-* `pending` (value: `"pending"`)
-
-* `failure` (value: `"failure"`)
-
-* `in_progress` (value: `"in_progress"`)
-
-* `success` (value: `"success"`)
+* `desc` (value: `"desc"`)
 
 
 

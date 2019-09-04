@@ -74,14 +74,20 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property bindingSig (base name: "binding_sig")', function() {
-      // uncomment below and update the code to test the property bindingSig
+    it('should have the property rk (base name: "rk")', function() {
+      // uncomment below and update the code to test the property rk
       //var instance = new QedItAssetTransfers.AnalyticsTransferTx();
       //expect(instance).to.be();
     });
 
-    it('should have the property spendAuthSigs (base name: "spend_auth_sigs")', function() {
-      // uncomment below and update the code to test the property spendAuthSigs
+    it('should have the property spendAuthSig (base name: "spend_auth_sig")', function() {
+      // uncomment below and update the code to test the property spendAuthSig
+      //var instance = new QedItAssetTransfers.AnalyticsTransferTx();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property bindingSig (base name: "binding_sig")', function() {
+      // uncomment below and update the code to test the property bindingSig
       //var instance = new QedItAssetTransfers.AnalyticsTransferTx();
       //expect(instance).to.be();
     });

@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient'], factory);
+    define(['ApiClient', 'model/Result', 'model/TaskType'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../ApiClient'), require('./Result'), require('./TaskType'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.GetTasksRequest = factory(root.QedItAssetTransfers.ApiClient);
+    root.QedItAssetTransfers.GetTasksRequest = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.Result, root.QedItAssetTransfers.TaskType);
   }
-}(this, function(ApiClient) {
+}(this, function(ApiClient, Result, TaskType) {
   'use strict';
 
 
@@ -42,8 +42,8 @@
    * Constructs a new <code>GetTasksRequest</code>.
    * @alias module:model/GetTasksRequest
    * @class
-   * @param startIndex {Number} 
-   * @param numberOfResults {Number} 
+   * @param startIndex {Number} An offset used to paginate through the Task list; indexing is 0-based
+   * @param numberOfResults {Number} Maximal number of results to fetch in this call
    */
   var exports = function(startIndex, numberOfResults) {
     var _this = this;
@@ -69,10 +69,10 @@
         obj['number_of_results'] = ApiClient.convertToType(data['number_of_results'], 'Number');
       }
       if (data.hasOwnProperty('types')) {
-        obj['types'] = ApiClient.convertToType(data['types'], ['String']);
+        obj['types'] = ApiClient.convertToType(data['types'], [TaskType]);
       }
       if (data.hasOwnProperty('results')) {
-        obj['results'] = ApiClient.convertToType(data['results'], ['String']);
+        obj['results'] = ApiClient.convertToType(data['results'], [Result]);
       }
       if (data.hasOwnProperty('order')) {
         obj['order'] = ApiClient.convertToType(data['order'], 'String');
@@ -82,81 +82,49 @@
   }
 
   /**
+   * An offset used to paginate through the Task list; indexing is 0-based
    * @member {Number} start_index
    */
   exports.prototype['start_index'] = undefined;
   /**
+   * Maximal number of results to fetch in this call
    * @member {Number} number_of_results
    */
   exports.prototype['number_of_results'] = undefined;
   /**
-   * @member {Array.<module:model/GetTasksRequest.TypesEnum>} types
+   * Types of Tasks to fetch; fetch all types if omitted
+   * @member {Array.<module:model/TaskType>} types
    */
   exports.prototype['types'] = undefined;
   /**
-   * @member {Array.<module:model/GetTasksRequest.ResultsEnum>} results
+   * List of results (statuses) to filter by; fetch in_progress tasks if omitted
+   * @member {Array.<module:model/Result>} results
    */
   exports.prototype['results'] = undefined;
   /**
-   * @member {String} order
+   * Order of tasks to fetch (either ascending or descending); ordering is chronological where the time is set to when the task was created in this Node
+   * @member {module:model/GetTasksRequest.OrderEnum} order
    * @default 'desc'
    */
   exports.prototype['order'] = 'desc';
 
 
   /**
-   * Allowed values for the <code>types</code> property.
+   * Allowed values for the <code>order</code> property.
    * @enum {String}
    * @readonly
    */
-  exports.TypesEnum = {
+  exports.OrderEnum = {
     /**
-     * value: "unlock_wallet"
+     * value: "asc"
      * @const
      */
-    "unlock_wallet": "unlock_wallet",
+    "asc": "asc",
     /**
-     * value: "transfer_asset"
+     * value: "desc"
      * @const
      */
-    "transfer_asset": "transfer_asset",
-    /**
-     * value: "issue_asset"
-     * @const
-     */
-    "issue_asset": "issue_asset",
-    /**
-     * value: "alter_rule"
-     * @const
-     */
-    "alter_rule": "alter_rule"  };
-
-  /**
-   * Allowed values for the <code>results</code> property.
-   * @enum {String}
-   * @readonly
-   */
-  exports.ResultsEnum = {
-    /**
-     * value: "pending"
-     * @const
-     */
-    "pending": "pending",
-    /**
-     * value: "failure"
-     * @const
-     */
-    "failure": "failure",
-    /**
-     * value: "in_progress"
-     * @const
-     */
-    "in_progress": "in_progress",
-    /**
-     * value: "success"
-     * @const
-     */
-    "success": "success"  };
+    "desc": "desc"  };
 
 
   return exports;

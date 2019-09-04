@@ -42,8 +42,8 @@
    * Constructs a new <code>GetNetworkActivityRequest</code>.
    * @alias module:model/GetNetworkActivityRequest
    * @class
-   * @param startIndex {Number} 
-   * @param numberOfResults {Number} 
+   * @param startIndex {Number} An offset used to paginate through the activity history; indexing is 0-based
+   * @param numberOfResults {Number} Maximal number of results to fetch in this call
    */
   var exports = function(startIndex, numberOfResults) {
     var _this = this;
@@ -68,18 +68,27 @@
       if (data.hasOwnProperty('number_of_results')) {
         obj['number_of_results'] = ApiClient.convertToType(data['number_of_results'], 'Number');
       }
+      if (data.hasOwnProperty('tx_hashes')) {
+        obj['tx_hashes'] = ApiClient.convertToType(data['tx_hashes'], ['String']);
+      }
     }
     return obj;
   }
 
   /**
+   * An offset used to paginate through the activity history; indexing is 0-based
    * @member {Number} start_index
    */
   exports.prototype['start_index'] = undefined;
   /**
+   * Maximal number of results to fetch in this call
    * @member {Number} number_of_results
    */
   exports.prototype['number_of_results'] = undefined;
+  /**
+   * @member {Array.<String>} tx_hashes
+   */
+  exports.prototype['tx_hashes'] = undefined;
 
 
 

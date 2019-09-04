@@ -73,6 +73,7 @@
    */
   exports.prototype['metadata'] = undefined;
   /**
+   * The detailed content of the transaction; format differs depending on the transaction type
    * @member {Object} content
    */
   exports.prototype['content'] = undefined;

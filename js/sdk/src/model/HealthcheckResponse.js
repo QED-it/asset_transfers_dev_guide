@@ -78,6 +78,7 @@
   }
 
   /**
+   * API version of the Node
    * @member {String} version
    */
   exports.prototype['version'] = undefined;
@@ -94,6 +95,7 @@
    */
   exports.prototype['database'] = undefined;
   /**
+   * Boolean signifying whether the endpoint is ready for calls
    * @member {Boolean} passing
    */
   exports.prototype['passing'] = undefined;

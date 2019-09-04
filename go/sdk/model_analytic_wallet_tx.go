@@ -9,7 +9,9 @@
 
 package sdk
 
+// A single retrieved transaction
 type AnalyticWalletTx struct {
 	Metadata AnalyticWalletMetadata `json:"metadata,omitempty"`
-	Content  map[string]interface{} `json:"content,omitempty"`
+	// The detailed information of the transaction; structure depends on the type of transaction
+	Content map[string]interface{} `json:"content,omitempty"`
 }

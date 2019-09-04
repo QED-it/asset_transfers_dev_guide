@@ -11,6 +11,8 @@ Method | HTTP request | Description
 > HealthcheckResponse HealthPost(ctx, )
 Perform a healthcheck of the node and its dependent services
 
+Reports the health of the various components of the system as well as an overall status for the Node. If the Node's status is good, then the Node is synced with the Blockchain and can successfully process requests.
+
 ### Required Parameters
 This endpoint does not need any parameter.
 

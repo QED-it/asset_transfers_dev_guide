@@ -68,12 +68,6 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property memo (base name: "memo")', function() {
-      // uncomment below and update the code to test the property memo
-      //var instance = new QedItAssetTransfers.AnalyticTransferWalletTx();
-      //expect(instance).to.be();
-    });
-
     it('should have the property recipientAddress (base name: "recipient_address")', function() {
       // uncomment below and update the code to test the property recipientAddress
       //var instance = new QedItAssetTransfers.AnalyticTransferWalletTx();
@@ -88,6 +82,12 @@
 
     it('should have the property amount (base name: "amount")', function() {
       // uncomment below and update the code to test the property amount
+      //var instance = new QedItAssetTransfers.AnalyticTransferWalletTx();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property memo (base name: "memo")', function() {
+      // uncomment below and update the code to test the property memo
       //var instance = new QedItAssetTransfers.AnalyticTransferWalletTx();
       //expect(instance).to.be();
     });

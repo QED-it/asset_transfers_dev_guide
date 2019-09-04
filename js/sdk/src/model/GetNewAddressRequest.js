@@ -42,7 +42,7 @@
    * Constructs a new <code>GetNewAddressRequest</code>.
    * @alias module:model/GetNewAddressRequest
    * @class
-   * @param walletId {String} 
+   * @param walletId {String} The ID of the Wallet for which to generate an Address
    */
   var exports = function(walletId) {
     var _this = this;
@@ -71,10 +71,12 @@
   }
 
   /**
+   * The ID of the Wallet for which to generate an Address
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * An optional 11-byte (22 hexadecimal characters) input which is used to generate different Addresses. A unique Address will be generated for each different diversifier used. If omitted, the Node selects a random diversifier.
    * @member {String} diversifier
    */
   exports.prototype['diversifier'] = undefined;

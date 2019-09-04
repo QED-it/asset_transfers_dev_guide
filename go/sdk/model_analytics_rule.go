@@ -9,7 +9,10 @@
 
 package sdk
 
+// The Rule used in the Issuance
 type AnalyticsRule struct {
+	// The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
 	MinId int32 `json:"min_id"`
+	// The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
 	MaxId int32 `json:"max_id"`
 }

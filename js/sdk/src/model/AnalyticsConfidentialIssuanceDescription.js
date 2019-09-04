@@ -40,6 +40,7 @@
 
   /**
    * Constructs a new <code>AnalyticsConfidentialIssuanceDescription</code>.
+   * The details and Proof attached to a confidential Issuance; null if the Issuance was public
    * @alias module:model/AnalyticsConfidentialIssuanceDescription
    * @class
    */
@@ -61,28 +62,30 @@
       if (data.hasOwnProperty('input_cv')) {
         obj['input_cv'] = ApiClient.convertToType(data['input_cv'], 'String');
       }
-      if (data.hasOwnProperty('zkproof')) {
-        obj['zkproof'] = ApiClient.convertToType(data['zkproof'], 'String');
-      }
       if (data.hasOwnProperty('rule')) {
         obj['rule'] = AnalyticsRule.constructFromObject(data['rule']);
+      }
+      if (data.hasOwnProperty('zkproof')) {
+        obj['zkproof'] = ApiClient.convertToType(data['zkproof'], 'String');
       }
     }
     return obj;
   }
 
   /**
+   * Thecommitment to both the Asset Type and amount of the issued Note
    * @member {String} input_cv
    */
   exports.prototype['input_cv'] = undefined;
   /**
-   * @member {String} zkproof
-   */
-  exports.prototype['zkproof'] = undefined;
-  /**
    * @member {module:model/AnalyticsRule} rule
    */
   exports.prototype['rule'] = undefined;
+  /**
+   * The Proof that the issued Asset Type indeed matches the reported Rule
+   * @member {String} zkproof
+   */
+  exports.prototype['zkproof'] = undefined;
 
 
 

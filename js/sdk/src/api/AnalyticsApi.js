@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient', 'model/ErrorResponse', 'model/GetNetworkActivityRequest', 'model/GetNetworkActivityResponse'], factory);
+    define(['ApiClient', 'model/ErrorResponse', 'model/GetNetworkActivityRequest', 'model/GetNetworkActivityResponse', 'model/GetSyncStatusResponse'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'), require('../model/ErrorResponse'), require('../model/GetNetworkActivityRequest'), require('../model/GetNetworkActivityResponse'));
+    module.exports = factory(require('../ApiClient'), require('../model/ErrorResponse'), require('../model/GetNetworkActivityRequest'), require('../model/GetNetworkActivityResponse'), require('../model/GetSyncStatusResponse'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.AnalyticsApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.GetNetworkActivityRequest, root.QedItAssetTransfers.GetNetworkActivityResponse);
+    root.QedItAssetTransfers.AnalyticsApi = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.ErrorResponse, root.QedItAssetTransfers.GetNetworkActivityRequest, root.QedItAssetTransfers.GetNetworkActivityResponse, root.QedItAssetTransfers.GetSyncStatusResponse);
   }
-}(this, function(ApiClient, ErrorResponse, GetNetworkActivityRequest, GetNetworkActivityResponse) {
+}(this, function(ApiClient, ErrorResponse, GetNetworkActivityRequest, GetNetworkActivityResponse, GetSyncStatusResponse) {
   'use strict';
 
   /**
@@ -49,7 +49,8 @@
 
 
     /**
-     * Get details on past blocks
+     * Get details on past blocks either by order using start_index and number_of_results or by the tx_hashes of the transactions
+     * List all verified Transactions from the network, even ones that do not have anything to do with any Wallet stored in the Node; For each such Transaction all of public information is returned in a structured format; However, no private information is returned even if some private information is known.
      * @param {module:model/GetNetworkActivityRequest} getNetworkActivityRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetNetworkActivityResponse} and HTTP response
      */
@@ -86,12 +87,58 @@
     }
 
     /**
-     * Get details on past blocks
+     * Get details on past blocks either by order using start_index and number_of_results or by the tx_hashes of the transactions
+     * List all verified Transactions from the network, even ones that do not have anything to do with any Wallet stored in the Node; For each such Transaction all of public information is returned in a structured format; However, no private information is returned even if some private information is known.
      * @param {module:model/GetNetworkActivityRequest} getNetworkActivityRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetNetworkActivityResponse}
      */
     this.analyticsGetNetworkActivityPost = function(getNetworkActivityRequest) {
       return this.analyticsGetNetworkActivityPostWithHttpInfo(getNetworkActivityRequest)
+        .then(function(response_and_data) {
+          return response_and_data.data;
+        });
+    }
+
+
+    /**
+     * Get blockchain sync status information
+     * Returns detailed information about the status of the sync between the QEDIT Node and the underlying Blockchain
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetSyncStatusResponse} and HTTP response
+     */
+    this.analyticsGetSyncStatusPostWithHttpInfo = function() {
+      var postBody = null;
+
+
+      var pathParams = {
+      };
+      var queryParams = {
+      };
+      var collectionQueryParams = {
+      };
+      var headerParams = {
+      };
+      var formParams = {
+      };
+
+      var authNames = ['ApiKeyAuth'];
+      var contentTypes = [];
+      var accepts = ['application/json'];
+      var returnType = GetSyncStatusResponse;
+
+      return this.apiClient.callApi(
+        '/analytics/get_sync_status', 'POST',
+        pathParams, queryParams, collectionQueryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType
+      );
+    }
+
+    /**
+     * Get blockchain sync status information
+     * Returns detailed information about the status of the sync between the QEDIT Node and the underlying Blockchain
+     * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetSyncStatusResponse}
+     */
+    this.analyticsGetSyncStatusPost = function() {
+      return this.analyticsGetSyncStatusPostWithHttpInfo()
         .then(function(response_and_data) {
           return response_and_data.data;
         });

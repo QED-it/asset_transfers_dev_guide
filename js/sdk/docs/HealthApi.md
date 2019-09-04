@@ -13,6 +13,8 @@ Method | HTTP request | Description
 
 Perform a healthcheck of the node and its dependent services
 
+Reports the health of the various components of the system as well as an overall status for the Node. If the Node&#39;s status is good, then the Node is synced with the Blockchain and can successfully process requests.
+
 ### Example
 ```javascript
 var QedItAssetTransfers = require('qed-it-asset-transfers');

@@ -42,8 +42,8 @@
    * Constructs a new <code>GenerateWalletRequest</code>.
    * @alias module:model/GenerateWalletRequest
    * @class
-   * @param walletId {String} 
-   * @param authorization {String} 
+   * @param walletId {String} The ID under which to create the Wallet; must be unique within the Node
+   * @param authorization {String} The authorizarion password under which to encrypt the generated Wallet's secret key; will be required in order to perform actions using the Wallet
    */
   var exports = function(walletId, authorization) {
     var _this = this;
@@ -73,10 +73,12 @@
   }
 
   /**
+   * The ID under which to create the Wallet; must be unique within the Node
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The authorizarion password under which to encrypt the generated Wallet's secret key; will be required in order to perform actions using the Wallet
    * @member {String} authorization
    */
   exports.prototype['authorization'] = undefined;

@@ -42,7 +42,7 @@
    * Constructs a new <code>AsyncTaskCreatedResponse</code>.
    * @alias module:model/AsyncTaskCreatedResponse
    * @class
-   * @param id {String} 
+   * @param id {String} The unique ID of the Task that was created in the Node to process the asynchronous request
    */
   var exports = function(id) {
     var _this = this;
@@ -68,6 +68,7 @@
   }
 
   /**
+   * The unique ID of the Task that was created in the Node to process the asynchronous request
    * @member {String} id
    */
   exports.prototype['id'] = undefined;

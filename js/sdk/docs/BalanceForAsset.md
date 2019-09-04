@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**assetId** | **Number** |  | 
-**amount** | **Number** |  | 
+**assetId** | **Number** | The ID of the Asset Type | 
+**amount** | **Number** | The outstanding balance for the Asset Type | 
 
 

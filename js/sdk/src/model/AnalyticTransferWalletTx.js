@@ -64,9 +64,6 @@
       if (data.hasOwnProperty('sender_id')) {
         obj['sender_id'] = ApiClient.convertToType(data['sender_id'], 'String');
       }
-      if (data.hasOwnProperty('memo')) {
-        obj['memo'] = ApiClient.convertToType(data['memo'], 'String');
-      }
       if (data.hasOwnProperty('recipient_address')) {
         obj['recipient_address'] = ApiClient.convertToType(data['recipient_address'], 'String');
       }
@@ -76,34 +73,43 @@
       if (data.hasOwnProperty('amount')) {
         obj['amount'] = ApiClient.convertToType(data['amount'], 'Number');
       }
+      if (data.hasOwnProperty('memo')) {
+        obj['memo'] = ApiClient.convertToType(data['memo'], 'String');
+      }
     }
     return obj;
   }
 
   /**
+   * Boolean signifying whether the Assets were transferred to the Wallet in question; false of the Assets were transferred from the Wallet into another
    * @member {Boolean} is_incoming
    */
   exports.prototype['is_incoming'] = undefined;
   /**
+   * The public key of the Wallet the Assets were transferred from
    * @member {String} sender_id
    */
   exports.prototype['sender_id'] = undefined;
   /**
-   * @member {String} memo
-   */
-  exports.prototype['memo'] = undefined;
-  /**
+   * The address of the Wallet the Assets were transferred to
    * @member {String} recipient_address
    */
   exports.prototype['recipient_address'] = undefined;
   /**
+   * The Id of the Asset Type transferred
    * @member {Number} asset_id
    */
   exports.prototype['asset_id'] = undefined;
   /**
+   * The amount of Assets transferred
    * @member {Number} amount
    */
   exports.prototype['amount'] = undefined;
+  /**
+   * The private memo attached to the Transfer
+   * @member {String} memo
+   */
+  exports.prototype['memo'] = undefined;
 
 
 

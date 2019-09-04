@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**walletId** | **String** |  | 
-**authorization** | **String** |  | [optional] 
+**walletId** | **String** | The ID of the Wallet to delete | 
+**authorization** | **String** | The authorization password for the Wallet | [optional] 
 
 

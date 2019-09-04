@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient'], factory);
+    define(['ApiClient', 'model/AnalyticsTxType'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../ApiClient'), require('./AnalyticsTxType'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.AnalyticWalletMetadata = factory(root.QedItAssetTransfers.ApiClient);
+    root.QedItAssetTransfers.AnalyticWalletMetadata = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.AnalyticsTxType);
   }
-}(this, function(ApiClient) {
+}(this, function(ApiClient, AnalyticsTxType) {
   'use strict';
 
 
@@ -59,7 +59,7 @@
     if (data) {
       obj = obj || new exports();
       if (data.hasOwnProperty('type')) {
-        obj['type'] = ApiClient.convertToType(data['type'], 'String');
+        obj['type'] = AnalyticsTxType.constructFromObject(data['type']);
       }
       if (data.hasOwnProperty('tx_hash')) {
         obj['tx_hash'] = ApiClient.convertToType(data['tx_hash'], 'String');
@@ -72,14 +72,16 @@
   }
 
   /**
-   * @member {String} type
+   * @member {module:model/AnalyticsTxType} type
    */
   exports.prototype['type'] = undefined;
   /**
+   * The QEDIT-generated hash of the transaction
    * @member {String} tx_hash
    */
   exports.prototype['tx_hash'] = undefined;
   /**
+   * UTC time of creation of the time the Block containing the transaction was created in RFC-3339 format
    * @member {String} timestamp
    */
   exports.prototype['timestamp'] = undefined;

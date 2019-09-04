@@ -10,6 +10,8 @@
 package sdk
 
 type DeleteWalletRequest struct {
-	WalletId      string `json:"wallet_id"`
+	// The ID of the Wallet to delete
+	WalletId string `json:"wallet_id"`
+	// The authorization password for the Wallet
 	Authorization string `json:"authorization,omitempty"`
 }

@@ -42,9 +42,9 @@
    * Constructs a new <code>DeleteRuleRequest</code>.
    * @alias module:model/DeleteRuleRequest
    * @class
-   * @param walletId {String} 
-   * @param authorization {String} 
-   * @param rulesToDelete {Array.<module:model/Rule>} 
+   * @param walletId {String} The ID of the Wallet whose admin credentials should be used to delete the Rules
+   * @param authorization {String} The authorization password for the Wallet whose admin credentials should be used to delete the Rules
+   * @param rulesToDelete {Array.<module:model/Rule>} The list of Rules to delete from the network
    */
   var exports = function(walletId, authorization, rulesToDelete) {
     var _this = this;
@@ -78,14 +78,17 @@
   }
 
   /**
+   * The ID of the Wallet whose admin credentials should be used to delete the Rules
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The authorization password for the Wallet whose admin credentials should be used to delete the Rules
    * @member {String} authorization
    */
   exports.prototype['authorization'] = undefined;
   /**
+   * The list of Rules to delete from the network
    * @member {Array.<module:model/Rule>} rules_to_delete
    */
   exports.prototype['rules_to_delete'] = undefined;

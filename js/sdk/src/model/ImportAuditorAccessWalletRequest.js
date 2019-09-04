@@ -42,9 +42,9 @@
    * Constructs a new <code>ImportAuditorAccessWalletRequest</code>.
    * @alias module:model/ImportAuditorAccessWalletRequest
    * @class
-   * @param walletId {String} 
-   * @param publicKey {String} 
-   * @param accessKey {String} 
+   * @param walletId {String} The ID under which to import the Wallet; can be different from the ID the Wallet was stored under in the exporting Node
+   * @param publicKey {String} The public key of the imported Wallet
+   * @param accessKey {String} the encrypted viewing key of the imported Wallet
    */
   var exports = function(walletId, publicKey, accessKey) {
     var _this = this;
@@ -78,14 +78,17 @@
   }
 
   /**
+   * The ID under which to import the Wallet; can be different from the ID the Wallet was stored under in the exporting Node
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The public key of the imported Wallet
    * @member {String} public_key
    */
   exports.prototype['public_key'] = undefined;
   /**
+   * the encrypted viewing key of the imported Wallet
    * @member {String} access_key
    */
   exports.prototype['access_key'] = undefined;

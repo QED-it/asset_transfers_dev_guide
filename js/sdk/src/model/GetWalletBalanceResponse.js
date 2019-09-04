@@ -42,8 +42,8 @@
    * Constructs a new <code>GetWalletBalanceResponse</code>.
    * @alias module:model/GetWalletBalanceResponse
    * @class
-   * @param walletId {String} 
-   * @param assets {Array.<module:model/BalanceForAsset>} 
+   * @param walletId {String} The ID of the Wallet
+   * @param assets {Array.<module:model/BalanceForAsset>} The balances of the various Asset Types held by the Wallet
    */
   var exports = function(walletId, assets) {
     var _this = this;
@@ -73,10 +73,12 @@
   }
 
   /**
+   * The ID of the Wallet
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The balances of the various Asset Types held by the Wallet
    * @member {Array.<module:model/BalanceForAsset>} assets
    */
   exports.prototype['assets'] = undefined;

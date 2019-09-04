@@ -10,6 +10,7 @@
 package sdk
 
 type GetWalletActivityResponse struct {
-	WalletId     string             `json:"wallet_id,omitempty"`
+	WalletId string `json:"wallet_id,omitempty"`
+	// The list of retrieved transactions
 	Transactions []AnalyticWalletTx `json:"transactions,omitempty"`
 }

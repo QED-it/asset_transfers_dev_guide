@@ -42,22 +42,22 @@
    * Constructs a new <code>IssueAssetRequest</code>.
    * @alias module:model/IssueAssetRequest
    * @class
-   * @param walletId {String} 
-   * @param authorization {String} 
-   * @param recipientAddress {String} 
-   * @param amount {Number} 
-   * @param assetId {Number} 
-   * @param confidential {Boolean} 
+   * @param walletId {String} The ID of the Wallet that has the required Issuance privileges
+   * @param authorization {String} The authorization password for the Wallet that has the Issuance privileges
+   * @param recipientAddress {String} The Address of the recipient of the issued Assets
+   * @param assetId {Number} The ID of the Asset Type to issue
+   * @param amount {Number} the amount of Assets to issue
+   * @param confidential {Boolean} Boolean which should be true if the issuance should be confidential, and false of the Issuance should be public
    * @param memo {String} 
    */
-  var exports = function(walletId, authorization, recipientAddress, amount, assetId, confidential, memo) {
+  var exports = function(walletId, authorization, recipientAddress, assetId, amount, confidential, memo) {
     var _this = this;
 
     _this['wallet_id'] = walletId;
     _this['authorization'] = authorization;
     _this['recipient_address'] = recipientAddress;
-    _this['amount'] = amount;
     _this['asset_id'] = assetId;
+    _this['amount'] = amount;
     _this['confidential'] = confidential;
     _this['memo'] = memo;
   };
@@ -81,11 +81,11 @@
       if (data.hasOwnProperty('recipient_address')) {
         obj['recipient_address'] = ApiClient.convertToType(data['recipient_address'], 'String');
       }
-      if (data.hasOwnProperty('amount')) {
-        obj['amount'] = ApiClient.convertToType(data['amount'], 'Number');
-      }
       if (data.hasOwnProperty('asset_id')) {
         obj['asset_id'] = ApiClient.convertToType(data['asset_id'], 'Number');
+      }
+      if (data.hasOwnProperty('amount')) {
+        obj['amount'] = ApiClient.convertToType(data['amount'], 'Number');
       }
       if (data.hasOwnProperty('confidential')) {
         obj['confidential'] = ApiClient.convertToType(data['confidential'], 'Boolean');
@@ -98,26 +98,32 @@
   }
 
   /**
+   * The ID of the Wallet that has the required Issuance privileges
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The authorization password for the Wallet that has the Issuance privileges
    * @member {String} authorization
    */
   exports.prototype['authorization'] = undefined;
   /**
+   * The Address of the recipient of the issued Assets
    * @member {String} recipient_address
    */
   exports.prototype['recipient_address'] = undefined;
   /**
-   * @member {Number} amount
-   */
-  exports.prototype['amount'] = undefined;
-  /**
+   * The ID of the Asset Type to issue
    * @member {Number} asset_id
    */
   exports.prototype['asset_id'] = undefined;
   /**
+   * the amount of Assets to issue
+   * @member {Number} amount
+   */
+  exports.prototype['amount'] = undefined;
+  /**
+   * Boolean which should be true if the issuance should be confidential, and false of the Issuance should be public
    * @member {Boolean} confidential
    */
   exports.prototype['confidential'] = undefined;

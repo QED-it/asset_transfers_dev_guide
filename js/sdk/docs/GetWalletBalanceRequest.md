@@ -3,6 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**walletId** | **String** |  | 
+**walletId** | **String** | The ID of the Wallet | 
 
 

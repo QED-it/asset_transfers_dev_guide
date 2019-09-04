@@ -75,14 +75,17 @@
   }
 
   /**
+   * Boolean signifying whether the Rule was created by the Wallet in question
    * @member {Boolean} signed_by_self
    */
   exports.prototype['signed_by_self'] = undefined;
   /**
+   * Boolean signifying whether the Rule granted permissions to the Wallet in question
    * @member {Boolean} rule_affect_self
    */
   exports.prototype['rule_affect_self'] = undefined;
   /**
+   * The public key of the Wallet that was used to create the Rule
    * @member {String} tx_signer
    */
   exports.prototype['tx_signer'] = undefined;

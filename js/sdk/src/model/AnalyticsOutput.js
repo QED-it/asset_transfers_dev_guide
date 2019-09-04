@@ -75,6 +75,7 @@
   }
 
   /**
+   * Boolean signifying whether the Issuance was done confidentially; false if the Issuance was done publicly
    * @member {Boolean} is_confidential
    */
   exports.prototype['is_confidential'] = undefined;

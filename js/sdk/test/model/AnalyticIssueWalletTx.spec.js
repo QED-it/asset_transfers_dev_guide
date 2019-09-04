@@ -74,12 +74,6 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property memo (base name: "memo")', function() {
-      // uncomment below and update the code to test the property memo
-      //var instance = new QedItAssetTransfers.AnalyticIssueWalletTx();
-      //expect(instance).to.be();
-    });
-
     it('should have the property recipientAddress (base name: "recipient_address")', function() {
       // uncomment below and update the code to test the property recipientAddress
       //var instance = new QedItAssetTransfers.AnalyticIssueWalletTx();
@@ -100,6 +94,12 @@
 
     it('should have the property isConfidential (base name: "is_confidential")', function() {
       // uncomment below and update the code to test the property isConfidential
+      //var instance = new QedItAssetTransfers.AnalyticIssueWalletTx();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property memo (base name: "memo")', function() {
+      // uncomment below and update the code to test the property memo
       //var instance = new QedItAssetTransfers.AnalyticIssueWalletTx();
       //expect(instance).to.be();
     });

@@ -40,6 +40,7 @@
 
   /**
    * Constructs a new <code>AnalyticWalletTx</code>.
+   * A single retrieved transaction
    * @alias module:model/AnalyticWalletTx
    * @class
    */
@@ -73,6 +74,7 @@
    */
   exports.prototype['metadata'] = undefined;
   /**
+   * The detailed information of the transaction; structure depends on the type of transaction
    * @member {Object} content
    */
   exports.prototype['content'] = undefined;

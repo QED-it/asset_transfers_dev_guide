@@ -42,8 +42,8 @@
    * Constructs a new <code>GetPublicKeyResponse</code>.
    * @alias module:model/GetPublicKeyResponse
    * @class
-   * @param walletId {String} 
-   * @param publicKey {String} 
+   * @param walletId {String} The ID of the Wallet the pubic key belongs to
+   * @param publicKey {String} The public key of the Wallet
    */
   var exports = function(walletId, publicKey) {
     var _this = this;
@@ -73,10 +73,12 @@
   }
 
   /**
+   * The ID of the Wallet the pubic key belongs to
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The public key of the Wallet
    * @member {String} public_key
    */
   exports.prototype['public_key'] = undefined;

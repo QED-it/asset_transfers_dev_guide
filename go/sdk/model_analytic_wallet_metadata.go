@@ -10,7 +10,9 @@
 package sdk
 
 type AnalyticWalletMetadata struct {
-	Type      string `json:"type,omitempty"`
-	TxHash    string `json:"tx_hash,omitempty"`
+	Type AnalyticsTxType `json:"type,omitempty"`
+	// The QEDIT-generated hash of the transaction
+	TxHash string `json:"tx_hash,omitempty"`
+	// UTC time of creation of the time the Block containing the transaction was created in RFC-3339 format
 	Timestamp string `json:"timestamp,omitempty"`
 }

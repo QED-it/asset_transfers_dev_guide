@@ -42,7 +42,7 @@
    * Constructs a new <code>GetWalletBalanceRequest</code>.
    * @alias module:model/GetWalletBalanceRequest
    * @class
-   * @param walletId {String} 
+   * @param walletId {String} The ID of the Wallet
    */
   var exports = function(walletId) {
     var _this = this;
@@ -68,6 +68,7 @@
   }
 
   /**
+   * The ID of the Wallet
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;

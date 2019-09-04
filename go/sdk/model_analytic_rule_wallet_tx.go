@@ -10,8 +10,11 @@
 package sdk
 
 type AnalyticRuleWalletTx struct {
-	SignedBySelf   bool                          `json:"signed_by_self,omitempty"`
-	RuleAffectSelf bool                          `json:"rule_affect_self,omitempty"`
-	TxSigner       string                        `json:"tx_signer,omitempty"`
-	Rule           AnalyticsRuleWalletDefinition `json:"rule,omitempty"`
+	// Boolean signifying whether the Rule was created by the Wallet in question
+	SignedBySelf bool `json:"signed_by_self,omitempty"`
+	// Boolean signifying whether the Rule granted permissions to the Wallet in question
+	RuleAffectSelf bool `json:"rule_affect_self,omitempty"`
+	// The public key of the Wallet that was used to create the Rule
+	TxSigner string                        `json:"tx_signer,omitempty"`
+	Rule     AnalyticsRuleWalletDefinition `json:"rule,omitempty"`
 }

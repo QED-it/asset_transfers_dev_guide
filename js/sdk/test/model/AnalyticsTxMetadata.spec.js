@@ -68,6 +68,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property blockHeight (base name: "block_height")', function() {
+      // uncomment below and update the code to test the property blockHeight
+      //var instance = new QedItAssetTransfers.AnalyticsTxMetadata();
+      //expect(instance).to.be();
+    });
+
     it('should have the property blockHash (base name: "block_hash")', function() {
       // uncomment below and update the code to test the property blockHash
       //var instance = new QedItAssetTransfers.AnalyticsTxMetadata();
@@ -82,12 +88,6 @@
 
     it('should have the property indexInBlock (base name: "index_in_block")', function() {
       // uncomment below and update the code to test the property indexInBlock
-      //var instance = new QedItAssetTransfers.AnalyticsTxMetadata();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property blockHeight (base name: "block_height")', function() {
-      // uncomment below and update the code to test the property blockHeight
       //var instance = new QedItAssetTransfers.AnalyticsTxMetadata();
       //expect(instance).to.be();
     });

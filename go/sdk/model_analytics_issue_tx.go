@@ -9,8 +9,12 @@
 
 package sdk
 
+// The data of a particular Issuance transaction
 type AnalyticsIssueTx struct {
-	Outputs   []AnalyticsOutput `json:"outputs,omitempty"`
-	PublicKey string            `json:"public_key,omitempty"`
-	Signature string            `json:"signature,omitempty"`
+	// The data of the Assets issued (multiple Assets may potentially be issued in a single Issuance transaction)
+	Outputs []AnalyticsOutput `json:"outputs,omitempty"`
+	// The public key of the Wallet that performed the Issuance
+	PublicKey string `json:"public_key,omitempty"`
+	// The signature on the transaction by the secret key of the Wallet that performed the Issuance
+	Signature string `json:"signature,omitempty"`
 }

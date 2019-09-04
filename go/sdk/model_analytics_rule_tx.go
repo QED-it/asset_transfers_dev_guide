@@ -9,10 +9,16 @@
 
 package sdk
 
+// The data of a particular Rule changing transaction
 type AnalyticsRuleTx struct {
-	SenderPublicKey string                    `json:"sender_public_key,omitempty"`
-	RulesToAdd      []AnalyticsRuleDefinition `json:"rules_to_add,omitempty"`
-	RulesToDelete   []AnalyticsRuleDefinition `json:"rules_to_delete,omitempty"`
-	Nonce           int32                     `json:"nonce,omitempty"`
-	Signature       string                    `json:"signature,omitempty"`
+	// The public key of the Wallet used to create the Rule
+	SenderPublicKey string `json:"sender_public_key,omitempty"`
+	// The details of the Rules added in this transaction
+	RulesToAdd []AnalyticsRuleDefinition `json:"rules_to_add,omitempty"`
+	// The details of the Rules deleted in this transaction
+	RulesToDelete []AnalyticsRuleDefinition `json:"rules_to_delete,omitempty"`
+	// The nonce used to make this Rule transaction unique
+	Nonce int32 `json:"nonce,omitempty"`
+	// The signature authorizing the Rule changes, made by the Wallet that made the Rule changes
+	Signature string `json:"signature,omitempty"`
 }

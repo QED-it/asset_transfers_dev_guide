@@ -66,6 +66,7 @@
   }
 
   /**
+   * The IDs of the Wallets currently active in this Node
    * @member {Array.<String>} wallet_ids
    */
   exports.prototype['wallet_ids'] = undefined;

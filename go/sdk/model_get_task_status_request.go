@@ -10,5 +10,6 @@
 package sdk
 
 type GetTaskStatusRequest struct {
+	// The ID of the Task
 	Id string `json:"id"`
 }

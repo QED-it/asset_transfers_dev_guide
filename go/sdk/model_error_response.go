@@ -10,6 +10,8 @@
 package sdk
 
 type ErrorResponse struct {
-	ErrorCode int32  `json:"error_code"`
-	Message   string `json:"message,omitempty"`
+	// The error code returned from the server
+	ErrorCode int32 `json:"error_code"`
+	// The error message returned from the server
+	Message string `json:"message,omitempty"`
 }

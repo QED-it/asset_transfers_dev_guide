@@ -9,10 +9,18 @@
 
 package sdk
 
+// The data of a single Transfer within a Transfer transaction
 type AnalyticsTransferTx struct {
+	// The Converter Proofs
 	AssetConverterDescriptions []AnalyticsAssetConverterProofDescription `json:"asset_converter_descriptions,omitempty"`
-	Spends                     []AnalyticsSpendDescription               `json:"spends,omitempty"`
-	Outputs                    []AnalyticsOutputDescription              `json:"outputs,omitempty"`
-	BindingSig                 string                                    `json:"binding_sig,omitempty"`
-	SpendAuthSigs              []string                                  `json:"spend_auth_sigs,omitempty"`
+	// The information and Proofs associated with the Assets spent in the Transfer
+	Spends []AnalyticsSpendDescription `json:"spends,omitempty"`
+	// The information and Proofs associated with the Assets output from the Transfer
+	Outputs []AnalyticsOutputDescription `json:"outputs,omitempty"`
+	// The re-randomized public key of the Wallet which created the Transfer
+	Rk string `json:"rk,omitempty"`
+	// The signature authorizing the spend of the Assets spent in the Transfer
+	SpendAuthSig string `json:"spend_auth_sig,omitempty"`
+	// The signature binding the spent and output Assets and verifying the balance
+	BindingSig string `json:"binding_sig,omitempty"`
 }

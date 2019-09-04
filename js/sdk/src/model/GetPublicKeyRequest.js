@@ -42,7 +42,7 @@
    * Constructs a new <code>GetPublicKeyRequest</code>.
    * @alias module:model/GetPublicKeyRequest
    * @class
-   * @param walletId {String} 
+   * @param walletId {String} The ID of the Wallet for which to retrieve the public key
    */
   var exports = function(walletId) {
     var _this = this;
@@ -68,6 +68,7 @@
   }
 
   /**
+   * The ID of the Wallet for which to retrieve the public key
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;

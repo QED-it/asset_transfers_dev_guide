@@ -42,7 +42,7 @@
    * Constructs a new <code>ErrorResponse</code>.
    * @alias module:model/ErrorResponse
    * @class
-   * @param errorCode {Number} 
+   * @param errorCode {Number} The error code returned from the server
    */
   var exports = function(errorCode) {
     var _this = this;
@@ -71,10 +71,12 @@
   }
 
   /**
+   * The error code returned from the server
    * @member {Number} error_code
    */
   exports.prototype['error_code'] = undefined;
   /**
+   * The error message returned from the server
    * @member {String} message
    */
   exports.prototype['message'] = undefined;

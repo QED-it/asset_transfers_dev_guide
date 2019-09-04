@@ -10,7 +10,10 @@
 package sdk
 
 type ExportAuditorAccessWalletResponse struct {
-	WalletId  string `json:"wallet_id"`
+	// The ID of the exported Wallet in the Node from which it was exported
+	WalletId string `json:"wallet_id"`
+	// The public key of the exported Wallet which uniquely identifies it across the network
 	PublicKey string `json:"public_key"`
+	// The encrypted viewing key
 	AccessKey string `json:"access_key"`
 }

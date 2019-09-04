@@ -40,6 +40,7 @@
 
   /**
    * Constructs a new <code>AnalyticsMultiTransferTx</code>.
+   * The data of a particular Transfer transaction; a single such transaction may contain multiple Transfers
    * @alias module:model/AnalyticsMultiTransferTx
    * @class
    */
@@ -66,6 +67,7 @@
   }
 
   /**
+   * The (potentially several) Transfers within the transaction
    * @member {Array.<module:model/AnalyticsTransferTx>} transfers
    */
   exports.prototype['transfers'] = undefined;

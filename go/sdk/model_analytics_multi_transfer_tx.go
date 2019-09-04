@@ -9,6 +9,8 @@
 
 package sdk
 
+// The data of a particular Transfer transaction; a single such transaction may contain multiple Transfers
 type AnalyticsMultiTransferTx struct {
+	// The (potentially several) Transfers within the transaction
 	Transfers []AnalyticsTransferTx `json:"transfers,omitempty"`
 }

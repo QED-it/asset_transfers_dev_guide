@@ -40,6 +40,7 @@
 
   /**
    * Constructs a new <code>AnalyticsRuleTx</code>.
+   * The data of a particular Rule changing transaction
    * @alias module:model/AnalyticsRuleTx
    * @class
    */
@@ -78,22 +79,27 @@
   }
 
   /**
+   * The public key of the Wallet used to create the Rule
    * @member {String} sender_public_key
    */
   exports.prototype['sender_public_key'] = undefined;
   /**
+   * The details of the Rules added in this transaction
    * @member {Array.<module:model/AnalyticsRuleDefinition>} rules_to_add
    */
   exports.prototype['rules_to_add'] = undefined;
   /**
+   * The details of the Rules deleted in this transaction
    * @member {Array.<module:model/AnalyticsRuleDefinition>} rules_to_delete
    */
   exports.prototype['rules_to_delete'] = undefined;
   /**
+   * The nonce used to make this Rule transaction unique
    * @member {Number} nonce
    */
   exports.prototype['nonce'] = undefined;
   /**
+   * The signature authorizing the Rule changes, made by the Wallet that made the Rule changes
    * @member {String} signature
    */
   exports.prototype['signature'] = undefined;

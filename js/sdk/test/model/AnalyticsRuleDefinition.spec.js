@@ -62,12 +62,6 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property canIssueConfidentially (base name: "can_issue_confidentially")', function() {
-      // uncomment below and update the code to test the property canIssueConfidentially
-      //var instance = new QedItAssetTransfers.AnalyticsRuleDefinition();
-      //expect(instance).to.be();
-    });
-
     it('should have the property isAdmin (base name: "is_admin")', function() {
       // uncomment below and update the code to test the property isAdmin
       //var instance = new QedItAssetTransfers.AnalyticsRuleDefinition();
@@ -82,6 +76,12 @@
 
     it('should have the property canIssueAssetIdLast (base name: "can_issue_asset_id_last")', function() {
       // uncomment below and update the code to test the property canIssueAssetIdLast
+      //var instance = new QedItAssetTransfers.AnalyticsRuleDefinition();
+      //expect(instance).to.be();
+    });
+
+    it('should have the property canIssueConfidentially (base name: "can_issue_confidentially")', function() {
+      // uncomment below and update the code to test the property canIssueConfidentially
       //var instance = new QedItAssetTransfers.AnalyticsRuleDefinition();
       //expect(instance).to.be();
     });

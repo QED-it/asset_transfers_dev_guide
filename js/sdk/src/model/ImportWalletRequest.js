@@ -42,10 +42,10 @@
    * Constructs a new <code>ImportWalletRequest</code>.
    * @alias module:model/ImportWalletRequest
    * @class
-   * @param walletId {String} 
-   * @param encryptedSk {String} 
-   * @param authorization {String} 
-   * @param salt {String} 
+   * @param walletId {String} The ID under which to import the Wallet; can be different from the ID the Wallet was stored under in the exporting Node
+   * @param encryptedSk {String} The encrypted secret key of the Wallet
+   * @param authorization {String} The authorization password used during Wallet generation that allows to decrypt the encrypted secret key
+   * @param salt {String} The salt used in the encryption of the secret key
    */
   var exports = function(walletId, encryptedSk, authorization, salt) {
     var _this = this;
@@ -83,18 +83,22 @@
   }
 
   /**
+   * The ID under which to import the Wallet; can be different from the ID the Wallet was stored under in the exporting Node
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The encrypted secret key of the Wallet
    * @member {String} encrypted_sk
    */
   exports.prototype['encrypted_sk'] = undefined;
   /**
+   * The authorization password used during Wallet generation that allows to decrypt the encrypted secret key
    * @member {String} authorization
    */
   exports.prototype['authorization'] = undefined;
   /**
+   * The salt used in the encryption of the secret key
    * @member {String} salt
    */
   exports.prototype['salt'] = undefined;

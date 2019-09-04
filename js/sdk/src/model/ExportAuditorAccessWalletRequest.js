@@ -42,9 +42,9 @@
    * Constructs a new <code>ExportAuditorAccessWalletRequest</code>.
    * @alias module:model/ExportAuditorAccessWalletRequest
    * @class
-   * @param walletId {String} 
-   * @param authorization {String} 
-   * @param recipientPaymentAddress {String} 
+   * @param walletId {String} The ID of the Wallet to export a viewing key for
+   * @param authorization {String} The authorization password for the Wallet
+   * @param recipientPaymentAddress {String} The Address of the Wallet that belongs to the intended recipient of the exported viewing key; used to encrypt the key in such a way that only the intended recipient can decrypt it
    */
   var exports = function(walletId, authorization, recipientPaymentAddress) {
     var _this = this;
@@ -78,14 +78,17 @@
   }
 
   /**
+   * The ID of the Wallet to export a viewing key for
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The authorization password for the Wallet
    * @member {String} authorization
    */
   exports.prototype['authorization'] = undefined;
   /**
+   * The Address of the Wallet that belongs to the intended recipient of the exported viewing key; used to encrypt the key in such a way that only the intended recipient can decrypt it
    * @member {String} recipient_payment_address
    */
   exports.prototype['recipient_payment_address'] = undefined;

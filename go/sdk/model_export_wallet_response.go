@@ -10,7 +10,10 @@
 package sdk
 
 type ExportWalletResponse struct {
-	WalletId    string `json:"wallet_id"`
+	// The ID of the exported Wallet in the Node from which it was exported
+	WalletId string `json:"wallet_id"`
+	// The encrypted secret key of the Wallet
 	EncryptedSk string `json:"encrypted_sk"`
-	Salt        string `json:"salt"`
+	// The salt used in the encryption of the secret key
+	Salt string `json:"salt"`
 }

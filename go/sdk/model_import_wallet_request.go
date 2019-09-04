@@ -10,8 +10,12 @@
 package sdk
 
 type ImportWalletRequest struct {
-	WalletId      string `json:"wallet_id"`
-	EncryptedSk   string `json:"encrypted_sk"`
+	// The ID under which to import the Wallet; can be different from the ID the Wallet was stored under in the exporting Node
+	WalletId string `json:"wallet_id"`
+	// The encrypted secret key of the Wallet
+	EncryptedSk string `json:"encrypted_sk"`
+	// The authorization password used during Wallet generation that allows to decrypt the encrypted secret key
 	Authorization string `json:"authorization"`
-	Salt          string `json:"salt"`
+	// The salt used in the encryption of the secret key
+	Salt string `json:"salt"`
 }

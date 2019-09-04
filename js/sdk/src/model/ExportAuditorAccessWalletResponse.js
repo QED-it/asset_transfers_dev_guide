@@ -42,9 +42,9 @@
    * Constructs a new <code>ExportAuditorAccessWalletResponse</code>.
    * @alias module:model/ExportAuditorAccessWalletResponse
    * @class
-   * @param walletId {String} 
-   * @param publicKey {String} 
-   * @param accessKey {String} 
+   * @param walletId {String} The ID of the exported Wallet in the Node from which it was exported
+   * @param publicKey {String} The public key of the exported Wallet which uniquely identifies it across the network
+   * @param accessKey {String} The encrypted viewing key
    */
   var exports = function(walletId, publicKey, accessKey) {
     var _this = this;
@@ -78,14 +78,17 @@
   }
 
   /**
+   * The ID of the exported Wallet in the Node from which it was exported
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The public key of the exported Wallet which uniquely identifies it across the network
    * @member {String} public_key
    */
   exports.prototype['public_key'] = undefined;
   /**
+   * The encrypted viewing key
    * @member {String} access_key
    */
   exports.prototype['access_key'] = undefined;

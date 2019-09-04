@@ -25,7 +25,8 @@ var (
 type WalletApiService service
 
 /*
-WalletApiService Create & broadcast add-config-rule [async call]
+WalletApiService Create a new Rule in the network [async call]
+Create new Rules that can either create a new admin, a new issuer, or both; The Rules are created by a Wallet that needs to have admin rights; The Rules grant rights to other Wallets through the Wallets&#39; public keys.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param createRuleRequest
 @return AsyncTaskCreatedResponse
@@ -156,7 +157,8 @@ func (a *WalletApiService) WalletCreateRulePost(ctx context.Context, createRuleR
 }
 
 /*
-WalletApiService Create & broadcast delete-config-rule [async call]
+WalletApiService Delete an existing Rule from the network [async call]
+Delete an existing Rule from the network; The Rule is deleted by a Wallet which needs to have admin rights.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param deleteRuleRequest
 @return AsyncTaskCreatedResponse
@@ -288,6 +290,7 @@ func (a *WalletApiService) WalletDeleteRulePost(ctx context.Context, deleteRuleR
 
 /*
 WalletApiService Get wallet activity (transactions)
+List transactions that were created by a specifed Wallet or that affected that Wallet; All known details of each such transaction will be returned.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param getWalletActivityRequest
 @return GetWalletActivityResponse
@@ -418,7 +421,8 @@ func (a *WalletApiService) WalletGetActivityPost(ctx context.Context, getWalletA
 }
 
 /*
-WalletApiService Get wallets balance
+WalletApiService Get wallets balances
+Get a list of the Asset Types held within a given Wallet and the amount of each type held.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param getWalletBalanceRequest
 @return GetWalletBalanceResponse
@@ -550,6 +554,7 @@ func (a *WalletApiService) WalletGetBalancesPost(ctx context.Context, getWalletB
 
 /*
 WalletApiService Get a new address from a given diversifier or generate randomly
+Generate an Address for the Wallet; the address can be used by other Wallet owners to issue or transfer Assets into said Wallet; If a diversifier is provided, then the generated address is deterministically generated from the diversifier; If the diversifier is omitted, then a random diversifier is used and the resulting Address will be random; in both cases the Address cannot be linked to the Wallet by parties that do not have access to the Wallet. All generated Addresses of a Wallet are always valid and cannot be invalidated.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param getNewAddressRequest
 @return GetNewAddressResponse
@@ -681,6 +686,7 @@ func (a *WalletApiService) WalletGetNewAddressPost(ctx context.Context, getNewAd
 
 /*
 WalletApiService Get wallet public key
+Get the unique public key of the Wallet; This key is unique across the entire network and is used to identify the Wallet.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param getPublicKeyRequest
 @return GetPublicKeyResponse
@@ -812,6 +818,7 @@ func (a *WalletApiService) WalletGetPublicKeyPost(ctx context.Context, getPublic
 
 /*
 WalletApiService Issue assets [async call]
+Issue Assets from a Wallet to a recipient Address; The issuing Wallet is required to have matching issuance rights (in the form of a matching Rule); Issuance can be done either confidentially or in public; In order to issue confidentially, the matching Rule must explicitly allow this.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param issueAssetRequest
 @return AsyncTaskCreatedResponse
@@ -943,6 +950,7 @@ func (a *WalletApiService) WalletIssueAssetPost(ctx context.Context, issueAssetR
 
 /*
 WalletApiService Transfer assets [async call]
+Transfer a specified amount of a specified Asset Type from a specified Wallet to a specified Address; Transfers are always completely confidential.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param transferAssetRequest
 @return AsyncTaskCreatedResponse

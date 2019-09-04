@@ -42,8 +42,8 @@
    * Constructs a new <code>GetNewAddressResponse</code>.
    * @alias module:model/GetNewAddressResponse
    * @class
-   * @param walletId {String} 
-   * @param recipientAddress {String} 
+   * @param walletId {String} The ID of the Wallet the Address belongs to
+   * @param recipientAddress {String} The generated Address of the Wallet
    */
   var exports = function(walletId, recipientAddress) {
     var _this = this;
@@ -73,10 +73,12 @@
   }
 
   /**
+   * The ID of the Wallet the Address belongs to
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The generated Address of the Wallet
    * @member {String} recipient_address
    */
   exports.prototype['recipient_address'] = undefined;

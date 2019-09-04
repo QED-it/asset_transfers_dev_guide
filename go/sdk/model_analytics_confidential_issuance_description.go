@@ -9,8 +9,11 @@
 
 package sdk
 
+// The details and Proof attached to a confidential Issuance; null if the Issuance was public
 type AnalyticsConfidentialIssuanceDescription struct {
+	// Thecommitment to both the Asset Type and amount of the issued Note
 	InputCv string        `json:"input_cv,omitempty"`
-	Zkproof string        `json:"zkproof,omitempty"`
 	Rule    AnalyticsRule `json:"rule,omitempty"`
+	// The Proof that the issued Asset Type indeed matches the reported Rule
+	Zkproof string `json:"zkproof,omitempty"`
 }

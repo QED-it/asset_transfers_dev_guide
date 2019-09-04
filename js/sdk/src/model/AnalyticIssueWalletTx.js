@@ -67,9 +67,6 @@
       if (data.hasOwnProperty('sender_id')) {
         obj['sender_id'] = ApiClient.convertToType(data['sender_id'], 'String');
       }
-      if (data.hasOwnProperty('memo')) {
-        obj['memo'] = ApiClient.convertToType(data['memo'], 'String');
-      }
       if (data.hasOwnProperty('recipient_address')) {
         obj['recipient_address'] = ApiClient.convertToType(data['recipient_address'], 'String');
       }
@@ -82,42 +79,53 @@
       if (data.hasOwnProperty('is_confidential')) {
         obj['is_confidential'] = ApiClient.convertToType(data['is_confidential'], 'Boolean');
       }
+      if (data.hasOwnProperty('memo')) {
+        obj['memo'] = ApiClient.convertToType(data['memo'], 'String');
+      }
     }
     return obj;
   }
 
   /**
+   * Boolean signifying whether the Assets were issued to the Wallet in question
    * @member {Boolean} is_incoming
    */
   exports.prototype['is_incoming'] = undefined;
   /**
+   * Boolean signifying whether the Wallet used to issue the Assets is the Wallet in question
    * @member {Boolean} issued_by_self
    */
   exports.prototype['issued_by_self'] = undefined;
   /**
+   * The public key of the Wallet that was used to issue the Assets
    * @member {String} sender_id
    */
   exports.prototype['sender_id'] = undefined;
   /**
-   * @member {String} memo
-   */
-  exports.prototype['memo'] = undefined;
-  /**
+   * The Address the Assets were issued to
    * @member {String} recipient_address
    */
   exports.prototype['recipient_address'] = undefined;
   /**
+   * The ID of the Asset Type issued
    * @member {Number} asset_id
    */
   exports.prototype['asset_id'] = undefined;
   /**
+   * The amount of Assets issued
    * @member {Number} amount
    */
   exports.prototype['amount'] = undefined;
   /**
+   * Boolean signifying whether the Issuance was done confidentially
    * @member {Boolean} is_confidential
    */
   exports.prototype['is_confidential'] = undefined;
+  /**
+   * The private memo attached to the Issuance
+   * @member {String} memo
+   */
+  exports.prototype['memo'] = undefined;
 
 
 

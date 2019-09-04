@@ -10,9 +10,14 @@
 package sdk
 
 type Rule struct {
-	PublicKey              string `json:"public_key"`
-	CanIssueConfidentially bool   `json:"can_issue_confidentially"`
-	CanIssueAssetIdFirst   int32  `json:"can_issue_asset_id_first"`
-	CanIssueAssetIdLast    int32  `json:"can_issue_asset_id_last"`
-	IsAdmin                bool   `json:"is_admin"`
+	// The public key of the Wallet that is being granted rights in this Rule
+	PublicKey string `json:"public_key"`
+	// Boolean signifying whether the Rule grants admin rights
+	IsAdmin bool `json:"is_admin"`
+	// The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
+	CanIssueAssetIdFirst int32 `json:"can_issue_asset_id_first"`
+	// The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
+	CanIssueAssetIdLast int32 `json:"can_issue_asset_id_last"`
+	// Boolean signifying whether the Rule grants confidentialy issuance rights; if true, then both public and confidential issuance right are granted; if false, then only public issuance rights are granted
+	CanIssueConfidentially bool `json:"can_issue_confidentially"`
 }

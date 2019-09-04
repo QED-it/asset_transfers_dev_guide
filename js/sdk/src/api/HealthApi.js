@@ -50,6 +50,7 @@
 
     /**
      * Perform a healthcheck of the node and its dependent services
+     * Reports the health of the various components of the system as well as an overall status for the Node. If the Node&#39;s status is good, then the Node is synced with the Blockchain and can successfully process requests.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/HealthcheckResponse} and HTTP response
      */
     this.healthPostWithHttpInfo = function() {
@@ -81,6 +82,7 @@
 
     /**
      * Perform a healthcheck of the node and its dependent services
+     * Reports the health of the various components of the system as well as an overall status for the Node. If the Node&#39;s status is good, then the Node is synced with the Blockchain and can successfully process requests.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/HealthcheckResponse}
      */
     this.healthPost = function() {

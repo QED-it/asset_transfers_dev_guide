@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient'], factory);
+    define(['ApiClient', 'model/Result', 'model/TaskType'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../ApiClient'), require('./Result'), require('./TaskType'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.GetTaskStatusResponse = factory(root.QedItAssetTransfers.ApiClient);
+    root.QedItAssetTransfers.GetTaskStatusResponse = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.Result, root.QedItAssetTransfers.TaskType);
   }
-}(this, function(ApiClient) {
+}(this, function(ApiClient, Result, TaskType) {
   'use strict';
 
 
@@ -68,7 +68,7 @@
         obj['updated_at'] = ApiClient.convertToType(data['updated_at'], 'Date');
       }
       if (data.hasOwnProperty('result')) {
-        obj['result'] = ApiClient.convertToType(data['result'], 'String');
+        obj['result'] = Result.constructFromObject(data['result']);
       }
       if (data.hasOwnProperty('state')) {
         obj['state'] = ApiClient.convertToType(data['state'], 'String');
@@ -80,7 +80,7 @@
         obj['qedit_tx_hash'] = ApiClient.convertToType(data['qedit_tx_hash'], 'String');
       }
       if (data.hasOwnProperty('type')) {
-        obj['type'] = ApiClient.convertToType(data['type'], 'String');
+        obj['type'] = TaskType.constructFromObject(data['type']);
       }
       if (data.hasOwnProperty('data')) {
         obj['data'] = ApiClient.convertToType(data['data'], Object);
@@ -93,42 +93,50 @@
   }
 
   /**
+   * Unique ID of the Task
    * @member {String} id
    */
   exports.prototype['id'] = undefined;
   /**
+   * UTC time of creation of the Task in RFC-3339 format
    * @member {Date} created_at
    */
   exports.prototype['created_at'] = undefined;
   /**
+   * UTC last time the Task was updated in RFC-3339 format
    * @member {Date} updated_at
    */
   exports.prototype['updated_at'] = undefined;
   /**
-   * @member {String} result
+   * @member {module:model/Result} result
    */
   exports.prototype['result'] = undefined;
   /**
+   * More granular current state of the Task; list of supported states is not guaranteed to be stable
    * @member {String} state
    */
   exports.prototype['state'] = undefined;
   /**
+   * The Blockchain-generated hash of the Transaction; populated after the Blockchain Node accepted the Transaction
    * @member {String} tx_hash
    */
   exports.prototype['tx_hash'] = undefined;
   /**
+   * The QEDIT-generated hash of the Transaction; generated after proof generation, but prior to Broadcast by the QEDIT Node
    * @member {String} qedit_tx_hash
    */
   exports.prototype['qedit_tx_hash'] = undefined;
   /**
-   * @member {String} type
+   * @member {module:model/TaskType} type
    */
   exports.prototype['type'] = undefined;
   /**
+   * Container for the Transaction data; each Transaction type has different fields
    * @member {Object} data
    */
   exports.prototype['data'] = undefined;
   /**
+   * In case of failure this field reports the reason for the failure
    * @member {String} error
    */
   exports.prototype['error'] = undefined;

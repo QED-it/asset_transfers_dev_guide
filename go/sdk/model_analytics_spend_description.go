@@ -10,9 +10,12 @@
 package sdk
 
 type AnalyticsSpendDescription struct {
-	Cv        string `json:"cv,omitempty"`
-	Anchor    string `json:"anchor,omitempty"`
+	// The commitment to both the Asset Type and amount of the Note
+	Cv string `json:"cv,omitempty"`
+	// The anchor (root) of the Merkle tree used in the Proof
+	Anchor string `json:"anchor,omitempty"`
+	// The Note's Nullifier
 	Nullifier string `json:"nullifier,omitempty"`
-	RkOut     string `json:"rk_out,omitempty"`
-	Zkproof   string `json:"zkproof,omitempty"`
+	// The Proof that the Note indeed exists in the Merkle tree and belongs to the spender
+	Zkproof string `json:"zkproof,omitempty"`
 }

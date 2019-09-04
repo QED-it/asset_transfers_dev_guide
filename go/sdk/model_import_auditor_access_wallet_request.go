@@ -10,7 +10,10 @@
 package sdk
 
 type ImportAuditorAccessWalletRequest struct {
-	WalletId  string `json:"wallet_id"`
+	// The ID under which to import the Wallet; can be different from the ID the Wallet was stored under in the exporting Node
+	WalletId string `json:"wallet_id"`
+	// The public key of the imported Wallet
 	PublicKey string `json:"public_key"`
+	// the encrypted viewing key of the imported Wallet
 	AccessKey string `json:"access_key"`
 }

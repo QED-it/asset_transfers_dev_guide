@@ -10,5 +10,6 @@
 package sdk
 
 type GetRulesResponse struct {
+	// The Rules currently active in the network
 	Rules []Rule `json:"rules,omitempty"`
 }

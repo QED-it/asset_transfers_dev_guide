@@ -42,8 +42,8 @@
    * Constructs a new <code>BalanceForAsset</code>.
    * @alias module:model/BalanceForAsset
    * @class
-   * @param assetId {Number} 
-   * @param amount {Number} 
+   * @param assetId {Number} The ID of the Asset Type
+   * @param amount {Number} The outstanding balance for the Asset Type
    */
   var exports = function(assetId, amount) {
     var _this = this;
@@ -73,10 +73,12 @@
   }
 
   /**
+   * The ID of the Asset Type
    * @member {Number} asset_id
    */
   exports.prototype['asset_id'] = undefined;
   /**
+   * The outstanding balance for the Asset Type
    * @member {Number} amount
    */
   exports.prototype['amount'] = undefined;

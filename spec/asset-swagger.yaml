@@ -5,16 +5,19 @@ info:
 security:
   - ApiKeyAuth: []
 servers:
-  - url: http://{server_url}:12052
+  - url: http://{server_url}:{port}
     variables:
       server_url:
         default: localhost
+      port:
+        default: '12052'
 paths:
   /wallet/get_balances:
     post:
       tags:
         - Wallet
-      summary: Get wallets balance
+      summary: Get wallets balances
+      description: Get a list of the Asset Types held within a given Wallet and the amount of each type held.
       requestBody:
         required: true
         content:
@@ -51,6 +54,7 @@ paths:
       tags:
         - Wallet
       summary: Issue assets [async call]
+      description: Issue Assets from a Wallet to a recipient Address; The issuing Wallet is required to have matching issuance rights (in the form of a matching Rule); Issuance can be done either confidentially or in public; In order to issue confidentially, the matching Rule must explicitly allow this.
       requestBody:
         required: true
         content:
@@ -87,6 +91,7 @@ paths:
       tags:
         - Wallet
       summary: Transfer assets [async call]
+      description: Transfer a specified amount of a specified Asset Type from a specified Wallet to a specified Address; Transfers are always completely confidential.
       requestBody:
         required: true
         content:
@@ -123,6 +128,7 @@ paths:
       tags:
         - Wallet
       summary: Get a new address from a given diversifier or generate randomly
+      description: Generate an Address for the Wallet; the address can be used by other Wallet owners to issue or transfer Assets into said Wallet; If a diversifier is provided, then the generated address is deterministically generated from the diversifier; If the diversifier is omitted, then a random diversifier is used and the resulting Address will be random; in both cases the Address cannot be linked to the Wallet by parties that do not have access to the Wallet. All generated Addresses of a Wallet are always valid and cannot be invalidated.
       requestBody:
         required: true
         content:
@@ -159,6 +165,7 @@ paths:
       tags:
         - Wallet
       summary: Get wallet public key
+      description: Get the unique public key of the Wallet; This key is unique across the entire network and is used to identify the Wallet.
       requestBody:
         required: true
         content:
@@ -194,7 +201,8 @@ paths:
     post:
       tags:
         - Wallet
-      summary: Create & broadcast add-config-rule [async call]
+      summary: Create a new Rule in the network [async call]
+      description: Create new Rules that can either create a new admin, a new issuer, or both; The Rules are created by a Wallet that needs to have admin rights; The Rules grant rights to other Wallets through the Wallets' public keys.
       requestBody:
         required: true
         content:
@@ -230,7 +238,8 @@ paths:
     post:
       tags:
         - Wallet
-      summary: Create & broadcast delete-config-rule [async call]
+      summary: Delete an existing Rule from the network [async call]
+      description: Delete an existing Rule from the network; The Rule is deleted by a Wallet which needs to have admin rights.
       requestBody:
         required: true
         content:
@@ -267,6 +276,7 @@ paths:
       tags:
         - Wallet
       summary: Get wallet activity (transactions)
+      description: List transactions that were created by a specifed Wallet or that affected that Wallet; All known details of each such transaction will be returned.
       requestBody:
         required: true
         content:
@@ -302,7 +312,8 @@ paths:
     post:
       tags:
         - Analytics
-      summary: Get details on past blocks
+      summary: Get details on past blocks either by order using start_index and number_of_results or by the tx_hashes of the transactions
+      description: List all verified Transactions from the network, even ones that do not have anything to do with any Wallet stored in the Node; For each such Transaction all of public information is returned in a structured format; However, no private information is returned even if some private information is known.
       requestBody:
         required: true
         content:
@@ -334,11 +345,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /analytics/get_sync_status:
+    post:
+      tags:
+        - Analytics
+      summary: Get blockchain sync status information
+      description: Returns detailed information about the status of the sync between the QEDIT Node and the underlying Blockchain
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSyncStatusResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /node/generate_wallet:
     post:
       tags:
         - Node
-      summary: Generate a new wallet
+      summary: Generate a new Wallet
+      description: Randomly generate a new Wallet under a specified ID; This only affects the Node and in particular nothing about this action is broadcast to the Blockchain; The Wallet ID is required to be unique within the Node, but can otherwise be user-defined.
       requestBody:
         required: true
         content:
@@ -370,7 +413,8 @@ paths:
     post:
       tags:
         - Node
-      summary: Delete a wallet
+      summary: Delete a Wallet
+      description: Deletes a Wallet from the Node; All private information about the Wallet will be deleted including transactional history, balances, and keys; If the secret key of the Wallet are not stored elsewhere then all Assets held in the Wallet will be forever lost! If the secret key of the Wallet is stored elsewhere, then all held Assets and the entire transactional history of the Wallet can be restored from the Blockchain at any time by importing the Wallet into a Node.
       requestBody:
         required: true
         content:
@@ -407,6 +451,7 @@ paths:
       tags:
         - Node
       summary: Export wallet secret key
+      description: Export an encrypted form of the Wallet's secret key; The authorization password under which the secret key is encrypted is the same one under which it was originally created or imported; Knowledge of the secret key and the authorization password is required to import the Wallet into a Node in the future.
       requestBody:
         required: true
         content:
@@ -442,7 +487,8 @@ paths:
     post:
       tags:
         - Node
-      summary: Import wallet from secret key [async call]
+      summary: Import Wallet from a known secret key and authorization [async call]
+      description: Import a Wallet into the Node under a specified ID; All the transactional history and outstanding balanced of the Wallet will be extracted from the Blockchain; The Wallet ID is required to be unique within the Node, but can otherwise be user-defined.
       requestBody:
         required: true
         content:
@@ -478,7 +524,8 @@ paths:
     post:
       tags:
         - Node
-      summary: Export a viewing key that allows an auditor to view all transactions to and from a wallet. The viewing key is encrypted for the auditor identified by recipient_payment_address. The viewing key does not enable the auditor to make transactions.
+      summary: Export viewing credentials for a Wallet
+      description: Export a viewing key that allows viewing all transactions to and from a wallet, including past transactions. The viewing key is encrypted for a specific Address, and can only be recovered by someone in possession of either a secret key or a viewing key for the Wallet that Address belongs to. The viewing key does enable making any transactions (including rule changes, issuance, and transfers) on behalf of the exported Wallet.
       requestBody:
         required: true
         content:
@@ -514,7 +561,8 @@ paths:
     post:
       tags:
         - Node
-      summary: Import a viewing key generated by export_auditor_access_wallet [async call]. This will create a read-only wallet which can be queried with endpoints such as get_activity and get_balances, but cannot be used to perform transactions.
+      summary: Import viewing credentials for a Wallet [async call]
+      description: Import a viewing key generated by the export_auditor_access_wallet endpoint. This will create a read-only wallet which can be queried with endpoints such as get_activity and get_balances, but cannot be used to perform transactions. The Wallet whose Address was used as the recipient for the exported viewing key must already be imported within the Node in order for this process to succeed.
       requestBody:
         required: true
         content:
@@ -551,6 +599,7 @@ paths:
       tags:
         - Node
       summary: Unlocks a wallet for a given amount of seconds [async call]
+      description: Causes a specified Wallet's secret key to be stored in-memory for a specified amount of time in order to increase transactional latency. Should only be used in cases where latency is highly sensitive.
       requestBody:
         required: true
         content:
@@ -586,7 +635,8 @@ paths:
     post:
       tags:
         - Node
-      summary: Get network governance rules
+      summary: Get network governance Rules
+      description: Returns a full list of all the Rules that govern admin and issuance rights within the network.
       responses:
         '200':
           description: Success
@@ -610,7 +660,8 @@ paths:
     post:
       tags:
         - Node
-      summary: Get all wallet labels
+      summary: Get all wallet IDs
+      description: Returns a list of the IDs of all Wallets currently stored on the Node. Both full-access and view-only Wallets are listed.
       responses:
         '200':
           description: Success
@@ -641,6 +692,7 @@ paths:
       tags:
         - Node
       summary: Get a specific task (by ID)
+      description: Returns the meta-data of a given Task and its current status. The particular, private details of the Task such as an Asset ID or amount in a Transfer are not returned.
       responses:
         '200':
           description: Success
@@ -676,7 +728,8 @@ paths:
               $ref: '#/components/schemas/GetTasksRequest'
       tags:
         - Node
-      summary: Get a list of tasks by results/types
+      summary: Get a (potentially) filtered list of all Tasks
+      description: Returns a list of all Tasks along with their meta-data and statuses. The particular, private details of the Task such as an Asset ID or amount in a Transfer are not returned. Tasks can be filtered using various parameters as specified in the request body.
       responses:
         '200':
           description: Success
@@ -707,6 +760,7 @@ paths:
       tags:
         - Health
       summary: Perform a healthcheck of the node and its dependent services
+      description: Reports the health of the various components of the system as well as an overall status for the Node. If the Node's status is good, then the Node is synced with the Blockchain and can successfully process requests.
       responses:
         '200':
           description: Success
@@ -733,13 +787,12 @@ components:
       name: x-auth-token
       in: header
   schemas:
-    IntPointer:
-      type: integer
     GetWalletBalanceRequest:
       type: object
       properties:
         wallet_id:
           type: string
+          description: The ID of the Wallet
       required:
         - wallet_id
       example:
@@ -749,8 +802,10 @@ components:
       properties:
         asset_id:
           type: integer
+          description: The ID of the Asset Type
         amount:
           type: integer
+          description: The outstanding balance for the Asset Type
       required:
         - asset_id
         - amount
@@ -761,10 +816,12 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID of the Wallet
         assets:
           type: array
           items:
             $ref: '#/components/schemas/BalanceForAsset'
+          description: The balances of the various Asset Types held by the Wallet
       required:
         - wallet_id
         - assets
@@ -773,21 +830,29 @@ components:
         assets:
           - asset_id: 1
             amount: 8
+          - asset_id: 10
+            amount: 200
     TransferAssetRequest:
       type: object
       properties:
         wallet_id:
           type: string
+          description: The ID of the Wallet to transfer from
         authorization:
           type: string
+          description: The authorization password for the Wallet to transfer from
         recipient_address:
           type: string
-        amount:
-          type: integer
+          description: The Address of the recipient of the funds
         asset_id:
           type: integer
+          description: The ID for the Asset Type to transfer
+        amount:
+          type: integer
+          description: The amount of assets to transfer
         memo:
           type: string
+          description: An app-customizable field to store additional private data relating to the transfer; the memo is shared between the sender and the receiver, but is not divulged to other parties
       required:
         - wallet_id
         - authorization
@@ -799,18 +864,21 @@ components:
         wallet_id: source_wallet
         authorization: PrivacyIsAwesome
         recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
-        amount: 4
         asset_id: 1
+        amount: 4
         memo: '{"recipient_name": "Dan"}'
     GetWalletActivityRequest:
       type: object
       properties:
         wallet_id:
           type: string
+          description: The ID of the Wallet for which to retrieve activity history
         start_index:
           type: integer
+          description: An offset used to paginate through the activity history; indexing is 0-based
         number_of_results:
           type: integer
+          description: Maximal number of results to fetch in this call
       required:
         - wallet_id
         - start_index
@@ -819,28 +887,6 @@ components:
         wallet_id: source_wallet
         start_index: 0
         number_of_results: 10
-    TransactionsForWallet:
-      type: object
-      properties:
-        is_incoming:
-          type: boolean
-        asset_id:
-          type: integer
-        amount:
-          type: integer
-        recipient_address:
-          type: string
-        memo:
-          type: string
-        id:
-          type: string
-      required:
-        - is_incoming
-        - asset_id
-        - amount
-        - recipient_address
-        - memo
-        - id
     GetRulesResponse:
       type: object
       properties:
@@ -848,6 +894,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Rule'
+          description: The Rules currently active in the network
     GetAllWalletsResponse:
       type: object
       properties:
@@ -855,6 +902,7 @@ components:
           type: array
           items:
             type: string
+          description: The IDs of the Wallets currently active in this Node
       example:
         wallet_ids:
           - Jane
@@ -865,6 +913,7 @@ components:
       properties:
         id:
           type: string
+          description: The ID of the Task
       required:
         - id
       example:
@@ -874,31 +923,28 @@ components:
       properties:
         start_index:
           type: integer
+          description: An offset used to paginate through the Task list; indexing is 0-based
         number_of_results:
           type: integer
+          description: Maximal number of results to fetch in this call
         types:
           type: array
           items:
-            type: string
-            enum:
-              - unlock_wallet
-              - transfer_asset
-              - issue_asset
-              - alter_rule
+            $ref: '#/components/schemas/TaskType'
+          description: Types of Tasks to fetch; fetch all types if omitted
         results:
           type: array
           items:
-            type: string
-            default: in_progress
-            enum:
-              - pending
-              - failure
-              - in_progress
-              - success
+            $ref: '#/components/schemas/Result'
+          description: List of results (statuses) to filter by; fetch in_progress tasks if omitted
+        #          default: [in_progress]
         order:
           type: string
           default: desc
-          pattern: '^(asc|desc)$'
+          enum:
+            - asc
+            - desc
+          description: Order of tasks to fetch (either ascending or descending); ordering is chronological where the time is set to when the task was created in this Node
       required:
         - start_index
         - number_of_results
@@ -913,35 +959,61 @@ components:
       properties:
         id:
           type: string
+          description: Unique ID of the Task
         created_at:
           type: string
           format: date
+          description: UTC time of creation of the Task in RFC-3339 format
         updated_at:
           type: string
           format: date
+          description: UTC last time the Task was updated in RFC-3339 format
         result:
-          type: string
+          $ref: '#/components/schemas/Result'
         state:
           type: string
+          description: More granular current state of the Task; list of supported states is not guaranteed to be stable
         tx_hash:
           type: string
+          description: The Blockchain-generated hash of the Transaction; populated after the Blockchain Node accepted the Transaction
         qedit_tx_hash:
           type: string
+          description: The QEDIT-generated hash of the Transaction; generated after proof generation, but prior to Broadcast by the QEDIT Node
         type:
-          type: string
+          $ref: '#/components/schemas/TaskType'
         data:
           type: object
+          description: Container for the Transaction data; each Transaction type has different fields
         error:
           type: string
+          description: In case of failure this field reports the reason for the failure
       example:
         id: "5aaa4045-e949-4c44-a7ef-25fb55a1afa6"
-        created_at: "2019-03-12T16:40:22"
-        updated_at: "2019-03-12T16:41:17"
+        created_at: "2019-08-11T10:37:04Z"
+        updated_at: "2019-08-12T11:12:59Z"
         result: "in_progress"
         state: "tx_submitted"
         tx_hash: "0xd379aa4e5e40552910c8ae456c65dcf51e9779fc9281ac2dc9e677ec810af6b1"
         type: "transfer_asset"
         data: {}
+    Result:
+      type: string
+      enum:
+        - pending
+        - in_progress
+        - success
+        - failure
+      description: The current result (status) of the Task
+    TaskType:
+      type: string
+      enum:
+        - unlock_wallet
+        - transfer_asset
+        - issue_asset
+        - alter_rule
+        - import_wallet
+        - delete_wallet
+      description: Task type
     GetTasksResponse:
       type: object
       properties:
@@ -949,19 +1021,27 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/GetTaskStatusResponse'
+          description: The returned Tasks array, sorted in the requested order
     GetNetworkActivityRequest:
       type: object
       properties:
         start_index:
           type: integer
+          description: An offset used to paginate through the activity history; indexing is 0-based
         number_of_results:
           type: integer
+          description: Maximal number of results to fetch in this call
+        tx_hashes:
+          type: array
+          items:
+            type: string
       required:
         - start_index
         - number_of_results
       example:
         start_index: 0
-        number_of_results: 10
+        number_of_results: 1
+        tx_hashes: ["0xd379aa4e5e40552910c8ae456c65dcf51e9779fc9281ac2dc9e677ec810af6b1"]
     GetNetworkActivityResponse:
       type: object
       properties:
@@ -969,21 +1049,40 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AnalyticTransaction'
+    GetSyncStatusResponse:
+      type: object
+      properties:
+        in_sync:
+          type: boolean
+          description: Boolean signifying whether the QEDIT Node is in sync with the Blockchain;
+            false if the Node is not synced; sync is defined as having less than a preconfigured difference between the current Blockchain height and the last block processed by the Node; the allowed difference defaults to 5, but can be configured when setting up the Node
+        blockchain_block_height:
+          type: integer
+          description: The current block height of the Blockchain
+        last_processed_block_height:
+          type: integer
+          description: The height of the last block that was processed in the Node
     IssueAssetRequest:
       type: object
       properties:
         wallet_id:
           type: string
+          description: The ID of the Wallet that has the required Issuance privileges
         authorization:
           type: string
+          description: The authorization password for the Wallet that has the Issuance privileges
         recipient_address:
           type: string
-        amount:
-          type: integer
+          description: The Address of the recipient of the issued Assets
         asset_id:
           type: integer
+          description: The ID of the Asset Type to issue
+        amount:
+          type: integer
+          description: the amount of Assets to issue
         confidential:
           type: boolean
+          description: Boolean which should be true if the issuance should be confidential, and false of the Issuance should be public
         memo:
           type: string
       required:
@@ -1007,8 +1106,10 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID of the Wallet for which to generate an Address
         diversifier:
           type: string
+          description: An optional 11-byte (22 hexadecimal characters) input which is used to generate different Addresses. A unique Address will be generated for each different diversifier used. If omitted, the Node selects a random diversifier.
       required:
         - wallet_id
       example:
@@ -1018,8 +1119,10 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID of the Wallet the Address belongs to
         recipient_address:
           type: string
+          description: The generated Address of the Wallet
       required:
         - wallet_id
         - recipient_address
@@ -1031,6 +1134,7 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID of the Wallet for which to retrieve the public key
       required:
         - wallet_id
       example:
@@ -1040,8 +1144,10 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID of the Wallet the pubic key belongs to
         public_key:
           type: string
+          description: The public key of the Wallet
       required:
         - wallet_id
         - public_key
@@ -1053,6 +1159,7 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID of the Wallet to export
       required:
         - wallet_id
       example:
@@ -1062,10 +1169,13 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID of the exported Wallet in the Node from which it was exported
         encrypted_sk:
           type: string
+          description: The encrypted secret key of the Wallet
         salt:
           type: string
+          description: The salt used in the encryption of the secret key
       required:
         - wallet_id
         - encrypted_sk
@@ -1079,12 +1189,16 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID under which to import the Wallet; can be different from the ID the Wallet was stored under in the exporting Node
         encrypted_sk:
           type: string
+          description: The encrypted secret key of the Wallet
         authorization:
           type: string
+          description: The authorization password used during Wallet generation that allows to decrypt the encrypted secret key
         salt:
           type: string
+          description: The salt used in the encryption of the secret key
       required:
         - wallet_id
         - encrypted_sk
@@ -1100,10 +1214,13 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID of the Wallet to export a viewing key for
         authorization:
           type: string
+          description: The authorization password for the Wallet
         recipient_payment_address:
           type: string
+          description: The Address of the Wallet that belongs to the intended recipient of the exported viewing key; used to encrypt the key in such a way that only the intended recipient can decrypt it
       required:
         - wallet_id
         - authorization
@@ -1117,10 +1234,13 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID of the exported Wallet in the Node from which it was exported
         public_key:
           type: string
+          description: The public key of the exported Wallet which uniquely identifies it across the network
         access_key:
           type: string
+          description: The encrypted viewing key
       required:
         - wallet_id
         - public_key
@@ -1134,10 +1254,13 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID under which to import the Wallet; can be different from the ID the Wallet was stored under in the exporting Node
         public_key:
           type: string
+          description: The public key of the imported Wallet
         access_key:
           type: string
+          description: the encrypted viewing key of the imported Wallet
       required:
         - wallet_id
         - public_key
@@ -1151,8 +1274,10 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID under which to create the Wallet; must be unique within the Node
         authorization:
           type: string
+          description: The authorizarion password under which to encrypt the generated Wallet's secret key; will be required in order to perform actions using the Wallet
       required:
         - wallet_id
         - authorization
@@ -1164,8 +1289,10 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID of the Wallet to delete
         authorization:
           type: string
+          description: The authorization password for the Wallet
       required:
         - wallet_id
       example:
@@ -1176,10 +1303,13 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID of the Wallet to unlock
         authorization:
           type: string
+          description: The authorization password for the Wallet
         seconds:
           type: integer
+          description: The number of seconds to keep the Wallet unlocked
       required:
         - wallet_id
         - authorization
@@ -1193,12 +1323,15 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID of the Wallet whose admin credentials should be used to create the new Rules
         authorization:
           type: string
+          description: The authorization password for the Wallet whose admin credentials should be used to create the new Rules
         rules_to_add:
           type: array
           items:
             $ref: '#/components/schemas/Rule'
+          description: The list of Rules to add to the network
       required:
         - wallet_id
         - authorization
@@ -1217,12 +1350,15 @@ components:
       properties:
         wallet_id:
           type: string
+          description: The ID of the Wallet whose admin credentials should be used to delete the Rules
         authorization:
           type: string
+          description: The authorization password for the Wallet whose admin credentials should be used to delete the Rules
         rules_to_delete:
           type: array
           items:
             $ref: '#/components/schemas/Rule'
+          description: The list of Rules to delete from the network
       required:
         - wallet_id
         - authorization
@@ -1241,14 +1377,19 @@ components:
       properties:
         public_key:
           type: string
-        can_issue_confidentially:
-          type: boolean
-        can_issue_asset_id_first:
-          type: integer
-        can_issue_asset_id_last:
-          type: integer
+          description: The public key of the Wallet that is being granted rights in this Rule
         is_admin:
           type: boolean
+          description: Boolean signifying whether the Rule grants admin rights
+        can_issue_asset_id_first:
+          type: integer
+          description: The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
+        can_issue_asset_id_last:
+          type: integer
+          description: The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
+        can_issue_confidentially:
+          type: boolean
+          description: Boolean signifying whether the Rule grants confidentialy issuance rights; if true, then both public and confidential issuance right are granted; if false, then only public issuance rights are granted
       required:
         - public_key
         - can_issue_confidentially
@@ -1266,24 +1407,25 @@ components:
       properties:
         error_code:
           type: integer
+          description: The error code returned from the server
         message:
           type: string
+          description: The error message returned from the server
       required:
         - error_code
       example:
         error_code: 400
-        message: "error message"
+        message: "insufficient funds"
     AsyncTaskCreatedResponse:
       type: object
       properties:
         id:
           type: string
+          description: The unique ID of the Task that was created in the Node to process the asynchronous request
       required:
         - id
       example:
         id: "70a88558-2b8b-4b63-a5b6-2c54b24377f5"
-
-
     AnalyticTransaction:
       type: object
       properties:
@@ -1294,6 +1436,7 @@ components:
             - $ref: '#/components/schemas/AnalyticsIssueTx'
             - $ref: '#/components/schemas/AnalyticsMultiTransferTx'
             - $ref: '#/components/schemas/AnalyticsRuleTx'
+          description: The detailed content of the transaction; format differs depending on the transaction type
       example:
         metadata:
           type: 'Issue'
@@ -1304,7 +1447,7 @@ components:
           block_height: 100
         content:
           outputs:
-            - is_confidntial: false,
+            - is_confidential: false,
               public_issuance_description:
                 amount: 12
                 asset_id: 5
@@ -1322,119 +1465,165 @@ components:
       type: object
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/AnalyticsTxType'
         tx_hash:
           type: string
-        block_hash:
-          type: string
-        timestamp:
-          type: string
-        index_in_block:
-          type: integer
+          description: the QEDIT-generated hash of the transaction
         block_height:
           type: integer
+          description: The height of the Block (inside the Blockchain) that the transaction is a part of
+        block_hash:
+          type: string
+          description: the hash of the Block (inside the Blockchain) that the transaction is a part of
+        timestamp:
+          type: string
+          description: UTC time of creation of the time the Block containing the transaction was created in RFC-3339 format
+        index_in_block:
+          type: integer
+          description: The serial number within the Block of the transaction relative to other QEDIT transactions; indexing is 0-based
+
+    AnalyticsTxType:
+      type: string
+      description: Type of transaction
+      enum:
+        - Issue
+        - Transfer
+        - Rule
 
     AnalyticsIssueTx:
       type: object
+      description: The data of a particular Issuance transaction
       properties:
         outputs:
           type: array
+          description: The data of the Assets issued (multiple Assets may potentially be issued in a single Issuance transaction)
           items:
             $ref: '#/components/schemas/AnalyticsOutput'
         public_key:
           type: string
+          description: The public key of the Wallet that performed the Issuance
         signature:
           type: string
+          description: The signature on the transaction by the secret key of the Wallet that performed the Issuance
 
     AnalyticsMultiTransferTx:
       type: object
+      description: The data of a particular Transfer transaction; a single such transaction may contain multiple Transfers
       properties:
         transfers:
           type: array
+          description: The (potentially several) Transfers within the transaction
           items:
             $ref: '#/components/schemas/AnalyticsTransferTx'
 
     AnalyticsTransferTx:
       type: object
+      description: The data of a single Transfer within a Transfer transaction
       properties:
         asset_converter_descriptions:
           type: array
+          description: The Converter Proofs
           items:
             $ref: '#/components/schemas/AnalyticsAssetConverterProofDescription'
         spends:
           type: array
+          description: The information and Proofs associated with the Assets spent in the Transfer
           items:
             $ref: '#/components/schemas/AnalyticsSpendDescription'
         outputs:
           type: array
+          description: The information and Proofs associated with the Assets output from the Transfer
           items:
             $ref: '#/components/schemas/AnalyticsOutputDescription'
+        rk:
+          type: string
+          description: The re-randomized public key of the Wallet which created the Transfer
+        spend_auth_sig:
+          type: string
+          description: The signature authorizing the spend of the Assets spent in the Transfer
         binding_sig:
           type: string
-        spend_auth_sigs:
-          type: array
-          items:
-            type: string
+          description: The signature binding the spent and output Assets and verifying the balance
 
     AnalyticsRuleTx:
       type: object
+      description: The data of a particular Rule changing transaction
       properties:
         sender_public_key:
           type: string
+          description: The public key of the Wallet used to create the Rule
         rules_to_add:
           type: array
           items:
             $ref: '#/components/schemas/AnalyticsRuleDefinition'
+          description: The details of the Rules added in this transaction
         rules_to_delete:
           type: array
           items:
             $ref: '#/components/schemas/AnalyticsRuleDefinition'
+          description: The details of the Rules deleted in this transaction
         nonce:
           type: integer
+          description: The nonce used to make this Rule transaction unique
         signature:
           type: string
+          description: The signature authorizing the Rule changes, made by the Wallet that made the Rule changes
 
     AnalyticsRuleDefinition:
       type: object
       properties:
         public_key:
           type: string
-        can_issue_confidentially:
-          type: boolean
+          description: The public key of the Wallet that is being granted rights in this Rule
         is_admin:
           type: boolean
+          description: Boolean signifying whether the Rule grants admin rights
         can_issue_asset_id_first:
           type: integer
+          description: The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
         can_issue_asset_id_last:
           type: integer
+          description: The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
+        can_issue_confidentially:
+          type: boolean
+          description: Boolean signifying whether the Rule grants confidentialy issuance rights; if true, then both public and confidential issuance right are granted; if false, then only public issuance rights are granted
       example:
         public_key: "AAAAAAAAAA=="
-        can_issue_confidentially: true
         is_admin: true
         can_issue_asset_id_first: 11
         can_issue_asset_id_last: 20
+        can_issue_confidentially: true
 
     AnalyticsRuleWalletDefinition:
       type: object
       properties:
         public_key:
           type: string
-        can_issue_confidentially:
-          type: boolean
+          description: The public key of the Wallet that is being granted rights in this Rule
         is_admin:
           type: boolean
+          description: Boolean signifying whether the Rule grants admin rights
         can_issue_asset_id_first:
           type: integer
+          description: The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
         can_issue_asset_id_last:
           type: integer
+          description: The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
+        can_issue_confidentially:
+          type: boolean
+          description: Boolean signifying whether the Rule grants confidentialy issuance rights; if true, then both public and confidential issuance right are granted; if false, then only public issuance rights are granted
         operation:
           type: string
+          enum:
+            - CreateRule
+            - DeleteRule
+          description: Operation of the transaction, which can be rule creation or deletion
       example:
         public_key: "AAAAAAAAAA=="
-        can_issue_confidentially: true
         is_admin: true
         can_issue_asset_id_first: 11
         can_issue_asset_id_last: 20
+        can_issue_confidentially: true
         operation: "CreateRule"
 
     AnalyticsOutput:
@@ -1442,6 +1631,7 @@ components:
       properties:
         is_confidential:
           type: boolean
+          description: Boolean signifying whether the Issuance was done confidentially; false if the Issuance was done publicly
         public_issuance_description:
           $ref: '#/components/schemas/AnalyticsPublicIssuanceDescription'
         confidential_issuance_description:
@@ -1451,6 +1641,7 @@ components:
 
     AnalyticsPublicIssuanceDescription:
       type: object
+      description: Describes what Asset Type and amount were issued; null if the Issuance was confidential
       nullable: true
       required:
         - asset_id
@@ -1459,9 +1650,11 @@ components:
         asset_id:
           type: integer
           minimum: 1
+          description: The ID of the Asset Type issued
         amount:
           type: integer
           minimum: 0
+          description: The amount of Assets issued
       example:
         asset_id: 10
         amount: 3
@@ -1471,12 +1664,16 @@ components:
       properties:
         input_cv:
           type: string
+          description: The commitment to both the Asset Type and amount of the Note
         amount_cv:
           type: string
+          description: The commitment to the Asset amount
         asset_cv:
           type: string
+          description: The commitment to the ID of the Asset Type
         zkproof:
           type: string
+          description: The Proof that the commitment contents match
       example:
         asset_cv: "AAAAAAAAAAA="
         amount_cv: "AAAAAAAAAAA="
@@ -1488,54 +1685,64 @@ components:
       properties:
         cv:
           type: string
+          description: The commitment to both the Asset Type and amount of the Note
         anchor:
           type: string
+          description: The anchor (root) of the Merkle tree used in the Proof
         nullifier:
           type: string
-        rk_out:
-          type: string
+          description: The Note's Nullifier
         zkproof:
           type: string
+          description: The Proof that the Note indeed exists in the Merkle tree and belongs to the spender
       example:
         cv: "AAAAAAAAAAA="
         anchor: "AAAAAAAAAAA="
         nullifier: "AAAAAAAAAAA="
         zkproof: "000AAAAAAA="
-        rk_out: "AAAAAAAAAAA="
 
     AnalyticsOutputDescription:
       type: object
       properties:
         cv:
           type: string
+          description: The commitment to both the Asset Type and amount of the Note
         cm:
           type: string
-        epk:
-          type: string
+          description: The commitment to the entire Note
         zkproof:
           type: string
+          description: The Proof that the commitments match
+        epk:
+          type: string
+          description: The ephemeral public key used to encrypt the Note contents for the receiver
         enc_note:
           type: string
+          description: The Note encryption for the receiver
         enc_sender:
           type: string
+          description: The Note encryption for the sender
       example:
         cv: "AAAAAAAAAAA="
         cm: "000AAAAAAA="
-        epk: "AAAAAAAAAAA="
         zkproof: "000AAAAAAA="
+        epk: "AAAAAAAAAAA="
         enc_note: "AAAAAAAAAAA="
         enc_sender: "000AAAAAAA="
 
     AnalyticsConfidentialIssuanceDescription:
       type: object
+      description: The details and Proof attached to a confidential Issuance; null if the Issuance was public
       nullable: true
       properties:
         input_cv:
           type: string
-        zkproof:
-          type: string
+          description: Thecommitment to both the Asset Type and amount of the issued Note
         rule:
           $ref: '#/components/schemas/AnalyticsRule'
+        zkproof:
+          type: string
+          description: The Proof that the issued Asset Type indeed matches the reported Rule
       example:
         input_cv: "AAAAAAAAAAA="
         zkproof: "000AAAAAAA="
@@ -1545,11 +1752,14 @@ components:
 
     AnalyticsRule:
       type: object
+      description: The Rule used in the Issuance
       properties:
         min_id:
           type: integer
+          description: The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
         max_id:
           type: integer
+          description: The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
       required:
         - min_id
         - max_id
@@ -1566,9 +1776,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AnalyticWalletTx'
+          description: The list of retrieved transactions
 
     AnalyticWalletTx:
       type: object
+      description: A single retrieved transaction
       properties:
         metadata:
           $ref: '#/components/schemas/AnalyticWalletMetadata'
@@ -1577,62 +1789,82 @@ components:
             - $ref: '#/components/schemas/AnalyticIssueWalletTx'
             - $ref: '#/components/schemas/AnalyticTransferWalletTx'
             - $ref: '#/components/schemas/AnalyticRuleWalletTx'
+          description: The detailed information of the transaction; structure depends on the type of transaction
 
     AnalyticWalletMetadata:
       type: object
       properties:
         type:
-          type: string
+          $ref: '#/components/schemas/AnalyticsTxType'
         tx_hash:
           type: string
+          description: The QEDIT-generated hash of the transaction
         timestamp:
           type: string
+          description: UTC time of creation of the time the Block containing the transaction was created in RFC-3339 format
 
     AnalyticIssueWalletTx:
       type: object
       properties:
         is_incoming:
           type: boolean
+          description: Boolean signifying whether the Assets were issued to the Wallet in question
         issued_by_self:
           type: boolean
+          description: Boolean signifying whether the Wallet used to issue the Assets is the Wallet in question
         sender_id:
           type: string
-        memo:
-          type: string
+          description: The public key of the Wallet that was used to issue the Assets
         recipient_address:
           type: string
+          description: The Address the Assets were issued to
         asset_id:
           type: integer
+          description: The ID of the Asset Type issued
         amount:
           type: integer
+          description: The amount of Assets issued
         is_confidential:
           type: boolean
+          description: Boolean signifying whether the Issuance was done confidentially
+        memo:
+          type: string
+          description: The private memo attached to the Issuance
 
     AnalyticTransferWalletTx:
       type: object
       properties:
         is_incoming:
           type: boolean
+          description: Boolean signifying whether the Assets were transferred to the Wallet in question; false of the Assets were transferred from the Wallet into another
         sender_id:
           type: string
-        memo:
-          type: string
+          description: The public key of the Wallet the Assets were transferred from
         recipient_address:
           type: string
+          description: The address of the Wallet the Assets were transferred to
         asset_id:
           type: integer
+          description: The Id of the Asset Type transferred
         amount:
           type: integer
+          description: The amount of Assets transferred
+        memo:
+          type: string
+          description: The private memo attached to the Transfer
 
     AnalyticRuleWalletTx:
       type: object
       properties:
         signed_by_self:
           type: boolean
+          description: Boolean signifying whether the Rule was created by the Wallet in question
         rule_affect_self:
           type: boolean
+          description: Boolean signifying whether the Rule granted permissions to the Wallet in question
         tx_signer:
           type: string
+          description: The public key of the Wallet that was used to create the Rule
         rule:
           $ref: '#/components/schemas/AnalyticsRuleWalletDefinition'
 
@@ -1641,6 +1873,7 @@ components:
       properties:
         version:
           type: string
+          description: API version of the Node
         blockchain_connector:
           $ref: '#/components/schemas/HealthcheckResponseItem'
         message_queue:
@@ -1649,11 +1882,11 @@ components:
           $ref: '#/components/schemas/HealthcheckResponseItem'
         passing:
           type: boolean
+          description: Boolean signifying whether the endpoint is ready for calls
       example:
-        version: '1.3.0'
+        version: '1.5.0'
         blockchain_connector:
-          error: 'Post http://localhost:8082/connector/get_block: dial tcp 127.0.0.1:8082:
-      connect: connection refused'
+          error: 'Post http://localhost:8082/connector/get_block: dial tcp 127.0.0.1:8082:connect: connection refused'
           passing: false
         database:
           error: ''
@@ -1668,5 +1901,7 @@ components:
       properties:
         passing:
           type: boolean
+          description: Boolean signifying whether the component is healthy
         error:
           type: string
+          description: Error string describing the component's problem; empty if the component is healthy

@@ -10,12 +10,20 @@
 package sdk
 
 type AnalyticIssueWalletTx struct {
-	IsIncoming       bool   `json:"is_incoming,omitempty"`
-	IssuedBySelf     bool   `json:"issued_by_self,omitempty"`
-	SenderId         string `json:"sender_id,omitempty"`
-	Memo             string `json:"memo,omitempty"`
+	// Boolean signifying whether the Assets were issued to the Wallet in question
+	IsIncoming bool `json:"is_incoming,omitempty"`
+	// Boolean signifying whether the Wallet used to issue the Assets is the Wallet in question
+	IssuedBySelf bool `json:"issued_by_self,omitempty"`
+	// The public key of the Wallet that was used to issue the Assets
+	SenderId string `json:"sender_id,omitempty"`
+	// The Address the Assets were issued to
 	RecipientAddress string `json:"recipient_address,omitempty"`
-	AssetId          int32  `json:"asset_id,omitempty"`
-	Amount           int32  `json:"amount,omitempty"`
-	IsConfidential   bool   `json:"is_confidential,omitempty"`
+	// The ID of the Asset Type issued
+	AssetId int32 `json:"asset_id,omitempty"`
+	// The amount of Assets issued
+	Amount int32 `json:"amount,omitempty"`
+	// Boolean signifying whether the Issuance was done confidentially
+	IsConfidential bool `json:"is_confidential,omitempty"`
+	// The private memo attached to the Issuance
+	Memo string `json:"memo,omitempty"`
 }

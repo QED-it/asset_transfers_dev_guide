@@ -42,9 +42,9 @@
    * Constructs a new <code>GetWalletActivityRequest</code>.
    * @alias module:model/GetWalletActivityRequest
    * @class
-   * @param walletId {String} 
-   * @param startIndex {Number} 
-   * @param numberOfResults {Number} 
+   * @param walletId {String} The ID of the Wallet for which to retrieve activity history
+   * @param startIndex {Number} An offset used to paginate through the activity history; indexing is 0-based
+   * @param numberOfResults {Number} Maximal number of results to fetch in this call
    */
   var exports = function(walletId, startIndex, numberOfResults) {
     var _this = this;
@@ -78,14 +78,17 @@
   }
 
   /**
+   * The ID of the Wallet for which to retrieve activity history
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * An offset used to paginate through the activity history; indexing is 0-based
    * @member {Number} start_index
    */
   exports.prototype['start_index'] = undefined;
   /**
+   * Maximal number of results to fetch in this call
    * @member {Number} number_of_results
    */
   exports.prototype['number_of_results'] = undefined;

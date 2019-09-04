@@ -42,21 +42,21 @@
    * Constructs a new <code>TransferAssetRequest</code>.
    * @alias module:model/TransferAssetRequest
    * @class
-   * @param walletId {String} 
-   * @param authorization {String} 
-   * @param recipientAddress {String} 
-   * @param amount {Number} 
-   * @param assetId {Number} 
-   * @param memo {String} 
+   * @param walletId {String} The ID of the Wallet to transfer from
+   * @param authorization {String} The authorization password for the Wallet to transfer from
+   * @param recipientAddress {String} The Address of the recipient of the funds
+   * @param assetId {Number} The ID for the Asset Type to transfer
+   * @param amount {Number} The amount of assets to transfer
+   * @param memo {String} An app-customizable field to store additional private data relating to the transfer; the memo is shared between the sender and the receiver, but is not divulged to other parties
    */
-  var exports = function(walletId, authorization, recipientAddress, amount, assetId, memo) {
+  var exports = function(walletId, authorization, recipientAddress, assetId, amount, memo) {
     var _this = this;
 
     _this['wallet_id'] = walletId;
     _this['authorization'] = authorization;
     _this['recipient_address'] = recipientAddress;
-    _this['amount'] = amount;
     _this['asset_id'] = assetId;
+    _this['amount'] = amount;
     _this['memo'] = memo;
   };
 
@@ -79,11 +79,11 @@
       if (data.hasOwnProperty('recipient_address')) {
         obj['recipient_address'] = ApiClient.convertToType(data['recipient_address'], 'String');
       }
-      if (data.hasOwnProperty('amount')) {
-        obj['amount'] = ApiClient.convertToType(data['amount'], 'Number');
-      }
       if (data.hasOwnProperty('asset_id')) {
         obj['asset_id'] = ApiClient.convertToType(data['asset_id'], 'Number');
+      }
+      if (data.hasOwnProperty('amount')) {
+        obj['amount'] = ApiClient.convertToType(data['amount'], 'Number');
       }
       if (data.hasOwnProperty('memo')) {
         obj['memo'] = ApiClient.convertToType(data['memo'], 'String');
@@ -93,26 +93,32 @@
   }
 
   /**
+   * The ID of the Wallet to transfer from
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The authorization password for the Wallet to transfer from
    * @member {String} authorization
    */
   exports.prototype['authorization'] = undefined;
   /**
+   * The Address of the recipient of the funds
    * @member {String} recipient_address
    */
   exports.prototype['recipient_address'] = undefined;
   /**
-   * @member {Number} amount
-   */
-  exports.prototype['amount'] = undefined;
-  /**
+   * The ID for the Asset Type to transfer
    * @member {Number} asset_id
    */
   exports.prototype['asset_id'] = undefined;
   /**
+   * The amount of assets to transfer
+   * @member {Number} amount
+   */
+  exports.prototype['amount'] = undefined;
+  /**
+   * An app-customizable field to store additional private data relating to the transfer; the memo is shared between the sender and the receiver, but is not divulged to other parties
    * @member {String} memo
    */
   exports.prototype['memo'] = undefined;

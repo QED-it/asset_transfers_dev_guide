@@ -10,5 +10,6 @@
 package sdk
 
 type GetAllWalletsResponse struct {
+	// The IDs of the Wallets currently active in this Node
 	WalletIds []string `json:"wallet_ids,omitempty"`
 }

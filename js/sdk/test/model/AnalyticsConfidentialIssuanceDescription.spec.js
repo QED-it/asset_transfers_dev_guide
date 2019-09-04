@@ -62,14 +62,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property zkproof (base name: "zkproof")', function() {
-      // uncomment below and update the code to test the property zkproof
+    it('should have the property rule (base name: "rule")', function() {
+      // uncomment below and update the code to test the property rule
       //var instance = new QedItAssetTransfers.AnalyticsConfidentialIssuanceDescription();
       //expect(instance).to.be();
     });
 
-    it('should have the property rule (base name: "rule")', function() {
-      // uncomment below and update the code to test the property rule
+    it('should have the property zkproof (base name: "zkproof")', function() {
+      // uncomment below and update the code to test the property zkproof
       //var instance = new QedItAssetTransfers.AnalyticsConfidentialIssuanceDescription();
       //expect(instance).to.be();
     });

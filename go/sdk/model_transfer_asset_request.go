@@ -10,10 +10,16 @@
 package sdk
 
 type TransferAssetRequest struct {
-	WalletId         string `json:"wallet_id"`
-	Authorization    string `json:"authorization"`
+	// The ID of the Wallet to transfer from
+	WalletId string `json:"wallet_id"`
+	// The authorization password for the Wallet to transfer from
+	Authorization string `json:"authorization"`
+	// The Address of the recipient of the funds
 	RecipientAddress string `json:"recipient_address"`
-	Amount           int32  `json:"amount"`
-	AssetId          int32  `json:"asset_id"`
-	Memo             string `json:"memo"`
+	// The ID for the Asset Type to transfer
+	AssetId int32 `json:"asset_id"`
+	// The amount of assets to transfer
+	Amount int32 `json:"amount"`
+	// An app-customizable field to store additional private data relating to the transfer; the memo is shared between the sender and the receiver, but is not divulged to other parties
+	Memo string `json:"memo"`
 }

@@ -10,6 +10,8 @@
 package sdk
 
 type HealthcheckResponseItem struct {
-	Passing bool   `json:"passing,omitempty"`
-	Error   string `json:"error,omitempty"`
+	// Boolean signifying whether the component is healthy
+	Passing bool `json:"passing,omitempty"`
+	// Error string describing the component's problem; empty if the component is healthy
+	Error string `json:"error,omitempty"`
 }

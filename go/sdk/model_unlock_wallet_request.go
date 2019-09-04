@@ -10,7 +10,10 @@
 package sdk
 
 type UnlockWalletRequest struct {
-	WalletId      string `json:"wallet_id"`
+	// The ID of the Wallet to unlock
+	WalletId string `json:"wallet_id"`
+	// The authorization password for the Wallet
 	Authorization string `json:"authorization"`
-	Seconds       int32  `json:"seconds"`
+	// The number of seconds to keep the Wallet unlocked
+	Seconds int32 `json:"seconds"`
 }

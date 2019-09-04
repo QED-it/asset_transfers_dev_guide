@@ -10,10 +10,16 @@
 package sdk
 
 type AnalyticTransferWalletTx struct {
-	IsIncoming       bool   `json:"is_incoming,omitempty"`
-	SenderId         string `json:"sender_id,omitempty"`
-	Memo             string `json:"memo,omitempty"`
+	// Boolean signifying whether the Assets were transferred to the Wallet in question; false of the Assets were transferred from the Wallet into another
+	IsIncoming bool `json:"is_incoming,omitempty"`
+	// The public key of the Wallet the Assets were transferred from
+	SenderId string `json:"sender_id,omitempty"`
+	// The address of the Wallet the Assets were transferred to
 	RecipientAddress string `json:"recipient_address,omitempty"`
-	AssetId          int32  `json:"asset_id,omitempty"`
-	Amount           int32  `json:"amount,omitempty"`
+	// The Id of the Asset Type transferred
+	AssetId int32 `json:"asset_id,omitempty"`
+	// The amount of Assets transferred
+	Amount int32 `json:"amount,omitempty"`
+	// The private memo attached to the Transfer
+	Memo string `json:"memo,omitempty"`
 }

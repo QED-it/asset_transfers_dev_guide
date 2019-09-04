@@ -73,6 +73,7 @@
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The list of retrieved transactions
    * @member {Array.<module:model/AnalyticWalletTx>} transactions
    */
   exports.prototype['transactions'] = undefined;

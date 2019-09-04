@@ -42,9 +42,9 @@
    * Constructs a new <code>CreateRuleRequest</code>.
    * @alias module:model/CreateRuleRequest
    * @class
-   * @param walletId {String} 
-   * @param authorization {String} 
-   * @param rulesToAdd {Array.<module:model/Rule>} 
+   * @param walletId {String} The ID of the Wallet whose admin credentials should be used to create the new Rules
+   * @param authorization {String} The authorization password for the Wallet whose admin credentials should be used to create the new Rules
+   * @param rulesToAdd {Array.<module:model/Rule>} The list of Rules to add to the network
    */
   var exports = function(walletId, authorization, rulesToAdd) {
     var _this = this;
@@ -78,14 +78,17 @@
   }
 
   /**
+   * The ID of the Wallet whose admin credentials should be used to create the new Rules
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The authorization password for the Wallet whose admin credentials should be used to create the new Rules
    * @member {String} authorization
    */
   exports.prototype['authorization'] = undefined;
   /**
+   * The list of Rules to add to the network
    * @member {Array.<module:model/Rule>} rules_to_add
    */
   exports.prototype['rules_to_add'] = undefined;

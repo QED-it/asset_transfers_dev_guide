@@ -10,5 +10,6 @@
 package sdk
 
 type GetPublicKeyRequest struct {
+	// The ID of the Wallet for which to retrieve the public key
 	WalletId string `json:"wallet_id"`
 }

@@ -42,7 +42,7 @@
    * Constructs a new <code>GetTaskStatusRequest</code>.
    * @alias module:model/GetTaskStatusRequest
    * @class
-   * @param id {String} 
+   * @param id {String} The ID of the Task
    */
   var exports = function(id) {
     var _this = this;
@@ -68,6 +68,7 @@
   }
 
   /**
+   * The ID of the Task
    * @member {String} id
    */
   exports.prototype['id'] = undefined;

@@ -10,6 +10,8 @@
 package sdk
 
 type BalanceForAsset struct {
+	// The ID of the Asset Type
 	AssetId int32 `json:"asset_id"`
-	Amount  int32 `json:"amount"`
+	// The outstanding balance for the Asset Type
+	Amount int32 `json:"amount"`
 }

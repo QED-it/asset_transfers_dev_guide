@@ -62,8 +62,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property canIssueConfidentially (base name: "can_issue_confidentially")', function() {
-      // uncomment below and update the code to test the property canIssueConfidentially
+    it('should have the property isAdmin (base name: "is_admin")', function() {
+      // uncomment below and update the code to test the property isAdmin
       //var instance = new QedItAssetTransfers.Rule();
       //expect(instance).to.be();
     });
@@ -80,8 +80,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property isAdmin (base name: "is_admin")', function() {
-      // uncomment below and update the code to test the property isAdmin
+    it('should have the property canIssueConfidentially (base name: "can_issue_confidentially")', function() {
+      // uncomment below and update the code to test the property canIssueConfidentially
       //var instance = new QedItAssetTransfers.Rule();
       //expect(instance).to.be();
     });

@@ -4,10 +4,10 @@ All URIs are relative to *http://localhost:12052*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**walletCreateRulePost**](WalletApi.md#walletCreateRulePost) | **POST** /wallet/create_rule | Create &amp; broadcast add-config-rule [async call]
-[**walletDeleteRulePost**](WalletApi.md#walletDeleteRulePost) | **POST** /wallet/delete_rule | Create &amp; broadcast delete-config-rule [async call]
+[**walletCreateRulePost**](WalletApi.md#walletCreateRulePost) | **POST** /wallet/create_rule | Create a new Rule in the network [async call]
+[**walletDeleteRulePost**](WalletApi.md#walletDeleteRulePost) | **POST** /wallet/delete_rule | Delete an existing Rule from the network [async call]
 [**walletGetActivityPost**](WalletApi.md#walletGetActivityPost) | **POST** /wallet/get_activity | Get wallet activity (transactions)
-[**walletGetBalancesPost**](WalletApi.md#walletGetBalancesPost) | **POST** /wallet/get_balances | Get wallets balance
+[**walletGetBalancesPost**](WalletApi.md#walletGetBalancesPost) | **POST** /wallet/get_balances | Get wallets balances
 [**walletGetNewAddressPost**](WalletApi.md#walletGetNewAddressPost) | **POST** /wallet/get_new_address | Get a new address from a given diversifier or generate randomly
 [**walletGetPublicKeyPost**](WalletApi.md#walletGetPublicKeyPost) | **POST** /wallet/get_public_key | Get wallet public key
 [**walletIssueAssetPost**](WalletApi.md#walletIssueAssetPost) | **POST** /wallet/issue_asset | Issue assets [async call]
@@ -18,7 +18,9 @@ Method | HTTP request | Description
 # **walletCreateRulePost**
 > AsyncTaskCreatedResponse walletCreateRulePost(createRuleRequest)
 
-Create &amp; broadcast add-config-rule [async call]
+Create a new Rule in the network [async call]
+
+Create new Rules that can either create a new admin, a new issuer, or both; The Rules are created by a Wallet that needs to have admin rights; The Rules grant rights to other Wallets through the Wallets&#39; public keys.
 
 ### Example
 ```javascript
@@ -63,7 +65,9 @@ Name | Type | Description  | Notes
 # **walletDeleteRulePost**
 > AsyncTaskCreatedResponse walletDeleteRulePost(deleteRuleRequest)
 
-Create &amp; broadcast delete-config-rule [async call]
+Delete an existing Rule from the network [async call]
+
+Delete an existing Rule from the network; The Rule is deleted by a Wallet which needs to have admin rights.
 
 ### Example
 ```javascript
@@ -110,6 +114,8 @@ Name | Type | Description  | Notes
 
 Get wallet activity (transactions)
 
+List transactions that were created by a specifed Wallet or that affected that Wallet; All known details of each such transaction will be returned.
+
 ### Example
 ```javascript
 var QedItAssetTransfers = require('qed-it-asset-transfers');
@@ -153,7 +159,9 @@ Name | Type | Description  | Notes
 # **walletGetBalancesPost**
 > GetWalletBalanceResponse walletGetBalancesPost(getWalletBalanceRequest)
 
-Get wallets balance
+Get wallets balances
+
+Get a list of the Asset Types held within a given Wallet and the amount of each type held.
 
 ### Example
 ```javascript
@@ -200,6 +208,8 @@ Name | Type | Description  | Notes
 
 Get a new address from a given diversifier or generate randomly
 
+Generate an Address for the Wallet; the address can be used by other Wallet owners to issue or transfer Assets into said Wallet; If a diversifier is provided, then the generated address is deterministically generated from the diversifier; If the diversifier is omitted, then a random diversifier is used and the resulting Address will be random; in both cases the Address cannot be linked to the Wallet by parties that do not have access to the Wallet. All generated Addresses of a Wallet are always valid and cannot be invalidated.
+
 ### Example
 ```javascript
 var QedItAssetTransfers = require('qed-it-asset-transfers');
@@ -244,6 +254,8 @@ Name | Type | Description  | Notes
 > GetPublicKeyResponse walletGetPublicKeyPost(getPublicKeyRequest)
 
 Get wallet public key
+
+Get the unique public key of the Wallet; This key is unique across the entire network and is used to identify the Wallet.
 
 ### Example
 ```javascript
@@ -290,6 +302,8 @@ Name | Type | Description  | Notes
 
 Issue assets [async call]
 
+Issue Assets from a Wallet to a recipient Address; The issuing Wallet is required to have matching issuance rights (in the form of a matching Rule); Issuance can be done either confidentially or in public; In order to issue confidentially, the matching Rule must explicitly allow this.
+
 ### Example
 ```javascript
 var QedItAssetTransfers = require('qed-it-asset-transfers');
@@ -334,6 +348,8 @@ Name | Type | Description  | Notes
 > AsyncTaskCreatedResponse walletTransferAssetPost(transferAssetRequest)
 
 Transfer assets [async call]
+
+Transfer a specified amount of a specified Asset Type from a specified Wallet to a specified Address; Transfers are always completely confidential.
 
 ### Example
 ```javascript

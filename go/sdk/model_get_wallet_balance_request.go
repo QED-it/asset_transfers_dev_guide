@@ -10,5 +10,6 @@
 package sdk
 
 type GetWalletBalanceRequest struct {
+	// The ID of the Wallet
 	WalletId string `json:"wallet_id"`
 }

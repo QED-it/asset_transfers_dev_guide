@@ -40,10 +40,11 @@
 
   /**
    * Constructs a new <code>AnalyticsRule</code>.
+   * The Rule used in the Issuance
    * @alias module:model/AnalyticsRule
    * @class
-   * @param minId {Number} 
-   * @param maxId {Number} 
+   * @param minId {Number} The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
+   * @param maxId {Number} The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
    */
   var exports = function(minId, maxId) {
     var _this = this;
@@ -73,10 +74,12 @@
   }
 
   /**
+   * The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
    * @member {Number} min_id
    */
   exports.prototype['min_id'] = undefined;
   /**
+   * The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
    * @member {Number} max_id
    */
   exports.prototype['max_id'] = undefined;

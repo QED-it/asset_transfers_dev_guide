@@ -25,7 +25,8 @@ var (
 type NodeApiService service
 
 /*
-NodeApiService Delete a wallet
+NodeApiService Delete a Wallet
+Deletes a Wallet from the Node; All private information about the Wallet will be deleted including transactional history, balances, and keys; If the secret key of the Wallet are not stored elsewhere then all Assets held in the Wallet will be forever lost! If the secret key of the Wallet is stored elsewhere, then all held Assets and the entire transactional history of the Wallet can be restored from the Blockchain at any time by importing the Wallet into a Node.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param deleteWalletRequest
 @return AsyncTaskCreatedResponse
@@ -156,7 +157,8 @@ func (a *NodeApiService) NodeDeleteWalletPost(ctx context.Context, deleteWalletR
 }
 
 /*
-NodeApiService Export a viewing key that allows an auditor to view all transactions to and from a wallet. The viewing key is encrypted for the auditor identified by recipient_payment_address. The viewing key does not enable the auditor to make transactions.
+NodeApiService Export viewing credentials for a Wallet
+Export a viewing key that allows viewing all transactions to and from a wallet, including past transactions. The viewing key is encrypted for a specific Address, and can only be recovered by someone in possession of either a secret key or a viewing key for the Wallet that Address belongs to. The viewing key does enable making any transactions (including rule changes, issuance, and transfers) on behalf of the exported Wallet.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param exportAuditorAccessWalletRequest
 @return ExportAuditorAccessWalletResponse
@@ -288,6 +290,7 @@ func (a *NodeApiService) NodeExportAuditorAccessWalletPost(ctx context.Context, 
 
 /*
 NodeApiService Export wallet secret key
+Export an encrypted form of the Wallet&#39;s secret key; The authorization password under which the secret key is encrypted is the same one under which it was originally created or imported; Knowledge of the secret key and the authorization password is required to import the Wallet into a Node in the future.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param exportWalletRequest
 @return ExportWalletResponse
@@ -418,7 +421,8 @@ func (a *NodeApiService) NodeExportWalletPost(ctx context.Context, exportWalletR
 }
 
 /*
-NodeApiService Generate a new wallet
+NodeApiService Generate a new Wallet
+Randomly generate a new Wallet under a specified ID; This only affects the Node and in particular nothing about this action is broadcast to the Blockchain; The Wallet ID is required to be unique within the Node, but can otherwise be user-defined.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param generateWalletRequest
 */
@@ -528,7 +532,8 @@ func (a *NodeApiService) NodeGenerateWalletPost(ctx context.Context, generateWal
 }
 
 /*
-NodeApiService Get all wallet labels
+NodeApiService Get all wallet IDs
+Returns a list of the IDs of all Wallets currently stored on the Node. Both full-access and view-only Wallets are listed.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return GetAllWalletsResponse
 */
@@ -646,7 +651,8 @@ func (a *NodeApiService) NodeGetAllWalletsPost(ctx context.Context) (GetAllWalle
 }
 
 /*
-NodeApiService Get network governance rules
+NodeApiService Get network governance Rules
+Returns a full list of all the Rules that govern admin and issuance rights within the network.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 @return GetRulesResponse
 */
@@ -765,6 +771,7 @@ func (a *NodeApiService) NodeGetRulesPost(ctx context.Context) (GetRulesResponse
 
 /*
 NodeApiService Get a specific task (by ID)
+Returns the meta-data of a given Task and its current status. The particular, private details of the Task such as an Asset ID or amount in a Transfer are not returned.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param getTaskStatusRequest
 @return GetTaskStatusResponse
@@ -895,7 +902,8 @@ func (a *NodeApiService) NodeGetTaskStatusPost(ctx context.Context, getTaskStatu
 }
 
 /*
-NodeApiService Get a list of tasks by results/types
+NodeApiService Get a (potentially) filtered list of all Tasks
+Returns a list of all Tasks along with their meta-data and statuses. The particular, private details of the Task such as an Asset ID or amount in a Transfer are not returned. Tasks can be filtered using various parameters as specified in the request body.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param getTasksRequest
 @return GetTasksResponse
@@ -1026,7 +1034,8 @@ func (a *NodeApiService) NodeGetTasksPost(ctx context.Context, getTasksRequest G
 }
 
 /*
-NodeApiService Import a viewing key generated by export_auditor_access_wallet [async call]. This will create a read-only wallet which can be queried with endpoints such as get_activity and get_balances, but cannot be used to perform transactions.
+NodeApiService Import viewing credentials for a Wallet [async call]
+Import a viewing key generated by the export_auditor_access_wallet endpoint. This will create a read-only wallet which can be queried with endpoints such as get_activity and get_balances, but cannot be used to perform transactions. The Wallet whose Address was used as the recipient for the exported viewing key must already be imported within the Node in order for this process to succeed.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param importAuditorAccessWalletRequest
 @return AsyncTaskCreatedResponse
@@ -1157,7 +1166,8 @@ func (a *NodeApiService) NodeImportAuditorAccessWalletPost(ctx context.Context, 
 }
 
 /*
-NodeApiService Import wallet from secret key [async call]
+NodeApiService Import Wallet from a known secret key and authorization [async call]
+Import a Wallet into the Node under a specified ID; All the transactional history and outstanding balanced of the Wallet will be extracted from the Blockchain; The Wallet ID is required to be unique within the Node, but can otherwise be user-defined.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param importWalletRequest
 @return AsyncTaskCreatedResponse
@@ -1289,6 +1299,7 @@ func (a *NodeApiService) NodeImportWalletPost(ctx context.Context, importWalletR
 
 /*
 NodeApiService Unlocks a wallet for a given amount of seconds [async call]
+Causes a specified Wallet&#39;s secret key to be stored in-memory for a specified amount of time in order to increase transactional latency. Should only be used in cases where latency is highly sensitive.
  * @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param unlockWalletRequest
 @return AsyncTaskCreatedResponse

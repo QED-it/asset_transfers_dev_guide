@@ -40,6 +40,7 @@
 
   /**
    * Constructs a new <code>AnalyticsIssueTx</code>.
+   * The data of a particular Issuance transaction
    * @alias module:model/AnalyticsIssueTx
    * @class
    */
@@ -72,14 +73,17 @@
   }
 
   /**
+   * The data of the Assets issued (multiple Assets may potentially be issued in a single Issuance transaction)
    * @member {Array.<module:model/AnalyticsOutput>} outputs
    */
   exports.prototype['outputs'] = undefined;
   /**
+   * The public key of the Wallet that performed the Issuance
    * @member {String} public_key
    */
   exports.prototype['public_key'] = undefined;
   /**
+   * The signature on the transaction by the secret key of the Wallet that performed the Issuance
    * @member {String} signature
    */
   exports.prototype['signature'] = undefined;

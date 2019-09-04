@@ -10,6 +10,8 @@
 package sdk
 
 type GetPublicKeyResponse struct {
-	WalletId  string `json:"wallet_id"`
+	// The ID of the Wallet the pubic key belongs to
+	WalletId string `json:"wallet_id"`
+	// The public key of the Wallet
 	PublicKey string `json:"public_key"`
 }

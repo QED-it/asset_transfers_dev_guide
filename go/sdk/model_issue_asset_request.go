@@ -10,11 +10,17 @@
 package sdk
 
 type IssueAssetRequest struct {
-	WalletId         string `json:"wallet_id"`
-	Authorization    string `json:"authorization"`
+	// The ID of the Wallet that has the required Issuance privileges
+	WalletId string `json:"wallet_id"`
+	// The authorization password for the Wallet that has the Issuance privileges
+	Authorization string `json:"authorization"`
+	// The Address of the recipient of the issued Assets
 	RecipientAddress string `json:"recipient_address"`
-	Amount           int32  `json:"amount"`
-	AssetId          int32  `json:"asset_id"`
-	Confidential     bool   `json:"confidential"`
-	Memo             string `json:"memo"`
+	// The ID of the Asset Type to issue
+	AssetId int32 `json:"asset_id"`
+	// the amount of Assets to issue
+	Amount int32 `json:"amount"`
+	// Boolean which should be true if the issuance should be confidential, and false of the Issuance should be public
+	Confidential bool   `json:"confidential"`
+	Memo         string `json:"memo"`
 }

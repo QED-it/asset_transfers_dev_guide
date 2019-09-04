@@ -42,7 +42,7 @@
    * Constructs a new <code>DeleteWalletRequest</code>.
    * @alias module:model/DeleteWalletRequest
    * @class
-   * @param walletId {String} 
+   * @param walletId {String} The ID of the Wallet to delete
    */
   var exports = function(walletId) {
     var _this = this;
@@ -71,10 +71,12 @@
   }
 
   /**
+   * The ID of the Wallet to delete
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The authorization password for the Wallet
    * @member {String} authorization
    */
   exports.prototype['authorization'] = undefined;

@@ -40,6 +40,7 @@
 
   /**
    * Constructs a new <code>AnalyticsTransferTx</code>.
+   * The data of a single Transfer within a Transfer transaction
    * @alias module:model/AnalyticsTransferTx
    * @class
    */
@@ -67,36 +68,49 @@
       if (data.hasOwnProperty('outputs')) {
         obj['outputs'] = ApiClient.convertToType(data['outputs'], [AnalyticsOutputDescription]);
       }
+      if (data.hasOwnProperty('rk')) {
+        obj['rk'] = ApiClient.convertToType(data['rk'], 'String');
+      }
+      if (data.hasOwnProperty('spend_auth_sig')) {
+        obj['spend_auth_sig'] = ApiClient.convertToType(data['spend_auth_sig'], 'String');
+      }
       if (data.hasOwnProperty('binding_sig')) {
         obj['binding_sig'] = ApiClient.convertToType(data['binding_sig'], 'String');
-      }
-      if (data.hasOwnProperty('spend_auth_sigs')) {
-        obj['spend_auth_sigs'] = ApiClient.convertToType(data['spend_auth_sigs'], ['String']);
       }
     }
     return obj;
   }
 
   /**
+   * The Converter Proofs
    * @member {Array.<module:model/AnalyticsAssetConverterProofDescription>} asset_converter_descriptions
    */
   exports.prototype['asset_converter_descriptions'] = undefined;
   /**
+   * The information and Proofs associated with the Assets spent in the Transfer
    * @member {Array.<module:model/AnalyticsSpendDescription>} spends
    */
   exports.prototype['spends'] = undefined;
   /**
+   * The information and Proofs associated with the Assets output from the Transfer
    * @member {Array.<module:model/AnalyticsOutputDescription>} outputs
    */
   exports.prototype['outputs'] = undefined;
   /**
+   * The re-randomized public key of the Wallet which created the Transfer
+   * @member {String} rk
+   */
+  exports.prototype['rk'] = undefined;
+  /**
+   * The signature authorizing the spend of the Assets spent in the Transfer
+   * @member {String} spend_auth_sig
+   */
+  exports.prototype['spend_auth_sig'] = undefined;
+  /**
+   * The signature binding the spent and output Assets and verifying the balance
    * @member {String} binding_sig
    */
   exports.prototype['binding_sig'] = undefined;
-  /**
-   * @member {Array.<String>} spend_auth_sigs
-   */
-  exports.prototype['spend_auth_sigs'] = undefined;
 
 
 

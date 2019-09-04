@@ -10,6 +10,8 @@
 package sdk
 
 type GetWalletBalanceResponse struct {
-	WalletId string            `json:"wallet_id"`
-	Assets   []BalanceForAsset `json:"assets"`
+	// The ID of the Wallet
+	WalletId string `json:"wallet_id"`
+	// The balances of the various Asset Types held by the Wallet
+	Assets []BalanceForAsset `json:"assets"`
 }

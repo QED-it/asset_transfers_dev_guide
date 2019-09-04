@@ -42,9 +42,9 @@
    * Constructs a new <code>ExportWalletResponse</code>.
    * @alias module:model/ExportWalletResponse
    * @class
-   * @param walletId {String} 
-   * @param encryptedSk {String} 
-   * @param salt {String} 
+   * @param walletId {String} The ID of the exported Wallet in the Node from which it was exported
+   * @param encryptedSk {String} The encrypted secret key of the Wallet
+   * @param salt {String} The salt used in the encryption of the secret key
    */
   var exports = function(walletId, encryptedSk, salt) {
     var _this = this;
@@ -78,14 +78,17 @@
   }
 
   /**
+   * The ID of the exported Wallet in the Node from which it was exported
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The encrypted secret key of the Wallet
    * @member {String} encrypted_sk
    */
   exports.prototype['encrypted_sk'] = undefined;
   /**
+   * The salt used in the encryption of the secret key
    * @member {String} salt
    */
   exports.prototype['salt'] = undefined;

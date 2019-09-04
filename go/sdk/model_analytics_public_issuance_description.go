@@ -9,7 +9,10 @@
 
 package sdk
 
+// Describes what Asset Type and amount were issued; null if the Issuance was confidential
 type AnalyticsPublicIssuanceDescription struct {
+	// The ID of the Asset Type issued
 	AssetId int32 `json:"asset_id"`
-	Amount  int32 `json:"amount"`
+	// The amount of Assets issued
+	Amount int32 `json:"amount"`
 }

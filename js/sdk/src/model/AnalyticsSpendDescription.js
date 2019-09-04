@@ -67,9 +67,6 @@
       if (data.hasOwnProperty('nullifier')) {
         obj['nullifier'] = ApiClient.convertToType(data['nullifier'], 'String');
       }
-      if (data.hasOwnProperty('rk_out')) {
-        obj['rk_out'] = ApiClient.convertToType(data['rk_out'], 'String');
-      }
       if (data.hasOwnProperty('zkproof')) {
         obj['zkproof'] = ApiClient.convertToType(data['zkproof'], 'String');
       }
@@ -78,22 +75,22 @@
   }
 
   /**
+   * The commitment to both the Asset Type and amount of the Note
    * @member {String} cv
    */
   exports.prototype['cv'] = undefined;
   /**
+   * The anchor (root) of the Merkle tree used in the Proof
    * @member {String} anchor
    */
   exports.prototype['anchor'] = undefined;
   /**
+   * The Note's Nullifier
    * @member {String} nullifier
    */
   exports.prototype['nullifier'] = undefined;
   /**
-   * @member {String} rk_out
-   */
-  exports.prototype['rk_out'] = undefined;
-  /**
+   * The Proof that the Note indeed exists in the Merkle tree and belongs to the spender
    * @member {String} zkproof
    */
   exports.prototype['zkproof'] = undefined;

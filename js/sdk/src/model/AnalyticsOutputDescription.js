@@ -64,11 +64,11 @@
       if (data.hasOwnProperty('cm')) {
         obj['cm'] = ApiClient.convertToType(data['cm'], 'String');
       }
-      if (data.hasOwnProperty('epk')) {
-        obj['epk'] = ApiClient.convertToType(data['epk'], 'String');
-      }
       if (data.hasOwnProperty('zkproof')) {
         obj['zkproof'] = ApiClient.convertToType(data['zkproof'], 'String');
+      }
+      if (data.hasOwnProperty('epk')) {
+        obj['epk'] = ApiClient.convertToType(data['epk'], 'String');
       }
       if (data.hasOwnProperty('enc_note')) {
         obj['enc_note'] = ApiClient.convertToType(data['enc_note'], 'String');
@@ -81,26 +81,32 @@
   }
 
   /**
+   * The commitment to both the Asset Type and amount of the Note
    * @member {String} cv
    */
   exports.prototype['cv'] = undefined;
   /**
+   * The commitment to the entire Note
    * @member {String} cm
    */
   exports.prototype['cm'] = undefined;
   /**
-   * @member {String} epk
-   */
-  exports.prototype['epk'] = undefined;
-  /**
+   * The Proof that the commitments match
    * @member {String} zkproof
    */
   exports.prototype['zkproof'] = undefined;
   /**
+   * The ephemeral public key used to encrypt the Note contents for the receiver
+   * @member {String} epk
+   */
+  exports.prototype['epk'] = undefined;
+  /**
+   * The Note encryption for the receiver
    * @member {String} enc_note
    */
   exports.prototype['enc_note'] = undefined;
   /**
+   * The Note encryption for the sender
    * @member {String} enc_sender
    */
   exports.prototype['enc_sender'] = undefined;

@@ -10,6 +10,7 @@
 package sdk
 
 type AnalyticsOutput struct {
+	// Boolean signifying whether the Issuance was done confidentially; false if the Issuance was done publicly
 	IsConfidential                  bool                                     `json:"is_confidential,omitempty"`
 	PublicIssuanceDescription       AnalyticsPublicIssuanceDescription       `json:"public_issuance_description,omitempty"`
 	ConfidentialIssuanceDescription AnalyticsConfidentialIssuanceDescription `json:"confidential_issuance_description,omitempty"`

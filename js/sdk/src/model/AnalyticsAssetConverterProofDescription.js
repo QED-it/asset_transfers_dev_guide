@@ -75,18 +75,22 @@
   }
 
   /**
+   * The commitment to both the Asset Type and amount of the Note
    * @member {String} input_cv
    */
   exports.prototype['input_cv'] = undefined;
   /**
+   * The commitment to the Asset amount
    * @member {String} amount_cv
    */
   exports.prototype['amount_cv'] = undefined;
   /**
+   * The commitment to the ID of the Asset Type
    * @member {String} asset_cv
    */
   exports.prototype['asset_cv'] = undefined;
   /**
+   * The Proof that the commitment contents match
    * @member {String} zkproof
    */
   exports.prototype['zkproof'] = undefined;

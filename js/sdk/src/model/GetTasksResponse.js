@@ -66,6 +66,7 @@
   }
 
   /**
+   * The returned Tasks array, sorted in the requested order
    * @member {Array.<module:model/GetTaskStatusResponse>} tasks
    */
   exports.prototype['tasks'] = undefined;

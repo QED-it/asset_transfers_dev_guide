@@ -40,10 +40,11 @@
 
   /**
    * Constructs a new <code>AnalyticsPublicIssuanceDescription</code>.
+   * Describes what Asset Type and amount were issued; null if the Issuance was confidential
    * @alias module:model/AnalyticsPublicIssuanceDescription
    * @class
-   * @param assetId {Number} 
-   * @param amount {Number} 
+   * @param assetId {Number} The ID of the Asset Type issued
+   * @param amount {Number} The amount of Assets issued
    */
   var exports = function(assetId, amount) {
     var _this = this;
@@ -73,10 +74,12 @@
   }
 
   /**
+   * The ID of the Asset Type issued
    * @member {Number} asset_id
    */
   exports.prototype['asset_id'] = undefined;
   /**
+   * The amount of Assets issued
    * @member {Number} amount
    */
   exports.prototype['amount'] = undefined;

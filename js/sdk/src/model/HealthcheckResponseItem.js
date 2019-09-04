@@ -69,10 +69,12 @@
   }
 
   /**
+   * Boolean signifying whether the component is healthy
    * @member {Boolean} passing
    */
   exports.prototype['passing'] = undefined;
   /**
+   * Error string describing the component's problem; empty if the component is healthy
    * @member {String} error
    */
   exports.prototype['error'] = undefined;

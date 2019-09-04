@@ -42,9 +42,9 @@
    * Constructs a new <code>UnlockWalletRequest</code>.
    * @alias module:model/UnlockWalletRequest
    * @class
-   * @param walletId {String} 
-   * @param authorization {String} 
-   * @param seconds {Number} 
+   * @param walletId {String} The ID of the Wallet to unlock
+   * @param authorization {String} The authorization password for the Wallet
+   * @param seconds {Number} The number of seconds to keep the Wallet unlocked
    */
   var exports = function(walletId, authorization, seconds) {
     var _this = this;
@@ -78,14 +78,17 @@
   }
 
   /**
+   * The ID of the Wallet to unlock
    * @member {String} wallet_id
    */
   exports.prototype['wallet_id'] = undefined;
   /**
+   * The authorization password for the Wallet
    * @member {String} authorization
    */
   exports.prototype['authorization'] = undefined;
   /**
+   * The number of seconds to keep the Wallet unlocked
    * @member {Number} seconds
    */
   exports.prototype['seconds'] = undefined;

@@ -10,5 +10,6 @@
 package sdk
 
 type ExportWalletRequest struct {
+	// The ID of the Wallet to export
 	WalletId string `json:"wallet_id"`
 }

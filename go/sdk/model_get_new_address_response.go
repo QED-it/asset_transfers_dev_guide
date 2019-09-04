@@ -10,6 +10,8 @@
 package sdk
 
 type GetNewAddressResponse struct {
-	WalletId         string `json:"wallet_id"`
+	// The ID of the Wallet the Address belongs to
+	WalletId string `json:"wallet_id"`
+	// The generated Address of the Wallet
 	RecipientAddress string `json:"recipient_address"`
 }

@@ -49,7 +49,8 @@
 
 
     /**
-     * Delete a wallet
+     * Delete a Wallet
+     * Deletes a Wallet from the Node; All private information about the Wallet will be deleted including transactional history, balances, and keys; If the secret key of the Wallet are not stored elsewhere then all Assets held in the Wallet will be forever lost! If the secret key of the Wallet is stored elsewhere, then all held Assets and the entire transactional history of the Wallet can be restored from the Blockchain at any time by importing the Wallet into a Node.
      * @param {module:model/DeleteWalletRequest} deleteWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
      */
@@ -86,7 +87,8 @@
     }
 
     /**
-     * Delete a wallet
+     * Delete a Wallet
+     * Deletes a Wallet from the Node; All private information about the Wallet will be deleted including transactional history, balances, and keys; If the secret key of the Wallet are not stored elsewhere then all Assets held in the Wallet will be forever lost! If the secret key of the Wallet is stored elsewhere, then all held Assets and the entire transactional history of the Wallet can be restored from the Blockchain at any time by importing the Wallet into a Node.
      * @param {module:model/DeleteWalletRequest} deleteWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
      */
@@ -99,7 +101,8 @@
 
 
     /**
-     * Export a viewing key that allows an auditor to view all transactions to and from a wallet. The viewing key is encrypted for the auditor identified by recipient_payment_address. The viewing key does not enable the auditor to make transactions.
+     * Export viewing credentials for a Wallet
+     * Export a viewing key that allows viewing all transactions to and from a wallet, including past transactions. The viewing key is encrypted for a specific Address, and can only be recovered by someone in possession of either a secret key or a viewing key for the Wallet that Address belongs to. The viewing key does enable making any transactions (including rule changes, issuance, and transfers) on behalf of the exported Wallet.
      * @param {module:model/ExportAuditorAccessWalletRequest} exportAuditorAccessWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ExportAuditorAccessWalletResponse} and HTTP response
      */
@@ -136,7 +139,8 @@
     }
 
     /**
-     * Export a viewing key that allows an auditor to view all transactions to and from a wallet. The viewing key is encrypted for the auditor identified by recipient_payment_address. The viewing key does not enable the auditor to make transactions.
+     * Export viewing credentials for a Wallet
+     * Export a viewing key that allows viewing all transactions to and from a wallet, including past transactions. The viewing key is encrypted for a specific Address, and can only be recovered by someone in possession of either a secret key or a viewing key for the Wallet that Address belongs to. The viewing key does enable making any transactions (including rule changes, issuance, and transfers) on behalf of the exported Wallet.
      * @param {module:model/ExportAuditorAccessWalletRequest} exportAuditorAccessWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ExportAuditorAccessWalletResponse}
      */
@@ -150,6 +154,7 @@
 
     /**
      * Export wallet secret key
+     * Export an encrypted form of the Wallet&#39;s secret key; The authorization password under which the secret key is encrypted is the same one under which it was originally created or imported; Knowledge of the secret key and the authorization password is required to import the Wallet into a Node in the future.
      * @param {module:model/ExportWalletRequest} exportWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/ExportWalletResponse} and HTTP response
      */
@@ -187,6 +192,7 @@
 
     /**
      * Export wallet secret key
+     * Export an encrypted form of the Wallet&#39;s secret key; The authorization password under which the secret key is encrypted is the same one under which it was originally created or imported; Knowledge of the secret key and the authorization password is required to import the Wallet into a Node in the future.
      * @param {module:model/ExportWalletRequest} exportWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/ExportWalletResponse}
      */
@@ -199,7 +205,8 @@
 
 
     /**
-     * Generate a new wallet
+     * Generate a new Wallet
+     * Randomly generate a new Wallet under a specified ID; This only affects the Node and in particular nothing about this action is broadcast to the Blockchain; The Wallet ID is required to be unique within the Node, but can otherwise be user-defined.
      * @param {module:model/GenerateWalletRequest} generateWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing HTTP response
      */
@@ -236,7 +243,8 @@
     }
 
     /**
-     * Generate a new wallet
+     * Generate a new Wallet
+     * Randomly generate a new Wallet under a specified ID; This only affects the Node and in particular nothing about this action is broadcast to the Blockchain; The Wallet ID is required to be unique within the Node, but can otherwise be user-defined.
      * @param {module:model/GenerateWalletRequest} generateWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}
      */
@@ -249,7 +257,8 @@
 
 
     /**
-     * Get all wallet labels
+     * Get all wallet IDs
+     * Returns a list of the IDs of all Wallets currently stored on the Node. Both full-access and view-only Wallets are listed.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetAllWalletsResponse} and HTTP response
      */
     this.nodeGetAllWalletsPostWithHttpInfo = function() {
@@ -280,7 +289,8 @@
     }
 
     /**
-     * Get all wallet labels
+     * Get all wallet IDs
+     * Returns a list of the IDs of all Wallets currently stored on the Node. Both full-access and view-only Wallets are listed.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetAllWalletsResponse}
      */
     this.nodeGetAllWalletsPost = function() {
@@ -292,7 +302,8 @@
 
 
     /**
-     * Get network governance rules
+     * Get network governance Rules
+     * Returns a full list of all the Rules that govern admin and issuance rights within the network.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetRulesResponse} and HTTP response
      */
     this.nodeGetRulesPostWithHttpInfo = function() {
@@ -323,7 +334,8 @@
     }
 
     /**
-     * Get network governance rules
+     * Get network governance Rules
+     * Returns a full list of all the Rules that govern admin and issuance rights within the network.
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetRulesResponse}
      */
     this.nodeGetRulesPost = function() {
@@ -336,6 +348,7 @@
 
     /**
      * Get a specific task (by ID)
+     * Returns the meta-data of a given Task and its current status. The particular, private details of the Task such as an Asset ID or amount in a Transfer are not returned.
      * @param {module:model/GetTaskStatusRequest} getTaskStatusRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetTaskStatusResponse} and HTTP response
      */
@@ -373,6 +386,7 @@
 
     /**
      * Get a specific task (by ID)
+     * Returns the meta-data of a given Task and its current status. The particular, private details of the Task such as an Asset ID or amount in a Transfer are not returned.
      * @param {module:model/GetTaskStatusRequest} getTaskStatusRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetTaskStatusResponse}
      */
@@ -385,7 +399,8 @@
 
 
     /**
-     * Get a list of tasks by results/types
+     * Get a (potentially) filtered list of all Tasks
+     * Returns a list of all Tasks along with their meta-data and statuses. The particular, private details of the Task such as an Asset ID or amount in a Transfer are not returned. Tasks can be filtered using various parameters as specified in the request body.
      * @param {module:model/GetTasksRequest} getTasksRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/GetTasksResponse} and HTTP response
      */
@@ -422,7 +437,8 @@
     }
 
     /**
-     * Get a list of tasks by results/types
+     * Get a (potentially) filtered list of all Tasks
+     * Returns a list of all Tasks along with their meta-data and statuses. The particular, private details of the Task such as an Asset ID or amount in a Transfer are not returned. Tasks can be filtered using various parameters as specified in the request body.
      * @param {module:model/GetTasksRequest} getTasksRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/GetTasksResponse}
      */
@@ -435,7 +451,8 @@
 
 
     /**
-     * Import a viewing key generated by export_auditor_access_wallet [async call]. This will create a read-only wallet which can be queried with endpoints such as get_activity and get_balances, but cannot be used to perform transactions.
+     * Import viewing credentials for a Wallet [async call]
+     * Import a viewing key generated by the export_auditor_access_wallet endpoint. This will create a read-only wallet which can be queried with endpoints such as get_activity and get_balances, but cannot be used to perform transactions. The Wallet whose Address was used as the recipient for the exported viewing key must already be imported within the Node in order for this process to succeed.
      * @param {module:model/ImportAuditorAccessWalletRequest} importAuditorAccessWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
      */
@@ -472,7 +489,8 @@
     }
 
     /**
-     * Import a viewing key generated by export_auditor_access_wallet [async call]. This will create a read-only wallet which can be queried with endpoints such as get_activity and get_balances, but cannot be used to perform transactions.
+     * Import viewing credentials for a Wallet [async call]
+     * Import a viewing key generated by the export_auditor_access_wallet endpoint. This will create a read-only wallet which can be queried with endpoints such as get_activity and get_balances, but cannot be used to perform transactions. The Wallet whose Address was used as the recipient for the exported viewing key must already be imported within the Node in order for this process to succeed.
      * @param {module:model/ImportAuditorAccessWalletRequest} importAuditorAccessWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
      */
@@ -485,7 +503,8 @@
 
 
     /**
-     * Import wallet from secret key [async call]
+     * Import Wallet from a known secret key and authorization [async call]
+     * Import a Wallet into the Node under a specified ID; All the transactional history and outstanding balanced of the Wallet will be extracted from the Blockchain; The Wallet ID is required to be unique within the Node, but can otherwise be user-defined.
      * @param {module:model/ImportWalletRequest} importWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
      */
@@ -522,7 +541,8 @@
     }
 
     /**
-     * Import wallet from secret key [async call]
+     * Import Wallet from a known secret key and authorization [async call]
+     * Import a Wallet into the Node under a specified ID; All the transactional history and outstanding balanced of the Wallet will be extracted from the Blockchain; The Wallet ID is required to be unique within the Node, but can otherwise be user-defined.
      * @param {module:model/ImportWalletRequest} importWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
      */
@@ -536,6 +556,7 @@
 
     /**
      * Unlocks a wallet for a given amount of seconds [async call]
+     * Causes a specified Wallet&#39;s secret key to be stored in-memory for a specified amount of time in order to increase transactional latency. Should only be used in cases where latency is highly sensitive.
      * @param {module:model/UnlockWalletRequest} unlockWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with an object containing data of type {@link module:model/AsyncTaskCreatedResponse} and HTTP response
      */
@@ -573,6 +594,7 @@
 
     /**
      * Unlocks a wallet for a given amount of seconds [async call]
+     * Causes a specified Wallet&#39;s secret key to be stored in-memory for a specified amount of time in order to increase transactional latency. Should only be used in cases where latency is highly sensitive.
      * @param {module:model/UnlockWalletRequest} unlockWalletRequest 
      * @return {Promise} a {@link https://www.promisejs.org/|Promise}, with data of type {@link module:model/AsyncTaskCreatedResponse}
      */

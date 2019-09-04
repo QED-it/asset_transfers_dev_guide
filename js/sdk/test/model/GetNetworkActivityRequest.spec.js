@@ -68,6 +68,12 @@
       //expect(instance).to.be();
     });
 
+    it('should have the property txHashes (base name: "tx_hashes")', function() {
+      // uncomment below and update the code to test the property txHashes
+      //var instance = new QedItAssetTransfers.GetNetworkActivityRequest();
+      //expect(instance).to.be();
+    });
+
   });
 
 }));

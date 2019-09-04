@@ -10,6 +10,7 @@
 package sdk
 
 type AnalyticTransaction struct {
-	Metadata AnalyticsTxMetadata    `json:"metadata,omitempty"`
-	Content  map[string]interface{} `json:"content,omitempty"`
+	Metadata AnalyticsTxMetadata `json:"metadata,omitempty"`
+	// The detailed content of the transaction; format differs depending on the transaction type
+	Content map[string]interface{} `json:"content,omitempty"`
 }

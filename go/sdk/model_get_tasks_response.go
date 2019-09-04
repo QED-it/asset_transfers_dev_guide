@@ -10,5 +10,6 @@
 package sdk
 
 type GetTasksResponse struct {
+	// The returned Tasks array, sorted in the requested order
 	Tasks []GetTaskStatusResponse `json:"tasks,omitempty"`
 }

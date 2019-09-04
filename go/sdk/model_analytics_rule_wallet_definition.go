@@ -10,10 +10,16 @@
 package sdk
 
 type AnalyticsRuleWalletDefinition struct {
-	PublicKey              string `json:"public_key,omitempty"`
-	CanIssueConfidentially bool   `json:"can_issue_confidentially,omitempty"`
-	IsAdmin                bool   `json:"is_admin,omitempty"`
-	CanIssueAssetIdFirst   int32  `json:"can_issue_asset_id_first,omitempty"`
-	CanIssueAssetIdLast    int32  `json:"can_issue_asset_id_last,omitempty"`
-	Operation              string `json:"operation,omitempty"`
+	// The public key of the Wallet that is being granted rights in this Rule
+	PublicKey string `json:"public_key,omitempty"`
+	// Boolean signifying whether the Rule grants admin rights
+	IsAdmin bool `json:"is_admin,omitempty"`
+	// The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
+	CanIssueAssetIdFirst int32 `json:"can_issue_asset_id_first,omitempty"`
+	// The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
+	CanIssueAssetIdLast int32 `json:"can_issue_asset_id_last,omitempty"`
+	// Boolean signifying whether the Rule grants confidentialy issuance rights; if true, then both public and confidential issuance right are granted; if false, then only public issuance rights are granted
+	CanIssueConfidentially bool `json:"can_issue_confidentially,omitempty"`
+	// Operation of the transaction, which can be rule creation or deletion
+	Operation string `json:"operation,omitempty"`
 }

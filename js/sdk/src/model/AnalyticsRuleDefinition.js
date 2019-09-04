@@ -61,9 +61,6 @@
       if (data.hasOwnProperty('public_key')) {
         obj['public_key'] = ApiClient.convertToType(data['public_key'], 'String');
       }
-      if (data.hasOwnProperty('can_issue_confidentially')) {
-        obj['can_issue_confidentially'] = ApiClient.convertToType(data['can_issue_confidentially'], 'Boolean');
-      }
       if (data.hasOwnProperty('is_admin')) {
         obj['is_admin'] = ApiClient.convertToType(data['is_admin'], 'Boolean');
       }
@@ -73,30 +70,38 @@
       if (data.hasOwnProperty('can_issue_asset_id_last')) {
         obj['can_issue_asset_id_last'] = ApiClient.convertToType(data['can_issue_asset_id_last'], 'Number');
       }
+      if (data.hasOwnProperty('can_issue_confidentially')) {
+        obj['can_issue_confidentially'] = ApiClient.convertToType(data['can_issue_confidentially'], 'Boolean');
+      }
     }
     return obj;
   }
 
   /**
+   * The public key of the Wallet that is being granted rights in this Rule
    * @member {String} public_key
    */
   exports.prototype['public_key'] = undefined;
   /**
-   * @member {Boolean} can_issue_confidentially
-   */
-  exports.prototype['can_issue_confidentially'] = undefined;
-  /**
+   * Boolean signifying whether the Rule grants admin rights
    * @member {Boolean} is_admin
    */
   exports.prototype['is_admin'] = undefined;
   /**
+   * The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
    * @member {Number} can_issue_asset_id_first
    */
   exports.prototype['can_issue_asset_id_first'] = undefined;
   /**
+   * The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
    * @member {Number} can_issue_asset_id_last
    */
   exports.prototype['can_issue_asset_id_last'] = undefined;
+  /**
+   * Boolean signifying whether the Rule grants confidentialy issuance rights; if true, then both public and confidential issuance right are granted; if false, then only public issuance rights are granted
+   * @member {Boolean} can_issue_confidentially
+   */
+  exports.prototype['can_issue_confidentially'] = undefined;
 
 
 

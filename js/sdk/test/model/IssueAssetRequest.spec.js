@@ -74,14 +74,14 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property amount (base name: "amount")', function() {
-      // uncomment below and update the code to test the property amount
+    it('should have the property assetId (base name: "asset_id")', function() {
+      // uncomment below and update the code to test the property assetId
       //var instance = new QedItAssetTransfers.IssueAssetRequest();
       //expect(instance).to.be();
     });
 
-    it('should have the property assetId (base name: "asset_id")', function() {
-      // uncomment below and update the code to test the property assetId
+    it('should have the property amount (base name: "amount")', function() {
+      // uncomment below and update the code to test the property amount
       //var instance = new QedItAssetTransfers.IssueAssetRequest();
       //expect(instance).to.be();
     });

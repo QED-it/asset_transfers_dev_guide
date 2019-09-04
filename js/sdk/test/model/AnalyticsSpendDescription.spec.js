@@ -74,12 +74,6 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property rkOut (base name: "rk_out")', function() {
-      // uncomment below and update the code to test the property rkOut
-      //var instance = new QedItAssetTransfers.AnalyticsSpendDescription();
-      //expect(instance).to.be();
-    });
-
     it('should have the property zkproof (base name: "zkproof")', function() {
       // uncomment below and update the code to test the property zkproof
       //var instance = new QedItAssetTransfers.AnalyticsSpendDescription();

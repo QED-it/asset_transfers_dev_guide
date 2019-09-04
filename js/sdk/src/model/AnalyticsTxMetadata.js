@@ -16,18 +16,18 @@
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['ApiClient'], factory);
+    define(['ApiClient', 'model/AnalyticsTxType'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    module.exports = factory(require('../ApiClient'));
+    module.exports = factory(require('../ApiClient'), require('./AnalyticsTxType'));
   } else {
     // Browser globals (root is window)
     if (!root.QedItAssetTransfers) {
       root.QedItAssetTransfers = {};
     }
-    root.QedItAssetTransfers.AnalyticsTxMetadata = factory(root.QedItAssetTransfers.ApiClient);
+    root.QedItAssetTransfers.AnalyticsTxMetadata = factory(root.QedItAssetTransfers.ApiClient, root.QedItAssetTransfers.AnalyticsTxType);
   }
-}(this, function(ApiClient) {
+}(this, function(ApiClient, AnalyticsTxType) {
   'use strict';
 
 
@@ -59,10 +59,13 @@
     if (data) {
       obj = obj || new exports();
       if (data.hasOwnProperty('type')) {
-        obj['type'] = ApiClient.convertToType(data['type'], 'String');
+        obj['type'] = AnalyticsTxType.constructFromObject(data['type']);
       }
       if (data.hasOwnProperty('tx_hash')) {
         obj['tx_hash'] = ApiClient.convertToType(data['tx_hash'], 'String');
+      }
+      if (data.hasOwnProperty('block_height')) {
+        obj['block_height'] = ApiClient.convertToType(data['block_height'], 'Number');
       }
       if (data.hasOwnProperty('block_hash')) {
         obj['block_hash'] = ApiClient.convertToType(data['block_hash'], 'String');
@@ -73,37 +76,39 @@
       if (data.hasOwnProperty('index_in_block')) {
         obj['index_in_block'] = ApiClient.convertToType(data['index_in_block'], 'Number');
       }
-      if (data.hasOwnProperty('block_height')) {
-        obj['block_height'] = ApiClient.convertToType(data['block_height'], 'Number');
-      }
     }
     return obj;
   }
 
   /**
-   * @member {String} type
+   * @member {module:model/AnalyticsTxType} type
    */
   exports.prototype['type'] = undefined;
   /**
+   * the QEDIT-generated hash of the transaction
    * @member {String} tx_hash
    */
   exports.prototype['tx_hash'] = undefined;
   /**
+   * The height of the Block (inside the Blockchain) that the transaction is a part of
+   * @member {Number} block_height
+   */
+  exports.prototype['block_height'] = undefined;
+  /**
+   * the hash of the Block (inside the Blockchain) that the transaction is a part of
    * @member {String} block_hash
    */
   exports.prototype['block_hash'] = undefined;
   /**
+   * UTC time of creation of the time the Block containing the transaction was created in RFC-3339 format
    * @member {String} timestamp
    */
   exports.prototype['timestamp'] = undefined;
   /**
+   * The serial number within the Block of the transaction relative to other QEDIT transactions; indexing is 0-based
    * @member {Number} index_in_block
    */
   exports.prototype['index_in_block'] = undefined;
-  /**
-   * @member {Number} block_height
-   */
-  exports.prototype['block_height'] = undefined;
 
 
 

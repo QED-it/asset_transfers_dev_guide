@@ -60,6 +60,16 @@
         done();
       });
     });
+    describe('analyticsGetSyncStatusPost', function() {
+      it('should call analyticsGetSyncStatusPost successfully', function(done) {
+        //uncomment below and update the code to test analyticsGetSyncStatusPost
+        //instance.analyticsGetSyncStatusPost(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
+    });
   });
 
 }));

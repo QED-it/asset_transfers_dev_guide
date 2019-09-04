@@ -66,6 +66,7 @@
   }
 
   /**
+   * The Rules currently active in the network
    * @member {Array.<module:model/Rule>} rules
    */
   exports.prototype['rules'] = undefined;
