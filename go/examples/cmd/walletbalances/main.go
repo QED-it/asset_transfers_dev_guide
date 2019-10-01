@@ -26,7 +26,7 @@ func main() {
 
 	for i := range balanceResponse.Assets {
 		assetBalance := balanceResponse.Assets[i]
-		fmt.Printf("asset %d has balance %d\n", assetBalance.AssetId, assetBalance.Amount)
+		fmt.Printf("asset %s has balance %d\n", assetBalance.AssetId, assetBalance.Amount)
 	}
 }
 

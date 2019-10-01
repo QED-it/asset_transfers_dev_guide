@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: QEDIT - Asset Transfers
-  version: 1.5.0
+  version: 1.6.0
 servers:
 - url: http://{server_url}:{port}
   variables:
@@ -443,7 +443,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Internal error
-      summary: Delete a Wallet
+      summary: Delete a Wallet [async call]
       tags:
       - Node
   /node/export_wallet:
@@ -755,6 +755,72 @@ paths:
       summary: Get a (potentially) filtered list of all Tasks
       tags:
       - Node
+  /node/approve_task:
+    post:
+      description: Confirmation request tasks are confirmed using this point. After the user confirms the incoming transaction, it is asynchronously sent to the blockchain and its status can be queried like any other async task.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskActionRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal error
+      summary: Approve task with pending incoming transaction [async call]
+      tags:
+      - Node
+  /node/cancel_task:
+    post:
+      description: A user may select to decline an incoming transaction. The related task will change its result to failure both on senders and the receivers side. This endpoint can also be used to cancel an outgoing pending transaction that is awaiting user interaction from the receiver
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskActionRequest'
+        required: true
+      responses:
+        200:
+          description: Success
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal error
+      summary: Cancel task with pending incoming transaction both incoming and outgoing [async call]
+      tags:
+      - Node
   /health:
     post:
       description: Reports the health of the various components of the system as well as an overall status for the Node. If the Node's status is good, then the Node is synced with the Blockchain and can successfully process requests.
@@ -782,6 +848,14 @@ paths:
       - Health
 components:
   schemas:
+    AssetId:
+      description: |
+        The ID of an Asset Type. It must be a string of length 0 to 40 characters. Allowed characters are lower- and uppercase letters, digits, dot (.), and hyphen (-). It must not end with an hyphen. Asset IDs are case-sensitive.
+      type: string
+    Namespace:
+      description: |
+        A `Namespace` describes what Asset IDs can be issued in an Issuance Rule. It is a string in the same format as `AssetId`. Additionally, if it ends with a wildcard character `*`, then the namespace covers all asset IDs with the namespace as a prefix. Without a final wildcard, the namespace covers exactly one asset ID. Example: The namespace `currencies.dollar` covers only this exact asset type, while `currencies.*` covers all asset types that start with `currencies.`.
+      type: string
     GetWalletBalanceRequest:
       example:
         wallet_id: source_wallet
@@ -797,9 +871,9 @@ components:
         wallet_id: source_wallet
       properties:
         asset_id:
-          description: The ID of the Asset Type
-          format: int32
-          type: integer
+          description: |
+            The ID of an Asset Type. It must be a string of length 0 to 40 characters. Allowed characters are lower- and uppercase letters, digits, dot (.), and hyphen (-). It must not end with an hyphen. Asset IDs are case-sensitive.
+          type: string
         amount:
           description: The outstanding balance for the Asset Type
           format: int32
@@ -812,9 +886,9 @@ components:
       example:
         wallet_id: source_wallet
         assets:
-        - asset_id: 1
+        - asset_id: bank-a.loans.1
           amount: 8
-        - asset_id: 10
+        - asset_id: bank-a.loans.2
           amount: 200
       properties:
         wallet_id:
@@ -834,9 +908,10 @@ components:
         wallet_id: source_wallet
         authorization: PrivacyIsAwesome
         recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
-        asset_id: 1
+        asset_id: bank-a.loans.1
         amount: 4
         memo: '{"recipient_name": "Dan"}'
+        require_confirmation_from: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
       properties:
         wallet_id:
           description: The ID of the Wallet to transfer from
@@ -848,15 +923,18 @@ components:
           description: The Address of the recipient of the funds
           type: string
         asset_id:
-          description: The ID for the Asset Type to transfer
-          format: int32
-          type: integer
+          description: |
+            The ID of an Asset Type. It must be a string of length 0 to 40 characters. Allowed characters are lower- and uppercase letters, digits, dot (.), and hyphen (-). It must not end with an hyphen. Asset IDs are case-sensitive.
+          type: string
         amount:
           description: The amount of assets to transfer
           format: int32
           type: integer
         memo:
           description: An app-customizable field to store additional private data relating to the transfer; the memo is shared between the sender and the receiver, but is not divulged to other parties
+          type: string
+        require_confirmation_from:
+          description: A user may request confirmation from the receiving party. If a public key of the approver is included in this optional field, the transaction will only become valid after the received signs it. The receiver will be able to decide whether to accept or reject the transfer by calling the /node/approve_task or the /node/reject_task respectively.
           type: string
       required:
       - amount
@@ -865,6 +943,20 @@ components:
       - memo
       - recipient_address
       - wallet_id
+      type: object
+    TaskActionRequest:
+      description: To approve or cancel a task, the user should include the task id and authorization of the wallet related to this task.
+      example:
+        task_id: 5aaa4045-e949-4c44-a7ef-25fb55a1afa6
+        authorization: PrivacyIsAwesome
+      properties:
+        task_id:
+          type: string
+        authorization:
+          type: string
+      required:
+      - authorization
+      - task_id
       type: object
     GetWalletActivityRequest:
       example:
@@ -893,13 +985,11 @@ components:
         rules:
         - public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
           can_issue_confidentially: false
-          can_issue_asset_id_first: 100
-          can_issue_asset_id_last: 112
+          namespace: bank-a.loans.*
           is_admin: false
         - public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
           can_issue_confidentially: false
-          can_issue_asset_id_first: 100
-          can_issue_asset_id_last: 112
+          namespace: bank-a.loans.*
           is_admin: false
       properties:
         rules:
@@ -997,8 +1087,7 @@ components:
         result:
           $ref: '#/components/schemas/Result'
         state:
-          description: More granular current state of the Task; list of supported states is not guaranteed to be stable
-          type: string
+          $ref: '#/components/schemas/TaskState'
         tx_hash:
           description: The Blockchain-generated hash of the Transaction; populated after the Blockchain Node accepted the Transaction
           type: string
@@ -1008,8 +1097,7 @@ components:
         type:
           $ref: '#/components/schemas/TaskType'
         data:
-          description: Container for the Transaction data; each Transaction type has different fields
-          type: object
+          $ref: '#/components/schemas/TaskData'
         error:
           description: In case of failure this field reports the reason for the failure
           type: string
@@ -1019,8 +1107,23 @@ components:
       enum:
       - pending
       - in_progress
+      - awaiting_user_interaction
       - success
       - failure
+      type: string
+    TaskState:
+      description: A fine-grained status of the node's inner state. This field is subject to changes and should not be relied upon during development
+      enum:
+      - pending_state
+      - in_progress_state
+      - tx_generated_state
+      - conf_req_sent_state
+      - conf_req_received_state
+      - conf_req_canceled_by_sender_state
+      - conf_req_canceled_by_receiver_state
+      - tx_submitted_state
+      - failure_state
+      - success_state
       type: string
     TaskType:
       description: Task type
@@ -1031,7 +1134,26 @@ components:
       - alter_rule
       - import_wallet
       - delete_wallet
+      - outgoing_confirm_request
+      - incoming_confirm_request
       type: string
+    TaskData:
+      description: an object that includes additional request details
+      properties:
+        require_confirmation_from:
+          description: The public key for the confirmation request receiver
+          type: string
+        recipient_address:
+          description: The address the request was sent to
+          type: string
+        asset_id:
+          type: string
+        amount:
+          format: int32
+          type: integer
+        wallet_id:
+          type: string
+      type: object
     GetTasksResponse:
       example:
         tasks:
@@ -1096,7 +1218,7 @@ components:
             - is_confidential: false,
               public_issuance_description:
                 amount: 12
-                asset_id: 5
+                asset_id: bank-a.loans.1
               output_description:
                 cv: c2366ace373af05c92fc315dd502637ee4fa6ba46f05319ddcff209619bbaa27
                 cm: 0e148cb409e313cb13f28c6d8110fdb7f4daf119db99cedeab1234bd64ac4681
@@ -1118,7 +1240,7 @@ components:
             - is_confidential: false,
               public_issuance_description:
                 amount: 12
-                asset_id: 5
+                asset_id: bank-a.loans.1
               output_description:
                 cv: c2366ace373af05c92fc315dd502637ee4fa6ba46f05319ddcff209619bbaa27
                 cm: 0e148cb409e313cb13f28c6d8110fdb7f4daf119db99cedeab1234bd64ac4681
@@ -1158,7 +1280,7 @@ components:
         authorization: PrivacyIsAwesome
         recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
         amount: 4
-        asset_id: 1
+        asset_id: bank-a.loans.1
         confidential: false
         memo: '{"recipient_name": "Dan"}'
       properties:
@@ -1172,9 +1294,9 @@ components:
           description: The Address of the recipient of the issued Assets
           type: string
         asset_id:
-          description: The ID of the Asset Type to issue
-          format: int32
-          type: integer
+          description: |
+            The ID of an Asset Type. It must be a string of length 0 to 40 characters. Allowed characters are lower- and uppercase letters, digits, dot (.), and hyphen (-). It must not end with an hyphen. Asset IDs are case-sensitive.
+          type: string
         amount:
           description: the amount of Assets to issue
           format: int32
@@ -1418,8 +1540,7 @@ components:
         rules_to_add:
         - public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
           can_issue_confidentially: false
-          can_issue_asset_id_first: 100
-          can_issue_asset_id_last: 112
+          namespace: bank-a.loans.*
           is_admin: false
       properties:
         wallet_id:
@@ -1445,8 +1566,7 @@ components:
         rules_to_delete:
         - public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
           can_issue_confidentially: false
-          can_issue_asset_id_first: 100
-          can_issue_asset_id_last: 112
+          namespace: bank-a.loans.*
           is_admin: false
       properties:
         wallet_id:
@@ -1469,8 +1589,7 @@ components:
       example:
         public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
         can_issue_confidentially: false
-        can_issue_asset_id_first: 100
-        can_issue_asset_id_last: 112
+        namespace: bank-a.loans.*
         is_admin: false
       properties:
         public_key:
@@ -1479,22 +1598,17 @@ components:
         is_admin:
           description: Boolean signifying whether the Rule grants admin rights
           type: boolean
-        can_issue_asset_id_first:
-          description: The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
-          format: int32
-          type: integer
-        can_issue_asset_id_last:
-          description: The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
-          format: int32
-          type: integer
+        namespace:
+          description: |
+            A `Namespace` describes what Asset IDs can be issued in an Issuance Rule. It is a string in the same format as `AssetId`. Additionally, if it ends with a wildcard character `*`, then the namespace covers all asset IDs with the namespace as a prefix. Without a final wildcard, the namespace covers exactly one asset ID. Example: The namespace `currencies.dollar` covers only this exact asset type, while `currencies.*` covers all asset types that start with `currencies.`.
+          type: string
         can_issue_confidentially:
           description: Boolean signifying whether the Rule grants confidentialy issuance rights; if true, then both public and confidential issuance right are granted; if false, then only public issuance rights are granted
           type: boolean
       required:
-      - can_issue_asset_id_first
-      - can_issue_asset_id_last
       - can_issue_confidentially
       - is_admin
+      - namespace
       - public_key
       type: object
     ErrorResponse:
@@ -1536,7 +1650,7 @@ components:
           - is_confidential: false,
             public_issuance_description:
               amount: 12
-              asset_id: 5
+              asset_id: bank-a.loans.1
             output_description:
               cv: c2366ace373af05c92fc315dd502637ee4fa6ba46f05319ddcff209619bbaa27
               cm: 0e148cb409e313cb13f28c6d8110fdb7f4daf119db99cedeab1234bd64ac4681
@@ -1612,11 +1726,6 @@ components:
     AnalyticsTransferTx:
       description: The data of a single Transfer within a Transfer transaction
       properties:
-        asset_converter_descriptions:
-          description: The Converter Proofs
-          items:
-            $ref: '#/components/schemas/AnalyticsAssetConverterProofDescription'
-          type: array
         spends:
           description: The information and Proofs associated with the Assets spent in the Transfer
           items:
@@ -1665,8 +1774,7 @@ components:
       example:
         public_key: AAAAAAAAAA==
         is_admin: true
-        can_issue_asset_id_first: 11
-        can_issue_asset_id_last: 20
+        namespace: bank-a.loans.*
         can_issue_confidentially: true
       properties:
         public_key:
@@ -1675,14 +1783,10 @@ components:
         is_admin:
           description: Boolean signifying whether the Rule grants admin rights
           type: boolean
-        can_issue_asset_id_first:
-          description: The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
-          format: int32
-          type: integer
-        can_issue_asset_id_last:
-          description: The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
-          format: int32
-          type: integer
+        namespace:
+          description: |
+            A `Namespace` describes what Asset IDs can be issued in an Issuance Rule. It is a string in the same format as `AssetId`. Additionally, if it ends with a wildcard character `*`, then the namespace covers all asset IDs with the namespace as a prefix. Without a final wildcard, the namespace covers exactly one asset ID. Example: The namespace `currencies.dollar` covers only this exact asset type, while `currencies.*` covers all asset types that start with `currencies.`.
+          type: string
         can_issue_confidentially:
           description: Boolean signifying whether the Rule grants confidentialy issuance rights; if true, then both public and confidential issuance right are granted; if false, then only public issuance rights are granted
           type: boolean
@@ -1691,8 +1795,7 @@ components:
       example:
         public_key: AAAAAAAAAA==
         is_admin: true
-        can_issue_asset_id_first: 11
-        can_issue_asset_id_last: 20
+        namespace: bank-a.loans.*
         can_issue_confidentially: true
         operation: CreateRule
       properties:
@@ -1702,14 +1805,10 @@ components:
         is_admin:
           description: Boolean signifying whether the Rule grants admin rights
           type: boolean
-        can_issue_asset_id_first:
-          description: The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
-          format: int32
-          type: integer
-        can_issue_asset_id_last:
-          description: The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
-          format: int32
-          type: integer
+        namespace:
+          description: |
+            A `Namespace` describes what Asset IDs can be issued in an Issuance Rule. It is a string in the same format as `AssetId`. Additionally, if it ends with a wildcard character `*`, then the namespace covers all asset IDs with the namespace as a prefix. Without a final wildcard, the namespace covers exactly one asset ID. Example: The namespace `currencies.dollar` covers only this exact asset type, while `currencies.*` covers all asset types that start with `currencies.`.
+          type: string
         can_issue_confidentially:
           description: Boolean signifying whether the Rule grants confidentialy issuance rights; if true, then both public and confidential issuance right are granted; if false, then only public issuance rights are granted
           type: boolean
@@ -1735,15 +1834,14 @@ components:
     AnalyticsPublicIssuanceDescription:
       description: Describes what Asset Type and amount were issued; null if the Issuance was confidential
       example:
-        asset_id: 10
+        asset_id: bank-a.loans.1
         amount: 3
       nullable: true
       properties:
         asset_id:
-          description: The ID of the Asset Type issued
-          format: int32
-          minimum: 1
-          type: integer
+          description: |
+            The ID of an Asset Type. It must be a string of length 0 to 40 characters. Allowed characters are lower- and uppercase letters, digits, dot (.), and hyphen (-). It must not end with an hyphen. Asset IDs are case-sensitive.
+          type: string
         amount:
           description: The amount of Assets issued
           format: int32
@@ -1752,26 +1850,6 @@ components:
       required:
       - amount
       - asset_id
-      type: object
-    AnalyticsAssetConverterProofDescription:
-      example:
-        asset_cv: AAAAAAAAAAA=
-        amount_cv: AAAAAAAAAAA=
-        input_cv: AAAAAAAAAAA=
-        zkproof: 000AAAAAAA=
-      properties:
-        input_cv:
-          description: The commitment to both the Asset Type and amount of the Note
-          type: string
-        amount_cv:
-          description: The commitment to the Asset amount
-          type: string
-        asset_cv:
-          description: The commitment to the ID of the Asset Type
-          type: string
-        zkproof:
-          description: The Proof that the commitment contents match
-          type: string
       type: object
     AnalyticsSpendDescription:
       example:
@@ -1826,16 +1904,16 @@ components:
       example:
         input_cv: AAAAAAAAAAA=
         zkproof: 000AAAAAAA=
-        rule:
-        - min_id: 11
-        - max_id: 20
+        namespace: bank-a.loans.*
       nullable: true
       properties:
-        input_cv:
-          description: Thecommitment to both the Asset Type and amount of the issued Note
+        casset:
+          description: The commitment to both the Asset Type and amount of the issued Note
           type: string
-        rule:
-          $ref: '#/components/schemas/AnalyticsRule'
+        namespace:
+          description: |
+            A `Namespace` describes what Asset IDs can be issued in an Issuance Rule. It is a string in the same format as `AssetId`. Additionally, if it ends with a wildcard character `*`, then the namespace covers all asset IDs with the namespace as a prefix. Without a final wildcard, the namespace covers exactly one asset ID. Example: The namespace `currencies.dollar` covers only this exact asset type, while `currencies.*` covers all asset types that start with `currencies.`.
+          type: string
         zkproof:
           description: The Proof that the issued Asset Type indeed matches the reported Rule
           type: string
@@ -1843,20 +1921,14 @@ components:
     AnalyticsRule:
       description: The Rule used in the Issuance
       example:
-        min_id: 11
-        max_id: 20
+        namespace: bank-a.loans.*
       properties:
-        min_id:
-          description: The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
-          format: int32
-          type: integer
-        max_id:
-          description: The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
-          format: int32
-          type: integer
+        namespace:
+          description: |
+            A `Namespace` describes what Asset IDs can be issued in an Issuance Rule. It is a string in the same format as `AssetId`. Additionally, if it ends with a wildcard character `*`, then the namespace covers all asset IDs with the namespace as a prefix. Without a final wildcard, the namespace covers exactly one asset ID. Example: The namespace `currencies.dollar` covers only this exact asset type, while `currencies.*` covers all asset types that start with `currencies.`.
+          type: string
       required:
-      - max_id
-      - min_id
+      - namespace
       type: object
     GetWalletActivityResponse:
       example:
@@ -1925,9 +1997,9 @@ components:
           description: The Address the Assets were issued to
           type: string
         asset_id:
-          description: The ID of the Asset Type issued
-          format: int32
-          type: integer
+          description: |
+            The ID of an Asset Type. It must be a string of length 0 to 40 characters. Allowed characters are lower- and uppercase letters, digits, dot (.), and hyphen (-). It must not end with an hyphen. Asset IDs are case-sensitive.
+          type: string
         amount:
           description: The amount of Assets issued
           format: int32
@@ -1951,9 +2023,9 @@ components:
           description: The address of the Wallet the Assets were transferred to
           type: string
         asset_id:
-          description: The Id of the Asset Type transferred
-          format: int32
-          type: integer
+          description: |
+            The ID of an Asset Type. It must be a string of length 0 to 40 characters. Allowed characters are lower- and uppercase letters, digits, dot (.), and hyphen (-). It must not end with an hyphen. Asset IDs are case-sensitive.
+          type: string
         amount:
           description: The amount of Assets transferred
           format: int32

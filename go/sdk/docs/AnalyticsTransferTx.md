@@ -3,7 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AssetConverterDescriptions** | [**[]AnalyticsAssetConverterProofDescription**](AnalyticsAssetConverterProofDescription.md) | The Converter Proofs | [optional] 
 **Spends** | [**[]AnalyticsSpendDescription**](AnalyticsSpendDescription.md) | The information and Proofs associated with the Assets spent in the Transfer | [optional] 
 **Outputs** | [**[]AnalyticsOutputDescription**](AnalyticsOutputDescription.md) | The information and Proofs associated with the Assets output from the Transfer | [optional] 
 **Rk** | **string** | The re-randomized public key of the Wallet which created the Transfer | [optional] 

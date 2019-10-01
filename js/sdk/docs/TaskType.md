@@ -15,4 +15,8 @@
 
 * `delete_wallet` (value: `"delete_wallet"`)
 
+* `outgoing_confirm_request` (value: `"outgoing_confirm_request"`)
+
+* `incoming_confirm_request` (value: `"incoming_confirm_request"`)
+
 

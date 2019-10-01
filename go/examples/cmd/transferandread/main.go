@@ -98,7 +98,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Printf("got an issue-tx with asset ID %d, amount %d and memo \"%s\"", txContent.AssetId, txContent.Amount, txContent.Memo)
+		fmt.Printf("got an issue-tx with asset ID %s, amount %d and memo \"%s\"", txContent.AssetId, txContent.Amount, txContent.Memo)
 
 	case "Transfer":
 		var txContent sdk.AnalyticTransferWalletTx
@@ -106,7 +106,7 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Printf("got an transfer-tx with asset ID %d, amount %d and memo \"%s\"", txContent.AssetId, txContent.Amount, txContent.Memo)
+		fmt.Printf("got an transfer-tx with asset ID %s, amount %d and memo \"%s\"", txContent.AssetId, txContent.Amount, txContent.Memo)
 
 	}
 }

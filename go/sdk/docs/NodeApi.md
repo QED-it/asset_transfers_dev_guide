@@ -4,7 +4,9 @@ All URIs are relative to *http://localhost:12052*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**NodeDeleteWalletPost**](NodeApi.md#NodeDeleteWalletPost) | **Post** /node/delete_wallet | Delete a Wallet
+[**NodeApproveTaskPost**](NodeApi.md#NodeApproveTaskPost) | **Post** /node/approve_task | Approve task with pending incoming transaction [async call]
+[**NodeCancelTaskPost**](NodeApi.md#NodeCancelTaskPost) | **Post** /node/cancel_task | Cancel task with pending incoming transaction both incoming and outgoing [async call]
+[**NodeDeleteWalletPost**](NodeApi.md#NodeDeleteWalletPost) | **Post** /node/delete_wallet | Delete a Wallet [async call]
 [**NodeExportAuditorAccessWalletPost**](NodeApi.md#NodeExportAuditorAccessWalletPost) | **Post** /node/export_auditor_access_wallet | Export viewing credentials for a Wallet
 [**NodeExportWalletPost**](NodeApi.md#NodeExportWalletPost) | **Post** /node/export_wallet | Export wallet secret key
 [**NodeGenerateWalletPost**](NodeApi.md#NodeGenerateWalletPost) | **Post** /node/generate_wallet | Generate a new Wallet
@@ -17,9 +19,65 @@ Method | HTTP request | Description
 [**NodeUnlockWalletPost**](NodeApi.md#NodeUnlockWalletPost) | **Post** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds [async call]
 
 
+# **NodeApproveTaskPost**
+> NodeApproveTaskPost(ctx, taskActionRequest)
+Approve task with pending incoming transaction [async call]
+
+Confirmation request tasks are confirmed using this point. After the user confirms the incoming transaction, it is asynchronously sent to the blockchain and its status can be queried like any other async task.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **taskActionRequest** | [**TaskActionRequest**](TaskActionRequest.md)|  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **NodeCancelTaskPost**
+> NodeCancelTaskPost(ctx, taskActionRequest)
+Cancel task with pending incoming transaction both incoming and outgoing [async call]
+
+A user may select to decline an incoming transaction. The related task will change its result to failure both on senders and the receivers side. This endpoint can also be used to cancel an outgoing pending transaction that is awaiting user interaction from the receiver
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **taskActionRequest** | [**TaskActionRequest**](TaskActionRequest.md)|  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **NodeDeleteWalletPost**
 > AsyncTaskCreatedResponse NodeDeleteWalletPost(ctx, deleteWalletRequest)
-Delete a Wallet
+Delete a Wallet [async call]
 
 Deletes a Wallet from the Node; All private information about the Wallet will be deleted including transactional history, balances, and keys; If the secret key of the Wallet are not stored elsewhere then all Assets held in the Wallet will be forever lost! If the secret key of the Wallet is stored elsewhere, then all held Assets and the entire transactional history of the Wallet can be restored from the Blockchain at any time by importing the Wallet into a Node.
 

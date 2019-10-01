@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 1.5.0
+  version: 1.6.0
   title: QEDIT - Asset Transfers
 security:
   - ApiKeyAuth: []
@@ -308,6 +308,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+
+
   /analytics/get_network_activity:
     post:
       tags:
@@ -376,6 +378,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+
   /node/generate_wallet:
     post:
       tags:
@@ -413,7 +416,7 @@ paths:
     post:
       tags:
         - Node
-      summary: Delete a Wallet
+      summary: Delete a Wallet [async call]
       description: Deletes a Wallet from the Node; All private information about the Wallet will be deleted including transactional history, balances, and keys; If the secret key of the Wallet are not stored elsewhere then all Assets held in the Wallet will be forever lost! If the secret key of the Wallet is stored elsewhere, then all held Assets and the entire transactional history of the Wallet can be restored from the Blockchain at any time by importing the Wallet into a Node.
       requestBody:
         required: true
@@ -755,6 +758,73 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /node/approve_task:
+    post:
+      tags:
+        - Node
+      summary: Approve task with pending incoming transaction [async call]
+      description:  Confirmation request tasks are confirmed using this point. After the user confirms the incoming transaction, it is asynchronously sent to the blockchain and its status can be queried like any other async task.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskActionRequest'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /node/cancel_task:
+    post:
+      tags:
+        - Node
+      summary: Cancel task with pending incoming transaction both incoming and outgoing [async call]
+      description:  A user may select to decline an incoming transaction. The related task will change its result to failure both on senders and the receivers side. This endpoint can also be used to cancel an outgoing pending transaction that is awaiting user interaction from the receiver
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskActionRequest'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   /health:
     post:
       tags:
@@ -787,6 +857,22 @@ components:
       name: x-auth-token
       in: header
   schemas:
+    AssetId:
+      type: string
+      description: >
+        The ID of an Asset Type. It must be a string of length 0 to 40 characters.
+        Allowed characters are lower- and uppercase letters, digits, dot (.), and hyphen (-).
+        It must not end with an hyphen. Asset IDs are case-sensitive.
+    Namespace:
+      type: string
+      description: >
+        A `Namespace` describes what Asset IDs can be issued in an Issuance Rule.
+        It is a string in the same format as `AssetId`.
+        Additionally, if it ends with a wildcard character `*`, then the namespace covers
+        all asset IDs with the namespace as a prefix. Without a final wildcard, the namespace covers
+        exactly one asset ID.
+        Example: The namespace `currencies.dollar` covers only this exact asset type, while
+        `currencies.*` covers all asset types that start with `currencies.`.
     GetWalletBalanceRequest:
       type: object
       properties:
@@ -801,8 +887,7 @@ components:
       type: object
       properties:
         asset_id:
-          type: integer
-          description: The ID of the Asset Type
+          $ref: '#/components/schemas/AssetId'
         amount:
           type: integer
           description: The outstanding balance for the Asset Type
@@ -828,9 +913,9 @@ components:
       example:
         wallet_id: source_wallet
         assets:
-          - asset_id: 1
+          - asset_id: "bank-a.loans.1"
             amount: 8
-          - asset_id: 10
+          - asset_id: "bank-a.loans.2"
             amount: 200
     TransferAssetRequest:
       type: object
@@ -845,14 +930,16 @@ components:
           type: string
           description: The Address of the recipient of the funds
         asset_id:
-          type: integer
-          description: The ID for the Asset Type to transfer
+          $ref: '#/components/schemas/AssetId'
         amount:
           type: integer
           description: The amount of assets to transfer
         memo:
           type: string
           description: An app-customizable field to store additional private data relating to the transfer; the memo is shared between the sender and the receiver, but is not divulged to other parties
+        require_confirmation_from:
+          type: string
+          description: A user may request confirmation from the receiving party. If a public key of the approver is included in this optional field, the transaction will only become valid after the received signs it. The receiver will be able to decide whether to accept or reject the transfer by calling the /node/approve_task or the /node/reject_task respectively.
       required:
         - wallet_id
         - authorization
@@ -864,9 +951,24 @@ components:
         wallet_id: source_wallet
         authorization: PrivacyIsAwesome
         recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
-        asset_id: 1
+        asset_id: "bank-a.loans.1"
         amount: 4
         memo: '{"recipient_name": "Dan"}'
+        require_confirmation_from: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
+    TaskActionRequest:
+      type: object
+      description: To approve or cancel a task, the user should include the task id and authorization of the wallet related to this task.
+      properties:
+        task_id:
+          type: string
+        authorization:
+          type: string
+      required:
+        - task_id
+        - authorization
+      example:
+        task_id: "5aaa4045-e949-4c44-a7ef-25fb55a1afa6"
+        authorization: PrivacyIsAwesome
     GetWalletActivityRequest:
       type: object
       properties:
@@ -971,7 +1073,7 @@ components:
         result:
           $ref: '#/components/schemas/Result'
         state:
-          type: string
+          $ref: '#/components/schemas/TaskState'
           description: More granular current state of the Task; list of supported states is not guaranteed to be stable
         tx_hash:
           type: string
@@ -982,8 +1084,8 @@ components:
         type:
           $ref: '#/components/schemas/TaskType'
         data:
-          type: object
-          description: Container for the Transaction data; each Transaction type has different fields
+          $ref: '#/components/schemas/TaskData'
+          description: Container for the Transaction data related to the task; different tasks might have various fields
         error:
           type: string
           description: In case of failure this field reports the reason for the failure
@@ -1001,9 +1103,24 @@ components:
       enum:
         - pending
         - in_progress
+        - awaiting_user_interaction
         - success
         - failure
       description: The current result (status) of the Task
+    TaskState:
+      type: string
+      enum:
+        - pending_state
+        - in_progress_state
+        - tx_generated_state
+        - conf_req_sent_state
+        - conf_req_received_state
+        - conf_req_canceled_by_sender_state
+        - conf_req_canceled_by_receiver_state
+        - tx_submitted_state
+        - failure_state
+        - success_state
+      description: A fine-grained status of the node's inner state. This field is subject to changes and should not be relied upon during development
     TaskType:
       type: string
       enum:
@@ -1013,7 +1130,25 @@ components:
         - alter_rule
         - import_wallet
         - delete_wallet
+        - outgoing_confirm_request
+        - incoming_confirm_request
       description: Task type
+    TaskData:
+      type: object
+      description: an object that includes additional request details
+      properties:
+        require_confirmation_from:
+          type: string
+          description: The public key for the confirmation request receiver
+        recipient_address:
+          type: string
+          description: The address the request was sent to
+        asset_id:
+          type: string
+        amount:
+          type: integer
+        wallet_id:
+          type: string
     GetTasksResponse:
       type: object
       properties:
@@ -1075,8 +1210,7 @@ components:
           type: string
           description: The Address of the recipient of the issued Assets
         asset_id:
-          type: integer
-          description: The ID of the Asset Type to issue
+          $ref: '#/components/schemas/AssetId'
         amount:
           type: integer
           description: the amount of Assets to issue
@@ -1098,7 +1232,7 @@ components:
         authorization: PrivacyIsAwesome
         recipient_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
         amount: 4
-        asset_id: 1
+        asset_id: "bank-a.loans.1"
         confidential: false
         memo: '{"recipient_name": "Dan"}'
     GetNewAddressRequest:
@@ -1342,8 +1476,7 @@ components:
         rules_to_add:
           - public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
             can_issue_confidentially: false
-            can_issue_asset_id_first: 100
-            can_issue_asset_id_last: 112
+            namespace: "bank-a.loans.*"
             is_admin: false
     DeleteRuleRequest:
       type: object
@@ -1369,8 +1502,7 @@ components:
         rules_to_delete:
           - public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
             can_issue_confidentially: false
-            can_issue_asset_id_first: 100
-            can_issue_asset_id_last: 112
+            namespace: "bank-a.loans.*"
             is_admin: false
     Rule:
       type: object
@@ -1381,26 +1513,20 @@ components:
         is_admin:
           type: boolean
           description: Boolean signifying whether the Rule grants admin rights
-        can_issue_asset_id_first:
-          type: integer
-          description: The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
-        can_issue_asset_id_last:
-          type: integer
-          description: The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
+        namespace:
+          $ref: '#/components/schemas/Namespace'
         can_issue_confidentially:
           type: boolean
           description: Boolean signifying whether the Rule grants confidentialy issuance rights; if true, then both public and confidential issuance right are granted; if false, then only public issuance rights are granted
       required:
         - public_key
         - can_issue_confidentially
-        - can_issue_asset_id_first
-        - can_issue_asset_id_last
+        - namespace
         - is_admin
       example:
         public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
         can_issue_confidentially: false
-        can_issue_asset_id_first: 100
-        can_issue_asset_id_last: 112
+        namespace: "bank-a.loans.*"
         is_admin: false
     ErrorResponse:
       type: object
@@ -1450,7 +1576,7 @@ components:
             - is_confidential: false,
               public_issuance_description:
                 amount: 12
-                asset_id: 5
+                asset_id: "bank-a.loans.1"
               output_description:
                 cv: 'c2366ace373af05c92fc315dd502637ee4fa6ba46f05319ddcff209619bbaa27'
                 cm: '0e148cb409e313cb13f28c6d8110fdb7f4daf119db99cedeab1234bd64ac4681'
@@ -1520,11 +1646,6 @@ components:
       type: object
       description: The data of a single Transfer within a Transfer transaction
       properties:
-        asset_converter_descriptions:
-          type: array
-          description: The Converter Proofs
-          items:
-            $ref: '#/components/schemas/AnalyticsAssetConverterProofDescription'
         spends:
           type: array
           description: The information and Proofs associated with the Assets spent in the Transfer
@@ -1578,20 +1699,15 @@ components:
         is_admin:
           type: boolean
           description: Boolean signifying whether the Rule grants admin rights
-        can_issue_asset_id_first:
-          type: integer
-          description: The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
-        can_issue_asset_id_last:
-          type: integer
-          description: The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
+        namespace:
+          $ref: '#/components/schemas/Namespace'
         can_issue_confidentially:
           type: boolean
           description: Boolean signifying whether the Rule grants confidentialy issuance rights; if true, then both public and confidential issuance right are granted; if false, then only public issuance rights are granted
       example:
         public_key: "AAAAAAAAAA=="
         is_admin: true
-        can_issue_asset_id_first: 11
-        can_issue_asset_id_last: 20
+        namespace: "bank-a.loans.*"
         can_issue_confidentially: true
 
     AnalyticsRuleWalletDefinition:
@@ -1603,12 +1719,8 @@ components:
         is_admin:
           type: boolean
           description: Boolean signifying whether the Rule grants admin rights
-        can_issue_asset_id_first:
-          type: integer
-          description: The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
-        can_issue_asset_id_last:
-          type: integer
-          description: The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
+        namespace:
+          $ref: '#/components/schemas/Namespace'
         can_issue_confidentially:
           type: boolean
           description: Boolean signifying whether the Rule grants confidentialy issuance rights; if true, then both public and confidential issuance right are granted; if false, then only public issuance rights are granted
@@ -1621,8 +1733,7 @@ components:
       example:
         public_key: "AAAAAAAAAA=="
         is_admin: true
-        can_issue_asset_id_first: 11
-        can_issue_asset_id_last: 20
+        namespace: "bank-a.loans.*"
         can_issue_confidentially: true
         operation: "CreateRule"
 
@@ -1648,37 +1759,14 @@ components:
         - amount
       properties:
         asset_id:
-          type: integer
-          minimum: 1
-          description: The ID of the Asset Type issued
+          $ref: '#/components/schemas/AssetId'
         amount:
           type: integer
           minimum: 0
           description: The amount of Assets issued
       example:
-        asset_id: 10
+        asset_id: "bank-a.loans.1"
         amount: 3
-
-    AnalyticsAssetConverterProofDescription:
-      type: object
-      properties:
-        input_cv:
-          type: string
-          description: The commitment to both the Asset Type and amount of the Note
-        amount_cv:
-          type: string
-          description: The commitment to the Asset amount
-        asset_cv:
-          type: string
-          description: The commitment to the ID of the Asset Type
-        zkproof:
-          type: string
-          description: The Proof that the commitment contents match
-      example:
-        asset_cv: "AAAAAAAAAAA="
-        amount_cv: "AAAAAAAAAAA="
-        input_cv: "AAAAAAAAAAA="
-        zkproof: "000AAAAAAA="
 
     AnalyticsSpendDescription:
       type: object
@@ -1735,37 +1823,29 @@ components:
       description: The details and Proof attached to a confidential Issuance; null if the Issuance was public
       nullable: true
       properties:
-        input_cv:
+        casset:
           type: string
-          description: Thecommitment to both the Asset Type and amount of the issued Note
-        rule:
-          $ref: '#/components/schemas/AnalyticsRule'
+          description: The commitment to both the Asset Type and amount of the issued Note
+        namespace:
+          $ref: '#/components/schemas/Namespace'
         zkproof:
           type: string
           description: The Proof that the issued Asset Type indeed matches the reported Rule
       example:
         input_cv: "AAAAAAAAAAA="
         zkproof: "000AAAAAAA="
-        rule:
-          - min_id: 11
-          - max_id: 20
+        namespace: "bank-a.loans.*"
 
     AnalyticsRule:
       type: object
       description: The Rule used in the Issuance
       properties:
-        min_id:
-          type: integer
-          description: The lower Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
-        max_id:
-          type: integer
-          description: The upper Asset ID in the range of IDs the Rule grants issuance rights for (range is inclusive)
+        namespace:
+          $ref: '#/components/schemas/Namespace'
       required:
-        - min_id
-        - max_id
+        - namespace
       example:
-        min_id: 11
-        max_id: 20
+        namespace: "bank-a.loans.*"
 
     GetWalletActivityResponse:
       type: object
@@ -1819,8 +1899,7 @@ components:
           type: string
           description: The Address the Assets were issued to
         asset_id:
-          type: integer
-          description: The ID of the Asset Type issued
+          $ref: '#/components/schemas/AssetId'
         amount:
           type: integer
           description: The amount of Assets issued
@@ -1844,8 +1923,7 @@ components:
           type: string
           description: The address of the Wallet the Assets were transferred to
         asset_id:
-          type: integer
-          description: The Id of the Asset Type transferred
+          $ref: '#/components/schemas/AssetId'
         amount:
           type: integer
           description: The amount of Assets transferred

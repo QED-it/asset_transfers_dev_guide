@@ -4,7 +4,9 @@ All URIs are relative to *http://localhost:12052*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**nodeDeleteWalletPost**](NodeApi.md#nodeDeleteWalletPost) | **POST** /node/delete_wallet | Delete a Wallet
+[**nodeApproveTaskPost**](NodeApi.md#nodeApproveTaskPost) | **POST** /node/approve_task | Approve task with pending incoming transaction [async call]
+[**nodeCancelTaskPost**](NodeApi.md#nodeCancelTaskPost) | **POST** /node/cancel_task | Cancel task with pending incoming transaction both incoming and outgoing [async call]
+[**nodeDeleteWalletPost**](NodeApi.md#nodeDeleteWalletPost) | **POST** /node/delete_wallet | Delete a Wallet [async call]
 [**nodeExportAuditorAccessWalletPost**](NodeApi.md#nodeExportAuditorAccessWalletPost) | **POST** /node/export_auditor_access_wallet | Export viewing credentials for a Wallet
 [**nodeExportWalletPost**](NodeApi.md#nodeExportWalletPost) | **POST** /node/export_wallet | Export wallet secret key
 [**nodeGenerateWalletPost**](NodeApi.md#nodeGenerateWalletPost) | **POST** /node/generate_wallet | Generate a new Wallet
@@ -17,11 +19,105 @@ Method | HTTP request | Description
 [**nodeUnlockWalletPost**](NodeApi.md#nodeUnlockWalletPost) | **POST** /node/unlock_wallet | Unlocks a wallet for a given amount of seconds [async call]
 
 
+<a name="nodeApproveTaskPost"></a>
+# **nodeApproveTaskPost**
+> nodeApproveTaskPost(taskActionRequest)
+
+Approve task with pending incoming transaction [async call]
+
+Confirmation request tasks are confirmed using this point. After the user confirms the incoming transaction, it is asynchronously sent to the blockchain and its status can be queried like any other async task.
+
+### Example
+```javascript
+var QedItAssetTransfers = require('qed-it-asset-transfers');
+var defaultClient = QedItAssetTransfers.ApiClient.instance;
+// Configure API key authorization: ApiKeyAuth
+var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
+ApiKeyAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//ApiKeyAuth.apiKeyPrefix = 'Token';
+
+var apiInstance = new QedItAssetTransfers.NodeApi();
+var taskActionRequest = new QedItAssetTransfers.TaskActionRequest(); // TaskActionRequest | 
+apiInstance.nodeApproveTaskPost(taskActionRequest).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **taskActionRequest** | [**TaskActionRequest**](TaskActionRequest.md)|  | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="nodeCancelTaskPost"></a>
+# **nodeCancelTaskPost**
+> nodeCancelTaskPost(taskActionRequest)
+
+Cancel task with pending incoming transaction both incoming and outgoing [async call]
+
+A user may select to decline an incoming transaction. The related task will change its result to failure both on senders and the receivers side. This endpoint can also be used to cancel an outgoing pending transaction that is awaiting user interaction from the receiver
+
+### Example
+```javascript
+var QedItAssetTransfers = require('qed-it-asset-transfers');
+var defaultClient = QedItAssetTransfers.ApiClient.instance;
+// Configure API key authorization: ApiKeyAuth
+var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
+ApiKeyAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//ApiKeyAuth.apiKeyPrefix = 'Token';
+
+var apiInstance = new QedItAssetTransfers.NodeApi();
+var taskActionRequest = new QedItAssetTransfers.TaskActionRequest(); // TaskActionRequest | 
+apiInstance.nodeCancelTaskPost(taskActionRequest).then(function() {
+  console.log('API called successfully.');
+}, function(error) {
+  console.error(error);
+});
+
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **taskActionRequest** | [**TaskActionRequest**](TaskActionRequest.md)|  | 
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="nodeDeleteWalletPost"></a>
 # **nodeDeleteWalletPost**
 > AsyncTaskCreatedResponse nodeDeleteWalletPost(deleteWalletRequest)
 
-Delete a Wallet
+Delete a Wallet [async call]
 
 Deletes a Wallet from the Node; All private information about the Wallet will be deleted including transactional history, balances, and keys; If the secret key of the Wallet are not stored elsewhere then all Assets held in the Wallet will be forever lost! If the secret key of the Wallet is stored elsewhere, then all held Assets and the entire transactional history of the Wallet can be restored from the Blockchain at any time by importing the Wallet into a Node.
 
