@@ -1,4 +1,4 @@
-# QedItAssetTransfers.TaskType
+# QeditAssetTransfers.TaskType
 
 ## Enum
 

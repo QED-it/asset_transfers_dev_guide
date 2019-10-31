@@ -1,4 +1,4 @@
-# QedItAssetTransfers.GetPublicKeyResponse
+# QeditAssetTransfers.GetPublicKeyResponse
 
 ## Properties
 Name | Type | Description | Notes

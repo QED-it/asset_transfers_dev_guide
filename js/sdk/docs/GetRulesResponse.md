@@ -1,4 +1,4 @@
-# QedItAssetTransfers.GetRulesResponse
+# QeditAssetTransfers.GetRulesResponse
 
 ## Properties
 Name | Type | Description | Notes

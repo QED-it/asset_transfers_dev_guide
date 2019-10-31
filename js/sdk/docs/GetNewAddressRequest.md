@@ -1,4 +1,4 @@
-# QedItAssetTransfers.GetNewAddressRequest
+# QeditAssetTransfers.GetNewAddressRequest
 
 ## Properties
 Name | Type | Description | Notes

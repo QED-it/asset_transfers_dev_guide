@@ -1,4 +1,4 @@
-# QedItAssetTransfers.TaskActionRequest
+# QeditAssetTransfers.TaskActionRequest
 
 ## Properties
 Name | Type | Description | Notes

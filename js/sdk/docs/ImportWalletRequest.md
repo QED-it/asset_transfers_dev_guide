@@ -1,4 +1,4 @@
-# QedItAssetTransfers.ImportWalletRequest
+# QeditAssetTransfers.ImportWalletRequest
 
 ## Properties
 Name | Type | Description | Notes

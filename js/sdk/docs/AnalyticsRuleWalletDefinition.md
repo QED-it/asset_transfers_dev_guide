@@ -1,4 +1,4 @@
-# QedItAssetTransfers.AnalyticsRuleWalletDefinition
+# QeditAssetTransfers.AnalyticsRuleWalletDefinition
 
 ## Properties
 Name | Type | Description | Notes

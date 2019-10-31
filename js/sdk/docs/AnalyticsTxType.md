@@ -1,4 +1,4 @@
-# QedItAssetTransfers.AnalyticsTxType
+# QeditAssetTransfers.AnalyticsTxType
 
 ## Enum
 

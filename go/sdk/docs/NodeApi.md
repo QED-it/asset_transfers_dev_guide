@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**NodeExportWalletPost**](NodeApi.md#NodeExportWalletPost) | **Post** /node/export_wallet | Export wallet secret key
 [**NodeGenerateWalletPost**](NodeApi.md#NodeGenerateWalletPost) | **Post** /node/generate_wallet | Generate a new Wallet
 [**NodeGetAllWalletsPost**](NodeApi.md#NodeGetAllWalletsPost) | **Post** /node/get_all_wallets | Get all wallet IDs
+[**NodeGetNotificationsPost**](NodeApi.md#NodeGetNotificationsPost) | **Post** /node/get_notifications | Get notifications
 [**NodeGetRulesPost**](NodeApi.md#NodeGetRulesPost) | **Post** /node/get_rules | Get network governance Rules
 [**NodeGetTaskStatusPost**](NodeApi.md#NodeGetTaskStatusPost) | **Post** /node/get_task_status | Get a specific task (by ID)
 [**NodeGetTasksPost**](NodeApi.md#NodeGetTasksPost) | **Post** /node/get_tasks | Get a (potentially) filtered list of all Tasks
@@ -207,6 +208,34 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **NodeGetNotificationsPost**
+> GetNotificationsResponse NodeGetNotificationsPost(ctx, getNotificationsRequest)
+Get notifications
+
+Notifications are the Node's way to report about recent activity and status changes. This endpoint allows polling for these changes and fetching the updates. The notifications can be filtered in multiple ways.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **getNotificationsRequest** | [**GetNotificationsRequest**](GetNotificationsRequest.md)|  | 
+
+### Return type
+
+[**GetNotificationsResponse**](GetNotificationsResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

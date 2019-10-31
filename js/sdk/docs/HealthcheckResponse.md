@@ -1,4 +1,4 @@
-# QedItAssetTransfers.HealthcheckResponse
+# QeditAssetTransfers.HealthcheckResponse
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# QedItAssetTransfers.GetNetworkActivityRequest
+# QeditAssetTransfers.GetNetworkActivityRequest
 
 ## Properties
 Name | Type | Description | Notes

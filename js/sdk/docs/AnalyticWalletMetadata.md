@@ -1,4 +1,4 @@
-# QedItAssetTransfers.AnalyticWalletMetadata
+# QeditAssetTransfers.AnalyticWalletMetadata
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# QedItAssetTransfers.GetTaskStatusResponse
+# QeditAssetTransfers.GetTaskStatusResponse
 
 ## Properties
 Name | Type | Description | Notes

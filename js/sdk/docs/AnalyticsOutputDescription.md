@@ -1,4 +1,4 @@
-# QedItAssetTransfers.AnalyticsOutputDescription
+# QeditAssetTransfers.AnalyticsOutputDescription
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# QedItAssetTransfers.AnalyticsConfidentialIssuanceDescription
+# QeditAssetTransfers.AnalyticsConfidentialIssuanceDescription
 
 ## Properties
 Name | Type | Description | Notes

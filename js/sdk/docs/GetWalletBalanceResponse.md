@@ -1,4 +1,4 @@
-# QedItAssetTransfers.GetWalletBalanceResponse
+# QeditAssetTransfers.GetWalletBalanceResponse
 
 ## Properties
 Name | Type | Description | Notes

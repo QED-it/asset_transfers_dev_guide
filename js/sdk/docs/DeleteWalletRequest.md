@@ -1,4 +1,4 @@
-# QedItAssetTransfers.DeleteWalletRequest
+# QeditAssetTransfers.DeleteWalletRequest
 
 ## Properties
 Name | Type | Description | Notes

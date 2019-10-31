@@ -1,4 +1,4 @@
-# QedItAssetTransfers.AnalyticsApi
+# QeditAssetTransfers.AnalyticsApi
 
 All URIs are relative to *http://localhost:12052*
 
@@ -18,22 +18,24 @@ List all verified Transactions from the network, even ones that do not have anyt
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.AnalyticsApi();
-var getNetworkActivityRequest = new QedItAssetTransfers.GetNetworkActivityRequest(); // GetNetworkActivityRequest | 
-apiInstance.analyticsGetNetworkActivityPost(getNetworkActivityRequest).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.AnalyticsApi();
+var getNetworkActivityRequest = new QeditAssetTransfers.GetNetworkActivityRequest(); // GetNetworkActivityRequest | 
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.analyticsGetNetworkActivityPost(getNetworkActivityRequest, callback);
 ```
 
 ### Parameters
@@ -65,21 +67,23 @@ Returns detailed information about the status of the sync between the QEDIT Node
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.AnalyticsApi();
-apiInstance.analyticsGetSyncStatusPost().then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.AnalyticsApi();
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.analyticsGetSyncStatusPost(callback);
 ```
 
 ### Parameters

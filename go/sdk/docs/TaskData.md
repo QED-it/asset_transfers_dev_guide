@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**SenderPublicKey** | **string** | The public key of the sender of the confirmation request | [optional] 
 **RequireConfirmationFrom** | **string** | The public key for the confirmation request receiver | [optional] 
 **RecipientAddress** | **string** | The address the request was sent to | [optional] 
 **AssetId** | **string** |  | [optional] 

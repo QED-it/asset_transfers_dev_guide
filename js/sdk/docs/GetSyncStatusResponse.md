@@ -1,4 +1,4 @@
-# QedItAssetTransfers.GetSyncStatusResponse
+# QeditAssetTransfers.GetSyncStatusResponse
 
 ## Properties
 Name | Type | Description | Notes

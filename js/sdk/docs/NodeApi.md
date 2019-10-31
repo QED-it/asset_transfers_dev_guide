@@ -1,4 +1,4 @@
-# QedItAssetTransfers.NodeApi
+# QeditAssetTransfers.NodeApi
 
 All URIs are relative to *http://localhost:12052*
 
@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**nodeExportWalletPost**](NodeApi.md#nodeExportWalletPost) | **POST** /node/export_wallet | Export wallet secret key
 [**nodeGenerateWalletPost**](NodeApi.md#nodeGenerateWalletPost) | **POST** /node/generate_wallet | Generate a new Wallet
 [**nodeGetAllWalletsPost**](NodeApi.md#nodeGetAllWalletsPost) | **POST** /node/get_all_wallets | Get all wallet IDs
+[**nodeGetNotificationsPost**](NodeApi.md#nodeGetNotificationsPost) | **POST** /node/get_notifications | Get notifications
 [**nodeGetRulesPost**](NodeApi.md#nodeGetRulesPost) | **POST** /node/get_rules | Get network governance Rules
 [**nodeGetTaskStatusPost**](NodeApi.md#nodeGetTaskStatusPost) | **POST** /node/get_task_status | Get a specific task (by ID)
 [**nodeGetTasksPost**](NodeApi.md#nodeGetTasksPost) | **POST** /node/get_tasks | Get a (potentially) filtered list of all Tasks
@@ -29,22 +30,24 @@ Confirmation request tasks are confirmed using this point. After the user confir
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.NodeApi();
-var taskActionRequest = new QedItAssetTransfers.TaskActionRequest(); // TaskActionRequest | 
-apiInstance.nodeApproveTaskPost(taskActionRequest).then(function() {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.NodeApi();
+var taskActionRequest = new QeditAssetTransfers.TaskActionRequest(); // TaskActionRequest | 
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+apiInstance.nodeApproveTaskPost(taskActionRequest, callback);
 ```
 
 ### Parameters
@@ -76,22 +79,24 @@ A user may select to decline an incoming transaction. The related task will chan
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.NodeApi();
-var taskActionRequest = new QedItAssetTransfers.TaskActionRequest(); // TaskActionRequest | 
-apiInstance.nodeCancelTaskPost(taskActionRequest).then(function() {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.NodeApi();
+var taskActionRequest = new QeditAssetTransfers.TaskActionRequest(); // TaskActionRequest | 
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+apiInstance.nodeCancelTaskPost(taskActionRequest, callback);
 ```
 
 ### Parameters
@@ -123,22 +128,24 @@ Deletes a Wallet from the Node; All private information about the Wallet will be
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.NodeApi();
-var deleteWalletRequest = new QedItAssetTransfers.DeleteWalletRequest(); // DeleteWalletRequest | 
-apiInstance.nodeDeleteWalletPost(deleteWalletRequest).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.NodeApi();
+var deleteWalletRequest = new QeditAssetTransfers.DeleteWalletRequest(); // DeleteWalletRequest | 
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.nodeDeleteWalletPost(deleteWalletRequest, callback);
 ```
 
 ### Parameters
@@ -170,22 +177,24 @@ Export a viewing key that allows viewing all transactions to and from a wallet, 
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.NodeApi();
-var exportAuditorAccessWalletRequest = new QedItAssetTransfers.ExportAuditorAccessWalletRequest(); // ExportAuditorAccessWalletRequest | 
-apiInstance.nodeExportAuditorAccessWalletPost(exportAuditorAccessWalletRequest).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.NodeApi();
+var exportAuditorAccessWalletRequest = new QeditAssetTransfers.ExportAuditorAccessWalletRequest(); // ExportAuditorAccessWalletRequest | 
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.nodeExportAuditorAccessWalletPost(exportAuditorAccessWalletRequest, callback);
 ```
 
 ### Parameters
@@ -217,22 +226,24 @@ Export an encrypted form of the Wallet&#39;s secret key; The authorization passw
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.NodeApi();
-var exportWalletRequest = new QedItAssetTransfers.ExportWalletRequest(); // ExportWalletRequest | 
-apiInstance.nodeExportWalletPost(exportWalletRequest).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.NodeApi();
+var exportWalletRequest = new QeditAssetTransfers.ExportWalletRequest(); // ExportWalletRequest | 
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.nodeExportWalletPost(exportWalletRequest, callback);
 ```
 
 ### Parameters
@@ -264,22 +275,24 @@ Randomly generate a new Wallet under a specified ID; This only affects the Node 
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.NodeApi();
-var generateWalletRequest = new QedItAssetTransfers.GenerateWalletRequest(); // GenerateWalletRequest | 
-apiInstance.nodeGenerateWalletPost(generateWalletRequest).then(function() {
-  console.log('API called successfully.');
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.NodeApi();
+var generateWalletRequest = new QeditAssetTransfers.GenerateWalletRequest(); // GenerateWalletRequest | 
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+apiInstance.nodeGenerateWalletPost(generateWalletRequest, callback);
 ```
 
 ### Parameters
@@ -311,21 +324,23 @@ Returns a list of the IDs of all Wallets currently stored on the Node. Both full
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.NodeApi();
-apiInstance.nodeGetAllWalletsPost().then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.NodeApi();
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.nodeGetAllWalletsPost(callback);
 ```
 
 ### Parameters
@@ -344,6 +359,55 @@ This endpoint does not need any parameter.
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="nodeGetNotificationsPost"></a>
+# **nodeGetNotificationsPost**
+> GetNotificationsResponse nodeGetNotificationsPost(getNotificationsRequest)
+
+Get notifications
+
+Notifications are the Node&#39;s way to report about recent activity and status changes. This endpoint allows polling for these changes and fetching the updates. The notifications can be filtered in multiple ways.
+
+### Example
+```javascript
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
+// Configure API key authorization: ApiKeyAuth
+var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
+ApiKeyAuth.apiKey = 'YOUR API KEY';
+// Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
+//ApiKeyAuth.apiKeyPrefix = 'Token';
+
+var apiInstance = new QeditAssetTransfers.NodeApi();
+var getNotificationsRequest = new QeditAssetTransfers.GetNotificationsRequest(); // GetNotificationsRequest | 
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.nodeGetNotificationsPost(getNotificationsRequest, callback);
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **getNotificationsRequest** | [**GetNotificationsRequest**](GetNotificationsRequest.md)|  | 
+
+### Return type
+
+[**GetNotificationsResponse**](GetNotificationsResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="nodeGetRulesPost"></a>
 # **nodeGetRulesPost**
 > GetRulesResponse nodeGetRulesPost()
@@ -354,21 +418,23 @@ Returns a full list of all the Rules that govern admin and issuance rights withi
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.NodeApi();
-apiInstance.nodeGetRulesPost().then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.NodeApi();
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.nodeGetRulesPost(callback);
 ```
 
 ### Parameters
@@ -397,22 +463,24 @@ Returns the meta-data of a given Task and its current status. The particular, pr
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.NodeApi();
-var getTaskStatusRequest = new QedItAssetTransfers.GetTaskStatusRequest(); // GetTaskStatusRequest | 
-apiInstance.nodeGetTaskStatusPost(getTaskStatusRequest).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.NodeApi();
+var getTaskStatusRequest = new QeditAssetTransfers.GetTaskStatusRequest(); // GetTaskStatusRequest | 
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.nodeGetTaskStatusPost(getTaskStatusRequest, callback);
 ```
 
 ### Parameters
@@ -444,22 +512,24 @@ Returns a list of all Tasks along with their meta-data and statuses. The particu
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.NodeApi();
-var getTasksRequest = new QedItAssetTransfers.GetTasksRequest(); // GetTasksRequest | 
-apiInstance.nodeGetTasksPost(getTasksRequest).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.NodeApi();
+var getTasksRequest = new QeditAssetTransfers.GetTasksRequest(); // GetTasksRequest | 
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.nodeGetTasksPost(getTasksRequest, callback);
 ```
 
 ### Parameters
@@ -491,22 +561,24 @@ Import a viewing key generated by the export_auditor_access_wallet endpoint. Thi
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.NodeApi();
-var importAuditorAccessWalletRequest = new QedItAssetTransfers.ImportAuditorAccessWalletRequest(); // ImportAuditorAccessWalletRequest | 
-apiInstance.nodeImportAuditorAccessWalletPost(importAuditorAccessWalletRequest).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.NodeApi();
+var importAuditorAccessWalletRequest = new QeditAssetTransfers.ImportAuditorAccessWalletRequest(); // ImportAuditorAccessWalletRequest | 
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.nodeImportAuditorAccessWalletPost(importAuditorAccessWalletRequest, callback);
 ```
 
 ### Parameters
@@ -538,22 +610,24 @@ Import a Wallet into the Node under a specified ID; All the transactional histor
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.NodeApi();
-var importWalletRequest = new QedItAssetTransfers.ImportWalletRequest(); // ImportWalletRequest | 
-apiInstance.nodeImportWalletPost(importWalletRequest).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.NodeApi();
+var importWalletRequest = new QeditAssetTransfers.ImportWalletRequest(); // ImportWalletRequest | 
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.nodeImportWalletPost(importWalletRequest, callback);
 ```
 
 ### Parameters
@@ -585,22 +659,24 @@ Causes a specified Wallet&#39;s secret key to be stored in-memory for a specifie
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.NodeApi();
-var unlockWalletRequest = new QedItAssetTransfers.UnlockWalletRequest(); // UnlockWalletRequest | 
-apiInstance.nodeUnlockWalletPost(unlockWalletRequest).then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.NodeApi();
+var unlockWalletRequest = new QeditAssetTransfers.UnlockWalletRequest(); // UnlockWalletRequest | 
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.nodeUnlockWalletPost(unlockWalletRequest, callback);
 ```
 
 ### Parameters

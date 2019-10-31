@@ -1,4 +1,4 @@
-# QedItAssetTransfers.AnalyticsSpendDescription
+# QeditAssetTransfers.AnalyticsSpendDescription
 
 ## Properties
 Name | Type | Description | Notes

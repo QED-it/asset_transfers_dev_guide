@@ -1,4 +1,4 @@
-# QedItAssetTransfers.AnalyticsRuleTx
+# QeditAssetTransfers.AnalyticsRuleTx
 
 ## Properties
 Name | Type | Description | Notes

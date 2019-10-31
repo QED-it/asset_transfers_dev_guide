@@ -1,4 +1,4 @@
-# QedItAssetTransfers.BalanceForAsset
+# QeditAssetTransfers.BalanceForAsset
 
 ## Properties
 Name | Type | Description | Notes

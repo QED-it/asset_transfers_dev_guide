@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: QEDIT - Asset Transfers
-  version: 1.6.0
+  version: 1.6.1
 servers:
 - url: http://{server_url}:{port}
   variables:
@@ -821,6 +821,43 @@ paths:
       summary: Cancel task with pending incoming transaction both incoming and outgoing [async call]
       tags:
       - Node
+  /node/get_notifications:
+    post:
+      description: Notifications are the Node's way to report about recent activity and status changes. This endpoint allows polling for these changes and fetching the updates. The notifications can be filtered in multiple ways.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetNotificationsRequest'
+        required: true
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNotificationsResponse'
+          description: Success
+        400:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        401:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        500:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal error
+      summary: Get notifications
+      tags:
+      - Node
   /health:
     post:
       description: Reports the health of the various components of the system as well as an overall status for the Node. If the Node's status is good, then the Node is synced with the Blockchain and can successfully process requests.
@@ -958,6 +995,110 @@ components:
       - authorization
       - task_id
       type: object
+    GetNotificationsRequest:
+      description: The request body determines which filters to apply to the notifications. All filters are optional, while the maximal number of results defaults to 100 and the order defaults to descending.
+      example:
+        wallet_id: wallet_id
+        types:
+        - null
+        - null
+        max_results: 603
+        after_id: 0
+        starting_with_time: 2000-01-23
+      properties:
+        wallet_id:
+          description: Fetch notifications that relate to this wallet ID only
+          type: string
+        types:
+          items:
+            $ref: '#/components/schemas/NotificationType'
+          type: array
+        starting_with_time:
+          description: Fetch notifications reported at this timestamp or later/earlier. Later notifications will be fetched if the order is ascending, and earlier ones if the order is descending. The timestamp is expected to be in RFC-3339 format.
+          format: date
+          type: string
+        after_id:
+          description: Fetch notifications after this given ID (not including the notification with the given ID). This is meant to facilitate pagination. Later notifications will be fetched if ascending order is selected, and earlier ones if descending order is selected. Warning - do not assume anything about the implementation of after_id; the values of the ID are intended to be copy-pasted from retrieved notifications for pagination.
+          format: int32
+          type: integer
+        order:
+          $ref: '#/components/schemas/OrderEnum'
+        max_results:
+          default: 100
+          description: The maximal number of results to fetch
+          format: int32
+          maximum: 1000
+          minimum: 1
+          type: integer
+      type: object
+    NotificationType:
+      description: The type of notification. This also determines the type of the content of the notification.
+      enum:
+      - task_completed_successfully
+      - task_failed
+      type: string
+    OrderEnum:
+      default: desc
+      description: Order of results to fetch (either ascending or descending); ordering is chronological where the time is set to when the retrieved object was created
+      enum:
+      - asc
+      - desc
+      type: string
+    GetNotificationsResponse:
+      example:
+        notifications:
+        - wallet_id: wallet_id
+          created_at: 2000-01-23
+          task_id: task_id
+          id: 0
+          content: ""
+        - wallet_id: wallet_id
+          created_at: 2000-01-23
+          task_id: task_id
+          id: 0
+          content: ""
+      properties:
+        notifications:
+          items:
+            $ref: '#/components/schemas/Notification'
+          type: array
+      type: object
+    Notification:
+      description: A notification including some metadata and a content field whose type depends on the type of notification.
+      example:
+        wallet_id: wallet_id
+        created_at: 2000-01-23
+        task_id: task_id
+        id: 0
+        content: ""
+      properties:
+        id:
+          description: The unique identifier of the notification. Can be used for pagination purposes.
+          format: int32
+          type: integer
+        created_at:
+          description: Timestamp the notification was created at, in RFC-3339 format.
+          format: date
+          type: string
+        wallet_id:
+          description: The ID of the wallet the notification relates to. May be null in cases there is no such specific wallet.
+          type: string
+        task_id:
+          description: The ID of the task the notification relates to. May be empty in cases there is no such specific task.
+          type: string
+        notification_type:
+          $ref: '#/components/schemas/NotificationType'
+        content:
+          oneOf:
+          - $ref: '#/components/schemas/EmptyContent'
+      required:
+      - created_at
+      - id
+      - notification_type
+      - task_id
+      type: object
+    EmptyContent:
+      type: object
     GetWalletActivityRequest:
       example:
         wallet_id: source_wallet
@@ -1052,12 +1193,7 @@ components:
             $ref: '#/components/schemas/Result'
           type: array
         order:
-          default: desc
-          description: Order of tasks to fetch (either ascending or descending); ordering is chronological where the time is set to when the task was created in this Node
-          enum:
-          - asc
-          - desc
-          type: string
+          $ref: '#/components/schemas/OrderEnum'
       required:
       - number_of_results
       - start_index
@@ -1112,7 +1248,7 @@ components:
       - failure
       type: string
     TaskState:
-      description: A fine-grained status of the node's inner state. This field is subject to changes and should not be relied upon during development
+      description: A fine-grained status of the node's inner state. This field is subject to changes and should not be relied upon during development.
       enum:
       - pending_state
       - in_progress_state
@@ -1138,8 +1274,11 @@ components:
       - incoming_confirm_request
       type: string
     TaskData:
-      description: an object that includes additional request details
+      description: An object that includes additional request details
       properties:
+        sender_public_key:
+          description: The public key of the sender of the confirmation request
+          type: string
         require_confirmation_from:
           description: The public key for the confirmation request receiver
           type: string
@@ -1918,18 +2057,6 @@ components:
           description: The Proof that the issued Asset Type indeed matches the reported Rule
           type: string
       type: object
-    AnalyticsRule:
-      description: The Rule used in the Issuance
-      example:
-        namespace: bank-a.loans.*
-      properties:
-        namespace:
-          description: |
-            A `Namespace` describes what Asset IDs can be issued in an Issuance Rule. It is a string in the same format as `AssetId`. Additionally, if it ends with a wildcard character `*`, then the namespace covers all asset IDs with the namespace as a prefix. Without a final wildcard, the namespace covers exactly one asset ID. Example: The namespace `currencies.dollar` covers only this exact asset type, while `currencies.*` covers all asset types that start with `currencies.`.
-          type: string
-      required:
-      - namespace
-      type: object
     GetWalletActivityResponse:
       example:
         wallet_id: wallet_id
@@ -2050,7 +2177,7 @@ components:
       type: object
     HealthcheckResponse:
       example:
-        version: 1.5.0
+        version: 1.7.0
         blockchain_connector:
           error: 'Post http://localhost:8082/connector/get_block: dial tcp 127.0.0.1:8082:connect:
             connection refused'

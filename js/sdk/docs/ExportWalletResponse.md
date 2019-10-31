@@ -1,4 +1,4 @@
-# QedItAssetTransfers.ExportWalletResponse
+# QeditAssetTransfers.ExportWalletResponse
 
 ## Properties
 Name | Type | Description | Notes

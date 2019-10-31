@@ -1,4 +1,4 @@
-# QedItAssetTransfers.IssueAssetRequest
+# QeditAssetTransfers.IssueAssetRequest
 
 ## Properties
 Name | Type | Description | Notes

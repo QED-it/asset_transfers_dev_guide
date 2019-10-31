@@ -1,4 +1,4 @@
-# QedItAssetTransfers.AsyncTaskCreatedResponse
+# QeditAssetTransfers.AsyncTaskCreatedResponse
 
 ## Properties
 Name | Type | Description | Notes

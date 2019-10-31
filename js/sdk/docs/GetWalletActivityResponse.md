@@ -1,4 +1,4 @@
-# QedItAssetTransfers.GetWalletActivityResponse
+# QeditAssetTransfers.GetWalletActivityResponse
 
 ## Properties
 Name | Type | Description | Notes

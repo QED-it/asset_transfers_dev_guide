@@ -1,4 +1,4 @@
-# QedItAssetTransfers.AnalyticTransaction
+# QeditAssetTransfers.AnalyticTransaction
 
 ## Properties
 Name | Type | Description | Notes

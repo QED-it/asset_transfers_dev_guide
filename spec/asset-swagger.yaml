@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 1.6.0
+  version: 1.6.1
   title: QEDIT - Asset Transfers
 security:
   - ApiKeyAuth: []
@@ -824,6 +824,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /node/get_notifications:
+    post:
+      tags:
+        - Node
+      summary: Get notifications
+      description: Notifications are the Node's way to report about recent activity and status changes. This endpoint allows polling for these changes and fetching the updates. The notifications can be filtered in multiple ways.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetNotificationsRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNotificationsResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
   /health:
     post:
@@ -969,6 +1006,88 @@ components:
       example:
         task_id: "5aaa4045-e949-4c44-a7ef-25fb55a1afa6"
         authorization: PrivacyIsAwesome
+
+    GetNotificationsRequest:
+      type: object
+      description: The request body determines which filters to apply to the notifications. All filters are optional, while the maximal number of results defaults to 100 and the order defaults to descending.
+      properties:
+        wallet_id:
+          type: string
+          description: "Fetch notifications that relate to this wallet ID only"
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/NotificationType'
+        starting_with_time:
+          type: string
+          format: date
+          description: Fetch notifications reported at this timestamp or later/earlier. Later notifications will be fetched if the order is ascending, and earlier ones if the order is descending. The timestamp is expected to be in RFC-3339 format.
+        after_id:
+          type: integer
+          description: Fetch notifications after this given ID (not including the notification with the given ID). This is meant to facilitate pagination. Later notifications will be fetched if ascending order is selected, and earlier ones if descending order is selected. Warning - do not assume anything about the implementation of after_id; the values of the ID are intended to be copy-pasted from retrieved notifications for pagination.
+        order:
+          $ref: '#/components/schemas/OrderEnum'
+        max_results:
+          type: integer
+          description: The maximal number of results to fetch
+          minimum: 1
+          maximum: 1000
+          default: 100
+
+    NotificationType:
+      type: string
+      enum:
+        - task_completed_successfully
+        - task_failed
+      description: The type of notification. This also determines the type of the content of the notification.
+
+    OrderEnum:
+      type: string
+      enum:
+        - asc
+        - desc
+      default: desc
+      description: Order of results to fetch (either ascending or descending); ordering is chronological where the time is set to when the retrieved object was created
+
+    GetNotificationsResponse:
+      type: object
+      properties:
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+
+    Notification:
+      type: object
+      description: A notification including some metadata and a content field whose type depends on the type of notification.
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the notification. Can be used for pagination purposes.
+        created_at:
+          type: string
+          format: date
+          description: Timestamp the notification was created at, in RFC-3339 format.
+        wallet_id:
+          type: string
+          description: The ID of the wallet the notification relates to. May be null in cases there is no such specific wallet.
+        task_id:
+          type: string
+          description: The ID of the task the notification relates to. May be empty in cases there is no such specific task.
+        notification_type:
+          $ref: '#/components/schemas/NotificationType'
+        content:
+          oneOf:
+            - $ref: '#/components/schemas/EmptyContent'
+      required:
+        - id
+        - created_at
+        - task_id
+        - notification_type
+
+    EmptyContent:
+      type: object
+
     GetWalletActivityRequest:
       type: object
       properties:
@@ -1041,12 +1160,7 @@ components:
           description: List of results (statuses) to filter by; fetch in_progress tasks if omitted
         #          default: [in_progress]
         order:
-          type: string
-          default: desc
-          enum:
-            - asc
-            - desc
-          description: Order of tasks to fetch (either ascending or descending); ordering is chronological where the time is set to when the task was created in this Node
+          $ref: '#/components/schemas/OrderEnum'
       required:
         - start_index
         - number_of_results
@@ -1074,7 +1188,6 @@ components:
           $ref: '#/components/schemas/Result'
         state:
           $ref: '#/components/schemas/TaskState'
-          description: More granular current state of the Task; list of supported states is not guaranteed to be stable
         tx_hash:
           type: string
           description: The Blockchain-generated hash of the Transaction; populated after the Blockchain Node accepted the Transaction
@@ -1085,7 +1198,6 @@ components:
           $ref: '#/components/schemas/TaskType'
         data:
           $ref: '#/components/schemas/TaskData'
-          description: Container for the Transaction data related to the task; different tasks might have various fields
         error:
           type: string
           description: In case of failure this field reports the reason for the failure
@@ -1120,7 +1232,7 @@ components:
         - tx_submitted_state
         - failure_state
         - success_state
-      description: A fine-grained status of the node's inner state. This field is subject to changes and should not be relied upon during development
+      description: A fine-grained status of the node's inner state. This field is subject to changes and should not be relied upon during development.
     TaskType:
       type: string
       enum:
@@ -1135,8 +1247,11 @@ components:
       description: Task type
     TaskData:
       type: object
-      description: an object that includes additional request details
+      description: An object that includes additional request details
       properties:
+        sender_public_key:
+          type: string
+          description: The public key of the sender of the confirmation request
         require_confirmation_from:
           type: string
           description: The public key for the confirmation request receiver
@@ -1836,17 +1951,6 @@ components:
         zkproof: "000AAAAAAA="
         namespace: "bank-a.loans.*"
 
-    AnalyticsRule:
-      type: object
-      description: The Rule used in the Issuance
-      properties:
-        namespace:
-          $ref: '#/components/schemas/Namespace'
-      required:
-        - namespace
-      example:
-        namespace: "bank-a.loans.*"
-
     GetWalletActivityResponse:
       type: object
       properties:
@@ -1962,7 +2066,7 @@ components:
           type: boolean
           description: Boolean signifying whether the endpoint is ready for calls
       example:
-        version: '1.5.0'
+        version: '1.7.0'
         blockchain_connector:
           error: 'Post http://localhost:8082/connector/get_block: dial tcp 127.0.0.1:8082:connect: connection refused'
           passing: false

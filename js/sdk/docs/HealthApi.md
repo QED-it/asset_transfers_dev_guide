@@ -1,4 +1,4 @@
-# QedItAssetTransfers.HealthApi
+# QeditAssetTransfers.HealthApi
 
 All URIs are relative to *http://localhost:12052*
 
@@ -17,21 +17,23 @@ Reports the health of the various components of the system as well as an overall
 
 ### Example
 ```javascript
-var QedItAssetTransfers = require('qed-it-asset-transfers');
-var defaultClient = QedItAssetTransfers.ApiClient.instance;
+var QeditAssetTransfers = require('qedit___asset_transfers');
+var defaultClient = QeditAssetTransfers.ApiClient.instance;
 // Configure API key authorization: ApiKeyAuth
 var ApiKeyAuth = defaultClient.authentications['ApiKeyAuth'];
 ApiKeyAuth.apiKey = 'YOUR API KEY';
 // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
 //ApiKeyAuth.apiKeyPrefix = 'Token';
 
-var apiInstance = new QedItAssetTransfers.HealthApi();
-apiInstance.healthPost().then(function(data) {
-  console.log('API called successfully. Returned data: ' + data);
-}, function(error) {
-  console.error(error);
-});
-
+var apiInstance = new QeditAssetTransfers.HealthApi();
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+apiInstance.healthPost(callback);
 ```
 
 ### Parameters

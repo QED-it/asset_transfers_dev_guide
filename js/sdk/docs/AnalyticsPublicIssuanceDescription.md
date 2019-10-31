@@ -1,4 +1,4 @@
-# QedItAssetTransfers.AnalyticsPublicIssuanceDescription
+# QeditAssetTransfers.AnalyticsPublicIssuanceDescription
 
 ## Properties
 Name | Type | Description | Notes

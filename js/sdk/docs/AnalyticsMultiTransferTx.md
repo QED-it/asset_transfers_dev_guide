@@ -1,4 +1,4 @@
-# QedItAssetTransfers.AnalyticsMultiTransferTx
+# QeditAssetTransfers.AnalyticsMultiTransferTx
 
 ## Properties
 Name | Type | Description | Notes

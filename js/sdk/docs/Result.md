@@ -1,4 +1,4 @@
-# QedItAssetTransfers.Result
+# QeditAssetTransfers.Result
 
 ## Enum
 

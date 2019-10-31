@@ -1,4 +1,4 @@
-# QedItAssetTransfers.DeleteRuleRequest
+# QeditAssetTransfers.DeleteRuleRequest
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# QedItAssetTransfers.CreateRuleRequest
+# QeditAssetTransfers.CreateRuleRequest
 
 ## Properties
 Name | Type | Description | Notes

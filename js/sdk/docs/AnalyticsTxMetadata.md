@@ -1,4 +1,4 @@
-# QedItAssetTransfers.AnalyticsTxMetadata
+# QeditAssetTransfers.AnalyticsTxMetadata
 
 ## Properties
 Name | Type | Description | Notes

@@ -1,4 +1,4 @@
-# QedItAssetTransfers.UnlockWalletRequest
+# QeditAssetTransfers.UnlockWalletRequest
 
 ## Properties
 Name | Type | Description | Notes

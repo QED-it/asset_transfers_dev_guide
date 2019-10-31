@@ -22,10 +22,10 @@
     module.exports = factory(require('../ApiClient'));
   } else {
     // Browser globals (root is window)
-    if (!root.QedItAssetTransfers) {
-      root.QedItAssetTransfers = {};
+    if (!root.QeditAssetTransfers) {
+      root.QeditAssetTransfers = {};
     }
-    root.QedItAssetTransfers.AnalyticsRule = factory(root.QedItAssetTransfers.ApiClient);
+    root.QeditAssetTransfers.AnalyticsRule = factory(root.QeditAssetTransfers.ApiClient);
   }
 }(this, function(ApiClient) {
   'use strict';

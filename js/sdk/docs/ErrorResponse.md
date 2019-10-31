@@ -1,4 +1,4 @@
-# QedItAssetTransfers.ErrorResponse
+# QeditAssetTransfers.ErrorResponse
 
 ## Properties
 Name | Type | Description | Notes
