@@ -5,11 +5,12 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"fmt"
-	"github.com/mitchellh/mapstructure"
 	"log"
 
-	"github.com/QED-it/asset_transfers_dev_guide/go/examples/util"
-	"github.com/QED-it/asset_transfers_dev_guide/go/sdk"
+	"github.com/mitchellh/mapstructure"
+
+	"github.com/QED-it/goqedit"
+	"github.com/QED-it/goqedit/examples/util"
 )
 
 func main() {
@@ -27,7 +28,7 @@ func main() {
 		util.HandleErrorAndExit(err)
 	}
 
-	getNewAddressRequest := sdk.GetNewAddressRequest{
+	getNewAddressRequest := goqedit.GetNewAddressRequest{
 		WalletId:    "dest_wallet",
 		Diversifier: hex.EncodeToString(diversifier),
 	}
@@ -36,7 +37,7 @@ func main() {
 	// END get address of destination wallet
 
 	// START unlock source wallet
-	unlockRequest := sdk.UnlockWalletRequest{
+	unlockRequest := goqedit.UnlockWalletRequest{
 		WalletId:      "source_wallet",
 		Authorization: "PrivacyIsAwesome",
 		Seconds:       600,
@@ -56,7 +57,7 @@ func main() {
 	// END unlock source wallet
 
 	// START transfer from source to destination
-	transferRequest := sdk.TransferAssetRequest{
+	transferRequest := goqedit.TransferAssetRequest{
 		WalletId:         "source_wallet",
 		Authorization:    "PrivacyIsAwesome",
 		AssetId:          10,
@@ -78,7 +79,7 @@ func main() {
 	// END transfer from source to destination
 
 	// START read transactions in the destination wallet and find this transfer
-	getActivityRequest := sdk.GetWalletActivityRequest{
+	getActivityRequest := goqedit.GetWalletActivityRequest{
 		WalletId:        "dest_wallet",
 		NumberOfResults: 1000,
 		StartIndex:      0,
@@ -93,7 +94,7 @@ func main() {
 
 	switch lastTx.Metadata.Type {
 	case "Issue":
-		var txContent sdk.AnalyticIssueWalletTx
+		var txContent goqedit.AnalyticIssueWalletTx
 		err := mapstructure.Decode(lastTx.Content, &txContent)
 		if err != nil {
 			log.Fatal(err)
@@ -101,7 +102,7 @@ func main() {
 		fmt.Printf("got an issue-tx with asset ID %s, amount %d and memo \"%s\"", txContent.AssetId, txContent.Amount, txContent.Memo)
 
 	case "Transfer":
-		var txContent sdk.AnalyticTransferWalletTx
+		var txContent goqedit.AnalyticTransferWalletTx
 		err := mapstructure.Decode(lastTx.Content, &txContent)
 		if err != nil {
 			log.Fatal(err)

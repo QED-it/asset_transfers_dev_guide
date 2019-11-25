@@ -1,10 +1,11 @@
 package main
 
 import (
-	"fmt"
-	"github.com/QED-it/asset_transfers_dev_guide/go/examples/util"
-	"github.com/QED-it/asset_transfers_dev_guide/go/sdk"
 	"context"
+	"fmt"
+
+	"github.com/QED-it/goqedit"
+	"github.com/QED-it/goqedit/examples/util"
 )
 
 func main() {
@@ -15,7 +16,7 @@ func main() {
 
 	ctx := context.Background()
 
-	balanceRequest := sdk.GetWalletBalanceRequest{
+	balanceRequest := goqedit.GetWalletBalanceRequest{
 		WalletId: "source_wallet",
 	}
 
@@ -29,5 +30,3 @@ func main() {
 		fmt.Printf("asset %s has balance %d\n", assetBalance.AssetId, assetBalance.Amount)
 	}
 }
-
-

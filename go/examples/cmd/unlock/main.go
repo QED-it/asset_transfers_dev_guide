@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/QED-it/asset_transfers_dev_guide/go/examples/util"
-	"github.com/QED-it/asset_transfers_dev_guide/go/sdk"
+	"github.com/QED-it/goqedit"
+	"github.com/QED-it/goqedit/examples/util"
 )
 
 func main() {
@@ -16,7 +16,7 @@ func main() {
 
 	ctx := context.Background()
 
-	unlockRequest := sdk.UnlockWalletRequest{
+	unlockRequest := goqedit.UnlockWalletRequest{
 		WalletId:      "source_wallet",
 		Authorization: "PrivacyIsAwesome",
 		Seconds:       600,

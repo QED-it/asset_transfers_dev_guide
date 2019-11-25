@@ -3,9 +3,10 @@ package util
 import (
 	"flag"
 	"fmt"
-	"github.com/QED-it/asset_transfers_dev_guide/go/sdk"
 	"os"
 	"strings"
+
+	"github.com/QED-it/goqedit"
 )
 
 type AssetTransfersConfig struct {
@@ -45,17 +46,17 @@ func handleFlagParseError(err error) error {
 	return err
 }
 
-func InitAPIClient() (*sdk.APIClient, *AssetTransfersConfig, error) {
+func InitAPIClient() (*goqedit.APIClient, *AssetTransfersConfig, error) {
 	config, err := parseFlags()
 	if err != nil {
 		return nil, nil, err
 	}
 
-	clientConfig := sdk.NewConfiguration()
+	clientConfig := goqedit.NewConfiguration()
 	clientConfig.BasePath = config.ServerURL
 	clientConfig.AddDefaultHeader("x-auth-token", config.Token)
 
-	client := sdk.NewAPIClient(clientConfig)
+	client := goqedit.NewAPIClient(clientConfig)
 
 	return client, &config, nil
 }

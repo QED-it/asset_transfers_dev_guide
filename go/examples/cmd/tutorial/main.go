@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/QED-it/asset_transfers_dev_guide/go/examples/util"
-	"github.com/QED-it/asset_transfers_dev_guide/go/sdk"
+	"github.com/QED-it/goqedit"
+	"github.com/QED-it/goqedit/examples/util"
 )
 
 func main() {
@@ -16,7 +16,7 @@ func main() {
 
 	ctx := context.Background()
 
-	generateWalletRequest := sdk.GenerateWalletRequest{
+	generateWalletRequest := goqedit.GenerateWalletRequest{
 		WalletId:      "Jane",
 		Authorization: "123456",
 	}
@@ -26,7 +26,7 @@ func main() {
 		fmt.Printf("Could not generate Jane's wallet, %v\n", util.ErrorResponseString(err))
 	}
 
-	importWalletRequest := sdk.ImportWalletRequest{
+	importWalletRequest := goqedit.ImportWalletRequest{
 		WalletId:      "bank",
 		EncryptedSk:   "2b9a24e2eafce806cde2f03cae49a840ee4cfb408163c8d2de8264e3552b18ab5debc1def1fb446742cbec99f42ba9e2",
 		Authorization: "123",
@@ -45,7 +45,7 @@ func main() {
 		util.HandleErrorAndExit(fmt.Errorf("error while importing wallet: %v", importWalletTaskStatus.Error))
 	}
 
-	getNewAddressRequest := sdk.GetNewAddressRequest{
+	getNewAddressRequest := goqedit.GetNewAddressRequest{
 		WalletId:    "Jane",
 		Diversifier: "69be9d33a15535a59dd111",
 	}
@@ -57,11 +57,11 @@ func main() {
 
 	fmt.Printf("Jane's address details: %v\n", getNewAddressResponse)
 
-	issueAssetRequest := sdk.IssueAssetRequest{
+	issueAssetRequest := goqedit.IssueAssetRequest{
 		WalletId:         "bank",
 		Authorization:    "123",
 		RecipientAddress: getNewAddressResponse.RecipientAddress,
-		AssetId:          200,
+		AssetId:          "abcd",
 		Amount:           1,
 		Confidential:     false,
 		Memo:             "this is for you, Jane",
@@ -80,7 +80,7 @@ func main() {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't issue asset: %v\nDid you configure the bank's private key?", issueTaskStatus.Error))
 	}
 
-	getWalletBalancesRequest := sdk.GetWalletBalanceRequest{
+	getWalletBalancesRequest := goqedit.GetWalletBalanceRequest{
 		WalletId: "Jane",
 	}
 
@@ -91,7 +91,7 @@ func main() {
 
 	fmt.Printf("Jane's wallet balances: %v\n", getWalletBalancesResponse)
 
-	getActivityRequest := sdk.GetWalletActivityRequest{
+	getActivityRequest := goqedit.GetWalletActivityRequest{
 		WalletId:        "Jane",
 		StartIndex:      0,
 		NumberOfResults: 10,
@@ -103,7 +103,7 @@ func main() {
 	}
 
 	fmt.Printf("Jane's transactions: %v\n", getActivityResponse)
-	newBankAddressRequest := sdk.GetNewAddressRequest{
+	newBankAddressRequest := goqedit.GetNewAddressRequest{
 		WalletId: "bank",
 	}
 
@@ -112,11 +112,11 @@ func main() {
 		util.HandleErrorAndExit(fmt.Errorf("couldn't generate address for bank wallet: %v", util.ErrorResponseString(err)))
 	}
 
-	transferAssetRequest := sdk.TransferAssetRequest{
+	transferAssetRequest := goqedit.TransferAssetRequest{
 		WalletId:         "Jane",
 		Authorization:    "123456",
 		RecipientAddress: newBankAddressResponse.RecipientAddress,
-		AssetId:          200,
+		AssetId:          "abcd",
 		Amount:           1,
 		Memo:             "Getting rid of my asset",
 	}

@@ -1,0 +1,5 @@
+{
+    "useES6": false,
+    "usePromises": true,
+    "projectName": "qed-it-asset-transfers"
+}

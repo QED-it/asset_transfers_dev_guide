@@ -1,18 +1,36 @@
 # Asset transfers SDKs
 
-This repository provides the means to operate the QED-it asset transfers bundle API.
+This repository provides the means to operate the QED-it asset transfers API.
 
-The bundle exposes an HTTP API, which is specified using the [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification).
+The HTTP API is specified using the [OpenAPI specification](https://github.com/OAI/OpenAPI-Specification).
 
-The structure of the repository is as follows:
-  - [spec](spec) - contains the API specification.
-  - [go](go):
-    - [sdk](go/sdk) - Go SDK, generated from the API specification.
-    - [examples/cmd](go/examples/cmd):
-      - [walletbalances](go/examples/cmd/walletbalances): Get wallet balances.
-      - [unlock](go/examples/cmd/unlock): Unlock a wallet.
-      - [transferandread](go/examples/cmd/transferandread): Transfer between wallets and observe the transfer.
-      - [tutorial](go/examples/cmd/tutorial): Follows the [tutorial](https://docs.qed-it.com/docs/qed-solution-docs/en/latest/docs/tutorial.html).
-  - [js](js):
-    - [sdk](js/sdk) - Javascript SDK, generated from the API specification.
+Check out [QEDIT's swagger UI running and using the spec file from this repository](https://asset-api.qed-it.com/)
 
+## SDK repositories maintained by QEDIT
+
+  * [Python](https://github.com/QED-it/pyqedit)
+  * [Go](https://github.com/QED-it/goqedit)
+
+Alternatively, you can generate SDKs by yourself.
+
+## Generate SDK
+
+### Using `docker` and the batteries included `Makefile`
+
+Simply run `make <language>`. Currently the supported languages in the `Makefile` and `generate_in_docker.sh` script are:
+
+  * `Go`
+  * `Python`
+  * `JS`
+
+Alternatively you can use the other method of generating the SDK:
+
+### Using [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator/)
+
+Follow the instructions on [this repository](https://github.com/OpenAPITools/openapi-generator/). The input which is the
+`asset-swagger.yaml` file is independent on any external tools.
+
+## Config files
+
+Each language have got specific key-value JSON configuration for it.
+See [here](https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/) for a language-specific configuration definitions.

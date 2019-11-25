@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/QED-it/asset_transfers_dev_guide/go/sdk"
+	"github.com/QED-it/goqedit"
 )
 
 const (
@@ -16,7 +16,7 @@ const (
 // ErrorResponseString will return OpenAPI's model error (the original error, not the
 // one that's wrapped by OpenAPI)
 func ErrorResponseString(err error) string {
-	if apiError, ok := err.(sdk.GenericOpenAPIError).Model().(sdk.ErrorResponse); ok {
+	if apiError, ok := err.(goqedit.GenericOpenAPIError).Model().(goqedit.ErrorResponse); ok {
 		return apiError.Message
 	}
 	return err.Error()
@@ -25,9 +25,9 @@ func ErrorResponseString(err error) string {
 // WaitForAsyncTaskDone waits for async tasks with ID `taskID` to be done, meaning not
 // in `in_progress` or `pending` results.
 // It then returns the last GetTaskStatusResponse response (the one with the complete results)
-func WaitForAsyncTaskDone(ctx context.Context, taskID string, client *sdk.APIClient) (sdk.GetTaskStatusResponse, error) {
-	var taskStatus sdk.GetTaskStatusResponse
-	taskStatusRequest := sdk.GetTaskStatusRequest{Id: taskID}
+func WaitForAsyncTaskDone(ctx context.Context, taskID string, client *goqedit.APIClient) (goqedit.GetTaskStatusResponse, error) {
+	var taskStatus goqedit.GetTaskStatusResponse
+	taskStatusRequest := goqedit.GetTaskStatusRequest{Id: taskID}
 	for i := 0; i < asyncTaskRetries; i++ {
 		taskStatus, _, err := client.NodeApi.NodeGetTaskStatusPost(ctx, taskStatusRequest)
 		if err != nil {
