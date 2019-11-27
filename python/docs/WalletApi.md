@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**wallet_get_new_address_post**](WalletApi.md#wallet_get_new_address_post) | **POST** /wallet/get_new_address | Get a new address from a given diversifier or generate randomly
 [**wallet_get_public_key_post**](WalletApi.md#wallet_get_public_key_post) | **POST** /wallet/get_public_key | Get wallet public key
 [**wallet_issue_asset_post**](WalletApi.md#wallet_issue_asset_post) | **POST** /wallet/issue_asset | Issue assets [async call]
+[**wallet_share_viewing_permission_post**](WalletApi.md#wallet_share_viewing_permission_post) | **POST** /wallet/share_viewing_permission | Share the viewing credentials for a given Wallet
 [**wallet_transfer_asset_post**](WalletApi.md#wallet_transfer_asset_post) | **POST** /wallet/transfer_asset | Transfer assets [async call]
 
 
@@ -394,6 +395,62 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AsyncTaskCreatedResponse**](AsyncTaskCreatedResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **wallet_share_viewing_permission_post**
+> ShareWalletViewingPermissionResponse wallet_share_viewing_permission_post(share_wallet_viewing_permission_request)
+
+Share the viewing credentials for a given Wallet
+
+Share a viewing key that allows viewing all transactions to and from a wallet, including past transactions. The key is shared via p2p messenger directly to the recipient, and is encrypted specifically for the intended recipient address. Upon arrival, the wallet is automatically added to the recipient's node. The viewing key does not enable making any transactions (including rule changes, issuance, and transfers) on behalf of the exported Wallet.
+
+### Example
+
+* Api Key Authentication (ApiKeyAuth): 
+```python
+from __future__ import print_function
+import time
+import pyqedit
+from pyqedit.rest import ApiException
+from pprint import pprint
+
+# Configure API key authorization: ApiKeyAuth
+configuration = pyqedit.Configuration()
+configuration.api_key['x-auth-token'] = 'YOUR_API_KEY'
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['x-auth-token'] = 'Bearer'
+
+# create an instance of the API class
+api_instance = pyqedit.WalletApi(pyqedit.ApiClient(configuration))
+share_wallet_viewing_permission_request = pyqedit.ShareWalletViewingPermissionRequest() # ShareWalletViewingPermissionRequest | 
+
+try:
+    # Share the viewing credentials for a given Wallet
+    api_response = api_instance.wallet_share_viewing_permission_post(share_wallet_viewing_permission_request)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling WalletApi->wallet_share_viewing_permission_post: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **share_wallet_viewing_permission_request** | [**ShareWalletViewingPermissionRequest**](ShareWalletViewingPermissionRequest.md)|  | 
+
+### Return type
+
+[**ShareWalletViewingPermissionResponse**](ShareWalletViewingPermissionResponse.md)
 
 ### Authorization
 

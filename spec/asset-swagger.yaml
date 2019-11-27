@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 1.6.2
+  version: 1.7.0
   title: QEDIT - Asset Transfers
   contact:
     name: QEDIT
@@ -255,8 +255,8 @@ paths:
             schema:
               $ref: '#/components/schemas/DeleteRuleRequest'
       responses:
-        '201':
-          description: Created
+        '202':
+          description: Accepted
           content:
             application/json:
               schema:
@@ -298,6 +298,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GetWalletActivityResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /wallet/share_viewing_permission:
+    post:
+      tags:
+        - Wallet
+      summary: Share the viewing credentials for a given Wallet
+      description: Share a viewing key that allows viewing all transactions to and from a wallet, including past transactions. The key is shared via p2p messenger directly to the recipient, and is encrypted specifically for the intended recipient address. Upon arrival, the wallet is automatically added to the recipient's node. The viewing key does not enable making any transactions (including rule changes, issuance, and transfers) on behalf of the exported Wallet.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShareWalletViewingPermissionRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShareWalletViewingPermissionResponse'
         '400':
           description: Bad request
           content:
@@ -433,8 +470,8 @@ paths:
             schema:
               $ref: '#/components/schemas/DeleteWalletRequest'
       responses:
-        '201':
-          description: Created
+        '202':
+          description: Accepted
           content:
             application/json:
               schema:
@@ -837,6 +874,280 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
+  /attachment/create_group:
+    post:
+      tags:
+        - Attachment
+      summary: Create a new group
+      description: Groups are cryptographically-secure permission-sets which allow their members to either write or read/write to the Group (there's no read-only permission). When creating a new Group, a new secret is created which can be used to encrypt Attachments. Attachments can be stored (in encrypted form) in Groups, and Group permissions can be shared with other Wallets.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGroupRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGroupResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /attachment/add_to_group:
+    post:
+      tags:
+        - Attachment
+      summary: Add a new member to a group
+      description: Shares with another Wallet the credentials required to either write or both read and write to a Group another Wallet. The Group will be automatically added to any Nodes that have the recipient Wallet stored within them, including Nodes that have viewing-only access to said Wallet.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddToGroupRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddToGroupResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /attachment/leave_group:
+    post:
+      tags:
+        - Attachment
+      summary: Removes an owned Wallet from a Group
+      description: Deletes any credentials and messages that relate to the given Group and are owned by the given Wallet. Does not affect other Wallets in the same Node. Only owners of Wallets can remove their own Wallets from any given Group.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeaveGroupRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LeaveGroupResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /attachment/get_groups:
+    post:
+      tags:
+        - Attachment
+      summary: List the Groups the Wallet has access to
+      description: Returns the full list of Groups the Wallet has credentials for (both write-only and read/write).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetGroupsRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetGroupsResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /attachment/upload:
+    post:
+      tags:
+        - Attachment
+      summary: Upload an Attachment and share it with a Group
+      description: Encrypts and uploads an Attachment so that it becomes shared with a given Group. Returns a globally-unique identifier for the Attachment to be used in subsequent API calls.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UploadAttachmentRequest'
+
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadAttachmentResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /attachment/download:
+    post:
+      tags:
+        - Attachment
+      summary: Download an Attachment
+      description: Downloads and decrypts an Attachment given an Attachment ID, and assuming it exists and a Wallet with proper credentials for the relevant Group is used
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DownloadAttachmentRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DownloadAttachmentResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /attachment/list:
+    post:
+      tags:
+        - Attachment
+      summary: Lists available Attachments
+      description: Lists the Attachments available for download for a given Wallet, and filtered by further arguments. Note that Attachments must be filtered by exactly one of th e optional filters (transaction hashes or asset IDs).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListAttachmentsRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAttachmentsResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+
   /health:
     post:
       tags:
@@ -949,6 +1260,11 @@ components:
         memo:
           type: string
           description: An app-customizable field to store additional private data relating to the transfer; the memo is shared between the sender and the receiver, but is not divulged to other parties
+        attachment_ids:
+          type: array
+          items:
+            type: string
+          description: The globally-unique identifiers of the Attachments to attach to the transferred Asset; the attachments must already be uploaded, and their identifiers are returned by the upload endpoint
         require_confirmation_from:
           type: string
           description: A user may request confirmation from the receiving party. If a public key of the approver is included in this optional field, the transaction will only become valid after the received signs it. The receiver will be able to decide whether to accept or reject the transfer by calling the /node/approve_task or the /node/reject_task respectively.
@@ -1309,6 +1625,12 @@ components:
           description: Boolean which should be true if the issuance should be confidential, and false of the Issuance should be public
         memo:
           type: string
+          description: An app-customizable field to store additional private data relating to the issuance; the memo is shared between the sender and the receiver, but is not divulged to other parties
+        attachment_ids:
+          type: array
+          items:
+            type: string
+          description: The globally-unique identifiers of the Attachments to attach to the issued Asset; the attachments must already be uploaded, and their identifiers are returned by the upload endpoint
       required:
         - wallet_id
         - authorization
@@ -1378,6 +1700,33 @@ components:
       example:
         wallet_id: source_wallet
         public_key: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
+    ShareWalletViewingPermissionRequest:
+      type: object
+      properties:
+        wallet_id:
+          type: string
+          description: The ID of the Wallet to export a viewing key for
+        authorization:
+          type: string
+          description: The authorization password for the Wallet
+        recipient_payment_address:
+          type: string
+          description: An Address of the Wallet that belongs to the intended recipient of the exported viewing key; used to automatically send the key to the recipient in a secure and private manner
+        share_wallet_id_as:
+          type: string
+          description: The wallet id assigned by the sender and used to identify the shared wallet on the recipient's Node.
+      required:
+        - wallet_id
+        - authorization
+        - recipient_payment_address
+        - share_wallet_id_as
+      example:
+        wallet_id: alice_wallet
+        authorization: PrivacyIsAwesome
+        recipient_payment_address: q1dxlf6vap2566t8w3z8f5j5lxy9n036zfsaytjve7fedsw6w8c9q9ctrwfz6ryyjwkgvj6tjg70f
+        share_wallet_id_as: alice_wallet_readonly
+    ShareWalletViewingPermissionResponse:
+      type: object
     ExportWalletRequest:
       type: object
       properties:
@@ -2013,6 +2362,249 @@ components:
           description: The public key of the Wallet that was used to create the Rule
         rule:
           $ref: '#/components/schemas/AnalyticsRuleWalletDefinition'
+
+    CreateGroupRequest:
+      type: object
+      properties:
+        wallet_id:
+          type: string
+          description: The Node-specific identifier of the Wallet that owns the new Group
+        memo:
+          type: string
+          description: Memo to be used by the application to define the purpose of the group. Defaults to an empty string.
+      required:
+        - wallet_id
+
+    CreateGroupResponse:
+      type: object
+      properties:
+        group_id:
+          type: string
+          description: The globally unique identifier of the Group
+      required:
+        - group_id
+
+    AddToGroupRequest:
+      type: object
+      properties:
+        wallet_id:
+          type: string
+          description: The Node-specific identifier of the Wallet that is sharing the credentials for the Group
+        group_id:
+          type: string
+          description: The unique identifier of the Group whose credentials will be shared
+        read_permission:
+          type: boolean
+          description: Boolean that should be set to true if and only if read permission should be shared. Note that write permission is always shared and there's no option for read-only permission. Defaults to false.
+        memo:
+          type: string
+          description: Memo to be used by the application to define the purpose of the group and why its credentials were shared. Should include information about who is sharing the group if this information is relevant. Defaults to an empty string
+        recipient_address:
+          type: string
+          description: An Address of the Wallet with which the Group credentials should be shared
+      required:
+        - wallet_id
+        - group_id
+        - recipient_address
+
+    AddToGroupResponse:
+      type: object
+
+    LeaveGroupRequest:
+      type: object
+      properties:
+        wallet_id:
+          type: string
+          description: The Node-specific identifier of the Wallet that is to leave the Group
+        group_id:
+          type: string
+          description: The unique identifier of the Group which is being left
+      required:
+        - wallet_id
+        - group_id
+
+    LeaveGroupResponse:
+      type: object
+
+    GetGroupsRequest:
+      type: object
+      properties:
+        wallet_id:
+          type: string
+          description: The Node-specific identifier of the Wallet that is to leave the Group
+        start_index:
+          type: integer
+          description: An offset used to paginate through the available groups; indexing is 0-based; defaults to 0
+        number_of_results:
+          type: integer
+          description: Maximal number of results to fetch in this call; defaults to 100
+      required:
+        - wallet_id
+
+    GetGroupsResponse:
+      type: object
+      properties:
+        groups:
+          type: array
+          description: List of Groups available, ordered by time joined (ascending)
+          items:
+            $ref: '#/components/schemas/GroupInformation'
+      required:
+        - groups
+
+    GroupInformation:
+      type: object
+      properties:
+        group_id:
+          type: string
+          description: The unique identifier of the Group
+        joined_at:
+          type: string
+          format: date
+          description: Timestamp of when the Group credentials were shared with the Wallet. The timestamp is in RFC-3339 format.
+        read_permission:
+          type: boolean
+          description: Boolean set to true if and only if read permission for the given Group was shared with the given Wallet. Note that write access is always shared.
+        memo:
+          type: string
+          description: The memo used by the application that first shared this Group with the given Wallet when calling `add_to_group`.
+      required:
+        - group_id
+        - joined_at
+        - read_permission
+        - memo
+
+    UploadAttachmentRequest:
+      type: object
+      properties:
+        wallet_id:
+          type: string
+          description: The Node-specific identifier of the Wallet whose credentials should be used to upload the Attachment
+        authorization:
+          type: string
+          description: The authorization password for the Wallet
+        group_id:
+          type: string
+          description: The globally-unique ID of the Group the Attachment should be shared with
+        body:
+          $ref: '#/components/schemas/AttachmentBody'
+      required:
+        - wallet_id
+        - authorization
+        - group_id
+        - body
+
+    AttachmentBody:
+      type: object
+      description: The payload of the Attachment
+      properties:
+        name:
+          type: string
+          description: A name used by the caller of the API to describe the Attachment; does not have to be unique; should not be relied upon to uniquely identify the Attachment; defaults to the empty string ("")
+        content_type:
+          type: string
+          description: The media type (a.k.a. MIME type) of the content; defaults to 'application/x-binary'
+        content:
+          type: string
+          format: bytes
+          description: The representation of the Attachment in standard base64 encoding without padding (see RFC-4648)
+      required:
+        - content
+
+    UploadAttachmentResponse:
+      type: object
+      properties:
+        attachment_id:
+          type: string
+          description: The globally-unique ID of the Attachment; used to reference the Attachment and to download it; should be stored by the App for future reference\
+      required:
+        - attachment_id
+
+    DownloadAttachmentRequest:
+      type: object
+      properties:
+        wallet_id:
+          type: string
+          description: The Node-specific identifier of the Wallet whose credentials should be used to download the Attachment
+        attachment_id:
+          type: string
+          description: The globally-unique ID of the Attachment to be downloaded
+      required:
+        - wallet_id
+        - attachment_id
+
+    DownloadAttachmentResponse:
+      $ref: '#/components/schemas/AttachmentBody'
+
+    ListAttachmentsRequest:
+      type: object
+      properties:
+        wallet_id:
+          type: string
+          description: The Node-specific identifier of the Wallet whose credentials should be used to list Attachments
+        start_index:
+          type: integer
+          description: An offset used to paginate through the Attachment list; indexing is 0-based; defaults to 0
+        number_of_results:
+          type: integer
+          description: Maximal number of results to fetch in this call; defaults to 100
+        asset_ids:
+          type: array
+          items:
+            type: string
+          description: An optional list of Asset IDs; if present and not empty, only Attachments attached to Assets of one or more of the given Asset IDs will be returned; note that only Attachments attached to Assets owned or previously-owned by the given Wallet will be returned
+        tx_hashes:
+          type: array
+          items:
+            type: string
+          description: An optional list of Transaction hashes; if present and not empty, only Attachments attached to Assets transferred or created in the referenced Transations will be returned; note that only Attachments from Transactions that are visible to the given Wallet will be returned
+      required:
+        - wallet_id
+
+    ListAttachmentsResponse:
+      type: object
+      properties:
+        attachments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AttachmentHeader'
+          description: A list of the Attachments available for download after applying the requested filters
+      required:
+        - attachments
+
+    AttachmentHeader:
+      type: object
+      description: The metadata of a single Attachment, without the potentially long content
+      properties:
+        attachment_id:
+          type: string
+          description: The globally-unique ID of the Attachment; can be used as a reference for downloading it
+        name:
+          type: string
+          description: A name used by the uploader to describe the Attachment; does not have to be unique; should not be relied upon to uniquely identify the Attachment
+        content_type:
+          type: string
+          description: The media type (a.k.a. MIME type) of the content as specifies by the uploader of the Attachment
+        tx_hash:
+          type: string
+          description: The transaction hash for the transaction the Attachment was attached in. Set to empty string if the Wallet is unaware of the particular transaction in which the Attachment was attached to the Asset.
+        asset_id:
+          type: string
+          description: The asset ID transferred in the transaction to which this Attachment was attached.
+        uploaded_at:
+          type: string
+          format: date
+          description: The time the Attachment was uploaded at, in RFC-3339 format
+        content_length_bytes:
+          type: integer
+          format: int64
+          minimum: 0
+          description: The length in bytes of the raw content of the Attachment
+
+      required:
+        - attachment_id
+        - name
+        - content_type
 
     HealthcheckResponse:
       type: object

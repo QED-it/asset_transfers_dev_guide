@@ -4,6 +4,7 @@ from __future__ import absolute_import
 
 # import apis into api package
 from pyqedit.api.analytics_api import AnalyticsApi
+from pyqedit.api.attachment_api import AttachmentApi
 from pyqedit.api.health_api import HealthApi
 from pyqedit.api.node_api import NodeApi
 from pyqedit.api.wallet_api import WalletApi

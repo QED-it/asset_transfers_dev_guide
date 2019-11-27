@@ -9,7 +9,8 @@ Name | Type | Description | Notes
 **AssetId** | **string** | The ID of an Asset Type. It must be a string of length 0 to 40 characters. Allowed characters are lower- and uppercase letters, digits, dot (.), and hyphen (-). It must not end with an hyphen. Asset IDs are case-sensitive.  | 
 **Amount** | **int32** | the amount of Assets to issue | 
 **Confidential** | **bool** | Boolean which should be true if the issuance should be confidential, and false of the Issuance should be public | 
-**Memo** | **string** |  | 
+**Memo** | **string** | An app-customizable field to store additional private data relating to the issuance; the memo is shared between the sender and the receiver, but is not divulged to other parties | 
+**AttachmentIds** | **[]string** | The globally-unique identifiers of the Attachments to attach to the issued Asset; the attachments must already be uploaded, and their identifiers are returned by the upload endpoint | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

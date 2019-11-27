@@ -11,6 +11,7 @@ Method | HTTP request | Description
 [**WalletGetNewAddressPost**](WalletApi.md#WalletGetNewAddressPost) | **Post** /wallet/get_new_address | Get a new address from a given diversifier or generate randomly
 [**WalletGetPublicKeyPost**](WalletApi.md#WalletGetPublicKeyPost) | **Post** /wallet/get_public_key | Get wallet public key
 [**WalletIssueAssetPost**](WalletApi.md#WalletIssueAssetPost) | **Post** /wallet/issue_asset | Issue assets [async call]
+[**WalletShareViewingPermissionPost**](WalletApi.md#WalletShareViewingPermissionPost) | **Post** /wallet/share_viewing_permission | Share the viewing credentials for a given Wallet
 [**WalletTransferAssetPost**](WalletApi.md#WalletTransferAssetPost) | **Post** /wallet/transfer_asset | Transfer assets [async call]
 
 
@@ -198,6 +199,34 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**AsyncTaskCreatedResponse**](AsyncTaskCreatedResponse.md)
+
+### Authorization
+
+[ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **WalletShareViewingPermissionPost**
+> ShareWalletViewingPermissionResponse WalletShareViewingPermissionPost(ctx, shareWalletViewingPermissionRequest)
+Share the viewing credentials for a given Wallet
+
+Share a viewing key that allows viewing all transactions to and from a wallet, including past transactions. The key is shared via p2p messenger directly to the recipient, and is encrypted specifically for the intended recipient address. Upon arrival, the wallet is automatically added to the recipient's node. The viewing key does not enable making any transactions (including rule changes, issuance, and transfers) on behalf of the exported Wallet.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **shareWalletViewingPermissionRequest** | [**ShareWalletViewingPermissionRequest**](ShareWalletViewingPermissionRequest.md)|  | 
+
+### Return type
+
+[**ShareWalletViewingPermissionResponse**](ShareWalletViewingPermissionResponse.md)
 
 ### Authorization
 
