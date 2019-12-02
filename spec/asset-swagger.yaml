@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  version: 1.7.0
+  version: 1.7.2
   title: QEDIT - Asset Transfers
   contact:
     name: QEDIT
@@ -1283,6 +1283,8 @@ components:
         amount: 4
         memo: '{"recipient_name": "Dan"}'
         require_confirmation_from: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
+        attachment_ids: ["bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena/bafkreibkr4naotyzeovocq7oiuzwiwl3yejagfotocy3wc5lhagem5pjoi"]
+        
     TaskActionRequest:
       type: object
       description: To approve or cancel a task, the user should include the task id and authorization of the wallet related to this task.
@@ -1647,6 +1649,7 @@ components:
         asset_id: "bank-a.loans.1"
         confidential: false
         memo: '{"recipient_name": "Dan"}'
+        attachment_ids: ["bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena/bafkreibkr4naotyzeovocq7oiuzwiwl3yejagfotocy3wc5lhagem5pjoi"]
     GetNewAddressRequest:
       type: object
       properties:
@@ -2374,6 +2377,10 @@ components:
           description: Memo to be used by the application to define the purpose of the group. Defaults to an empty string.
       required:
         - wallet_id
+      example:
+        wallet_id: "example_wallet"
+        memo: "hi I just created this"
+
 
     CreateGroupResponse:
       type: object
@@ -2383,6 +2390,8 @@ components:
           description: The globally unique identifier of the Group
       required:
         - group_id
+      example:
+        group_id: "bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena"
 
     AddToGroupRequest:
       type: object
@@ -2406,6 +2415,13 @@ components:
         - wallet_id
         - group_id
         - recipient_address
+      example:
+        wallet_id: "example_wallet"
+        group_id: "bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena"
+        read_permission: false
+        memo: "bank's private group"
+        recipient_address: "bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena"
+
 
     AddToGroupResponse:
       type: object
@@ -2422,6 +2438,10 @@ components:
       required:
         - wallet_id
         - group_id
+      example:
+        wallet_id: "example_wallet"
+        group_id: "bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena"
+
 
     LeaveGroupResponse:
       type: object
@@ -2440,6 +2460,10 @@ components:
           description: Maximal number of results to fetch in this call; defaults to 100
       required:
         - wallet_id
+      example:
+        wallet_id: "example_wallet"
+        start_index: 0
+        number_of_results: 100
 
     GetGroupsResponse:
       type: object
@@ -2493,6 +2517,11 @@ components:
         - authorization
         - group_id
         - body
+      example:
+        wallet_id: "example_wallet"
+        authorization: "pa55W0r4"
+        group_id: "bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena"
+        body: {"name": "content.html","content_type": "text/html","content": "PGgxIHN0eWxlPSJ0ZXh0LWFsaWduOiBjZW50ZXI7Ij48c3Ryb25nPlFFRElUPC9zdHJvbmc+PC9oMT4KPHA+PHN0cm9uZz5CZWNhdXNlIHByaXZhY3kgaXMgYXdlc29tZS4uLjwvc3Ryb25nPjwvcD4KPHA+PHN0cm9uZz5BbmQgeW91IGFyZSB0b28hPC9zdHJvbmc+PC9wPg==" }
 
     AttachmentBody:
       type: object
@@ -2532,6 +2561,9 @@ components:
       required:
         - wallet_id
         - attachment_id
+      example:
+        wallet_id: "example_wallet"
+        attachment_id: "bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena/bafkreibkr4naotyzeovocq7oiuzwiwl3yejagfotocy3wc5lhagem5pjoi"
 
     DownloadAttachmentResponse:
       $ref: '#/components/schemas/AttachmentBody'
@@ -2560,6 +2592,12 @@ components:
           description: An optional list of Transaction hashes; if present and not empty, only Attachments attached to Assets transferred or created in the referenced Transations will be returned; note that only Attachments from Transactions that are visible to the given Wallet will be returned
       required:
         - wallet_id
+      example:
+        wallet_id: "example_wallet"
+        start_index: 0
+        number_of_results: 100
+        asset_ids: ["bank-A.Gold","bank-A.WoodCoin"]
+        
 
     ListAttachmentsResponse:
       type: object

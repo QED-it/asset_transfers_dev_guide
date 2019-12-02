@@ -7,7 +7,7 @@ info:
   description: |
     This SDK provides a programmatic way for interacting with QEDIT's _Asset Transfer_ API. The specification definition file is publicly available [in this repository](https://github.com/QED-it/asset_transfers_dev_guide/).
   title: QEDIT - Asset Transfers
-  version: 1.7.0
+  version: 1.7.2
 servers:
 - url: http://{server_url}:{port}
   variables:
@@ -1224,6 +1224,8 @@ components:
         amount: 4
         memo: '{"recipient_name": "Dan"}'
         require_confirmation_from: bf45ab74bd4a46fe7a2432ba05e2f726bf4fe42a80052849e13e2541230d3204
+        attachment_ids:
+        - bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena/bafkreibkr4naotyzeovocq7oiuzwiwl3yejagfotocy3wc5lhagem5pjoi
       properties:
         wallet_id:
           description: The ID of the Wallet to transfer from
@@ -1702,6 +1704,8 @@ components:
         asset_id: bank-a.loans.1
         confidential: false
         memo: '{"recipient_name": "Dan"}'
+        attachment_ids:
+        - bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena/bafkreibkr4naotyzeovocq7oiuzwiwl3yejagfotocy3wc5lhagem5pjoi
       properties:
         wallet_id:
           description: The ID of the Wallet that has the required Issuance privileges
@@ -2478,8 +2482,8 @@ components:
       type: object
     CreateGroupRequest:
       example:
-        wallet_id: wallet_id
-        memo: memo
+        wallet_id: example_wallet
+        memo: hi I just created this
       properties:
         wallet_id:
           description: The Node-specific identifier of the Wallet that owns the new Group
@@ -2492,7 +2496,7 @@ components:
       type: object
     CreateGroupResponse:
       example:
-        group_id: group_id
+        group_id: bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena
       properties:
         group_id:
           description: The globally unique identifier of the Group
@@ -2502,11 +2506,11 @@ components:
       type: object
     AddToGroupRequest:
       example:
-        wallet_id: wallet_id
-        group_id: group_id
-        memo: memo
-        recipient_address: recipient_address
-        read_permission: true
+        wallet_id: example_wallet
+        group_id: bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena
+        read_permission: false
+        memo: bank's private group
+        recipient_address: bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena
       properties:
         wallet_id:
           description: The Node-specific identifier of the Wallet that is sharing the credentials for the Group
@@ -2532,8 +2536,8 @@ components:
       type: object
     LeaveGroupRequest:
       example:
-        wallet_id: wallet_id
-        group_id: group_id
+        wallet_id: example_wallet
+        group_id: bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena
       properties:
         wallet_id:
           description: The Node-specific identifier of the Wallet that is to leave the Group
@@ -2549,9 +2553,9 @@ components:
       type: object
     GetGroupsRequest:
       example:
-        wallet_id: wallet_id
+        wallet_id: example_wallet
         start_index: 0
-        number_of_results: 6
+        number_of_results: 100
       properties:
         wallet_id:
           description: The Node-specific identifier of the Wallet that is to leave the Group
@@ -2615,13 +2619,13 @@ components:
       type: object
     UploadAttachmentRequest:
       example:
-        authorization: authorization
-        wallet_id: wallet_id
-        group_id: group_id
+        wallet_id: example_wallet
+        authorization: pa55W0r4
+        group_id: bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena
         body:
-          content_type: content_type
-          name: name
-          content: content
+          name: content.html
+          content_type: text/html
+          content: PGgxIHN0eWxlPSJ0ZXh0LWFsaWduOiBjZW50ZXI7Ij48c3Ryb25nPlFFRElUPC9zdHJvbmc+PC9oMT4KPHA+PHN0cm9uZz5CZWNhdXNlIHByaXZhY3kgaXMgYXdlc29tZS4uLjwvc3Ryb25nPjwvcD4KPHA+PHN0cm9uZz5BbmQgeW91IGFyZSB0b28hPC9zdHJvbmc+PC9wPg==
       properties:
         wallet_id:
           description: The Node-specific identifier of the Wallet whose credentials should be used to upload the Attachment
@@ -2672,8 +2676,8 @@ components:
       type: object
     DownloadAttachmentRequest:
       example:
-        wallet_id: wallet_id
-        attachment_id: attachment_id
+        wallet_id: example_wallet
+        attachment_id: bpad2jahptutggvbr7rvafvw25deoj37vyyncfqwjhpanf72hfena/bafkreibkr4naotyzeovocq7oiuzwiwl3yejagfotocy3wc5lhagem5pjoi
       properties:
         wallet_id:
           description: The Node-specific identifier of the Wallet whose credentials should be used to download the Attachment
@@ -2689,15 +2693,12 @@ components:
       $ref: '#/components/schemas/AttachmentBody'
     ListAttachmentsRequest:
       example:
-        wallet_id: wallet_id
-        asset_ids:
-        - asset_ids
-        - asset_ids
-        tx_hashes:
-        - tx_hashes
-        - tx_hashes
+        wallet_id: example_wallet
         start_index: 0
-        number_of_results: 6
+        number_of_results: 100
+        asset_ids:
+        - bank-A.Gold
+        - bank-A.WoodCoin
       properties:
         wallet_id:
           description: The Node-specific identifier of the Wallet whose credentials should be used to list Attachments
